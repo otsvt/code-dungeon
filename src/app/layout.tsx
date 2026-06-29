@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} font-sans bg-background text-foreground`}>
-      <body className="h-svh flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
