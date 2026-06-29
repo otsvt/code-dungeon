@@ -9,8 +9,14 @@ const COLOR = "#F8F2EC";
 
 export default function PhaserSpikeClient() {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const gameRef = useRef<Phaser.Game | null>(null);
 
   const [isInterview, setIsInterview] = useState<boolean>(false);
+
+  const handleCorrectAnswer = () => {
+    setIsInterview(false);
+    gameRef.current?.events.emit("doors:enable");
+  };
 
   useEffect(() => {
     if (!containerRef.current) {
@@ -36,15 +42,47 @@ export default function PhaserSpikeClient() {
       create() {
         this.add.image(width / 2, height / 2, "room");
 
-        const leftDoorHitbox = this.add.rectangle(width * 0.38, height * 0.23, 90, 140, 0x00ff00, 0.25);
-        const rightDoorHitbox = this.add.rectangle(width * 0.62, height * 0.23, 90, 140, 0x00ff00, 0.25);
+        const leftDoorHitbox = this.add.rectangle(width * 0.38, height * 0.23, 90, 140, 0x00ff00, 0);
+        const rightDoorHitbox = this.add.rectangle(width * 0.62, height * 0.23, 90, 140, 0x00ff00, 0);
 
-        leftDoorHitbox.on("pointerdown", () => {
-          // setIsInterview(true);
-        });
-        rightDoorHitbox.on("pointerdown", () => {
-          // setIsInterview(true);
-        });
+        const disableDoors = () => {
+          leftDoorHitbox.disableInteractive();
+          rightDoorHitbox.disableInteractive();
+
+          leftDoorHitbox.setFillStyle(0x00ff00, 0);
+          rightDoorHitbox.setFillStyle(0x00ff00, 0);
+        };
+
+        const enableDoors = () => {
+          leftDoorHitbox.setInteractive();
+          rightDoorHitbox.setInteractive();
+
+          leftDoorHitbox.setFillStyle(0x00ff00, 0.25);
+          rightDoorHitbox.setFillStyle(0x00ff00, 0.25);
+        };
+
+        this.game.events.on("doors:enable", enableDoors);
+
+        const reloadRoom = () => {
+          disableDoors();
+          setIsInterview(false);
+
+          this.cameras.main.fadeOut(500, 255, 255, 255);
+
+          this.cameras.main.once("camerafadeoutcomplete", () => {
+            hero.setY(heroStartY);
+            hero.setTexture("hero-stand");
+
+            this.cameras.main.fadeIn(500, 255, 255, 255);
+
+            this.cameras.main.once("camerafadeincomplete", () => {
+              playHeroEnter();
+            });
+          });
+        };
+
+        leftDoorHitbox.on("pointerdown", reloadRoom);
+        rightDoorHitbox.on("pointerdown", reloadRoom);
 
         const pedestal = this.add.image(width * 0.5, height * 0.51, "pedestal");
         pedestal.setScale(0.2);
@@ -71,7 +109,6 @@ export default function PhaserSpikeClient() {
 
         const hero = this.add.image(heroFinalX, heroStartY, "hero-stand");
         hero.setScale(0.22);
-        hero.setDepth(10);
 
         const playHeroEnter = () => {
           let stepIndex = 0;
@@ -93,9 +130,6 @@ export default function PhaserSpikeClient() {
             onComplete: () => {
               walkTimer.remove(false);
               hero.setTexture("hero-stand");
-
-              leftDoorHitbox.setInteractive();
-              rightDoorHitbox.setInteractive();
               setTimeout(() => setIsInterview(true), 500);
             },
           });
@@ -114,15 +148,18 @@ export default function PhaserSpikeClient() {
       transparent: true,
     });
 
+    gameRef.current = game;
+
     return () => {
       game.destroy(true);
+      gameRef.current = null;
     };
   }, []);
 
   return (
     <div className="relative h-svh overflow-hidden">
       <div ref={containerRef} style={{ backgroundColor: COLOR }} />
-      <InterviewOverlay isOpen={isInterview} onClose={() => setIsInterview(false)} />
+      <InterviewOverlay isOpen={isInterview} onCorrectAnswer={handleCorrectAnswer} />
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 type InterviewOverlayProps = {
   isOpen: boolean;
-  onClose: () => void;
+  onCorrectAnswer: () => void;
 };
 
 const question = {
@@ -19,17 +20,17 @@ const question = {
   ],
 };
 
-export function InterviewOverlay({ isOpen, onClose }: InterviewOverlayProps) {
+export function InterviewOverlay({ isOpen, onCorrectAnswer }: InterviewOverlayProps) {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
 
   const isAnswered = selectedOptionId !== null;
   const isCorrect = selectedOptionId === question.correctOptionId;
 
-  const handleClose = () => {
-    onClose();
-    setTimeout(() => {
-      setSelectedOptionId(null);
-    }, 300);
+  const handleContinue = () => {
+    if (isCorrect) {
+      onCorrectAnswer();
+      setTimeout(() => setSelectedOptionId(null), 500);
+    }
   };
 
   const getOptionClassName = (optionId: string) => {
@@ -53,7 +54,7 @@ export function InterviewOverlay({ isOpen, onClose }: InterviewOverlayProps) {
   return (
     <div
       className={[
-        "absolute inset-0 z-10 flex-center bg-foreground/75 transition-opacity duration-300 ease-out",
+        "absolute inset-0 z-10 flex-center bg-black/70 transition-opacity duration-300 ease-out",
         isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
       ].join(" ")}
     >
@@ -82,16 +83,25 @@ export function InterviewOverlay({ isOpen, onClose }: InterviewOverlayProps) {
         </div>
         <div className="border-4 border-amber-500 bg-white p-4">
           {isAnswered ? (
-            <div>
+            <div className="flex flex-col gap-y-4">
               <p className={isCorrect ? "font-bold text-green-700" : "font-bold text-red-700"}>
                 {isCorrect ? "Верно." : "Неверно."}
               </p>
-              <button
-                className="mt-4 rounded-lg bg-slate-950 px-5 py-2 font-bold text-white transition hover:bg-slate-800"
-                onClick={handleClose}
-              >
-                Продолжить
-              </button>
+              {isCorrect ? (
+                <button
+                  className="rounded-lg bg-slate-950 px-5 py-2 font-bold text-white transition hover:bg-slate-800"
+                  onClick={handleContinue}
+                >
+                  Продолжить
+                </button>
+              ) : (
+                <Link
+                  className="rounded-lg bg-slate-950 px-5 py-2 font-bold text-white transition hover:bg-slate-800"
+                  href="/"
+                >
+                  В главное меню
+                </Link>
+              )}
             </div>
           ) : (
             <p>Выбери ответ, кандидат. Даже древние баги JavaScript помнят твои сомнения.</p>
