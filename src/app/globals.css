@@ -10,7 +10,11 @@
   --color-foreground: #0F1E33;
 }
 
-@layer base {}
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+}
 
 @layer components {}
 

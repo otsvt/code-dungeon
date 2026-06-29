@@ -1,12 +1,16 @@
 "use client";
 
 import Phaser from "phaser";
-import { useEffect, useRef } from "react";
+
+import { useEffect, useRef, useState } from "react";
+import { InterviewOverlay } from "./InterviewOverlay";
 
 const COLOR = "#F8F2EC";
 
 export default function PhaserSpikeClient() {
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const [isInterview, setIsInterview] = useState<boolean>(false);
 
   useEffect(() => {
     if (!containerRef.current) {
@@ -37,10 +41,10 @@ export default function PhaserSpikeClient() {
         rightDoorHitbox.setInteractive();
 
         leftDoorHitbox.on("pointerdown", () => {
-          alert("left door clicked");
+          setIsInterview(true);
         });
         rightDoorHitbox.on("pointerdown", () => {
-          alert("right door clicked");
+          setIsInterview(true);
         });
 
         const pedestal = this.add.image(width * 0.5, height * 0.51, "pedestal");
@@ -81,5 +85,10 @@ export default function PhaserSpikeClient() {
     };
   }, []);
 
-  return <div ref={containerRef} className="h-svh overflow-hidden" style={{ backgroundColor: COLOR }} />;
+  return (
+    <div className="relative h-svh overflow-hidden">
+      <div ref={containerRef} style={{ backgroundColor: COLOR }} />
+      {isInterview && <InterviewOverlay onClose={() => setIsInterview(false)} />}
+    </div>
+  );
 }
