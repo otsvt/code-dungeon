@@ -88,7 +88,7 @@ export default function PhaserSpikeClient() {
   return (
     <div className="relative h-svh overflow-hidden">
       <div ref={containerRef} style={{ backgroundColor: COLOR }} />
-      {isInterview && <InterviewOverlay onClose={() => setIsInterview(false)} />}
+      <InterviewOverlay isOpen={isInterview} onClose={() => setIsInterview(false)} />
     </div>
   );
 }
