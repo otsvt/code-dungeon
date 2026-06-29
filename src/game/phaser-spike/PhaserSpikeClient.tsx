@@ -27,8 +27,10 @@ export default function PhaserSpikeClient() {
 
       preload() {
         this.load.image("room", "/assets/phaser-spike/scene-test.png");
-        this.load.image("hero", "/assets/phaser-spike/hero-main-stand.png");
         this.load.image("pedestal", "/assets/phaser-spike/pedestal-test.png");
+        this.load.image("hero-stand", "/assets/phaser-spike/hero-main-stand.png");
+        this.load.image("hero-left", "/assets/phaser-spike/hero-main-left.png");
+        this.load.image("hero-right", "/assets/phaser-spike/hero-main-right.png");
       }
 
       create() {
@@ -37,14 +39,11 @@ export default function PhaserSpikeClient() {
         const leftDoorHitbox = this.add.rectangle(width * 0.38, height * 0.23, 90, 140, 0x00ff00, 0.25);
         const rightDoorHitbox = this.add.rectangle(width * 0.62, height * 0.23, 90, 140, 0x00ff00, 0.25);
 
-        leftDoorHitbox.setInteractive();
-        rightDoorHitbox.setInteractive();
-
         leftDoorHitbox.on("pointerdown", () => {
-          setIsInterview(true);
+          // setIsInterview(true);
         });
         rightDoorHitbox.on("pointerdown", () => {
-          setIsInterview(true);
+          // setIsInterview(true);
         });
 
         const pedestal = this.add.image(width * 0.5, height * 0.51, "pedestal");
@@ -66,8 +65,43 @@ export default function PhaserSpikeClient() {
           ease: "Sine.easeInOut",
         });
 
-        const hero = this.add.image(width * 0.48, height * 0.65, "hero");
+        const heroStartY = height;
+        const heroFinalY = height * 0.65;
+        const heroFinalX = width * 0.48;
+
+        const hero = this.add.image(heroFinalX, heroStartY, "hero-stand");
         hero.setScale(0.22);
+        hero.setDepth(10);
+
+        const playHeroEnter = () => {
+          let stepIndex = 0;
+
+          const walkTimer = this.time.addEvent({
+            delay: 400,
+            loop: true,
+            callback: () => {
+              stepIndex += 1;
+              hero.setTexture(stepIndex % 2 === 0 ? "hero-left" : "hero-right");
+            },
+          });
+
+          this.tweens.add({
+            targets: hero,
+            y: heroFinalY,
+            ease: "Sine.easeInOut",
+            duration: 2400,
+            onComplete: () => {
+              walkTimer.remove(false);
+              hero.setTexture("hero-stand");
+
+              leftDoorHitbox.setInteractive();
+              rightDoorHitbox.setInteractive();
+              setTimeout(() => setIsInterview(true), 500);
+            },
+          });
+        };
+
+        playHeroEnter();
       }
     }
 
