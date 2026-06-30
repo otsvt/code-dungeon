@@ -8,6 +8,7 @@
 @theme {
   --color-background: #F8F2EC;
   --color-foreground: #0F1E33;
+  --color-decore: #D3A57F;
 }
 
 @layer base {
