@@ -1,0 +1,11 @@
+{
+  "MainMenu": {
+    "newRun": "New run",
+    "continue": "Continue",
+    "links": {
+      "spike": "Spike test",
+      "loader": "Loader",
+      "game": "Game"
+    }
+  }
+}

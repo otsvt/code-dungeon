@@ -1,0 +1,11 @@
+{
+  "MainMenu": {
+    "newRun": "Начать забег",
+    "continue": "Продолжить",
+    "links": {
+      "spike": "Spike тест",
+      "loader": "Загрузчик",
+      "game": "Игра"
+    }
+  }
+}
