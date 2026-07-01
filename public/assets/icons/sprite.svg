@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <symbol id="flag-ru" viewBox="0 0 30 20">
+    <path d="M30 0H0V20H30V0Z" fill="#0052B4" />
+    <path d="M30 0H0V6.66649H30V0Z" fill="#F0F0F0" />
+    <path d="M30 13.333H0V19.9994H30V13.333Z" fill="#D80027" />
+  </symbol>
+  <symbol id="flag-en" viewBox="0 0 30 20">
+    <path d="M30 0H0V20H30V0Z" fill="#F0F0F0" />
+    <path d="M30 2.49976H0V4.99951H30V2.49976Z" fill="#D80027" />
+    <path d="M30 7.49988H0V9.99964H30V7.49988Z" fill="#D80027" />
+    <path d="M30 12.4994H0V14.9991H30V12.4994Z" fill="#D80027" />
+    <path d="M30 17.4996H0V19.9994H30V17.4996Z" fill="#D80027" />
+    <path d="M15 0H0V10.7692H15V0Z" fill="#2E52B2" />
+  </symbol>
+</svg>

@@ -11,6 +11,7 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "Code Dungeon",
   description: "Browser programming roguelike game.",
+  icons: "/assets/logo/logo-icon.png",
 };
 
 export default function RootLayout({
