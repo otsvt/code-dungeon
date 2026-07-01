@@ -23,4 +23,8 @@
   .flex-center {
     @apply flex items-center justify-center;
   }
+
+  .bg-center-default {
+    @apply bg-center bg-no-repeat bg-cover;
+  }
 }

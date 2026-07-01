@@ -15,11 +15,11 @@ export function LanguageSwitcher() {
 
   return (
     <article className="inline-flex items-center justify-center gap-x-2">
-      <button onClick={() => changeLanguage("ru")} className={locale === "ru" ? "" : "opacity-50"}>
+      <button className={locale === "ru" ? "" : "opacity-50"} onClick={() => changeLanguage("ru")}>
         <SpriteIcon className="h-6 w-6" id="flag-ru" />
       </button>
       <span className="opacity-50">/</span>
-      <button onClick={() => changeLanguage("en")} className={locale === "en" ? "" : "opacity-50"}>
+      <button className={locale === "en" ? "" : "opacity-50"} onClick={() => changeLanguage("en")}>
         <SpriteIcon className="h-6 w-6" id="flag-en" />
       </button>
     </article>
