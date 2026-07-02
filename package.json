@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "next": "16.2.9",
     "next-intl": "^4.13.1",
     "phaser": "^4.2.0",

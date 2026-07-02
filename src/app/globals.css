@@ -6,6 +6,9 @@
 }
 
 @theme {
+  --container-fluid: 105rem;
+
+
   --color-background: #F8F2EC;
   --color-foreground: #0F1E33;
   --color-decore: #D3A57F;
@@ -13,11 +16,15 @@
 
 @layer base {
   button {
-    @apply cursor-pointer;
+    @apply cursor-pointer disabled:cursor-default;
   }
 }
 
-@layer components {}
+@layer components {
+  .main-container {
+    @apply max-w-fluid w-full mx-auto px-6;
+  }
+}
 
 @layer utilities {
   .flex-center {
