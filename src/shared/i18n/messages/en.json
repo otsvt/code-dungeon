@@ -9,6 +9,40 @@
     }
   },
   "RunSetup": {
-    "title": "Run setup"
+    "title": "Candidate Setup",
+    "subtitle": "Choose your run parameters. Good luck with the interview.",
+    "poolMode": {
+      "title": "Question Pool Format",
+      "description": "Choose a preset direction or build the pool manually."
+    },
+    "technologies": {
+      "title": "Technologies in Pool",
+      "description": "Selected technologies can appear during the run."
+    },
+    "difficulty": {
+      "title": "Run Difficulty",
+      "variants": {
+        "base": {
+          "type": "Normal",
+          "description": "A balanced experience."
+        },
+        "hard": {
+          "type": "Hard",
+          "description": "Harsh conditions."
+        }
+      }
+    },
+    "startBonus": {
+      "title": "Start Buff",
+      "description": "You receive a random buff at the start of the run."
+    },
+    "next": {
+      "title": "What Next?",
+      "description": "After starting, you enter the first room, receive a buff, and choose a path."
+    },
+    "actions": {
+      "toMenu": "To Menu",
+      "startRun": "Start Run"
+    }
   }
 }
