@@ -4,5 +4,6 @@ export const ASSETS = {
   },
   background: {
     main: "/assets/background/main-bg.png",
+    setup: "/assets/background/setup-bg.png",
   },
 } as const;
