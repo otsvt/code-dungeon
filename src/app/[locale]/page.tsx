@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Link } from "@/shared/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "@/feature/language";
+import { LanguageSwitcher } from "@/features/language";
 import { ROUTES } from "@/shared/routes";
 import { ASSETS } from "@/shared/assets";
 
