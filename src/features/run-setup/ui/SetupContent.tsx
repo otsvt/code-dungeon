@@ -5,13 +5,11 @@ import { SetupFooter } from "./SetupFooter";
 import { useRunSetup } from "../hooks/useRunSetup";
 
 export function SetupContent() {
-  const { poolModeId, selectedTechnologyIds, canStartRun, changePoolModeId, toggleCustomTechnologyId } = useRunSetup();
+  const { poolModeId, selectedTechnologyIds, canStartRun, changePoolModeId, toggleCustomTechnologyId, getRunSettings } =
+    useRunSetup();
 
   const startRun = () => {
-    console.log({
-      poolModeId,
-      technologyIds: selectedTechnologyIds,
-    });
+    console.log(getRunSettings());
   };
 
   return (

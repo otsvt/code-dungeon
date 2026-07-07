@@ -1,0 +1,1 @@
+export { TermTooltip } from "./TermTooltip";
