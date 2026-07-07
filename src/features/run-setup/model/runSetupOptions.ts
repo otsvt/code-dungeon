@@ -8,14 +8,14 @@ export type PoolMode = {
 
 export const POOL_MODES: PoolMode[] = [
   {
-    id: "custom",
-    technologyIds: [],
-    iconName: "lang-custom",
-  },
-  {
     id: "frontend",
     technologyIds: ["javascript", "typescript", "html", "css", "react", "vue", "git"],
     iconName: "lang-frontend",
+  },
+  {
+    id: "custom",
+    technologyIds: [],
+    iconName: "lang-custom",
   },
 ] as const;
 

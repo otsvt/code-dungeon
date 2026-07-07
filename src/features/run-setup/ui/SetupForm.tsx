@@ -6,6 +6,7 @@ import { SpriteIcon } from "@/shared/ui/sprite-icon";
 import { SetupPanel } from "./SetupPanel";
 import { useRunSetup } from "../hooks/useRunSetup";
 import { POOL_MODES } from "../model/runSetupOptions";
+import { DecoreRhombus } from "@/shared/ui/decore";
 
 export function SetupForm() {
   const t = useTranslations("RunSetup");
@@ -66,7 +67,25 @@ export function SetupForm() {
           ))}
         </div>
       </SetupPanel>
-      <SetupPanel title={t("difficulty.title")} />
+      <SetupPanel title={t("briefing.title")} description={t("briefing.description")}>
+        <div className="flex h-50 w-full flex-col justify-between py-2">
+          <ul className="space-y-2 text-sm text-pale">
+            <li>{t("briefing.items.setup")}</li>
+            <li className="flex justify-center">
+              <DecoreRhombus type="bg" />
+            </li>
+            <li>{t("briefing.items.minimum")}</li>
+            <li className="flex justify-center">
+              <DecoreRhombus type="bg" />
+            </li>
+            <li>{t("briefing.items.rooms")}</li>
+            <li className="flex justify-center">
+              <DecoreRhombus type="bg" />
+            </li>
+            <li>{t("briefing.items.goal")}</li>
+          </ul>
+        </div>
+      </SetupPanel>
     </article>
   );
 }

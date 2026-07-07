@@ -19,17 +19,14 @@
       "title": "Technologies in Pool",
       "description": "Selected technologies can appear during the run."
     },
-    "difficulty": {
-      "title": "Run Difficulty",
-      "variants": {
-        "base": {
-          "type": "Normal",
-          "description": "A balanced experience."
-        },
-        "hard": {
-          "type": "Hard",
-          "description": "Harsh conditions."
-        }
+    "briefing": {
+      "title": "Run Briefing",
+      "description": "Build your pool and enter the interview.",
+      "items": {
+        "setup": "Choose Frontend preset or build Custom.",
+        "minimum": "Custom starts from 3 technologies.",
+        "rooms": "Choose doors, clear rooms, answer questions.",
+        "goal": "Reach the final interview and survive."
       }
     },
     "startBonus": {

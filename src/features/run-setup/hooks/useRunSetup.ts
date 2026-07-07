@@ -3,7 +3,7 @@ import { POOL_MODES, type PoolModeId } from "../model/runSetupOptions";
 import { type TechnologyId } from "@/entities/technology";
 
 export const useRunSetup = () => {
-  const [poolModeId, setPoolModeId] = useState<PoolModeId>("custom");
+  const [poolModeId, setPoolModeId] = useState<PoolModeId>("frontend");
   const [customTechnologyIds, setCustomTechnologyIds] = useState<TechnologyId[]>([]);
 
   const isCustomMode = poolModeId === "custom";
