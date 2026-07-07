@@ -21,8 +21,13 @@
 }
 
 @layer base {
+
   button {
     @apply cursor-pointer disabled:cursor-default;
+  }
+
+  label {
+    @apply cursor-pointer has-disabled:cursor-default;
   }
 
 }

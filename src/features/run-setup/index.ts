@@ -1,2 +1,4 @@
-export { SetupPanel } from "./ui/SetupPanel";
-export { InfoCard } from "./ui/InfoCard";
+export { InfoCard } from "./ui/components/InfoCard";
+
+export { SetupHeader } from "./ui/SetupHeader";
+export { SetupForm } from "./ui/SetupForm";
