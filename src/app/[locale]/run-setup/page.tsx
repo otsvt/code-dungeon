@@ -1,10 +1,7 @@
-import { useTranslations } from "next-intl";
-import { InfoCard, SetupForm, SetupHeader } from "@/features/run-setup";
+import { SetupContent, SetupHeader } from "@/features/run-setup";
 import { ASSETS } from "@/shared/assets";
 
 export default function RunSetupPage() {
-  const t = useTranslations("RunSetup");
-
   return (
     <main className="min-h-svh bg-background">
       <section className="pb-6 relative main-container flex flex-col">
@@ -13,14 +10,7 @@ export default function RunSetupPage() {
           style={{ backgroundImage: `url(${ASSETS.background.setup})` }}
         />
         <SetupHeader />
-        <SetupForm />
-        <footer className="relative shrink-0 flex-center gap-x-4">
-          <InfoCard title={t("startBonus.title")} description={t("startBonus.description")} />
-          <button className="py-4 px-8 border-2 border-decore bg-dark text-2xl font-medium uppercase text-accent">
-            {t("actions.startRun")}
-          </button>
-          <InfoCard title={t("next.title")} description={t("next.description")} />
-        </footer>
+        <SetupContent />
       </section>
     </main>
   );

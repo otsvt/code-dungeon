@@ -1,17 +1,24 @@
-"use client";
-
 import { useTranslations } from "next-intl";
-import { TECHNOLOGIES } from "@/entities/technology";
+import { TECHNOLOGIES, type TechnologyId } from "@/entities/technology";
 import { SpriteIcon } from "@/shared/ui/sprite-icon";
-import { SetupPanel } from "./SetupPanel";
-import { useRunSetup } from "../hooks/useRunSetup";
-import { POOL_MODES } from "../model/runSetupOptions";
 import { DecoreRhombus } from "@/shared/ui/decore";
+import { SetupPanel } from "./SetupPanel";
+import { POOL_MODES, type PoolModeId } from "../model/runSetupOptions";
 
-export function SetupForm() {
+interface SetupFormProps {
+  poolModeId: PoolModeId;
+  selectedTechnologyIds: TechnologyId[];
+  changePoolModeId: (modeId: PoolModeId) => void;
+  toggleCustomTechnologyId: (technologyId: TechnologyId) => void;
+}
+
+export function SetupForm({
+  poolModeId,
+  selectedTechnologyIds,
+  changePoolModeId,
+  toggleCustomTechnologyId,
+}: SetupFormProps) {
   const t = useTranslations("RunSetup");
-
-  const { poolModeId, selectedTechnologyIds, changePoolModeId, toggleCustomTechnologyId } = useRunSetup();
 
   return (
     <article className="relative mb-6 p-2 grid grid-cols-3 gap-x-4 rounded-xl border border-decore bg-pure">

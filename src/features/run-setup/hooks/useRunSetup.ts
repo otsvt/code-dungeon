@@ -2,6 +2,8 @@ import { useState } from "react";
 import { POOL_MODES, type PoolModeId } from "../model/runSetupOptions";
 import { type TechnologyId } from "@/entities/technology";
 
+const MIN_TECHNOLOGY_NUMBER = 3;
+
 export const useRunSetup = () => {
   const [poolModeId, setPoolModeId] = useState<PoolModeId>("frontend");
   const [customTechnologyIds, setCustomTechnologyIds] = useState<TechnologyId[]>([]);
@@ -10,6 +12,8 @@ export const useRunSetup = () => {
 
   const selectedPoolMode = POOL_MODES.find((mode) => mode.id === poolModeId);
   const selectedTechnologyIds = isCustomMode ? customTechnologyIds : (selectedPoolMode?.technologyIds ?? []);
+
+  const canStartRun = isCustomMode ? customTechnologyIds.length >= MIN_TECHNOLOGY_NUMBER : true;
 
   const changePoolModeId = (modeId: PoolModeId) => {
     setPoolModeId(modeId);
@@ -37,6 +41,7 @@ export const useRunSetup = () => {
     poolModeId,
     selectedPoolMode,
     selectedTechnologyIds,
+    canStartRun,
     changePoolModeId,
     toggleCustomTechnologyId,
   };
