@@ -3,7 +3,7 @@ import { TECHNOLOGIES, type TechnologyId } from "@/entities/technology";
 import { SpriteIcon } from "@/shared/ui/sprite-icon";
 import { DecoreRhombus } from "@/shared/ui/decore";
 import { SetupPanel } from "./SetupPanel";
-import { POOL_MODES, type PoolModeId } from "../model/runSetupOptions";
+import { POOL_MODES, type PoolModeId } from "../types/runSetupOptions";
 
 interface SetupFormProps {
   poolModeId: PoolModeId;
