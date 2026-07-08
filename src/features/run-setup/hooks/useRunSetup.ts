@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { type TechnologyId } from "@/entities/technology";
-import { POOL_MODES } from "../types/runSetupOptions";
-import type { RunSettings, PoolModeId } from "../types/runSetupOptions";
+import { POOL_MODES, type RunSettings, type PoolModeId } from "../types/runSetupOptions";
 
 const MIN_TECHNOLOGY_NUMBER = 3;
 

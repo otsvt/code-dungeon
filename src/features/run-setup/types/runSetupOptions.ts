@@ -1,4 +1,4 @@
-import type { TechnologyId } from "@/entities/technology";
+import { type TechnologyId } from "@/entities/technology";
 
 export type PoolMode = {
   id: "frontend" | "custom";

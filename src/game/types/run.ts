@@ -1,4 +1,4 @@
-import type { RunSettings } from "@/features/run-setup";
+import { type RunSettings } from "@/features/run-setup";
 
 export type CurrentRun = {
   id: string;

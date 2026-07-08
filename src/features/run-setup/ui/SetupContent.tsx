@@ -2,7 +2,7 @@ import { SetupHeader } from "./SetupHeader";
 import { SetupForm } from "./SetupForm";
 import { SetupFooter } from "./SetupFooter";
 import { useRunSetup } from "../hooks/useRunSetup";
-import type { RunSettings } from "../types/runSetupOptions";
+import { type RunSettings } from "../types/runSetupOptions";
 
 interface SetupContentProps {
   onRunStart: (settings: RunSettings) => void;
