@@ -1,19 +1,24 @@
-"use client";
-
+import { SetupHeader } from "./SetupHeader";
 import { SetupForm } from "./SetupForm";
 import { SetupFooter } from "./SetupFooter";
 import { useRunSetup } from "../hooks/useRunSetup";
+import type { RunSettings } from "../types/runSetupOptions";
 
-export function SetupContent() {
+interface SetupContentProps {
+  onRunStart: (settings: RunSettings) => void;
+}
+
+export function SetupContent({ onRunStart }: SetupContentProps) {
   const { poolModeId, selectedTechnologyIds, canStartRun, changePoolModeId, toggleCustomTechnologyId, getRunSettings } =
     useRunSetup();
 
   const startRun = () => {
-    console.log(getRunSettings());
+    onRunStart(getRunSettings());
   };
 
   return (
     <>
+      <SetupHeader />
       <SetupForm
         poolModeId={poolModeId}
         selectedTechnologyIds={selectedTechnologyIds}
