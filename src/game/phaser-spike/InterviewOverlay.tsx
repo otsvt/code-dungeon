@@ -9,14 +9,14 @@ type InterviewOverlayProps = {
 
 const question = {
   spiritName: "JavaScript Spirit",
-  prompt: "Что выведет этот код?",
+  prompt: "What will this code output?",
   code: "console.log(typeof null);",
   correctOptionId: "object",
   options: [
     { id: "object", label: '"object"' },
     { id: "null", label: '"null"' },
     { id: "undefined", label: '"undefined"' },
-    { id: "error", label: "Будет ошибка" },
+    { id: "error", label: "error" },
   ],
 };
 
@@ -85,26 +85,26 @@ export function InterviewOverlay({ isOpen, onCorrectAnswer }: InterviewOverlayPr
           {isAnswered ? (
             <div className="flex flex-col gap-y-4">
               <p className={isCorrect ? "font-bold text-green-700" : "font-bold text-red-700"}>
-                {isCorrect ? "Верно." : "Неверно."}
+                {isCorrect ? "Right." : "Wrong."}
               </p>
               {isCorrect ? (
                 <button
                   className="rounded-lg bg-slate-950 px-5 py-2 font-bold text-white transition hover:bg-slate-800"
                   onClick={handleContinue}
                 >
-                  Продолжить
+                  Continue
                 </button>
               ) : (
                 <Link
                   className="rounded-lg bg-slate-950 px-5 py-2 font-bold text-white transition hover:bg-slate-800"
                   href="/"
                 >
-                  В главное меню
+                  To menu
                 </Link>
               )}
             </div>
           ) : (
-            <p>Выбери ответ, кандидат. Даже древние баги JavaScript помнят твои сомнения.</p>
+            <p>Choose your answer, candidate.</p>
           )}
         </div>
       </article>

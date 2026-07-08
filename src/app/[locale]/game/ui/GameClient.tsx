@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useRunStore } from "@/game";
 import { useRouter } from "@/shared/i18n/navigation";
 import { ROUTES } from "@/shared/routes";
-import { GamePhaser } from "./GamePhaser";
+import { GamePhaser } from "./layers/GamePhaser";
+import { GameHud } from "./layers/GameHud";
+import { GameOverlay } from "./layers/GameOverlay";
 
 export function GameClient() {
   const router = useRouter();
@@ -21,8 +23,10 @@ export function GameClient() {
   }
 
   return (
-    <section className="h-full w-full overflow-hidden">
+    <section className="relative h-full w-full overflow-hidden">
       <GamePhaser />
+      <GameOverlay />
+      <GameHud currentRun={currentRun} />
     </section>
   );
 }

@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 
 import { useEffect, useRef } from "react";
-import { PreloadScene } from "../scenes/PreloadScene";
-import { GameScene } from "../scenes/GameScene";
+import { PreloadScene } from "../../scenes/PreloadScene";
+import { GameScene } from "../../scenes/GameScene";
 
 export function GamePhaser() {
   const containerRef = useRef<HTMLDivElement | null>(null);
