@@ -25,7 +25,12 @@ export function SetupFooter({ canStartRun, startRun }: SetupFooterProps) {
       >
         {t("actions.startRun")}
       </button>
-      <InfoCard title={t("next.title")} description={t("next.description")} />
+      <InfoCard
+        title={t("next.title")}
+        description={t.rich("next.description", {
+          gift: (chunks) => <TermTooltip term="gift">{chunks}</TermTooltip>,
+        })}
+      />
     </footer>
   );
 }

@@ -35,7 +35,7 @@
     },
     "next": {
       "title": "What Next?",
-      "description": "After starting, you enter the first room, receive a buff, and choose a path."
+      "description": "After starting, you enter the first room, receive a <gift>gift</gift>, and choose a path."
     },
     "actions": {
       "toMenu": "To Menu",
