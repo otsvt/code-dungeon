@@ -1,8 +1,8 @@
-import { GameClient } from "./GameClient";
+import { GameClient } from "./ui/GameClient";
 
 export default function GamePage() {
   return (
-    <main className="h-svh flex-center">
+    <main className="h-svh bg-background">
       <GameClient />
     </main>
   );

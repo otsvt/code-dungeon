@@ -19,7 +19,6 @@ export default function HomePage() {
           <Link href={ROUTES.runSetup}>{t("newRun")}</Link>
           <Link href={ROUTES.dev.spikeTest}>{t("links.spike")}</Link>
           <Link href={ROUTES.dev.loader}>{t("links.loader")}</Link>
-          <Link href={ROUTES.game}>{t("links.game")}</Link>
         </nav>
         <LanguageSwitcher />
       </article>
