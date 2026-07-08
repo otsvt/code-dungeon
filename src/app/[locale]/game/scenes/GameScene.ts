@@ -1,11 +1,15 @@
 import Phaser from "phaser";
 
+import { Room } from "../entities/Room";
+
 export class GameScene extends Phaser.Scene {
+  private room?: Room;
+
   constructor() {
     super("GameScene");
   }
 
   create() {
-    this.add.text(0, 0, "Ready", { fontSize: "32px", color: "000" });
+    this.room = new Room(this);
   }
 }

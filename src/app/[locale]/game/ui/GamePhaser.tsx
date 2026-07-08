@@ -18,8 +18,8 @@ export function GamePhaser() {
       parent: containerRef.current,
       width: window.innerWidth,
       height: window.innerHeight,
-      scene: [PreloadScene, GameScene],
       transparent: true,
+      scene: [PreloadScene, GameScene],
     });
 
     return () => {
@@ -28,5 +28,5 @@ export function GamePhaser() {
     };
   }, []);
 
-  return <div ref={containerRef}></div>;
+  return <div ref={containerRef} className="h-full w-full"></div>;
 }
