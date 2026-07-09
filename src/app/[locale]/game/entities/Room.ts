@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { SPRITE_NAMES } from "../types/consts";
+import { DEPTH_INDEX, SPRITE_NAMES } from "../types/consts";
 
 export class Room extends Phaser.GameObjects.Image {
   constructor(scene: Phaser.Scene) {
@@ -11,5 +11,6 @@ export class Room extends Phaser.GameObjects.Image {
 
     const scaleY = height / this.height;
     this.setScale(scaleY);
+    this.setDepth(DEPTH_INDEX[SPRITE_NAMES.room]);
   }
 }
