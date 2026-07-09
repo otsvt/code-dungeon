@@ -18,6 +18,7 @@ export const useRunStore = create<RunStore>((set) => ({
         id: crypto.randomUUID(),
         settings,
         status: "created",
+        currentRoom: { type: "start" },
       },
     });
   },

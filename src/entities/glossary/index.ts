@@ -1,1 +1,1 @@
-export { TermTooltip } from "./TermTooltip";
+export { TermTooltip } from "./ui/TermTooltip";

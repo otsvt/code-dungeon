@@ -1,1 +1,1 @@
-export { TECHNOLOGIES, type Technology, type TechnologyId } from "./model/technology";
+export { TECHNOLOGIES, type Technology, type TechnologyId } from "./types/technology";
