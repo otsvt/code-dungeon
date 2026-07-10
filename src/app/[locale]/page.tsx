@@ -17,9 +17,7 @@ export default function HomePage() {
       <article className="max-w-3xl w-full py-8 px-12 space-y-4 border-4 border-double border-decore">
         <nav className="*:w-fit flex flex-col gap-y-4 text-2xl">
           <Link href={ROUTES.runSetup}>{t("newRun")}</Link>
-          <button disabled className="opacity-50">
-            {t("continue")}
-          </button>
+          <Link href={ROUTES.game}>{t("continue")}</Link>
           <Link href={ROUTES.dev.spikeTest}>{t("links.spike")}</Link>
           <Link href={ROUTES.dev.loader}>{t("links.loader")}</Link>
         </nav>

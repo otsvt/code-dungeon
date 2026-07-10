@@ -1,4 +1,6 @@
 import { CurrentRun } from "@/game/types/run";
+import { SpriteIcon } from "@/shared/ui/sprite-icon";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 interface GameHudProps {
@@ -6,6 +8,18 @@ interface GameHudProps {
 }
 
 export function GameHud({ currentRun }: GameHudProps) {
+  const t = useTranslations("GameHud");
+
+  const impressionLabel =
+    currentRun.impression === -1
+      ? t("impressions.weak")
+      : currentRun.impression === 1
+        ? t("impressions.strong")
+        : t("impressions.neutral");
+
+  const buffsLabel = currentRun.activeBuffIds.join(", ") || t("empty");
+  const debuffsLabel = currentRun.activeDebuffIds.join(", ") || t("empty");
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleHud = () => {
@@ -20,17 +34,26 @@ export function GameHud({ currentRun }: GameHudProps) {
       {isOpen && (
         <div className="w-full p-4 rounded-xl border border-decore bg-background">
           <div className="*:p-4 flex items-center divide-x divide-accent gap-x-2">
-            <div>Жизнь</div>
-            <div>Состояние</div>
-            <div className="w-120 grid gap-y-4">
-              <div>Бафы</div>
-              <div>Дебафы</div>
-            </div>
-            <div>Вопросов</div>
-            <div>Язык</div>
-            <div>Сложность</div>
-            <div>Таймер</div>
-            <div>Подсказки</div>
+            <dl className="p-4">
+              <dt className="text-sm text-pale">{t("life")}</dt>
+              {currentRun.lives.current ? (
+                <SpriteIcon id="heart" className="h-8 w-8 fill-red-500 stroke-red-500" />
+              ) : (
+                <SpriteIcon id="heart" className="h-8 w-8 fill-transparent stroke-red-300" />
+              )}
+            </dl>
+            <dl className="p-4 w-120">
+              <dt className="text-sm text-pale">{t("buffs")}</dt>
+              <dd className="text-lg font-medium">{buffsLabel}</dd>
+            </dl>
+            <dl className="p-4 w-120">
+              <dt className="text-sm text-pale">{t("debuffs")}</dt>
+              <dd className="text-lg font-medium">{debuffsLabel}</dd>
+            </dl>
+            <dl className="p-4">
+              <dt className="text-sm text-pale">{t("impression")}</dt>
+              <dd className="text-lg font-medium">{impressionLabel}</dd>
+            </dl>
           </div>
         </div>
       )}

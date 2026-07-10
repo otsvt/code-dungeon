@@ -8,10 +8,7 @@ export function SetupHeader() {
 
   return (
     <header className="relative pt-6 pb-40 flex flex-col gap-8 items-center">
-      <Link
-        href={ROUTES.home}
-        className="absolute left-0 top-6 px-4 py-2 rounded-lg border border-decore bg-pure text-lg font-medium uppercase"
-      >
+      <Link href={ROUTES.home} className="absolute left-0 top-6 default-button">
         {t("actions.toMenu")}
       </Link>
       <div className="flex items-center gap-x-4">

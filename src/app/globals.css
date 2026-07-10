@@ -36,6 +36,10 @@
   .main-container {
     @apply max-w-fluid w-full mx-auto px-6;
   }
+
+  .default-button {
+    @apply px-4 py-2 rounded-lg border border-decore bg-pure text-lg font-medium uppercase;
+  }
 }
 
 @layer utilities {

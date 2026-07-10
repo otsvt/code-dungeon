@@ -63,5 +63,19 @@
       "label": "run",
       "description": "A run is one attempt to clear rooms and reach the final interview."
     }
+  },
+  "GameHud": {
+    "life": "Life",
+    "room": "Room",
+    "buffs": "Gifts",
+    "debuffs": "Distortions",
+    "impression": "Impression",
+    "empty": "none",
+    "menu": "To Menu",
+    "impressions": {
+      "weak": "weak",
+      "neutral": "neutral",
+      "strong": "strong"
+    }
   }
 }
