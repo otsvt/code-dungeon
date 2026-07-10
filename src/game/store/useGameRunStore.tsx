@@ -17,8 +17,16 @@ export const useRunStore = create<RunStore>((set) => ({
       currentRun: {
         id: crypto.randomUUID(),
         settings,
-        status: "created",
         currentRoom: { type: "start" },
+        roomNumber: 0,
+        lives: {
+          current: 1,
+          max: 1,
+        },
+        activeBuffIds: [],
+        activeDebuffIds: [],
+        impression: 0,
+        status: "created",
       },
     });
   },
