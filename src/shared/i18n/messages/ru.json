@@ -72,6 +72,13 @@
     "impression": "Впечатление",
     "empty": "нет",
     "menu": "В меню",
+    "buffNames": {
+      "removeWrongOption": "Убрать неверный ответ",
+      "secondChance": "Второй шанс",
+      "doorInsight": "Знание пути",
+      "easierNextRoom": "Лёгкая следующая комната",
+      "skipQuestion": "Пропустить вопрос"
+    },
     "impressions": {
       "weak": "слабое",
       "neutral": "ровное",

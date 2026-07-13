@@ -72,6 +72,13 @@
     "impression": "Impression",
     "empty": "none",
     "menu": "To Menu",
+    "buffNames": {
+      "removeWrongOption": "Remove Wrong Option",
+      "secondChance": "Second Chance",
+      "doorInsight": "Door Insight",
+      "easierNextRoom": "Easier Next Room",
+      "skipQuestion": "Skip Question"
+    },
     "impressions": {
       "weak": "weak",
       "neutral": "neutral",
