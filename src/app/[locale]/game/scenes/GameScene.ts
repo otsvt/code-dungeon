@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 
+import { useRunStore } from "@/game";
 import { Room } from "../entities/Room";
 import { Hero } from "../entities/Hero";
 import { Pedestal } from "../entities/Pedestal";
@@ -9,8 +10,12 @@ export class GameScene extends Phaser.Scene {
   private pedestal?: Pedestal;
   private room?: Room;
 
+  public locale: "ru" | "en";
+
   constructor() {
     super("GameScene");
+
+    this.locale = window.location.pathname.split("/")[1] === "en" ? "en" : "ru";
   }
 
   create() {
@@ -28,6 +33,10 @@ export class GameScene extends Phaser.Scene {
 
     await this.hero.moveTo(this.scale.width * 0.48, this.scale.height * 0.8, 2000);
 
-    console.log("ready");
+    const buff = useRunStore.getState().grantStartBuff();
+
+    if (!buff) {
+      return;
+    }
   }
 }

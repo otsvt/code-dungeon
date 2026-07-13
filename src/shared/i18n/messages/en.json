@@ -79,6 +79,17 @@
       "easierNextRoom": "Easier Next Room",
       "skipQuestion": "Skip Question"
     },
+    "buffDescriptions": {
+      "removeWrongOption": "Removes one incorrect answer option.",
+      "secondChance": "Allows you to survive one mistake.",
+      "doorInsight": "Reveals information about one of the next paths.",
+      "easierNextRoom": "Reduces the difficulty of the next room.",
+      "skipQuestion": "Allows you to skip one question without a penalty."
+    },
+    "buffReward": {
+      "title": "Gift received",
+      "continue": "Continue"
+    },
     "impressions": {
       "weak": "weak",
       "neutral": "neutral",

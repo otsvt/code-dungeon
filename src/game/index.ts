@@ -1,2 +1,3 @@
 export { useRunStore } from "./store/useGameRunStore";
-export { START_BUFF_IDS, type StartBuffId } from "./types/buff";
+
+export { BUFFS, START_BUFFS, getBuffById, type Buff, type BuffId } from "./types/buff";

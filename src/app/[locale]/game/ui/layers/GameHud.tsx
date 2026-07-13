@@ -17,9 +17,6 @@ export function GameHud({ currentRun }: GameHudProps) {
         ? t("impressions.strong")
         : t("impressions.neutral");
 
-  const buffsLabel = currentRun.activeBuffIds.join(", ") || t("empty");
-  const debuffsLabel = currentRun.activeDebuffIds.join(", ") || t("empty");
-
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleHud = () => {
@@ -33,7 +30,7 @@ export function GameHud({ currentRun }: GameHudProps) {
       </button>
       {isOpen && (
         <div className="w-full p-4 rounded-xl border border-decore bg-background">
-          <div className="*:p-4 flex items-center divide-x divide-accent gap-x-2">
+          <div className="flex items-center divide-x divide-accent gap-x-2">
             <dl className="p-4">
               <dt className="text-sm text-pale">{t("life")}</dt>
               {currentRun.lives.current ? (
@@ -44,11 +41,11 @@ export function GameHud({ currentRun }: GameHudProps) {
             </dl>
             <dl className="p-4 w-120">
               <dt className="text-sm text-pale">{t("buffs")}</dt>
-              <dd className="text-lg font-medium">{buffsLabel}</dd>
+              <dd className="text-lg font-medium">{currentRun.activeBuffs.map((buff) => t(buff.nameKey))}</dd>
             </dl>
             <dl className="p-4 w-120">
               <dt className="text-sm text-pale">{t("debuffs")}</dt>
-              <dd className="text-lg font-medium">{debuffsLabel}</dd>
+              <dd className="text-lg font-medium">{t("empty")}</dd>
             </dl>
             <dl className="p-4">
               <dt className="text-sm text-pale">{t("impression")}</dt>

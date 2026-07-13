@@ -3,13 +3,13 @@
 import { create } from "zustand";
 import { type RunSettings } from "@/features/run-setup";
 import { type CurrentRun } from "../types/run";
-import { START_BUFF_IDS } from "../types/buff";
+import { START_BUFFS, type Buff } from "../types/buff";
 
 type RunStore = {
   currentRun: CurrentRun | null;
   startRun: (settings: RunSettings) => void;
   resetRun: () => void;
-  grantStartBuff: () => void;
+  grantStartBuff: () => Buff | null;
 };
 
 export const useRunStore = create<RunStore>((set) => ({
@@ -25,8 +25,8 @@ export const useRunStore = create<RunStore>((set) => ({
           current: 1,
           max: 1,
         },
-        activeBuffIds: [],
-        activeDebuffIds: [],
+        activeBuffs: [],
+        activeDebuffs: [],
         startBuffGranted: false,
         impression: 0,
         status: "created",
@@ -39,21 +39,27 @@ export const useRunStore = create<RunStore>((set) => ({
     });
   },
   grantStartBuff: () => {
+    let grantedBuff: Buff | null = null;
+
     set((state) => {
       if (!state.currentRun || state.currentRun.startBuffGranted) {
         return state;
       }
 
-      const randomIndex = Math.floor(Math.random() * START_BUFF_IDS.length);
-      const startBuffId = START_BUFF_IDS[randomIndex];
+      const randomIndex = Math.floor(Math.random() * START_BUFFS.length);
+      const buff = START_BUFFS[randomIndex];
+
+      grantedBuff = buff;
 
       return {
         currentRun: {
           ...state.currentRun,
-          activeBuffIds: [...state.currentRun.activeBuffIds, startBuffId],
+          activeBuffs: [...state.currentRun.activeBuffs, buff],
           startBuffGranted: true,
         },
       };
     });
+
+    return grantedBuff;
   },
 }));

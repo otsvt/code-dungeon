@@ -1,5 +1,5 @@
 import { type RunSettings } from "@/features/run-setup";
-import { type StartBuffId } from "./buff";
+import { type Buff } from "./buff";
 
 export type RoomType = "start" | "battle" | "hr" | "final";
 
@@ -16,8 +16,8 @@ export type CurrentRun = {
     current: number;
     max: number;
   };
-  activeBuffIds: StartBuffId[];
-  activeDebuffIds: string[];
+  activeBuffs: Buff[];
+  activeDebuffs: string[];
   startBuffGranted: boolean;
   impression: -1 | 0 | 1;
   status: "created" | "started";
