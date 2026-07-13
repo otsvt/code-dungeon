@@ -17,5 +17,17 @@ export class GameScene extends Phaser.Scene {
     this.room = new Room(this);
     this.pedestal = new Pedestal(this);
     this.hero = new Hero(this);
+
+    this.startRoomIntro();
+  }
+
+  private async startRoomIntro() {
+    if (!this.hero) {
+      return;
+    }
+
+    await this.hero.moveTo(this.scale.width * 0.48, this.scale.height * 0.8, 1500);
+
+    console.log("ready");
   }
 }

@@ -10,7 +10,31 @@ export class Hero extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
 
     this.setOrigin(0.5, 1);
-    this.setScale(0.5);
+    this.setScale(0.52);
     this.setDepth(DEPTH_INDEX[SPRITE_NAMES.hero]);
+  }
+
+  moveTo(x: number, y: number, duration: number): Promise<void> {
+    this.setFrame(1);
+
+    return new Promise((resolve) => {
+      this.scene.tweens.add({
+        targets: this,
+        x,
+        y,
+        duration,
+        ease: "Sine.easeInOut",
+        onUpdate: (tween) => {
+          const step = Math.floor(tween.progress * 3);
+          const frame = step % 2 === 0 ? 1 : 2;
+
+          this.setFrame(frame);
+        },
+        onComplete: () => {
+          this.setFrame(0);
+          resolve();
+        },
+      });
+    });
   }
 }
