@@ -7,6 +7,9 @@ export const SPRITE_NAMES = {
   room: "room",
   hero: "hero",
   pedestal: "pedestal",
+  flame: {
+    base: "baseFlame",
+  },
 } as const;
 
 export const DEPTH_INDEX = {
@@ -19,4 +22,5 @@ export const ASSETS_PATH = {
   [SPRITE_NAMES.room]: "/assets/game/scene.png",
   [SPRITE_NAMES.pedestal]: "/assets/game/pedestal.png",
   [SPRITE_NAMES.hero]: "/assets/game/hero-sprite.png",
+  [SPRITE_NAMES.flame.base]: "/assets/game/flame/red-flame-sprite.png",
 } as const;

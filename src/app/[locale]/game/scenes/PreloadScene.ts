@@ -12,6 +12,10 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image(SPRITE_NAMES.pedestal, ASSETS_PATH[SPRITE_NAMES.pedestal]);
 
     this.load.spritesheet(SPRITE_NAMES.hero, ASSETS_PATH[SPRITE_NAMES.hero], { frameHeight: 682, frameWidth: 682 });
+    this.load.spritesheet(SPRITE_NAMES.flame.base, ASSETS_PATH[SPRITE_NAMES.flame.base], {
+      frameHeight: 48,
+      frameWidth: 32,
+    });
   }
   create() {
     this.scene.start(SCENE_NAMES.game);

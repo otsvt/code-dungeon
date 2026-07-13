@@ -26,7 +26,7 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    await this.hero.moveTo(this.scale.width * 0.48, this.scale.height * 0.8, 1500);
+    await this.hero.moveTo(this.scale.width * 0.48, this.scale.height * 0.8, 2000);
 
     console.log("ready");
   }

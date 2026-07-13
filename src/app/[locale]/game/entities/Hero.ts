@@ -25,7 +25,7 @@ export class Hero extends Phaser.GameObjects.Sprite {
         duration,
         ease: "Sine.easeInOut",
         onUpdate: (tween) => {
-          const step = Math.floor(tween.progress * 3);
+          const step = Math.floor(tween.progress * 5);
           const frame = step % 2 === 0 ? 1 : 2;
 
           this.setFrame(frame);
