@@ -1,4 +1,5 @@
 import { Buff } from "@/game";
+import { Tooltip } from "@/shared/ui/tooltip";
 import { SectorWrapper } from "./SectorWrapper";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -11,11 +12,22 @@ export function BuffsSector({ buffs }: BuffsSectorProps) {
   const t = useTranslations("GameHud");
 
   return (
-    <SectorWrapper classNames="w-120">
+    <SectorWrapper>
       <dt className="text-sm text-pale">{t("buffs")}</dt>
       <dd className="flex gap-x-2">
         {buffs.map((buff) => (
-          <Image key={buff.id} src={buff.iconPath} height={80} width={80} alt={t(buff.descriptionKey)} />
+          <Tooltip
+            key={buff.id}
+            triggerClassName="cursor-help"
+            content={
+              <span className="flex flex-col gap-y-1">
+                <span className="font-semibold text-decore">{t(buff.nameKey)}</span>
+                <span>{t(buff.descriptionKey)}</span>
+              </span>
+            }
+          >
+            <Image src={buff.iconPath} height={80} width={80} alt={t(buff.nameKey)} />
+          </Tooltip>
         ))}
       </dd>
     </SectorWrapper>
