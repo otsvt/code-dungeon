@@ -1,7 +1,8 @@
-import { CurrentRun } from "@/game/types/run";
-import { SpriteIcon } from "@/shared/ui/sprite-icon";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { CurrentRun } from "@/game/types/run";
+import { useTranslations } from "next-intl";
+import { LiveSector } from "../components/LiveSector";
+import { BuffsSector } from "../components/BuffsSector";
 
 interface GameHudProps {
   currentRun: CurrentRun;
@@ -31,14 +32,8 @@ export function GameHud({ currentRun }: GameHudProps) {
       {isOpen && (
         <div className="w-full p-4 rounded-xl border border-decore bg-background">
           <div className="flex items-center divide-x divide-accent gap-x-2">
-            <dl className="p-4">
-              <dt className="text-sm text-pale">{t("life")}</dt>
-              {currentRun.lives.current ? (
-                <SpriteIcon id="heart" className="h-8 w-8 fill-red-500 stroke-red-500" />
-              ) : (
-                <SpriteIcon id="heart" className="h-8 w-8 fill-transparent stroke-red-300" />
-              )}
-            </dl>
+            <LiveSector lives={currentRun.lives.current} />
+            <BuffsSector buffs={currentRun.activeBuffs} />
             <dl className="p-4 w-120">
               <dt className="text-sm text-pale">{t("buffs")}</dt>
               <dd className="text-lg font-medium">{currentRun.activeBuffs.map((buff) => t(buff.nameKey))}</dd>
