@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { DEPTH_INDEX, SPRITE_NAMES } from "../types/consts";
+import { type BuffId } from "@/game";
 
 const FLAME_ANIMATION_KEY = "base-flame-burning";
 
@@ -41,5 +42,35 @@ export class Pedestal extends Phaser.GameObjects.Container {
     }
 
     this.flame.play(FLAME_ANIMATION_KEY);
+  }
+
+  public giveBuff(buffId: BuffId) {
+    const flameStartY = -150;
+
+    this.scene.tweens.add({
+      targets: this.flame,
+      scaleX: 7.5,
+      scaleY: 7.5,
+      y: this.flame.y - 50,
+      duration: 300,
+      ease: "Sine.easeInOut",
+      yoyo: true,
+    });
+
+    const buffIcon = this.scene.add.image(0, this.flame.y, buffId);
+    this.add(buffIcon);
+
+    buffIcon.setScale(0);
+    buffIcon.setAlpha(0);
+
+    this.scene.tweens.add({
+      targets: buffIcon,
+      scaleX: 0.075,
+      scaleY: 0.075,
+      alpha: 1,
+      y: flameStartY - 50,
+      duration: 500,
+      ease: "Back.easeOut",
+    });
   }
 }

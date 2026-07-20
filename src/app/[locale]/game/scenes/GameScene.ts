@@ -27,7 +27,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   private async startRoomIntro() {
-    if (!this.hero) {
+    if (!this.hero || !this.pedestal) {
       return;
     }
 
@@ -38,5 +38,7 @@ export class GameScene extends Phaser.Scene {
     if (!buff) {
       return;
     }
+
+    this.pedestal.giveBuff(buff.id);
   }
 }
