@@ -6,5 +6,15 @@ interface SectorWrapperProps {
 }
 
 export function SectorWrapper({ children, classNames }: SectorWrapperProps) {
-  return <dl className={clsx("p-4 text-sm text-pale", classNames)}>{children}</dl>;
+  return (
+    <section
+      className={clsx(
+        "relative p-2",
+        classNames,
+        "before:absolute before:top-2 before:h-px before:left-2 before:right-0 before:bg-sandy-low",
+      )}
+    >
+      {children}
+    </section>
+  );
 }

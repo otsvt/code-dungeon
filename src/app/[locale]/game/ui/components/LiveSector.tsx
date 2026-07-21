@@ -1,22 +1,18 @@
-import { useTranslations } from "next-intl";
-import { SectorWrapper } from "./SectorWrapper";
 import { SpriteIcon } from "@/shared/ui/sprite-icon";
+import { SectorWrapper } from "./SectorWrapper";
 
 interface LiveSectorProps {
-  lives: number;
+  currentLives: number;
+  maxLives: number;
 }
 
-export function LiveSector({ lives }: LiveSectorProps) {
-  const t = useTranslations("GameHud");
-
+export function LiveSector({ currentLives, maxLives }: LiveSectorProps) {
   return (
-    <SectorWrapper>
-      <dt>{t("life")}</dt>
-      {lives ? (
-        <SpriteIcon id="heart" className="h-8 w-8 fill-red-500 stroke-red-500" />
-      ) : (
-        <SpriteIcon id="heart" className="h-8 w-8 fill-transparent stroke-red-300" />
-      )}
+    <SectorWrapper classNames="font-mono flex items-center gap-x-2">
+      <SpriteIcon id="heart" className="h-8 w-8 fill-red-500 stroke-red-500" />
+      <span>
+        {currentLives}/{maxLives}
+      </span>
     </SectorWrapper>
   );
 }

@@ -7,6 +7,8 @@ export type CurrentRoom = {
   type: RoomType;
 };
 
+export type Impression = -1 | 0 | 1;
+
 export type CurrentRun = {
   id: string;
   settings: RunSettings;
@@ -19,6 +21,6 @@ export type CurrentRun = {
   activeBuffs: Buff[];
   activeDebuffs: string[];
   startBuffGranted: boolean;
-  impression: -1 | 0 | 1;
+  impression: Impression;
   status: "created" | "started";
 };

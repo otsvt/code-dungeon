@@ -12,9 +12,8 @@ export function BuffsSector({ buffs }: BuffsSectorProps) {
   const t = useTranslations("GameHud");
 
   return (
-    <SectorWrapper>
-      <dt className="text-sm text-pale">{t("buffs")}</dt>
-      <dd className="flex gap-x-2">
+    <SectorWrapper classNames="w-120 after:absolute after:bottom-2 after:h-px after:left-2 after:right-0 after:bg-sandy-low">
+      <div className="h-full flex items-center gap-x-2 overflow-x-auto">
         {buffs.map((buff) => (
           <Tooltip
             key={buff.id}
@@ -26,10 +25,12 @@ export function BuffsSector({ buffs }: BuffsSectorProps) {
               </span>
             }
           >
-            <Image src={buff.iconPath} height={80} width={80} alt={t(buff.nameKey)} />
+            <div className="rounded-full border-2 border-effect-buff-stroke bg-effect-buff-bg">
+              <Image src={buff.iconPath} height={54} width={54} alt={t(buff.nameKey)} />
+            </div>
           </Tooltip>
         ))}
-      </dd>
+      </div>
     </SectorWrapper>
   );
 }

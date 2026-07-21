@@ -2,13 +2,13 @@
 @import './styles/scrollbar.css';
 
 @theme inline {
+  --font-noto: var(--font-noto-serif);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @theme {
   --container-fluid: 105rem;
-
 
   --color-background: #F8F2EC;
   --color-foreground: #0F1E33;
@@ -18,16 +18,29 @@
   --color-light: #F4EFEB;
   --color-dark: #2E2C29;
   --color-accent: #E5C398;
+  --color-milk: #DDEBED;
+
+  --color-sandy: #C8A46A;
+  --color-sandy-low: #E5C39855;
+  --color-deep: #242623F7;
+
+  --color-effect-buff-bg: #151412ED;
+  --color-effect-buff-stroke: #6E9C66;
+  --color-effect-debuff-bg: #241619F2;
+  --color-effect-debuff-stroke: #B44C43;
 }
 
 @layer base {
-
   button {
     @apply cursor-pointer disabled:cursor-default;
   }
 
   label {
     @apply cursor-pointer has-disabled:cursor-default;
+  }
+
+  p {
+    @apply font-sans;
   }
 
 }
