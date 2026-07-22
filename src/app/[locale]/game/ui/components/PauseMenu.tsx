@@ -1,17 +1,17 @@
 import { useTranslations } from "next-intl";
+import { useGameUiStore } from "@/game";
 import { CurrentRun } from "@/game/types/run";
 import { DefaultButton } from "@/shared/ui/button";
 import { SpriteIcon } from "@/shared/ui/sprite-icon";
 
 interface PauseMenuProps {
   currentRun: CurrentRun;
-  onContinue: () => void;
-  onRestart: () => void;
-  onExitToMenu: () => void;
 }
 
-export function PauseMenu({ currentRun, onContinue, onRestart, onExitToMenu }: PauseMenuProps) {
+export function PauseMenu({ currentRun }: PauseMenuProps) {
   const t = useTranslations("GameHud.pause");
+  const resumeGame = useGameUiStore((state) => state.resumeGame);
+  const openConfirmation = useGameUiStore((state) => state.openConfirmation);
   const roomNumber = Math.max(currentRun.roomNumber, 1);
 
   return (
@@ -28,10 +28,7 @@ export function PauseMenu({ currentRun, onContinue, onRestart, onExitToMenu }: P
           <SpriteIcon id="pause" className="h-7 w-7 text-accent" />
         </div>
       </div>
-      <h1
-        id="pause-menu-title"
-        className="mt-4 flex h-13.5 items-center justify-center font-noto text-pause-title font-semibold tracking-pause-title text-dark max-md:text-3xl"
-      >
+      <h1 className="mt-4 flex h-13.5 items-center justify-center font-noto text-pause-title font-semibold tracking-pause-title text-dark max-md:text-3xl">
         {t("title")}
       </h1>
       <p className="flex h-6.5 items-center justify-center text-center font-sans text-xs font-medium text-pale">
@@ -44,11 +41,11 @@ export function PauseMenu({ currentRun, onContinue, onRestart, onExitToMenu }: P
       </p>
       <div className="mt-4 h-px w-full bg-decore/50" />
       <div className="mt-6.75 space-y-4">
-        <DefaultButton onClick={onContinue}>{t("continue")}</DefaultButton>
-        <DefaultButton variant="secondary" onClick={onRestart}>
+        <DefaultButton onClick={resumeGame}>{t("continue")}</DefaultButton>
+        <DefaultButton variant="secondary" onClick={() => openConfirmation("restart")}>
           {t("restart")}
         </DefaultButton>
-        <DefaultButton variant="secondary" onClick={onExitToMenu}>
+        <DefaultButton variant="secondary" onClick={() => openConfirmation("exit")}>
           {t("exitToMenu")}
         </DefaultButton>
       </div>

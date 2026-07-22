@@ -25,6 +25,12 @@
   --color-deep: #242623F7;
   --color-bronze: #B8893F;
   --color-overlay: #0F1E33C2;
+  --color-danger: #9E5D55;
+  --color-danger-icon: #D98F76;
+  --color-danger-surface: #9E5D5512;
+  --color-danger-border: #9E5D5555;
+  --color-danger-inner: #9E5D5514;
+  --color-danger-inner-border: #9E5D5588;
 
   --color-button-primary-hover: #39332D;
   --color-button-primary-active: #25211D;
@@ -39,13 +45,18 @@
   --text-pause-serial: 10px;
   --text-pause-title: 38px;
   --text-pause-hint: 9px;
+  --text-confirm-exit-title: 34px;
+  --text-confirm-restart-title: 31px;
+  --text-confirm-description: 13px;
 
   --tracking-pause-serial: 1.2px;
   --tracking-pause-title: 1.4px;
   --tracking-button: 1.1px;
   --tracking-pause-hint: 0.7px;
+  --tracking-confirm-title: 0.8px;
 
   --leading-save-policy: 1.4;
+  --leading-confirm-warning: 1.45;
   --shadow-pause-menu: 0 20px 42px #0F1E337A;
 }
 

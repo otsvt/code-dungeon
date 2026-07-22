@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useGameUiStore } from "@/game";
 import { CurrentRun } from "@/game/types/run";
+import { PauseConfirmationMenu } from "../components/PauseConfirmationMenu";
 import { PauseMenu } from "../components/PauseMenu";
 
 interface GameOverlayProps {
@@ -11,7 +12,9 @@ interface GameOverlayProps {
 
 export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlayProps) {
   const isPaused = useGameUiStore((state) => state.isPaused);
+  const confirmation = useGameUiStore((state) => state.confirmation);
   const resumeGame = useGameUiStore((state) => state.resumeGame);
+  const closeConfirmation = useGameUiStore((state) => state.closeConfirmation);
 
   useEffect(() => {
     if (!isPaused) {
@@ -20,6 +23,11 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        if (confirmation) {
+          closeConfirmation();
+          return;
+        }
+
         resumeGame();
       }
     };
@@ -29,20 +37,24 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isPaused, resumeGame]);
+  }, [closeConfirmation, confirmation, isPaused, resumeGame]);
 
   if (!isPaused) {
     return null;
   }
 
   return (
-    <div className="absolute inset-0 z-30 flex items-center justify-center overflow-y-auto bg-overlay p-6">
-      <PauseMenu
-        currentRun={currentRun}
-        onContinue={resumeGame}
-        onRestart={onRestart}
-        onExitToMenu={onExitToMenu}
-      />
+    <div className="absolute inset-0 z-30 p-6 flex-center bg-overlay">
+      {confirmation ? (
+        <PauseConfirmationMenu
+          confirmation={confirmation}
+          currentRun={currentRun}
+          onCancel={closeConfirmation}
+          onConfirm={confirmation === "restart" ? onRestart : onExitToMenu}
+        />
+      ) : (
+        <PauseMenu currentRun={currentRun} />
+      )}
     </div>
   );
 }

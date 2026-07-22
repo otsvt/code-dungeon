@@ -87,6 +87,26 @@
         "-1": "weak",
         "0": "neutral",
         "1": "strong"
+      },
+      "confirmations": {
+        "common": {
+          "stay": "STAY",
+          "keyboardHint": "ESC — stay"
+        },
+        "exit": {
+          "serial": "ACTION / EXIT_TO_MENU / RUN_{run}",
+          "title": "EXIT RUN?",
+          "description": "The current room is not complete. You will return to the latest saved checkpoint.",
+          "confirm": "EXIT TO MAIN MENU",
+          "warning": "Completed rooms and collected effects are saved. Answers from the current room will be reset."
+        },
+        "restart": {
+          "serial": "ACTION / RESTART_RUN / RUN_{run}",
+          "title": "RESTART RUN?",
+          "description": "A new run will replace the current progress, selected technologies, and all collected effects.",
+          "confirm": "START NEW RUN",
+          "warning": "This action cannot be undone. The current run will end without a result and disappear from continue."
+        }
       }
     },
     "buffNames": {
