@@ -72,6 +72,23 @@
     "impression": "Impression",
     "empty": "none",
     "menu": "To Menu",
+    "pause": {
+      "pauseGame": "Pause game",
+      "resumeGame": "Resume game",
+      "serial": "RUN_{run} / ROOM_{room}",
+      "title": "PAUSED",
+      "currentState": "Room {room} of ? • Impression: {impression} • Life {currentLives}/{maxLives}",
+      "continue": "CONTINUE",
+      "restart": "RESTART RUN",
+      "exitToMenu": "MAIN MENU",
+      "savePolicy": "Progress is saved after each room. The current question sequence will restart.",
+      "keyboardHint": "ESC — continue",
+      "impressions": {
+        "-1": "weak",
+        "0": "neutral",
+        "1": "strong"
+      }
+    },
     "buffNames": {
       "removeWrongOption": "Remove Wrong Option",
       "secondChance": "Second Chance",

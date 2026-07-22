@@ -7793,293 +7793,14 @@
           "height": 210
         },
         {
-          "id": "F3WAvc",
+          "id": "YgATj",
           "type": "ref",
           "ref": "r7KPL2",
-          "name": "Persistent Selected HUD",
+          "name": "Persistent Final HUD",
           "x": 160,
           "y": 18,
           "width": 1600,
-          "height": 136,
-          "children": [
-            {
-              "id": "LczUt",
-              "type": "ref",
-              "ref": "LczUt"
-            },
-            {
-              "id": "ExAh7",
-              "type": "ref",
-              "ref": "ExAh7"
-            },
-            {
-              "id": "DbRu5",
-              "type": "ref",
-              "ref": "DbRu5"
-            },
-            {
-              "id": "ZmtKa",
-              "type": "ref",
-              "ref": "ZmtKa"
-            },
-            {
-              "id": "LCJiB",
-              "type": "ref",
-              "ref": "LCJiB"
-            },
-            {
-              "id": "YDqcL",
-              "type": "ref",
-              "ref": "YDqcL"
-            },
-            {
-              "id": "W1iWKs",
-              "type": "ref",
-              "ref": "W1iWKs"
-            },
-            {
-              "id": "V2VGwn",
-              "type": "ref",
-              "ref": "V2VGwn"
-            },
-            {
-              "id": "IeplU",
-              "type": "ref",
-              "ref": "IeplU"
-            },
-            {
-              "id": "E9O5j",
-              "type": "ref",
-              "ref": "E9O5j"
-            },
-            {
-              "id": "hn5Tm",
-              "type": "ref",
-              "ref": "hn5Tm",
-              "children": [
-                {
-                  "id": "Y9csCj",
-                  "type": "ref",
-                  "ref": "hn5Tm/Y9csCj"
-                },
-                {
-                  "id": "X115m",
-                  "type": "ref",
-                  "ref": "hn5Tm/X115m"
-                },
-                {
-                  "id": "NNTfU",
-                  "type": "ref",
-                  "ref": "hn5Tm/NNTfU"
-                },
-                {
-                  "id": "gsxft",
-                  "type": "ref",
-                  "ref": "hn5Tm/gsxft"
-                }
-              ]
-            },
-            {
-              "id": "gtvX7",
-              "type": "ref",
-              "ref": "gtvX7"
-            },
-            {
-              "id": "uoHH4",
-              "type": "ref",
-              "ref": "uoHH4"
-            },
-            {
-              "id": "O9eoC",
-              "type": "ref",
-              "ref": "O9eoC"
-            },
-            {
-              "id": "dGirD",
-              "type": "ref",
-              "ref": "dGirD"
-            },
-            {
-              "id": "pNo7i",
-              "type": "ref",
-              "ref": "pNo7i",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "pNo7i/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "f756t",
-              "type": "ref",
-              "ref": "f756t",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "f756t/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "I1iJiF",
-              "type": "ref",
-              "ref": "I1iJiF",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "I1iJiF/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "G3tG1k",
-              "type": "ref",
-              "ref": "G3tG1k",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "G3tG1k/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "x6yIi",
-              "type": "ref",
-              "ref": "x6yIi",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "x6yIi/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "x6yIi/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "Tnd72",
-              "type": "ref",
-              "ref": "Tnd72",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "Tnd72/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "Tnd72/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "IZIVL",
-              "type": "ref",
-              "ref": "IZIVL",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "IZIVL/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "IZIVL/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "tFBrW",
-              "type": "ref",
-              "ref": "tFBrW",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "tFBrW/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "tFBrW/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "U6jRy",
-              "type": "ref",
-              "ref": "U6jRy",
-              "children": [
-                {
-                  "id": "LsGGO",
-                  "type": "ref",
-                  "ref": "U6jRy/LsGGO"
-                },
-                {
-                  "id": "orXiM",
-                  "type": "ref",
-                  "ref": "U6jRy/orXiM"
-                },
-                {
-                  "id": "G457PR",
-                  "type": "ref",
-                  "ref": "U6jRy/G457PR"
-                },
-                {
-                  "id": "R6QAD",
-                  "type": "ref",
-                  "ref": "U6jRy/R6QAD"
-                }
-              ]
-            },
-            {
-              "id": "c9RZ6",
-              "type": "ref",
-              "ref": "c9RZ6"
-            },
-            {
-              "id": "tRtuy",
-              "type": "ref",
-              "ref": "tRtuy"
-            },
-            {
-              "id": "JcOuF",
-              "type": "ref",
-              "ref": "JcOuF"
-            },
-            {
-              "id": "Y9EI2",
-              "type": "ref",
-              "ref": "Y9EI2",
-              "children": [
-                {
-                  "id": "QOhRE",
-                  "type": "ref",
-                  "ref": "Y9EI2/QOhRE"
-                },
-                {
-                  "id": "T4JO9N",
-                  "type": "ref",
-                  "ref": "Y9EI2/T4JO9N"
-                },
-                {
-                  "id": "o40vTl",
-                  "type": "ref",
-                  "ref": "Y9EI2/o40vTl"
-                }
-              ]
-            }
-          ]
+          "height": 136
         },
         {
           "type": "rectangle",
@@ -9118,10 +8839,10 @@
           "type": "polygon",
           "polygonCount": 4,
           "id": "V2VGwn",
-          "x": 396,
-          "y": 60,
+          "x": 396.31370849898474,
+          "y": 74.31370849898485,
           "name": "C Left Join Diamond",
-          "rotation": 45,
+          "rotation": -270,
           "fill": "#242623",
           "width": 16,
           "height": 16,
@@ -9133,27 +8854,13 @@
           "polygonCount": 4,
           "id": "IeplU",
           "x": 1108,
-          "y": 60,
+          "y": 73,
           "name": "C Right Join Diamond",
-          "rotation": 45,
+          "rotation": -270,
           "fill": "#242623",
           "width": 16,
           "height": 16,
           "stroke": "#C8A46A",
-          "strokeWidth": 1
-        },
-        {
-          "type": "polygon",
-          "polygonCount": 4,
-          "id": "E9O5j",
-          "x": 762,
-          "y": 60,
-          "name": "C Center Accent Diamond",
-          "rotation": 45,
-          "fill": "#C8A46A",
-          "width": 14,
-          "height": 14,
-          "stroke": "#F8F2EC",
           "strokeWidth": 1
         },
         {
@@ -9164,7 +8871,12 @@
           "x": 0,
           "y": 12,
           "width": 112,
-          "height": 112
+          "height": 112,
+          "descendants": {
+            "NNTfU": {
+              "enabled": false
+            }
+          }
         },
         {
           "type": "icon",
@@ -9394,8 +9106,8 @@
         {
           "type": "text",
           "id": "JcOuF",
-          "x": 1458,
-          "y": 39,
+          "x": 1450,
+          "y": 41,
           "name": "C Run Progress",
           "fill": "$background",
           "textGrowth": "fixed-width-height",
@@ -9494,294 +9206,19 @@
           "height": 250
         },
         {
-          "id": "FKONP",
+          "id": "kDoU0",
           "type": "ref",
           "ref": "r7KPL2",
-          "name": "Selected Segmented HUD / In Game",
+          "name": "Final HUD / In Game",
           "x": 160,
           "y": 18,
           "width": 1600,
           "height": 136,
-          "children": [
-            {
-              "id": "LczUt",
-              "type": "ref",
-              "ref": "LczUt"
-            },
-            {
-              "id": "ExAh7",
-              "type": "ref",
-              "ref": "ExAh7"
-            },
-            {
-              "id": "DbRu5",
-              "type": "ref",
-              "ref": "DbRu5"
-            },
-            {
-              "id": "ZmtKa",
-              "type": "ref",
-              "ref": "ZmtKa"
-            },
-            {
-              "id": "LCJiB",
-              "type": "ref",
-              "ref": "LCJiB"
-            },
-            {
-              "id": "YDqcL",
-              "type": "ref",
-              "ref": "YDqcL"
-            },
-            {
-              "id": "W1iWKs",
-              "type": "ref",
-              "ref": "W1iWKs"
-            },
-            {
-              "id": "V2VGwn",
-              "type": "ref",
-              "ref": "V2VGwn"
-            },
-            {
-              "id": "IeplU",
-              "type": "ref",
-              "ref": "IeplU"
-            },
-            {
-              "id": "E9O5j",
-              "type": "ref",
-              "ref": "E9O5j"
-            },
-            {
-              "id": "hn5Tm",
-              "type": "ref",
-              "ref": "hn5Tm",
-              "children": [
-                {
-                  "id": "Y9csCj",
-                  "type": "ref",
-                  "ref": "hn5Tm/Y9csCj"
-                },
-                {
-                  "id": "X115m",
-                  "type": "ref",
-                  "ref": "hn5Tm/X115m"
-                },
-                {
-                  "id": "NNTfU",
-                  "type": "ref",
-                  "ref": "hn5Tm/NNTfU"
-                },
-                {
-                  "id": "gsxft",
-                  "type": "ref",
-                  "ref": "hn5Tm/gsxft"
-                }
-              ]
-            },
-            {
-              "id": "gtvX7",
-              "type": "ref",
-              "ref": "gtvX7"
-            },
-            {
-              "id": "uoHH4",
-              "type": "ref",
-              "ref": "uoHH4"
-            },
-            {
-              "id": "O9eoC",
-              "type": "ref",
-              "ref": "O9eoC",
+          "descendants": {
+            "O9eoC": {
               "content": "0/1"
-            },
-            {
-              "id": "dGirD",
-              "type": "ref",
-              "ref": "dGirD"
-            },
-            {
-              "id": "pNo7i",
-              "type": "ref",
-              "ref": "pNo7i",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "pNo7i/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "f756t",
-              "type": "ref",
-              "ref": "f756t",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "f756t/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "I1iJiF",
-              "type": "ref",
-              "ref": "I1iJiF",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "I1iJiF/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "G3tG1k",
-              "type": "ref",
-              "ref": "G3tG1k",
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "G3tG1k/y185Av"
-                }
-              ]
-            },
-            {
-              "id": "x6yIi",
-              "type": "ref",
-              "ref": "x6yIi",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "x6yIi/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "x6yIi/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "Tnd72",
-              "type": "ref",
-              "ref": "Tnd72",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "Tnd72/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "Tnd72/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "IZIVL",
-              "type": "ref",
-              "ref": "IZIVL",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "IZIVL/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "IZIVL/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "tFBrW",
-              "type": "ref",
-              "ref": "tFBrW",
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "tFBrW/EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "tFBrW/TQ1mA"
-                }
-              ]
-            },
-            {
-              "id": "U6jRy",
-              "type": "ref",
-              "ref": "U6jRy",
-              "children": [
-                {
-                  "id": "LsGGO",
-                  "type": "ref",
-                  "ref": "U6jRy/LsGGO"
-                },
-                {
-                  "id": "orXiM",
-                  "type": "ref",
-                  "ref": "U6jRy/orXiM"
-                },
-                {
-                  "id": "G457PR",
-                  "type": "ref",
-                  "ref": "U6jRy/G457PR"
-                },
-                {
-                  "id": "R6QAD",
-                  "type": "ref",
-                  "ref": "U6jRy/R6QAD"
-                }
-              ]
-            },
-            {
-              "id": "c9RZ6",
-              "type": "ref",
-              "ref": "c9RZ6"
-            },
-            {
-              "id": "tRtuy",
-              "type": "ref",
-              "ref": "tRtuy"
-            },
-            {
-              "id": "JcOuF",
-              "type": "ref",
-              "ref": "JcOuF"
-            },
-            {
-              "id": "Y9EI2",
-              "type": "ref",
-              "ref": "Y9EI2",
-              "children": [
-                {
-                  "id": "QOhRE",
-                  "type": "ref",
-                  "ref": "Y9EI2/QOhRE"
-                },
-                {
-                  "id": "T4JO9N",
-                  "type": "ref",
-                  "ref": "Y9EI2/T4JO9N"
-                },
-                {
-                  "id": "o40vTl",
-                  "type": "ref",
-                  "ref": "Y9EI2/o40vTl"
-                }
-              ]
             }
-          ]
+          }
         }
       ]
     },
@@ -10750,10 +10187,10 @@
           "height": 210
         },
         {
-          "id": "y9FiR",
+          "id": "jmJ5K",
           "type": "ref",
           "ref": "r7KPL2",
-          "name": "Persistent Selected HUD",
+          "name": "Persistent Final HUD",
           "x": 160,
           "y": 18,
           "width": 1600,
@@ -11291,10 +10728,10 @@
           "height": 210
         },
         {
-          "id": "jwkyQ",
+          "id": "dqgrF",
           "type": "ref",
           "ref": "r7KPL2",
-          "name": "Persistent Selected HUD",
+          "name": "Persistent Final HUD",
           "x": 160,
           "y": 18,
           "width": 1600,
@@ -11877,10 +11314,10 @@
           "height": 210
         },
         {
-          "id": "PdveP",
+          "id": "a5fiS",
           "type": "ref",
           "ref": "r7KPL2",
-          "name": "Persistent Selected HUD",
+          "name": "Persistent Final HUD",
           "x": 160,
           "y": 18,
           "width": 1600,
@@ -12480,10 +11917,10 @@
           "height": 210
         },
         {
-          "id": "tgHdc",
+          "id": "GmQjI",
           "type": "ref",
           "ref": "r7KPL2",
-          "name": "Persistent Selected HUD",
+          "name": "Persistent Final HUD",
           "x": 160,
           "y": 18,
           "width": 1600,
@@ -13106,10 +12543,10 @@
           "height": 210
         },
         {
-          "id": "X8rtI",
+          "id": "kPjK8",
           "type": "ref",
           "ref": "r7KPL2",
-          "name": "Persistent Selected HUD",
+          "name": "Persistent Final HUD",
           "x": 160,
           "y": 18,
           "width": 1600,
@@ -13588,7 +13025,7 @@
     {
       "type": "frame",
       "id": "gFD24",
-      "x": 13000,
+      "x": 10077,
       "y": 11,
       "name": "05A — Run Result / Passed / RU",
       "clip": true,
@@ -14255,20 +13692,6 @@
               "strokeWidth": 2
             },
             {
-              "type": "polygon",
-              "polygonCount": 4,
-              "id": "QnZJW",
-              "x": 645,
-              "y": 197,
-              "name": "Result Impression Diamond",
-              "rotation": 45,
-              "fill": "#E5C39822",
-              "width": 52,
-              "height": 52,
-              "stroke": "#E5C398",
-              "strokeWidth": 2
-            },
-            {
               "type": "icon",
               "id": "TZhNQ",
               "x": 655,
@@ -14858,7 +14281,7 @@
     {
       "type": "frame",
       "id": "pHoRS",
-      "x": 13000,
+      "x": 10077,
       "y": 1565,
       "name": "05B — Run Result / Failed / RU",
       "clip": true,
@@ -15525,20 +14948,6 @@
               "strokeWidth": 2
             },
             {
-              "type": "polygon",
-              "polygonCount": 4,
-              "id": "GLgbF",
-              "x": 645,
-              "y": 197,
-              "name": "Result Impression Diamond",
-              "rotation": 45,
-              "fill": "#9E5D5522",
-              "width": 52,
-              "height": 52,
-              "stroke": "#D98F76",
-              "strokeWidth": 2
-            },
-            {
               "type": "icon",
               "id": "ItbUu",
               "x": 655,
@@ -16099,7 +15508,7 @@
     {
       "type": "frame",
       "id": "XLAJZ",
-      "x": 10647,
+      "x": 12581,
       "y": 11,
       "name": "06A — Pause Menu / RU",
       "clip": true,
@@ -16456,7 +15865,7 @@
     {
       "type": "frame",
       "id": "tL7w3",
-      "x": 10647,
+      "x": 12581,
       "y": 1221,
       "name": "06B — Pause Menu / Confirm Exit / RU",
       "clip": true,
@@ -16806,7 +16215,7 @@
     {
       "type": "frame",
       "id": "p3ecRo",
-      "x": 10647,
+      "x": 12581,
       "y": 2571,
       "name": "06C — Pause Menu / Confirm Restart / RU",
       "clip": true,

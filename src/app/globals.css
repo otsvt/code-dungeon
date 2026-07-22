@@ -23,16 +23,35 @@
   --color-sandy: #C8A46A;
   --color-sandy-low: #E5C39855;
   --color-deep: #242623F7;
+  --color-bronze: #B8893F;
+  --color-overlay: #0F1E33C2;
+
+  --color-button-primary-hover: #39332D;
+  --color-button-primary-active: #25211D;
+  --color-button-secondary-hover: #EDE5E0;
+  --color-button-secondary-active: #E5D9D0;
 
   --color-effect-buff-bg: #151412ED;
   --color-effect-buff-stroke: #6E9C66;
   --color-effect-debuff-bg: #241619F2;
   --color-effect-debuff-stroke: #B44C43;
+
+  --text-pause-serial: 10px;
+  --text-pause-title: 38px;
+  --text-pause-hint: 9px;
+
+  --tracking-pause-serial: 1.2px;
+  --tracking-pause-title: 1.4px;
+  --tracking-button: 1.1px;
+  --tracking-pause-hint: 0.7px;
+
+  --leading-save-policy: 1.4;
+  --shadow-pause-menu: 0 20px 42px #0F1E337A;
 }
 
 @layer base {
   button {
-    @apply cursor-pointer disabled:cursor-default;
+    @apply cursor-pointer disabled:cursor-default outline-none;
   }
 
   label {

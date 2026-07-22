@@ -6,4 +6,7 @@ export const ASSETS = {
     main: "/assets/background/main-bg.png",
     setup: "/assets/background/setup-bg.png",
   },
+  hud: {
+    avatar: "/assets/game/hero-avatar.png",
+  },
 } as const;

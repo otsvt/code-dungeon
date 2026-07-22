@@ -72,6 +72,23 @@
     "impression": "Впечатление",
     "empty": "нет",
     "menu": "В меню",
+    "pause": {
+      "pauseGame": "Поставить игру на паузу",
+      "resumeGame": "Продолжить игру",
+      "serial": "RUN_{run} / ROOM_{room}",
+      "title": "ПАУЗА",
+      "currentState": "Комната {room} из ? • Впечатление: {impression} • Жизнь {currentLives}/{maxLives}",
+      "continue": "ПРОДОЛЖИТЬ",
+      "restart": "НАЧАТЬ RUN ЗАНОВО",
+      "exitToMenu": "В ГЛАВНОЕ МЕНЮ",
+      "savePolicy": "Прогресс сохраняется после комнаты. Текущая серия вопросов начнётся заново.",
+      "keyboardHint": "ESC — продолжить",
+      "impressions": {
+        "-1": "слабое",
+        "0": "ровное",
+        "1": "сильное"
+      }
+    },
     "buffNames": {
       "removeWrongOption": "Убрать неверный ответ",
       "secondChance": "Второй шанс",
