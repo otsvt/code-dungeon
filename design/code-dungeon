@@ -3,50 +3,6 @@
   "children": [
     {
       "type": "frame",
-      "id": "bi8Au",
-      "x": -6,
-      "y": 11,
-      "name": "Проверка подключения",
-      "clip": true,
-      "width": 800,
-      "height": 600,
-      "fill": "#F8F2EC",
-      "layout": "vertical",
-      "justifyContent": "center",
-      "alignItems": "center",
-      "children": [
-        {
-          "type": "text",
-          "id": "NbJYR",
-          "fill": "#000000",
-          "content": "апапвапвап",
-          "fontFamily": "Inter",
-          "fontSize": 16,
-          "fontWeight": "normal"
-        },
-        {
-          "type": "text",
-          "id": "pjcF2",
-          "fill": "#000000",
-          "content": "аваываываыв",
-          "fontFamily": "Inter",
-          "fontSize": 16,
-          "fontWeight": "normal"
-        },
-        {
-          "type": "text",
-          "id": "Y5j2sE",
-          "name": "Статус",
-          "fill": "#0F1E33",
-          "content": "готов к работе",
-          "fontFamily": "Geist",
-          "fontSize": 32,
-          "fontWeight": "600"
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "uJwm0",
       "x": 874,
       "y": 11,
@@ -3946,8 +3902,8 @@
     {
       "type": "frame",
       "id": "B1xue",
-      "x": 880,
-      "y": 4860,
+      "x": 4994,
+      "y": 11,
       "name": "01 — Main Menu / RU",
       "clip": true,
       "width": 1920,
@@ -4617,8 +4573,8 @@
     {
       "type": "frame",
       "id": "FQSqR",
-      "x": 4274,
-      "y": 11,
+      "x": 2574,
+      "y": 974,
       "name": "00.6 — Components / Language Switch",
       "clip": true,
       "width": 1200,
@@ -4875,8 +4831,8 @@
     {
       "type": "frame",
       "id": "vy9Nu",
-      "x": 5594,
-      "y": 11,
+      "x": 2574,
+      "y": 1671,
       "name": "00.7 — Components / Run Setup",
       "clip": true,
       "width": 1600,
@@ -5376,8 +5332,8 @@
     {
       "type": "frame",
       "id": "O47FH",
-      "x": 880,
-      "y": 6080,
+      "x": 4994,
+      "y": 1234,
       "name": "02 — Run Setup / RU",
       "clip": true,
       "width": 1920,
@@ -6463,8 +6419,8 @@
     {
       "type": "frame",
       "id": "izaNn",
-      "x": 5594,
-      "y": 1011,
+      "x": 2574,
+      "y": 2695,
       "name": "00.8 — Components / Game HUD",
       "clip": true,
       "width": 1600,
@@ -6971,8 +6927,8 @@
     {
       "type": "frame",
       "id": "oZC7O",
-      "x": 5594,
-      "y": 2051,
+      "x": 2574,
+      "y": 3919,
       "name": "00.9 — Components / Challenge Overlay",
       "width": 1600,
       "height": 1240,
@@ -7150,8 +7106,8 @@
     {
       "type": "frame",
       "id": "tqUMJ",
-      "x": 5650,
-      "y": 2221,
+      "x": 2630,
+      "y": 4089,
       "name": "Challenge / Answer / Default",
       "reusable": true,
       "width": 520,
@@ -7217,8 +7173,8 @@
     {
       "type": "frame",
       "id": "ZjKuH",
-      "x": 5650,
-      "y": 2313,
+      "x": 2630,
+      "y": 4181,
       "name": "Challenge / Answer / Hover",
       "reusable": true,
       "width": 520,
@@ -7284,8 +7240,8 @@
     {
       "type": "frame",
       "id": "h2YPU",
-      "x": 5650,
-      "y": 2405,
+      "x": 2630,
+      "y": 4273,
       "name": "Challenge / Answer / Selected Neutral",
       "reusable": true,
       "width": 520,
@@ -7351,8 +7307,8 @@
     {
       "type": "frame",
       "id": "a5uus9",
-      "x": 5650,
-      "y": 2497,
+      "x": 2630,
+      "y": 4365,
       "name": "Challenge / Answer / Disabled",
       "reusable": true,
       "opacity": 0.55,
@@ -7419,8 +7375,8 @@
     {
       "type": "frame",
       "id": "g6raUi",
-      "x": 5650,
-      "y": 2621,
+      "x": 2630,
+      "y": 4489,
       "name": "Challenge / Metadata Badge",
       "reusable": true,
       "width": 210,
@@ -7466,8 +7422,8 @@
     {
       "type": "frame",
       "id": "j5qw4y",
-      "x": 5650,
-      "y": 2695,
+      "x": 2630,
+      "y": 4563,
       "name": "Challenge / Code Block",
       "reusable": true,
       "width": 820,
@@ -7535,8 +7491,8 @@
     {
       "type": "frame",
       "id": "l1ZeBf",
-      "x": 6604,
-      "y": 2221,
+      "x": 3584,
+      "y": 4089,
       "name": "Challenge / Spirit Portrait / JavaScript",
       "reusable": true,
       "width": 500,
@@ -7634,8 +7590,8 @@
     {
       "type": "frame",
       "id": "eew4P",
-      "x": 7314,
-      "y": 2051,
+      "x": 794,
+      "y": 4857,
       "name": "Challenge / Overlay Shell",
       "reusable": true,
       "width": 1680,
@@ -7765,8 +7721,8 @@
     {
       "type": "frame",
       "id": "jugRa",
-      "x": 7000,
-      "y": 7420,
+      "x": 7609,
+      "y": 2890,
       "name": "04C — Challenge / Code Output / RU",
       "clip": true,
       "width": 1920,
@@ -8816,8 +8772,8 @@
     {
       "type": "frame",
       "id": "LkBiS",
-      "x": 5594,
-      "y": 4061,
+      "x": 794,
+      "y": 6725,
       "name": "HUD / Sacred Candidate / Default",
       "reusable": true,
       "width": 112,
@@ -8891,8 +8847,8 @@
     {
       "type": "frame",
       "id": "aLonE",
-      "x": 5754,
-      "y": 4067,
+      "x": 954,
+      "y": 6731,
       "name": "HUD / Sacred Menu / Default",
       "reusable": true,
       "width": 100,
@@ -8952,8 +8908,8 @@
     {
       "type": "frame",
       "id": "Qk4g1",
-      "x": 5904,
-      "y": 4081,
+      "x": 1104,
+      "y": 6745,
       "name": "HUD / Impression / Neutral",
       "reusable": true,
       "width": 250,
@@ -9024,8 +8980,8 @@
     {
       "type": "frame",
       "id": "r7KPL2",
-      "x": 5594,
-      "y": 4293,
+      "x": 794,
+      "y": 6957,
       "name": "HUD / Final / Segmented",
       "reusable": true,
       "width": 1600,
@@ -9466,8 +9422,8 @@
     {
       "type": "frame",
       "id": "Q1jGTn",
-      "x": 880,
-      "y": 7420,
+      "x": 4994,
+      "y": 2695,
       "name": "03 — Game HUD / Final / RU",
       "clip": true,
       "width": 1920,
@@ -9832,8 +9788,8 @@
     {
       "type": "frame",
       "id": "DPweq",
-      "x": 5594,
-      "y": 4569,
+      "x": 794,
+      "y": 7233,
       "name": "Challenge / Answer / Fluid / Default",
       "reusable": true,
       "width": 1180,
@@ -9898,8 +9854,8 @@
     {
       "type": "frame",
       "id": "g124g",
-      "x": 5594,
-      "y": 4679,
+      "x": 794,
+      "y": 7343,
       "name": "Challenge / Answer / Fluid / Hover",
       "reusable": true,
       "width": 1180,
@@ -9964,8 +9920,8 @@
     {
       "type": "frame",
       "id": "JNB3n",
-      "x": 5594,
-      "y": 4789,
+      "x": 794,
+      "y": 7453,
       "name": "Challenge / Answer / Fluid / Selected Neutral",
       "reusable": true,
       "width": 1180,
@@ -10030,8 +9986,8 @@
     {
       "type": "frame",
       "id": "L8i0r",
-      "x": 5594,
-      "y": 4929,
+      "x": 794,
+      "y": 7593,
       "name": "Challenge / Code / Syntax Highlighted",
       "reusable": true,
       "width": 1288,
@@ -10433,8 +10389,8 @@
     {
       "type": "frame",
       "id": "P5WeW",
-      "x": 5594,
-      "y": 5219,
+      "x": 794,
+      "y": 7883,
       "name": "Challenge / Spirit Rail / Technology",
       "reusable": true,
       "clip": true,
@@ -10590,8 +10546,8 @@
     {
       "type": "frame",
       "id": "R78v6s",
-      "x": 6914,
-      "y": 4929,
+      "x": 794,
+      "y": 5865,
       "name": "Challenge / Overlay Shell / Adaptive",
       "reusable": true,
       "width": 1680,
@@ -10722,8 +10678,8 @@
     {
       "type": "frame",
       "id": "xUp69",
-      "x": 2920,
-      "y": 7420,
+      "x": 7609,
+      "y": 11,
       "name": "04A — Challenge / Quiz / RU",
       "clip": true,
       "width": 1920,
@@ -11263,8 +11219,8 @@
     {
       "type": "frame",
       "id": "ThI7g",
-      "x": 4960,
-      "y": 7420,
+      "x": 7609,
+      "y": 1491,
       "name": "04B — Challenge / True False / RU",
       "clip": true,
       "width": 1920,
@@ -11849,8 +11805,8 @@
     {
       "type": "frame",
       "id": "WSFSs",
-      "x": 9040,
-      "y": 7420,
+      "x": 7609,
+      "y": 4399,
       "name": "04D — Challenge / Find the Bug / RU",
       "clip": true,
       "width": 1920,
@@ -12452,8 +12408,8 @@
     {
       "type": "frame",
       "id": "DjU23",
-      "x": 11080,
-      "y": 7420,
+      "x": 7609,
+      "y": 5865,
       "name": "04E — Challenge / Choose Correct Fragment / RU",
       "clip": true,
       "width": 1920,
@@ -13078,8 +13034,8 @@
     {
       "type": "frame",
       "id": "v3rdr",
-      "x": 13120,
-      "y": 7420,
+      "x": 7609,
+      "y": 7343,
       "name": "04F — Challenge / Order Steps / RU",
       "clip": true,
       "width": 1920,
@@ -13632,8 +13588,8 @@
     {
       "type": "frame",
       "id": "gFD24",
-      "x": 16874,
-      "y": 3861,
+      "x": 13000,
+      "y": 11,
       "name": "05A — Run Result / Passed / RU",
       "clip": true,
       "width": 1920,
@@ -14902,8 +14858,8 @@
     {
       "type": "frame",
       "id": "pHoRS",
-      "x": 18914,
-      "y": 3861,
+      "x": 13000,
+      "y": 1565,
       "name": "05B — Run Result / Failed / RU",
       "clip": true,
       "width": 1920,
@@ -16143,8 +16099,8 @@
     {
       "type": "frame",
       "id": "XLAJZ",
-      "x": 10244,
-      "y": 1442,
+      "x": 10647,
+      "y": 11,
       "name": "06A — Pause Menu / RU",
       "clip": true,
       "width": 1920,
@@ -16229,11 +16185,11 @@
               "type": "rectangle",
               "id": "c38Ou",
               "x": 0,
-              "y": 160,
+              "y": 0,
               "name": "Pause Scene Dimmer",
               "fill": "#0F1E33C2",
               "width": 1920,
-              "height": 920
+              "height": 1080
             },
             {
               "type": "frame",
@@ -16500,8 +16456,8 @@
     {
       "type": "frame",
       "id": "tL7w3",
-      "x": 12284,
-      "y": 1442,
+      "x": 10647,
+      "y": 1221,
       "name": "06B — Pause Menu / Confirm Exit / RU",
       "clip": true,
       "width": 1920,
@@ -16586,11 +16542,11 @@
               "type": "rectangle",
               "id": "YQz7K",
               "x": 0,
-              "y": 160,
+              "y": 0,
               "name": "Pause Scene Dimmer",
               "fill": "#0F1E33C2",
               "width": 1920,
-              "height": 920
+              "height": 1080
             },
             {
               "type": "frame",
@@ -16850,8 +16806,8 @@
     {
       "type": "frame",
       "id": "p3ecRo",
-      "x": 14324,
-      "y": 1442,
+      "x": 10647,
+      "y": 2571,
       "name": "06C — Pause Menu / Confirm Restart / RU",
       "clip": true,
       "width": 1920,
@@ -16936,11 +16892,11 @@
               "type": "rectangle",
               "id": "PdfKa",
               "x": 0,
-              "y": 160,
+              "y": 0,
               "name": "Pause Scene Dimmer",
               "fill": "#0F1E33C2",
               "width": 1920,
-              "height": 920
+              "height": 1080
             },
             {
               "type": "frame",
