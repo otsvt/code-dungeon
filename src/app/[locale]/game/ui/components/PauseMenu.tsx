@@ -34,6 +34,7 @@ export function PauseMenu({ currentRun }: PauseMenuProps) {
       <p className="flex h-6.5 items-center justify-center text-center font-sans text-xs font-medium text-pale">
         {t("currentState", {
           room: roomNumber,
+          totalRooms: "?",
           impression: t(`impressions.${currentRun.impression}`),
           currentLives: currentRun.lives.current,
           maxLives: currentRun.lives.max,

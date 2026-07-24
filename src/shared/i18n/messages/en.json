@@ -77,7 +77,7 @@
       "resumeGame": "Resume game",
       "serial": "RUN_{run} / ROOM_{room}",
       "title": "PAUSED",
-      "currentState": "Room {room} of ? • Impression: {impression} • Life {currentLives}/{maxLives}",
+      "currentState": "Room {room} of {totalRooms} • Impression: {impression} • Life {currentLives}/{maxLives}",
       "continue": "CONTINUE",
       "restart": "RESTART RUN",
       "exitToMenu": "MAIN MENU",

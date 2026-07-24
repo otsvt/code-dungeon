@@ -5,6 +5,13 @@ import { type RunSettings } from "@/features/run-setup";
 import { type CurrentRun } from "../types/run";
 import { START_BUFFS, type Buff } from "../types/buff";
 
+const MIN_RUN_ROOMS = 5;
+const MAX_RUN_ROOMS = 9;
+
+function generateRunRoomCount() {
+  return Math.floor(Math.random() * (MAX_RUN_ROOMS - MIN_RUN_ROOMS + 1)) + MIN_RUN_ROOMS;
+}
+
 type RunStore = {
   currentRun: CurrentRun | null;
   startRun: (settings: RunSettings) => void;
@@ -21,6 +28,7 @@ export const useRunStore = create<RunStore>((set) => ({
         settings,
         currentRoom: { type: "start" },
         roomNumber: 0,
+        totalRooms: generateRunRoomCount(),
         lives: {
           current: 1,
           max: 1,

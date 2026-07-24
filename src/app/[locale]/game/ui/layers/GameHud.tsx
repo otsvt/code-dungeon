@@ -5,6 +5,7 @@ import { SectorDecore } from "../components/SectorDecore";
 import { UserSector } from "../components/UserSector";
 import { ImpressionSector } from "../components/ImpressionSector";
 import { PauseSector } from "../components/PauseSector";
+import { DoorSector } from "../components/DoorSector";
 
 interface GameHudProps {
   currentRun: CurrentRun;
@@ -12,13 +13,15 @@ interface GameHudProps {
 
 export function GameHud({ currentRun }: GameHudProps) {
   return (
-    <div className="absolute z-20 top-6 left-1/2 -translate-x-1/2 h-25 flex border-2 border-sandy bg-deep text-lg text-background shadow-2xl shadow-deep">
+    <div className="absolute z-20 top-6 left-1/2 -translate-x-1/2 h-25 flex border-2 border-sandy bg-deep text-lg text-background shadow-xl shadow-deep">
       <UserSector />
       <LiveSector currentLives={currentRun.lives.current} maxLives={currentRun.lives.max} />
       <SectorDecore />
       <BuffsSector buffs={currentRun.activeBuffs} />
       <SectorDecore />
       <ImpressionSector impression={currentRun.impression} />
+      <SectorDecore />
+      <DoorSector currentRoomNumber={currentRun.roomNumber} totalRooms={currentRun.totalRooms} />
       <PauseSector />
     </div>
   );

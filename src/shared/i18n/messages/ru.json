@@ -77,7 +77,7 @@
       "resumeGame": "Продолжить игру",
       "serial": "RUN_{run} / ROOM_{room}",
       "title": "ПАУЗА",
-      "currentState": "Комната {room} из ? • Впечатление: {impression} • Жизнь {currentLives}/{maxLives}",
+      "currentState": "Комната {room} из {totalRooms} • Впечатление: {impression} • Жизнь {currentLives}/{maxLives}",
       "continue": "ПРОДОЛЖИТЬ",
       "restart": "НАЧАТЬ RUN ЗАНОВО",
       "exitToMenu": "В ГЛАВНОЕ МЕНЮ",

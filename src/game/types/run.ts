@@ -14,6 +14,7 @@ export type CurrentRun = {
   settings: RunSettings;
   currentRoom: CurrentRoom;
   roomNumber: number;
+  totalRooms: number;
   lives: {
     current: number;
     max: number;
