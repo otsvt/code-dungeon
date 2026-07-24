@@ -4,11 +4,13 @@ import { useRunStore } from "@/game";
 import { Room } from "../entities/Room";
 import { Hero } from "../entities/Hero";
 import { Pedestal } from "../entities/Pedestal";
+import { Doors } from "../entities/Doors";
 
 export class GameScene extends Phaser.Scene {
   private hero?: Hero;
   private pedestal?: Pedestal;
   private room?: Room;
+  private doors?: Doors;
 
   public locale: "ru" | "en";
 
@@ -20,6 +22,7 @@ export class GameScene extends Phaser.Scene {
 
   create() {
     this.room = new Room(this);
+    this.doors = new Doors(this);
     this.pedestal = new Pedestal(this);
     this.hero = new Hero(this);
 

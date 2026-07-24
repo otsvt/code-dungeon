@@ -10,6 +10,7 @@ export class PreloadScene extends Phaser.Scene {
 
   preload() {
     this.load.image(SPRITE_NAMES.room, ASSETS_PATH[SPRITE_NAMES.room]);
+    this.load.image(SPRITE_NAMES.door, ASSETS_PATH[SPRITE_NAMES.door]);
     this.load.image(SPRITE_NAMES.pedestal, ASSETS_PATH[SPRITE_NAMES.pedestal]);
 
     this.load.spritesheet(SPRITE_NAMES.hero, ASSETS_PATH[SPRITE_NAMES.hero], { frameHeight: 682, frameWidth: 682 });
