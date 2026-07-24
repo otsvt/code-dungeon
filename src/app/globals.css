@@ -83,6 +83,11 @@
   .default-button {
     @apply px-4 py-2 rounded-lg border border-decore bg-pure text-lg font-medium uppercase;
   }
+
+  .buff-icon-arrival {
+    transform-origin: center;
+    animation: buff-icon-arrival 520ms cubic-bezier(0.2, 0.9, 0.25, 1.25) both;
+  }
 }
 
 @layer utilities {
@@ -92,5 +97,35 @@
 
   .bg-center-default {
     @apply bg-center bg-no-repeat bg-cover;
+  }
+}
+
+@keyframes buff-icon-arrival {
+  0% {
+    opacity: 0;
+    transform: scale(0.35) rotate(-8deg);
+    filter: brightness(2.4) drop-shadow(0 0 18px #E5C398);
+  }
+
+  48% {
+    opacity: 1;
+    transform: scale(1.16) rotate(3deg);
+    filter: brightness(1.65) drop-shadow(0 0 14px #6E9C66);
+  }
+
+  72% {
+    transform: scale(0.94) rotate(-1deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    filter: brightness(1) drop-shadow(0 0 0 transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buff-icon-arrival {
+    animation-duration: 1ms;
   }
 }

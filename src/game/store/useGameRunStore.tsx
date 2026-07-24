@@ -14,15 +14,19 @@ function generateRunRoomCount() {
 
 type RunStore = {
   currentRun: CurrentRun | null;
+  pendingStartBuff: Buff | null;
   startRun: (settings: RunSettings) => void;
   resetRun: () => void;
-  grantStartBuff: () => Buff | null;
+  prepareStartBuff: () => Buff | null;
+  completeStartBuffGrant: () => void;
 };
 
 export const useRunStore = create<RunStore>((set) => ({
   currentRun: null,
+  pendingStartBuff: null,
   startRun: (settings) => {
     set({
+      pendingStartBuff: null,
       currentRun: {
         id: crypto.randomUUID(),
         settings,
@@ -44,30 +48,48 @@ export const useRunStore = create<RunStore>((set) => ({
   resetRun: () => {
     set({
       currentRun: null,
+      pendingStartBuff: null,
     });
   },
-  grantStartBuff: () => {
-    let grantedBuff: Buff | null = null;
+  prepareStartBuff: () => {
+    let preparedBuff: Buff | null = null;
 
     set((state) => {
       if (!state.currentRun || state.currentRun.startBuffGranted) {
         return state;
       }
 
+      if (state.pendingStartBuff) {
+        preparedBuff = state.pendingStartBuff;
+        return state;
+      }
+
       const randomIndex = Math.floor(Math.random() * START_BUFFS.length);
       const buff = START_BUFFS[randomIndex];
 
-      grantedBuff = buff;
+      preparedBuff = buff;
 
       return {
+        pendingStartBuff: buff,
+      };
+    });
+
+    return preparedBuff;
+  },
+  completeStartBuffGrant: () => {
+    set((state) => {
+      if (!state.currentRun || !state.pendingStartBuff || state.currentRun.startBuffGranted) {
+        return state;
+      }
+
+      return {
+        pendingStartBuff: null,
         currentRun: {
           ...state.currentRun,
-          activeBuffs: [...state.currentRun.activeBuffs, buff],
+          activeBuffs: [...state.currentRun.activeBuffs, state.pendingStartBuff],
           startBuffGranted: true,
         },
       };
     });
-
-    return grantedBuff;
   },
 }));
