@@ -42,7 +42,8 @@
               "fill": "$muted",
               "content": "Code Dungeon · тестовая палитра интерфейса · source: globals.css + visual references",
               "fontFamily": "Geist",
-              "fontSize": 18
+              "fontSize": 18,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -124,7 +125,8 @@
                       "fill": "$muted",
                       "content": "$background",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -180,7 +182,8 @@
                       "fill": "$muted",
                       "content": "$foreground",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -236,7 +239,8 @@
                       "fill": "$muted",
                       "content": "$decorative",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -292,7 +296,8 @@
                       "fill": "$muted",
                       "content": "$muted",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -348,7 +353,8 @@
                       "fill": "$muted",
                       "content": "$surface-pure",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -404,7 +410,8 @@
                       "fill": "$muted",
                       "content": "$surface-light",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -460,7 +467,8 @@
                       "fill": "$muted",
                       "content": "$surface-dark",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -516,7 +524,8 @@
                       "fill": "$muted",
                       "content": "$accent",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -604,7 +613,8 @@
                       "fill": "$muted",
                       "content": "$positive",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -660,7 +670,8 @@
                       "fill": "$muted",
                       "content": "$negative",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -716,7 +727,8 @@
                       "fill": "$muted",
                       "content": "$info",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -772,7 +784,8 @@
                       "fill": "$muted",
                       "content": "$focus",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -828,7 +841,8 @@
                       "fill": "$muted",
                       "content": "$overlay",
                       "fontFamily": "Geist Mono",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -878,7 +892,8 @@
               "fill": "$accent",
               "content": "Семантические цвета пока тестовые: окончательно фиксируем их после проверки HUD и игровых эффектов.",
               "fontFamily": "Geist",
-              "fontSize": 15
+              "fontSize": 15,
+              "fontWeight": "normal"
             }
           ]
         }
@@ -1528,7 +1543,8 @@
           "content": "Одинаковые семейства, размеры и роли для русского и английского интерфейса.",
           "lineHeight": 1.5,
           "fontFamily": "$font-ui",
-          "fontSize": 16
+          "fontSize": 16,
+          "fontWeight": "normal"
         },
         {
           "type": "frame",
@@ -2098,7 +2114,8 @@
               "content": "Выберите следующий путь",
               "lineHeight": "$line-height-ui-md",
               "fontFamily": "$font-ui",
-              "fontSize": "$font-size-ui-md"
+              "fontSize": "$font-size-ui-md",
+              "fontWeight": "normal"
             },
             {
               "type": "text",
@@ -2112,7 +2129,8 @@
               "content": "Choose the next path",
               "lineHeight": "$line-height-ui-md",
               "fontFamily": "$font-ui",
-              "fontSize": "$font-size-ui-md"
+              "fontSize": "$font-size-ui-md",
+              "fontWeight": "normal"
             },
             {
               "type": "text",
@@ -2417,7 +2435,8 @@
           "content": "Display — только ключевые титулы. UI — меню, HUD и оверлеи. Code — задачи и терминал.",
           "lineHeight": 1.45,
           "fontFamily": "$font-ui",
-          "fontSize": 14
+          "fontSize": 14,
+          "fontWeight": "normal"
         },
         {
           "type": "text",
@@ -2500,7 +2519,8 @@
           "content": "Спокойный ритм, тонкие границы и сакрально-технологичные акценты без визуального шума.",
           "lineHeight": 1.5,
           "fontFamily": "$font-ui",
-          "fontSize": 16
+          "fontSize": 16,
+          "fontWeight": "normal"
         },
         {
           "type": "frame",
@@ -2564,7 +2584,8 @@
           "content": "Базовый ритм 4 px. Крупные шаги используются для композиции экранов.",
           "lineHeight": 1.45,
           "fontFamily": "$font-ui",
-          "fontSize": 14
+          "fontSize": 14,
+          "fontWeight": "normal"
         },
         {
           "type": "frame",
@@ -2639,7 +2660,8 @@
               "content": "micro",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -2716,7 +2738,8 @@
               "content": "inline",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -2793,7 +2816,8 @@
               "content": "compact",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -2870,7 +2894,8 @@
               "content": "control",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -2947,7 +2972,8 @@
               "content": "group",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3024,7 +3050,8 @@
               "content": "section",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3101,7 +3128,8 @@
               "content": "layout",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3178,7 +3206,8 @@
               "content": "screen",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3219,7 +3248,8 @@
           "content": "Граница показывает иерархию и состояние, а не украшает каждый блок.",
           "lineHeight": 1.45,
           "fontFamily": "$font-ui",
-          "fontSize": 14
+          "fontSize": 14,
+          "fontWeight": "normal"
         },
         {
           "type": "frame",
@@ -3263,7 +3293,8 @@
               "content": "1 px · square corners",
               "lineHeight": 1.35,
               "fontFamily": "$font-code",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3309,7 +3340,8 @@
               "content": "2 px · radius 2",
               "lineHeight": 1.35,
               "fontFamily": "$font-code",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3355,7 +3387,8 @@
               "content": "3 px · radius 6",
               "lineHeight": 1.35,
               "fontFamily": "$font-code",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             },
             {
               "type": "rectangle",
@@ -3545,7 +3578,8 @@
           "content": "Три повторяемых мотива: разделитель, рамка-фокус и системная печать.",
           "lineHeight": 1.45,
           "fontFamily": "$font-ui",
-          "fontSize": 14
+          "fontSize": 14,
+          "fontWeight": "normal"
         },
         {
           "type": "frame",
@@ -3629,7 +3663,8 @@
               "content": "между смысловыми секциями",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3766,7 +3801,8 @@
               "content": "выбор, дверь, активная цель",
               "lineHeight": 1.35,
               "fontFamily": "$font-ui",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -3880,7 +3916,8 @@
           "content": "Правило: на одном компоненте — не более одного активного орнаментального мотива.",
           "lineHeight": 1.45,
           "fontFamily": "$font-ui",
-          "fontSize": 14
+          "fontSize": 14,
+          "fontWeight": "normal"
         },
         {
           "type": "text",
@@ -4954,7 +4991,8 @@
                       "fill": "#F8F2ECAA",
                       "content": "Готовый набор",
                       "fontFamily": "$font-ui",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -5051,7 +5089,8 @@
                       "fill": "$muted",
                       "content": "Ручной выбор",
                       "fontFamily": "$font-ui",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -5323,7 +5362,8 @@
               "width": 1448,
               "content": "Frontend включает весь технологический пул и блокирует ручное изменение. Custom открывает выбор и требует минимум 3 технологии.",
               "fontFamily": "$font-ui",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             }
           ]
         }
@@ -5452,7 +5492,8 @@
           "textAlign": "center",
           "textAlignVertical": "middle",
           "fontFamily": "$font-ui",
-          "fontSize": 17
+          "fontSize": 17,
+          "fontWeight": "normal"
         },
         {
           "type": "frame",
@@ -5523,7 +5564,8 @@
               "fill": "$muted",
               "content": "Выберите готовое направление или соберите пул вручную.",
               "fontFamily": "$font-ui",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "text",
@@ -5559,7 +5601,8 @@
               "fill": "$muted",
               "content": "Frontend-пресет включает весь набор. Для Custom выберите минимум 3.",
               "fontFamily": "$font-ui",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "rectangle",
@@ -5607,7 +5650,8 @@
               "width": 480,
               "content": "Соберите пул и отправляйтесь на интервью.",
               "fontFamily": "$font-ui",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "rectangle",
@@ -7534,7 +7578,7 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "./images/generated-1784724607659.png",
+            "url": "images/generated-1784724607659.png",
             "mode": "fill"
           },
           "layout": "none"
@@ -7820,49 +7864,7 @@
           "x": 120,
           "y": 176,
           "width": 1680,
-          "height": 860,
-          "children": [
-            {
-              "id": "QCMD7",
-              "type": "ref",
-              "ref": "QCMD7"
-            },
-            {
-              "id": "VOWfm",
-              "type": "ref",
-              "ref": "VOWfm"
-            },
-            {
-              "id": "x3dwP",
-              "type": "ref",
-              "ref": "x3dwP"
-            },
-            {
-              "id": "AqONH",
-              "type": "ref",
-              "ref": "AqONH"
-            },
-            {
-              "id": "fv1Da",
-              "type": "ref",
-              "ref": "fv1Da"
-            },
-            {
-              "id": "UiExm",
-              "type": "ref",
-              "ref": "UiExm"
-            },
-            {
-              "id": "ETXqF",
-              "type": "ref",
-              "ref": "ETXqF"
-            },
-            {
-              "id": "MoZXB",
-              "type": "ref",
-              "ref": "MoZXB"
-            }
-          ]
+          "height": 860
         },
         {
           "id": "nFeQo",
@@ -7872,58 +7874,7 @@
           "x": 1480,
           "y": 176,
           "width": 320,
-          "height": 860,
-          "children": [
-            {
-              "id": "kPgsi",
-              "type": "ref",
-              "ref": "kPgsi"
-            },
-            {
-              "id": "X90x6Q",
-              "type": "ref",
-              "ref": "X90x6Q"
-            },
-            {
-              "id": "Es7li",
-              "type": "ref",
-              "ref": "Es7li"
-            },
-            {
-              "id": "qeMFk",
-              "type": "ref",
-              "ref": "qeMFk",
-              "content": "TECH SPIRIT / JS_01"
-            },
-            {
-              "id": "r0ufc6",
-              "type": "ref",
-              "ref": "r0ufc6",
-              "content": "ДУХ JAVASCRIPT"
-            },
-            {
-              "id": "zS9CT",
-              "type": "ref",
-              "ref": "zS9CT",
-              "content": "Испытатель этой комнаты"
-            },
-            {
-              "id": "AQpHv",
-              "type": "ref",
-              "ref": "AQpHv"
-            },
-            {
-              "id": "HSQ3e",
-              "type": "ref",
-              "ref": "HSQ3e",
-              "content": "«Докажи, что понимаешь преобразование данных.»"
-            },
-            {
-              "id": "MugT6",
-              "type": "ref",
-              "ref": "MugT6"
-            }
-          ]
+          "height": 860
         },
         {
           "type": "text",
@@ -8117,164 +8068,7 @@
           "x": 156,
           "y": 386,
           "width": 1288,
-          "height": 230,
-          "children": [
-            {
-              "id": "nKwNC",
-              "type": "ref",
-              "ref": "nKwNC"
-            },
-            {
-              "id": "o9edwa",
-              "type": "ref",
-              "ref": "o9edwa"
-            },
-            {
-              "id": "HG7pA",
-              "type": "ref",
-              "ref": "HG7pA"
-            },
-            {
-              "id": "fpT0B",
-              "type": "ref",
-              "ref": "fpT0B"
-            },
-            {
-              "id": "uF70g",
-              "type": "ref",
-              "ref": "uF70g"
-            },
-            {
-              "id": "R040c",
-              "type": "ref",
-              "ref": "R040c"
-            },
-            {
-              "id": "wfE4x",
-              "type": "ref",
-              "ref": "wfE4x"
-            },
-            {
-              "id": "N9Fsi",
-              "type": "ref",
-              "ref": "N9Fsi"
-            },
-            {
-              "id": "lE6ql",
-              "type": "ref",
-              "ref": "lE6ql"
-            },
-            {
-              "id": "NXj0c",
-              "type": "ref",
-              "ref": "NXj0c"
-            },
-            {
-              "id": "k4drhC",
-              "type": "ref",
-              "ref": "k4drhC"
-            },
-            {
-              "id": "E8Uy8",
-              "type": "ref",
-              "ref": "E8Uy8"
-            },
-            {
-              "id": "pEQe5",
-              "type": "ref",
-              "ref": "pEQe5"
-            },
-            {
-              "id": "jIUhT",
-              "type": "ref",
-              "ref": "jIUhT"
-            },
-            {
-              "id": "J1gscj",
-              "type": "ref",
-              "ref": "J1gscj"
-            },
-            {
-              "id": "m1Fnd7",
-              "type": "ref",
-              "ref": "m1Fnd7"
-            },
-            {
-              "id": "LxUkm",
-              "type": "ref",
-              "ref": "LxUkm"
-            },
-            {
-              "id": "tRCqU",
-              "type": "ref",
-              "ref": "tRCqU"
-            },
-            {
-              "id": "lUHQR",
-              "type": "ref",
-              "ref": "lUHQR"
-            },
-            {
-              "id": "cBCF7",
-              "type": "ref",
-              "ref": "cBCF7"
-            },
-            {
-              "id": "f6XFL2",
-              "type": "ref",
-              "ref": "f6XFL2"
-            },
-            {
-              "id": "L3FM9",
-              "type": "ref",
-              "ref": "L3FM9"
-            },
-            {
-              "id": "R40Kj",
-              "type": "ref",
-              "ref": "R40Kj"
-            },
-            {
-              "id": "ImgPq",
-              "type": "ref",
-              "ref": "ImgPq"
-            },
-            {
-              "id": "M75dut",
-              "type": "ref",
-              "ref": "M75dut"
-            },
-            {
-              "id": "IIYsi",
-              "type": "ref",
-              "ref": "IIYsi"
-            },
-            {
-              "id": "voGLN",
-              "type": "ref",
-              "ref": "voGLN"
-            },
-            {
-              "id": "MzYFf",
-              "type": "ref",
-              "ref": "MzYFf"
-            },
-            {
-              "id": "PWBy3",
-              "type": "ref",
-              "ref": "PWBy3"
-            },
-            {
-              "id": "l0CAc",
-              "type": "ref",
-              "ref": "l0CAc"
-            },
-            {
-              "id": "CLZVq",
-              "type": "ref",
-              "ref": "CLZVq"
-            }
-          ]
+          "height": 230
         },
         {
           "type": "text",
@@ -8459,17 +8253,7 @@
           "x": 1104,
           "y": 944,
           "width": 320,
-          "height": 58,
-          "children": [
-            {
-              "id": "c7KUQ",
-              "type": "ref",
-              "ref": "c7KUQ",
-              "content": "ПОДТВЕРДИТЬ",
-              "fontSize": 14,
-              "letterSpacing": 1.1
-            }
-          ]
+          "height": 58
         },
         {
           "type": "text",
@@ -9708,7 +9492,7 @@
         {
           "type": "text",
           "id": "L3FM9",
-          "x": 232,
+          "x": 237,
           "y": 114,
           "name": "L3 Question",
           "fill": "#D98F76",
@@ -13763,20 +13547,7 @@
               "x": 918,
               "y": 184,
               "width": 64,
-              "height": 64,
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "y185Av",
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "../public/assets/game/buffs/second-chance.png",
-                    "mode": "fill"
-                  }
-                }
-              ]
+              "height": 64
             },
             {
               "id": "WWFot",
@@ -13786,20 +13557,7 @@
               "x": 1002,
               "y": 184,
               "width": 64,
-              "height": 64,
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "y185Av",
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "../public/assets/game/buffs/door-insight.png",
-                    "mode": "fill"
-                  }
-                }
-              ]
+              "height": 64
             },
             {
               "id": "ykI1A",
@@ -13809,20 +13567,7 @@
               "x": 1086,
               "y": 184,
               "width": 64,
-              "height": 64,
-              "children": [
-                {
-                  "id": "y185Av",
-                  "type": "ref",
-                  "ref": "y185Av",
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "../public/assets/game/buffs/easier-next-room.png",
-                    "mode": "fill"
-                  }
-                }
-              ]
+              "height": 64
             },
             {
               "type": "text",
@@ -13866,20 +13611,7 @@
               "x": 972,
               "y": 366,
               "width": 64,
-              "height": 64,
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "TQ1mA",
-                  "icon": "timer"
-                }
-              ]
+              "height": 64
             },
             {
               "id": "BPLP7",
@@ -13889,20 +13621,7 @@
               "x": 1056,
               "y": 366,
               "width": 64,
-              "height": 64,
-              "children": [
-                {
-                  "id": "EoQyO",
-                  "type": "ref",
-                  "ref": "EoQyO"
-                },
-                {
-                  "id": "TQ1mA",
-                  "type": "ref",
-                  "ref": "TQ1mA",
-                  "icon": "triangle-alert"
-                }
-              ]
+              "height": 64
             },
             {
               "type": "text",
@@ -14225,17 +13944,7 @@
               "x": 468,
               "y": 548,
               "width": 330,
-              "height": 64,
-              "children": [
-                {
-                  "id": "bsUDT",
-                  "type": "ref",
-                  "ref": "bsUDT",
-                  "content": "В МЕНЮ",
-                  "fontSize": 14,
-                  "letterSpacing": 1.1
-                }
-              ]
+              "height": 64
             },
             {
               "id": "xWkrC",
@@ -14245,17 +13954,7 @@
               "x": 842,
               "y": 548,
               "width": 330,
-              "height": 64,
-              "children": [
-                {
-                  "id": "c7KUQ",
-                  "type": "ref",
-                  "ref": "c7KUQ",
-                  "content": "НОВЫЙ RUN",
-                  "fontSize": 14,
-                  "letterSpacing": 1.1
-                }
-              ]
+              "height": 64
             },
             {
               "type": "text",
@@ -15741,17 +15440,7 @@
                   "x": 70,
                   "y": 278,
                   "width": 480,
-                  "height": 68,
-                  "children": [
-                    {
-                      "id": "c7KUQ",
-                      "type": "ref",
-                      "ref": "c7KUQ",
-                      "content": "ПРОДОЛЖИТЬ",
-                      "fontSize": 14,
-                      "letterSpacing": 1.1
-                    }
-                  ]
+                  "height": 68
                 },
                 {
                   "id": "OrWXK",
@@ -15761,17 +15450,7 @@
                   "x": 70,
                   "y": 366,
                   "width": 480,
-                  "height": 64,
-                  "children": [
-                    {
-                      "id": "bsUDT",
-                      "type": "ref",
-                      "ref": "bsUDT",
-                      "content": "НАЧАТЬ RUN ЗАНОВО",
-                      "fontSize": 14,
-                      "letterSpacing": 1.1
-                    }
-                  ]
+                  "height": 64
                 },
                 {
                   "id": "eCcK9",
@@ -15781,17 +15460,7 @@
                   "x": 70,
                   "y": 446,
                   "width": 480,
-                  "height": 64,
-                  "children": [
-                    {
-                      "id": "bsUDT",
-                      "type": "ref",
-                      "ref": "bsUDT",
-                      "content": "В ГЛАВНОЕ МЕНЮ",
-                      "fontSize": 14,
-                      "letterSpacing": 1.1
-                    }
-                  ]
+                  "height": 64
                 },
                 {
                   "type": "frame",

@@ -8,5 +8,10 @@ export const ASSETS = {
   },
   hud: {
     avatar: "/assets/game/hero-avatar.png",
+    impressions: {
+      weak: "/assets/game/impressions/impression-weak.png",
+      neutral: "/assets/game/impressions/impression-neutral.png",
+      strong: "/assets/game/impressions/impression-strong.png",
+    },
   },
 } as const;

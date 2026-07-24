@@ -2,7 +2,7 @@ import { Buff } from "@/game";
 import { Tooltip } from "@/shared/ui/tooltip";
 import { SectorWrapper } from "./SectorWrapper";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { EffectIcon } from "@/entities/effect";
 
 interface BuffsSectorProps {
   buffs: Buff[];
@@ -25,9 +25,7 @@ export function BuffsSector({ buffs }: BuffsSectorProps) {
               </span>
             }
           >
-            <div className="rounded-full border-2 border-effect-buff-stroke bg-effect-buff-bg">
-              <Image src={buff.iconPath} height={54} width={54} alt={t(buff.nameKey)} />
-            </div>
+            <EffectIcon src={buff.iconPath} alt={t(buff.nameKey)} type="buff" />
           </Tooltip>
         ))}
       </div>
