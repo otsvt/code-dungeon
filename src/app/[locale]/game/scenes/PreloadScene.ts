@@ -1,7 +1,14 @@
 import Phaser from "phaser";
 
 import { BUFFS } from "@/game";
-import { ASSETS_PATH, SCENE_NAMES, SPRITE_NAMES } from "../types/consts";
+import { TECHNOLOGIES } from "@/entities/technology";
+import {
+  ASSETS_PATH,
+  getTechnologyAssetPath,
+  getTechnologyTextureKey,
+  SCENE_NAMES,
+  SPRITE_NAMES,
+} from "../types/consts";
 
 export class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -21,6 +28,14 @@ export class PreloadScene extends Phaser.Scene {
 
     for (const buff of BUFFS) {
       this.load.image(buff.id, buff.iconPath);
+    }
+
+    for (const technology of TECHNOLOGIES) {
+      this.load.svg(
+        getTechnologyTextureKey(technology.id),
+        getTechnologyAssetPath(technology.id),
+        { width: 64, height: 64 },
+      );
     }
   }
   create() {

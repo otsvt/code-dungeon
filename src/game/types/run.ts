@@ -1,5 +1,8 @@
 import { type RunSettings } from "@/features/run-setup";
-import { type Buff } from "./buff";
+import { type BuffId } from "./buff";
+import { type DebuffId } from "./debuff";
+import { type ActiveEffect } from "./effect";
+import { type NextRoomChoice } from "../rooms/nextRoomChoices";
 
 export type RoomType = "start" | "battle" | "hr" | "final";
 
@@ -13,14 +16,15 @@ export type CurrentRun = {
   id: string;
   settings: RunSettings;
   currentRoom: CurrentRoom;
+  nextRoomChoices: NextRoomChoice[];
   roomNumber: number;
   totalRooms: number;
   lives: {
     current: number;
     max: number;
   };
-  activeBuffs: Buff[];
-  activeDebuffs: string[];
+  activeBuffs: ActiveEffect<BuffId>[];
+  activeDebuffs: ActiveEffect<DebuffId>[];
   startBuffGranted: boolean;
   impression: Impression;
   status: "created" | "started";

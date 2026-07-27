@@ -123,6 +123,20 @@
       "easierNextRoom": "Reduces the difficulty of the next room.",
       "skipQuestion": "Allows you to skip one question without a penalty."
     },
+    "debuffNames": {
+      "timerPressure": "Timer Pressure",
+      "hiddenDoorInfo": "Hidden Paths",
+      "harderNextRoom": "Harder Next Room",
+      "extraTechnology": "Extra Technology",
+      "fewerHints": "Fewer Hints"
+    },
+    "debuffDescriptions": {
+      "timerPressure": "Reduces the time available in the next room.",
+      "hiddenDoorInfo": "Hides one revealed path.",
+      "harderNextRoom": "Increases the difficulty of the next room.",
+      "extraTechnology": "Adds a random technology to the challenge pool.",
+      "fewerHints": "Blocks one available hint."
+    },
     "buffReward": {
       "title": "Gift received",
       "continue": "Continue"

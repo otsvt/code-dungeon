@@ -3,7 +3,10 @@
 import { create } from "zustand";
 import { type RunSettings } from "@/features/run-setup";
 import { type CurrentRun } from "../types/run";
-import { START_BUFFS, type Buff } from "../types/buff";
+import { BUFFS, START_BUFFS, type Buff, type BuffId } from "../types/buff";
+import { type DebuffId } from "../types/debuff";
+import { addEffectStacks, consumeEffectStacks, type EffectId } from "../types/effect";
+import { generateNextRoomChoices } from "../rooms/nextRoomChoices";
 
 const MIN_RUN_ROOMS = 5;
 const MAX_RUN_ROOMS = 9;
@@ -19,20 +22,29 @@ type RunStore = {
   resetRun: () => void;
   prepareStartBuff: () => Buff | null;
   completeStartBuffGrant: () => void;
+  addEffect: (effectId: EffectId, stacks?: number) => void;
+  consumeEffect: (effectId: EffectId, stacks?: number) => void;
 };
 
 export const useRunStore = create<RunStore>((set) => ({
   currentRun: null,
   pendingStartBuff: null,
   startRun: (settings) => {
+    const totalRooms = generateRunRoomCount();
+
     set({
       pendingStartBuff: null,
       currentRun: {
         id: crypto.randomUUID(),
         settings,
         currentRoom: { type: "start" },
+        nextRoomChoices: generateNextRoomChoices({
+          currentRoomNumber: 0,
+          totalRooms,
+          technologyIds: settings.technologyIds,
+        }),
         roomNumber: 0,
-        totalRooms: generateRunRoomCount(),
+        totalRooms,
         lives: {
           current: 1,
           max: 1,
@@ -86,8 +98,73 @@ export const useRunStore = create<RunStore>((set) => ({
         pendingStartBuff: null,
         currentRun: {
           ...state.currentRun,
-          activeBuffs: [...state.currentRun.activeBuffs, state.pendingStartBuff],
+          activeBuffs: addEffectStacks(
+            state.currentRun.activeBuffs,
+            state.pendingStartBuff.id,
+          ),
           startBuffGranted: true,
+        },
+      };
+    });
+  },
+  addEffect: (effectId, stacks = 1) => {
+    set((state) => {
+      if (!state.currentRun) {
+        return state;
+      }
+
+      if (BUFFS.some((buff) => buff.id === effectId)) {
+        return {
+          currentRun: {
+            ...state.currentRun,
+            activeBuffs: addEffectStacks(
+              state.currentRun.activeBuffs,
+              effectId as BuffId,
+              stacks,
+            ),
+          },
+        };
+      }
+
+      return {
+        currentRun: {
+          ...state.currentRun,
+          activeDebuffs: addEffectStacks(
+            state.currentRun.activeDebuffs,
+            effectId as DebuffId,
+            stacks,
+          ),
+        },
+      };
+    });
+  },
+  consumeEffect: (effectId, stacks = 1) => {
+    set((state) => {
+      if (!state.currentRun) {
+        return state;
+      }
+
+      if (BUFFS.some((buff) => buff.id === effectId)) {
+        return {
+          currentRun: {
+            ...state.currentRun,
+            activeBuffs: consumeEffectStacks(
+              state.currentRun.activeBuffs,
+              effectId as BuffId,
+              stacks,
+            ),
+          },
+        };
+      }
+
+      return {
+        currentRun: {
+          ...state.currentRun,
+          activeDebuffs: consumeEffectStacks(
+            state.currentRun.activeDebuffs,
+            effectId as DebuffId,
+            stacks,
+          ),
         },
       };
     });

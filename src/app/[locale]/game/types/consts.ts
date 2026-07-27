@@ -27,3 +27,11 @@ export const ASSETS_PATH = {
   [SPRITE_NAMES.hero]: "/assets/game/hero-sprite.png",
   [SPRITE_NAMES.flame.base]: "/assets/game/flame/red-flame-sprite.png",
 } as const;
+
+export function getTechnologyTextureKey(technologyId: string) {
+  return `technology-${technologyId}`;
+}
+
+export function getTechnologyAssetPath(technologyId: string) {
+  return `/assets/game/technologies/${technologyId}.svg`;
+}

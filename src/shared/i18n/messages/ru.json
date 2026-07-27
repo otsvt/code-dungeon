@@ -123,6 +123,20 @@
       "easierNextRoom": "Снижает сложность следующей комнаты.",
       "skipQuestion": "Позволяет пропустить один вопрос без штрафа."
     },
+    "debuffNames": {
+      "timerPressure": "Давление времени",
+      "hiddenDoorInfo": "Скрытые пути",
+      "harderNextRoom": "Сложная следующая комната",
+      "extraTechnology": "Лишняя технология",
+      "fewerHints": "Меньше подсказок"
+    },
+    "debuffDescriptions": {
+      "timerPressure": "Сокращает время на прохождение следующей комнаты.",
+      "hiddenDoorInfo": "Скрывает один раскрытый путь.",
+      "harderNextRoom": "Повышает сложность следующей комнаты.",
+      "extraTechnology": "Добавляет случайную технологию в пул испытаний.",
+      "fewerHints": "Блокирует одну доступную подсказку."
+    },
     "buffReward": {
       "title": "Получен дар",
       "continue": "Продолжить"

@@ -1,10 +1,10 @@
 import Phaser from "phaser";
 
-import { useRunStore } from "@/game";
+import { resolveGameplayEffects, type NextRoomChoice, useRunStore } from "@/game";
 import { Room } from "../entities/Room";
 import { Hero } from "../entities/Hero";
 import { Pedestal } from "../entities/Pedestal";
-import { Doors } from "../entities/Doors";
+import { Doors, DOOR_SELECTED_EVENT } from "../entities/Doors";
 
 export class GameScene extends Phaser.Scene {
   private hero?: Hero;
@@ -21,8 +21,11 @@ export class GameScene extends Phaser.Scene {
   }
 
   create() {
+    const currentRun = useRunStore.getState().currentRun;
+
     this.room = new Room(this);
-    this.doors = new Doors(this);
+    this.doors = new Doors(this, currentRun?.nextRoomChoices ?? []);
+    this.doors.on(DOOR_SELECTED_EVENT, this.handleDoorSelected, this);
     this.pedestal = new Pedestal(this);
     this.hero = new Hero(this);
 
@@ -49,6 +52,22 @@ export class GameScene extends Phaser.Scene {
     await this.pedestal.giveBuff(buff.id, hudTarget, reducedMotion);
 
     useRunStore.getState().completeStartBuffGrant();
+    const currentRun = useRunStore.getState().currentRun;
+
+    if (!currentRun) {
+      return;
+    }
+
+    const modifiers = resolveGameplayEffects(
+      currentRun.activeBuffs,
+      currentRun.activeDebuffs,
+    );
+
+    this.doors?.showSigns(modifiers.doorsToReveal);
+  }
+
+  private handleDoorSelected(choice: NextRoomChoice) {
+    this.registry.set("selectedNextRoom", choice);
   }
 
   private getBuffHudTarget() {
