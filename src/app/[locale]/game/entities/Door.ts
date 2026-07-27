@@ -4,17 +4,21 @@ import { getTechnologyTextureKey, SPRITE_NAMES } from "../types/consts";
 
 const SIGN_Y_OFFSET = 120;
 const SIGN_APPEAR_DURATION = 260;
-const SEAL_OUTER_RADIUS = 34;
-const SEAL_INNER_RADIUS = 22;
-const SEAL_TICK_START = 38;
-const SEAL_TICK_END = 46;
+const SEAL_HALO_RADIUS = 52;
+const SEAL_OUTER_RADIUS = 36;
+const SEAL_MIDDLE_RADIUS = 29;
+const SEAL_INNER_RADIUS = 23;
+const SEAL_NODE_RADIUS = 43;
+const SEAL_BEAM_RADIUS = 48;
 
 const UNKNOWN_COLOR = 0x3c8299;
-const REVEALED_COLOR = 0x3f7d4b;
-const HOVER_COLOR = 0xb8893f;
-const ACCENT_COLOR = 0xe5c398;
-const SELECTED_FLASH_COLOR = 0xf8f2ec;
-const PROJECTION_CORE_COLOR = 0x2e2c29;
+const REVEALED_COLOR = 0x87dfa0;
+const HOVER_COLOR = 0xc8ffd4;
+const SELECTED_COLOR = 0xf4c86a;
+const SELECTED_FLASH_COLOR = 0xfff4cd;
+const PROJECTION_CORE_COLOR = 0x17231d;
+
+type ProjectionVisualState = "unknown" | "revealed" | "hover" | "selected";
 
 type DoorSelectHandler = (choice: NextRoomChoice) => void;
 
@@ -60,9 +64,9 @@ export class Door extends Phaser.GameObjects.Container {
     this.projectionGlow = scene.add.circle(
       0,
       0,
-      SEAL_TICK_END + 3,
+      SEAL_HALO_RADIUS,
       UNKNOWN_COLOR,
-      0.035,
+      0.07,
     );
     this.projectionGlow.setBlendMode(Phaser.BlendModes.ADD);
     this.projectionCore = scene.add.circle(
@@ -118,7 +122,7 @@ export class Door extends Phaser.GameObjects.Container {
 
     this.add([this.doorImage, this.projection, this.hitArea]);
 
-    this.drawProjection(UNKNOWN_COLOR, 1);
+    this.drawProjection("unknown");
     this.bindInteraction();
   }
 
@@ -151,19 +155,15 @@ export class Door extends Phaser.GameObjects.Container {
 
     this.disableSelection();
     this.scene.tweens.killTweensOf(this.projectionSeal);
-    this.drawProjection(ACCENT_COLOR, 1.18);
-    this.projectionLabel.setColor(toCssColor(ACCENT_COLOR));
-    this.projectionLabel.setShadow(0, 0, toCssColor(ACCENT_COLOR), 8, true, true);
+    this.drawProjection("selected");
+    this.projectionLabel.setColor(toCssColor(SELECTED_COLOR));
+    this.projectionLabel.setShadow(0, 0, toCssColor(SELECTED_COLOR), 10, true, true);
 
-    const selectionRing = this.scene.add.circle(
-      0,
-      0,
-      SEAL_OUTER_RADIUS,
-      SELECTED_FLASH_COLOR,
-      0,
-    );
-    selectionRing.setStrokeStyle(2, SELECTED_FLASH_COLOR, 0.95);
-    this.projection.addAt(selectionRing, 1);
+    const selectionWave = this.scene.add.graphics();
+    selectionWave.lineStyle(2, SELECTED_FLASH_COLOR, 0.95);
+    selectionWave.strokePoints(this.getPolygonPoints(43, 6), true);
+    selectionWave.setBlendMode(Phaser.BlendModes.ADD);
+    this.projection.addAt(selectionWave, 1);
 
     const coreFlash = this.scene.add
       .rectangle(0, 0, 13, 13, SELECTED_FLASH_COLOR, 0.88)
@@ -172,14 +172,15 @@ export class Door extends Phaser.GameObjects.Container {
     this.projection.addAt(coreFlash, 2);
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.createSelectionBurst(reducedMotion);
 
     this.scene.tweens.add({
-      targets: selectionRing,
-      scale: reducedMotion ? 1 : 2.25,
+      targets: selectionWave,
+      scale: reducedMotion ? 1 : 1.75,
       alpha: 0,
       duration: reducedMotion ? 0 : 320,
       ease: "Cubic.easeOut",
-      onComplete: () => selectionRing.destroy(),
+      onComplete: () => selectionWave.destroy(),
     });
 
     this.scene.tweens.add({
@@ -221,9 +222,9 @@ export class Door extends Phaser.GameObjects.Container {
         return;
       }
 
-      this.drawProjection(HOVER_COLOR, 1.18);
+      this.drawProjection("hover");
       this.projectionLabel.setColor(toCssColor(HOVER_COLOR));
-      this.projectionLabel.setShadow(0, 0, toCssColor(HOVER_COLOR), 8, true, true);
+      this.projectionLabel.setShadow(0, 0, toCssColor(HOVER_COLOR), 10, true, true);
 
       this.scene.tweens.add({
         targets: this.projectionSeal,
@@ -270,6 +271,7 @@ export class Door extends Phaser.GameObjects.Container {
   }
 
   private setProjectionContent() {
+    const state: ProjectionVisualState = this.isRevealed ? "revealed" : "unknown";
     const color = this.isRevealed ? REVEALED_COLOR : UNKNOWN_COLOR;
     const showTechnologyIcon = this.isRevealed && this.projectionTechnologyIcon !== null;
 
@@ -279,7 +281,7 @@ export class Door extends Phaser.GameObjects.Container {
     this.projectionLabel.setFontSize(this.isRevealed ? 14 : 29);
     this.projectionLabel.setColor(toCssColor(color));
     this.projectionLabel.setShadow(0, 0, toCssColor(color), 7, true, true);
-    this.drawProjection(color, 1);
+    this.drawProjection(state);
   }
 
   private getRoomLabel() {
@@ -292,38 +294,155 @@ export class Door extends Phaser.GameObjects.Container {
     return labels[this.choice.type];
   }
 
-  private drawProjection(color: number, intensity: number) {
-    this.projectionGlow.setFillStyle(color, 0.035 * intensity);
+  private drawProjection(state: ProjectionVisualState) {
+    const isHover = state === "hover";
+    const isSelected = state === "selected";
+    const color =
+      state === "unknown"
+        ? UNKNOWN_COLOR
+        : state === "revealed"
+          ? REVEALED_COLOR
+          : state === "hover"
+            ? HOVER_COLOR
+            : SELECTED_COLOR;
+    const intensity = isSelected ? 1.25 : isHover ? 1.12 : 1;
+
+    this.projectionGlow.setFillStyle(
+      color,
+      (isSelected ? 0.2 : isHover ? 0.14 : 0.075) * intensity,
+    );
+    this.projectionCore.setFillStyle(
+      PROJECTION_CORE_COLOR,
+      isSelected ? 0.94 : isHover ? 0.9 : 0.86,
+    );
 
     this.projectionGraphics.clear();
-    this.projectionGraphics.lineStyle(1, color, 0.66 * intensity);
-    this.projectionGraphics.strokeCircle(0, 0, SEAL_OUTER_RADIUS);
-    this.projectionGraphics.lineStyle(2, color, 0.9 * intensity);
+
+    if (isSelected) {
+      this.projectionGraphics.fillStyle(SELECTED_COLOR, 0.08);
+      this.projectionGraphics.fillRect(-5, -SEAL_BEAM_RADIUS - 8, 10, (SEAL_BEAM_RADIUS + 8) * 2);
+      this.projectionGraphics.lineStyle(2, SELECTED_FLASH_COLOR, 0.6);
+      this.projectionGraphics.lineBetween(-SEAL_BEAM_RADIUS, 0, SEAL_BEAM_RADIUS, 0);
+      this.projectionGraphics.lineBetween(0, -SEAL_BEAM_RADIUS, 0, SEAL_BEAM_RADIUS);
+
+      this.projectionGraphics.lineStyle(3, SELECTED_COLOR, 0.95);
+      this.projectionGraphics.strokePoints(this.getPolygonPoints(42, 6), true);
+      this.projectionGraphics.lineStyle(1, SELECTED_FLASH_COLOR, 0.9);
+      this.projectionGraphics.strokePoints(this.getPolygonPoints(31, 6), true);
+      this.projectionGraphics.lineStyle(2, SELECTED_COLOR, 0.95);
+      this.projectionGraphics.strokeCircle(0, 0, SEAL_INNER_RADIUS);
+
+      const particleAngles = [18, 72, 126, 164, 218, 274, 322];
+      particleAngles.forEach((angle, index) => {
+        const radians = Phaser.Math.DegToRad(angle);
+        const radius = index % 2 === 0 ? 49 : 45;
+        this.projectionGraphics.fillStyle(
+          index % 2 === 0 ? SELECTED_FLASH_COLOR : SELECTED_COLOR,
+          0.9,
+        );
+        this.projectionGraphics.fillCircle(
+          Math.cos(radians) * radius,
+          Math.sin(radians) * radius,
+          index % 3 === 0 ? 2 : 1.4,
+        );
+      });
+
+      return;
+    }
+
+    this.projectionGraphics.lineStyle(isHover ? 2 : 1, color, 0.72 * intensity);
+    this.projectionGraphics.strokeCircle(0, 0, isHover ? 40 : SEAL_OUTER_RADIUS);
+
+    if (isHover) {
+      this.projectionGraphics.lineStyle(1, REVEALED_COLOR, 0.72);
+      this.projectionGraphics.strokeCircle(0, 0, SEAL_MIDDLE_RADIUS);
+    }
+
+    this.projectionGraphics.lineStyle(isHover ? 3 : 2, color, 0.92 * intensity);
     this.projectionGraphics.strokeCircle(0, 0, SEAL_INNER_RADIUS);
 
     for (let index = 0; index < 4; index += 1) {
       const angle = Phaser.Math.DegToRad(index * 90);
+      const nodeX = Math.cos(angle) * SEAL_NODE_RADIUS;
+      const nodeY = Math.sin(angle) * SEAL_NODE_RADIUS;
 
-      this.projectionGraphics.lineStyle(1, color, 0.56 * intensity);
-      this.projectionGraphics.lineBetween(
-        Math.cos(angle) * SEAL_TICK_START,
-        Math.sin(angle) * SEAL_TICK_START,
-        Math.cos(angle) * SEAL_TICK_END,
-        Math.sin(angle) * SEAL_TICK_END,
-      );
+      this.drawDiamond(nodeX, nodeY, isHover ? 4.5 : 3.5, color, isHover ? 0.95 : 0.76);
     }
+  }
 
-    const diamondRadius = 7;
-    const diamondPoints = [
-      new Phaser.Math.Vector2(0, -diamondRadius),
-      new Phaser.Math.Vector2(diamondRadius, 0),
-      new Phaser.Math.Vector2(0, diamondRadius),
-      new Phaser.Math.Vector2(-diamondRadius, 0),
+  private drawDiamond(
+    x: number,
+    y: number,
+    radius: number,
+    color: number,
+    alpha: number,
+  ) {
+    const points = [
+      new Phaser.Math.Vector2(x, y - radius),
+      new Phaser.Math.Vector2(x + radius, y),
+      new Phaser.Math.Vector2(x, y + radius),
+      new Phaser.Math.Vector2(x - radius, y),
     ];
 
-    this.projectionGraphics.fillStyle(color, 0.12 * intensity);
-    this.projectionGraphics.fillPoints(diamondPoints, true);
-    this.projectionGraphics.lineStyle(1, color, 0.72 * intensity);
-    this.projectionGraphics.strokePoints(diamondPoints, true);
+    this.projectionGraphics.fillStyle(color, alpha * 0.32);
+    this.projectionGraphics.fillPoints(points, true);
+    this.projectionGraphics.lineStyle(1, color, alpha);
+    this.projectionGraphics.strokePoints(points, true);
+  }
+
+  private getPolygonPoints(radius: number, sides: number) {
+    return Array.from({ length: sides }, (_, index) => {
+      const angle = -Math.PI / 2 + (index / sides) * Math.PI * 2;
+
+      return new Phaser.Math.Vector2(
+        Math.cos(angle) * radius,
+        Math.sin(angle) * radius,
+      );
+    });
+  }
+
+  private createSelectionBurst(reducedMotion: boolean) {
+    const beam = this.scene.add
+      .rectangle(0, 0, 8, 112, SELECTED_COLOR, reducedMotion ? 0 : 0.16)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    this.projection.addAt(beam, 0);
+
+    this.scene.tweens.add({
+      targets: beam,
+      alpha: 0,
+      scaleX: 2.2,
+      duration: reducedMotion ? 0 : 260,
+      ease: "Cubic.easeOut",
+      onComplete: () => beam.destroy(),
+    });
+
+    const angles = [-78, -43, -12, 24, 58, 104, 142, 188, 226];
+
+    angles.forEach((angle, index) => {
+      const radians = Phaser.Math.DegToRad(angle);
+      const startRadius = 24 + (index % 3) * 4;
+      const endRadius = 54 + (index % 2) * 8;
+      const particle = this.scene.add
+        .circle(
+          Math.cos(radians) * startRadius,
+          Math.sin(radians) * startRadius,
+          index % 3 === 0 ? 2.4 : 1.6,
+          index % 2 === 0 ? SELECTED_FLASH_COLOR : SELECTED_COLOR,
+          reducedMotion ? 0 : 0.95,
+        )
+        .setBlendMode(Phaser.BlendModes.ADD);
+
+      this.projection.add(particle);
+      this.scene.tweens.add({
+        targets: particle,
+        x: Math.cos(radians) * endRadius,
+        y: Math.sin(radians) * endRadius,
+        alpha: 0,
+        scale: 0.35,
+        duration: reducedMotion ? 0 : 230 + index * 9,
+        ease: "Cubic.easeOut",
+        onComplete: () => particle.destroy(),
+      });
+    });
   }
 }
