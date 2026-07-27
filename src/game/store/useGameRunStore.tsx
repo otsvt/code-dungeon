@@ -6,7 +6,15 @@ import { type CurrentRun } from "../types/run";
 import { BUFFS, START_BUFFS, type Buff, type BuffId } from "../types/buff";
 import { type DebuffId } from "../types/debuff";
 import { addEffectStacks, consumeEffectStacks, type EffectId } from "../types/effect";
-import { generateNextRoomChoices } from "../rooms/nextRoomChoices";
+import {
+  createBattleRoomReward,
+  type BattleRoomReward,
+  type ChallengeOutcome,
+} from "../challenges/challenge";
+import {
+  generateNextRoomChoices,
+  type NextRoomChoice,
+} from "../rooms/nextRoomChoices";
 
 const MIN_RUN_ROOMS = 5;
 const MAX_RUN_ROOMS = 9;
@@ -22,6 +30,11 @@ type RunStore = {
   resetRun: () => void;
   prepareStartBuff: () => Buff | null;
   completeStartBuffGrant: () => void;
+  advanceToRoom: (choice: NextRoomChoice) => boolean;
+  completeBattleRoom: (
+    outcome: ChallengeOutcome,
+    reward?: BattleRoomReward,
+  ) => BattleRoomReward | null;
   addEffect: (effectId: EffectId, stacks?: number) => void;
   consumeEffect: (effectId: EffectId, stacks?: number) => void;
 };
@@ -51,6 +64,7 @@ export const useRunStore = create<RunStore>((set) => ({
         },
         activeBuffs: [],
         activeDebuffs: [],
+        resolvedRoomIds: [],
         startBuffGranted: false,
         impression: 0,
         status: "created",
@@ -106,6 +120,86 @@ export const useRunStore = create<RunStore>((set) => ({
         },
       };
     });
+  },
+  advanceToRoom: (choice) => {
+    let didAdvance = false;
+
+    set((state) => {
+      const currentRun = state.currentRun;
+
+      if (
+        !currentRun ||
+        !currentRun.nextRoomChoices.some(
+          (nextRoomChoice) => nextRoomChoice.id === choice.id,
+        )
+      ) {
+        return state;
+      }
+
+      const roomNumber = currentRun.roomNumber + 1;
+
+      didAdvance = true;
+
+      return {
+        currentRun: {
+          ...currentRun,
+          currentRoom: choice,
+          nextRoomChoices:
+            choice.type === "final"
+              ? []
+              : generateNextRoomChoices({
+                  currentRoomNumber: roomNumber,
+                  totalRooms: currentRun.totalRooms,
+                  technologyIds: currentRun.settings.technologyIds,
+                }),
+          roomNumber,
+          status: "started",
+        },
+      };
+    });
+
+    return didAdvance;
+  },
+  completeBattleRoom: (outcome, preparedReward) => {
+    let reward: BattleRoomReward | null = null;
+
+    set((state) => {
+      const currentRun = state.currentRun;
+      const currentRoom = currentRun?.currentRoom;
+
+      if (
+        !currentRun ||
+        !currentRoom ||
+        currentRoom.type !== "battle" ||
+        currentRun.resolvedRoomIds.includes(currentRoom.id)
+      ) {
+        return state;
+      }
+
+      const impression = outcome === "strong" ? 1 : outcome === "weak" ? -1 : 0;
+      let activeBuffs = currentRun.activeBuffs;
+      let activeDebuffs = currentRun.activeDebuffs;
+
+      reward = preparedReward ?? createBattleRoomReward(outcome);
+
+      if (reward.kind === "buff") {
+        activeBuffs = addEffectStacks(activeBuffs, reward.effectId);
+      } else if (reward.kind === "debuff") {
+        activeDebuffs = addEffectStacks(activeDebuffs, reward.effectId);
+      }
+
+      return {
+        currentRun: {
+          ...currentRun,
+          activeBuffs,
+          activeDebuffs,
+          impression,
+          resolvedRoomIds: [...currentRun.resolvedRoomIds, currentRoom.id],
+        },
+      };
+    });
+
+    return reward;
   },
   addEffect: (effectId, stacks = 1) => {
     set((state) => {

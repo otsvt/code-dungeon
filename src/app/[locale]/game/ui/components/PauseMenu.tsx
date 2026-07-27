@@ -12,7 +12,7 @@ export function PauseMenu({ currentRun }: PauseMenuProps) {
   const t = useTranslations("GameHud.pause");
   const resumeGame = useGameUiStore((state) => state.resumeGame);
   const openConfirmation = useGameUiStore((state) => state.openConfirmation);
-  const roomNumber = Math.max(currentRun.roomNumber, 1);
+  const roomNumber = currentRun.roomNumber + 1;
 
   return (
     <section className="relative my-auto h-162.5 w-full max-w-155 shrink-0 overflow-hidden rounded-xs border border-sandy bg-background/98 px-17.5 pt-7 pb-3.5 shadow-pause-menu max-md:h-auto max-md:max-w-xl max-md:px-6 max-md:pt-6">

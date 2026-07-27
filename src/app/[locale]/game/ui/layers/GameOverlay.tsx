@@ -3,6 +3,8 @@ import { useGameUiStore } from "@/game";
 import { CurrentRun } from "@/game/types/run";
 import { PauseConfirmationMenu } from "../components/PauseConfirmationMenu";
 import { PauseMenu } from "../components/PauseMenu";
+import { ChallengeOverlay } from "../components/ChallengeOverlay";
+import { resolveChallengeOutcome } from "@/game";
 
 interface GameOverlayProps {
   currentRun: CurrentRun;
@@ -13,6 +15,8 @@ interface GameOverlayProps {
 export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlayProps) {
   const isPaused = useGameUiStore((state) => state.isPaused);
   const confirmation = useGameUiStore((state) => state.confirmation);
+  const activeChallenge = useGameUiStore((state) => state.activeChallenge);
+  const completeChallenge = useGameUiStore((state) => state.completeChallenge);
   const resumeGame = useGameUiStore((state) => state.resumeGame);
   const closeConfirmation = useGameUiStore((state) => state.closeConfirmation);
 
@@ -39,22 +43,35 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
     };
   }, [closeConfirmation, confirmation, isPaused, resumeGame]);
 
-  if (!isPaused) {
+  if (!activeChallenge && !isPaused) {
     return null;
   }
 
   return (
-    <div className="absolute inset-0 z-30 p-6 flex-center bg-overlay">
-      {confirmation ? (
-        <PauseConfirmationMenu
-          confirmation={confirmation}
-          currentRun={currentRun}
-          onCancel={closeConfirmation}
-          onConfirm={confirmation === "restart" ? onRestart : onExitToMenu}
+    <>
+      {activeChallenge && (
+        <ChallengeOverlay
+          key={activeChallenge.roomId}
+          challenge={activeChallenge}
+          onComplete={(correctAnswers, totalAnswers) =>
+            completeChallenge(resolveChallengeOutcome(correctAnswers, totalAnswers))
+          }
         />
-      ) : (
-        <PauseMenu currentRun={currentRun} />
       )}
-    </div>
+      {isPaused && (
+        <div className="absolute inset-0 z-50 p-6 flex-center bg-overlay">
+          {confirmation ? (
+            <PauseConfirmationMenu
+              confirmation={confirmation}
+              currentRun={currentRun}
+              onCancel={closeConfirmation}
+              onConfirm={confirmation === "restart" ? onRestart : onExitToMenu}
+            />
+          ) : (
+            <PauseMenu currentRun={currentRun} />
+          )}
+        </div>
+      )}
+    </>
   );
 }

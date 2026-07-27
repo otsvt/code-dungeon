@@ -38,3 +38,7 @@ export const TECHNOLOGIES = [
 
 export type Technology = (typeof TECHNOLOGIES)[number];
 export type TechnologyId = (typeof TECHNOLOGIES)[number]["id"];
+
+export function getTechnologyById(technologyId: TechnologyId): Technology | undefined {
+  return TECHNOLOGIES.find((technology) => technology.id === technologyId);
+}

@@ -6,11 +6,17 @@ const MAX_DOOR_COUNT = 4;
 
 export type NextRoomType = Exclude<RoomType, "start">;
 
-export type NextRoomChoice = {
-  id: string;
-  type: NextRoomType;
-  technologyId?: TechnologyId;
-};
+export type NextRoomChoice =
+  | {
+      id: string;
+      type: "battle";
+      technologyId: TechnologyId;
+    }
+  | {
+      id: string;
+      type: Exclude<NextRoomType, "battle">;
+      technologyId?: never;
+    };
 
 type GenerateNextRoomChoicesOptions = {
   currentRoomNumber: number;

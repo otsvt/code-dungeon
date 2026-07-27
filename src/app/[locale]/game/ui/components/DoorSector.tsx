@@ -7,10 +7,12 @@ interface DoorSectorProps {
 }
 
 export function DoorSector({ currentRoomNumber }: DoorSectorProps) {
+  const displayRoomNumber = currentRoomNumber + 1;
+
   return (
     <SectorWrapper classNames="font-mono flex items-center gap-x-2">
       <SpriteIcon id="door" className="h-8 w-8 text-accent" />
-      <span>{currentRoomNumber}/?</span>
+      <span>{displayRoomNumber}/?</span>
     </SectorWrapper>
   );
 }

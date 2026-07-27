@@ -13,11 +13,11 @@ interface GameHudProps {
 
 export function GameHud({ currentRun }: GameHudProps) {
   return (
-    <div className="absolute z-20 top-6 left-1/2 -translate-x-1/2 h-25 flex border-2 border-sandy bg-deep text-lg text-background shadow-xl shadow-deep">
+    <div className="absolute z-40 top-6 left-1/2 -translate-x-1/2 h-25 flex border-2 border-sandy bg-deep text-lg text-background shadow-xl shadow-deep">
       <UserSector />
       <LiveSector currentLives={currentRun.lives.current} maxLives={currentRun.lives.max} />
       <SectorDecore />
-      <BuffsSector buffs={currentRun.activeBuffs} />
+      <BuffsSector buffs={currentRun.activeBuffs} debuffs={currentRun.activeDebuffs} />
       <SectorDecore />
       <ImpressionSector impression={currentRun.impression} />
       <SectorDecore />

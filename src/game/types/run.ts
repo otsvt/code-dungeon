@@ -6,9 +6,7 @@ import { type NextRoomChoice } from "../rooms/nextRoomChoices";
 
 export type RoomType = "start" | "battle" | "hr" | "final";
 
-export type CurrentRoom = {
-  type: RoomType;
-};
+export type CurrentRoom = { type: "start" } | NextRoomChoice;
 
 export type Impression = -1 | 0 | 1;
 
@@ -25,6 +23,7 @@ export type CurrentRun = {
   };
   activeBuffs: ActiveEffect<BuffId>[];
   activeDebuffs: ActiveEffect<DebuffId>[];
+  resolvedRoomIds: string[];
   startBuffGranted: boolean;
   impression: Impression;
   status: "created" | "started";

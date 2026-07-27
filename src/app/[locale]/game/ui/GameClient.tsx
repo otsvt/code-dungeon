@@ -14,6 +14,7 @@ export function GameClient() {
   const currentRun = useRunStore((state) => state.currentRun);
   const startRun = useRunStore((state) => state.startRun);
   const resumeGame = useGameUiStore((state) => state.resumeGame);
+  const resetChallenge = useGameUiStore((state) => state.resetChallenge);
 
   useEffect(() => {
     if (!currentRun) {
@@ -26,11 +27,13 @@ export function GameClient() {
   }
 
   const restartRun = () => {
+    resetChallenge();
     startRun(currentRun.settings);
     resumeGame();
   };
 
   const exitToMenu = () => {
+    resetChallenge();
     resumeGame();
     router.replace(ROUTES.home);
   };

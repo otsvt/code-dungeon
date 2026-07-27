@@ -16230,6 +16230,1026 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "ciGEE",
+      "x": 10077,
+      "y": 3600,
+      "name": "00.10 — Door Projection States / Concept Matched",
+      "clip": true,
+      "width": 1600,
+      "height": 920,
+      "fill": "$background",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "t4O8jy",
+          "x": 0,
+          "y": 0,
+          "name": "Door States Top Accent",
+          "fill": "$accent",
+          "width": 1600,
+          "height": 8
+        },
+        {
+          "type": "text",
+          "id": "l3has",
+          "x": 72,
+          "y": 46,
+          "name": "Door States Eyebrow",
+          "fill": "$focus",
+          "content": "GAMEPLAY / DOORS / PROJECTION STATES",
+          "fontFamily": "$font-ui",
+          "fontSize": 12,
+          "fontWeight": "700",
+          "letterSpacing": 1.4
+        },
+        {
+          "type": "text",
+          "id": "a14IY",
+          "x": 72,
+          "y": 76,
+          "name": "Door States Title",
+          "fill": "$foreground",
+          "content": "ДВЕРНАЯ ПРОЕКЦИЯ · ПО АРТ-КОНЦЕПТУ",
+          "fontFamily": "$font-display",
+          "fontSize": 36,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "x5WJV",
+          "x": 72,
+          "y": 124,
+          "name": "Door States Subtitle",
+          "fill": "$muted",
+          "content": "Одна и та же React-комната. Сравнивается только интенсивность, геометрия и поведение свечения.",
+          "fontFamily": "$font-ui",
+          "fontSize": 15,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "rectangle",
+          "id": "qgrsk",
+          "x": 72,
+          "y": 164,
+          "name": "Door States Header Rule",
+          "fill": "$decorative",
+          "width": 1456,
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "TmSx8",
+          "x": 72,
+          "y": 198,
+          "name": "Door State / DEFAULT / REVEALED",
+          "width": 456,
+          "height": 650,
+          "fill": "$surface-light",
+          "cornerRadius": 2,
+          "stroke": "$decorative",
+          "strokeWidth": 1,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "qqoyQ",
+              "x": 24,
+              "y": 22,
+              "name": "DEFAULT / REVEALED Label",
+              "fill": "$focus",
+              "content": "01  DEFAULT / REVEALED",
+              "fontFamily": "$font-code",
+              "fontSize": 12,
+              "fontWeight": "700",
+              "letterSpacing": 1.1
+            },
+            {
+              "type": "text",
+              "id": "B1YD64",
+              "x": 24,
+              "y": 48,
+              "name": "DEFAULT / REVEALED Caption",
+              "fill": "$muted",
+              "content": "Доступная дверь · технология известна",
+              "fontFamily": "$font-ui",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "fLcY7",
+              "x": 98,
+              "y": 88,
+              "name": "DEFAULT / REVEALED Door Artwork",
+              "width": 260,
+              "height": 410,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "../public/assets/game/door.png",
+                "mode": "fit"
+              },
+              "layout": "none"
+            },
+            {
+              "type": "text",
+              "id": "wlk9P",
+              "x": 28,
+              "y": 550,
+              "name": "DEFAULT / REVEALED Motion Note",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": 400,
+              "content": "Тихое дыхание 0.96 → 1.00 · без сплошного неона",
+              "lineHeight": 1.45,
+              "fontFamily": "$font-code",
+              "fontSize": 11,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "dMTi3",
+              "x": 98,
+              "y": 160,
+              "name": "Default Projection",
+              "width": 260,
+              "height": 260,
+              "fill": "#00000000",
+              "layout": "none",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "UM3lW",
+                  "x": 40,
+                  "y": 40,
+                  "name": "Default Soft Halo",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "radial",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "width": 1,
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$door-glow-known-soft",
+                        "position": 0
+                      },
+                      {
+                        "color": "#87DFA000",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 180,
+                  "height": 180
+                },
+                {
+                  "type": "rectangle",
+                  "id": "yIWQS",
+                  "x": 40,
+                  "y": 129,
+                  "name": "Default Horizontal Axis",
+                  "opacity": 0.38,
+                  "fill": "$door-glow-known",
+                  "width": 180,
+                  "height": 1
+                },
+                {
+                  "type": "rectangle",
+                  "id": "dA0az",
+                  "x": 129,
+                  "y": 40,
+                  "name": "Default Vertical Axis",
+                  "opacity": 0.38,
+                  "fill": "$door-glow-known",
+                  "width": 1,
+                  "height": 180
+                },
+                {
+                  "type": "ellipse",
+                  "id": "LI6x6",
+                  "x": 65,
+                  "y": 65,
+                  "name": "Default Outer Ring",
+                  "fill": "#00000000",
+                  "width": 130,
+                  "height": 130,
+                  "stroke": "$door-glow-known",
+                  "strokeWidth": 1,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-known-soft",
+                    "blur": 8
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "Ic1kM",
+                  "x": 82,
+                  "y": 82,
+                  "name": "Default Inner Ring",
+                  "fill": "$door-projection-core",
+                  "width": 96,
+                  "height": 96,
+                  "stroke": "$door-glow-known",
+                  "strokeWidth": 2
+                },
+                {
+                  "type": "rectangle",
+                  "id": "J0WkVP",
+                  "x": 126,
+                  "y": 55,
+                  "name": "Default Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-known",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "rectangle",
+                  "id": "NRieW",
+                  "x": 126,
+                  "y": 201,
+                  "name": "Default Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-known",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "rectangle",
+                  "id": "E9wWsv",
+                  "x": 55,
+                  "y": 126,
+                  "name": "Default Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-known",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "rectangle",
+                  "id": "bULAK",
+                  "x": 201,
+                  "y": 126,
+                  "name": "Default Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-known",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "frame",
+                  "id": "Z9zvdb",
+                  "x": 105,
+                  "y": 105,
+                  "name": "Default React Icon",
+                  "width": 50,
+                  "height": 50,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../public/assets/game/technologies/react.svg",
+                    "mode": "fit"
+                  },
+                  "layout": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bXfvD",
+          "x": 572,
+          "y": 198,
+          "name": "Door State / HOVER",
+          "width": 456,
+          "height": 650,
+          "fill": "$surface-light",
+          "cornerRadius": 2,
+          "stroke": "$decorative",
+          "strokeWidth": 1,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "deYJK",
+              "x": 24,
+              "y": 22,
+              "name": "HOVER Label",
+              "fill": "$focus",
+              "content": "02  HOVER",
+              "fontFamily": "$font-code",
+              "fontSize": 12,
+              "fontWeight": "700",
+              "letterSpacing": 1.1
+            },
+            {
+              "type": "text",
+              "id": "nqBZX",
+              "x": 24,
+              "y": 48,
+              "name": "HOVER Caption",
+              "fill": "$muted",
+              "content": "Наведение · проекция собирается к курсору",
+              "fontFamily": "$font-ui",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "S7vwC",
+              "x": 98,
+              "y": 88,
+              "name": "HOVER Door Artwork",
+              "width": 260,
+              "height": 410,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "../public/assets/game/door.png",
+                "mode": "fit"
+              },
+              "layout": "none"
+            },
+            {
+              "type": "text",
+              "id": "P9St0l",
+              "x": 28,
+              "y": 550,
+              "name": "HOVER Motion Note",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": 400,
+              "content": "Кольца +8% · лучи и узлы ярче · 120 ms",
+              "lineHeight": 1.45,
+              "fontFamily": "$font-code",
+              "fontSize": 11,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "Q6zbh",
+              "x": 98,
+              "y": 160,
+              "name": "Hover Projection",
+              "width": 260,
+              "height": 260,
+              "fill": "#00000000",
+              "layout": "none",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "ecapm",
+                  "x": 20,
+                  "y": 20,
+                  "name": "Hover Soft Halo",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "radial",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "width": 1,
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$door-glow-hover-soft",
+                        "position": 0
+                      },
+                      {
+                        "color": "#9FFFBF00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 220,
+                  "height": 220
+                },
+                {
+                  "type": "rectangle",
+                  "id": "cQorJ",
+                  "x": 24,
+                  "y": 128,
+                  "name": "Hover Horizontal Beam",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 90,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#C8FFD400",
+                        "position": 0
+                      },
+                      {
+                        "color": "$door-glow-hover",
+                        "position": 0.5
+                      },
+                      {
+                        "color": "#C8FFD400",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 212,
+                  "height": 3
+                },
+                {
+                  "type": "rectangle",
+                  "id": "oh6w7",
+                  "x": 128,
+                  "y": 24,
+                  "name": "Hover Vertical Beam",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 180,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#C8FFD400",
+                        "position": 0
+                      },
+                      {
+                        "color": "$door-glow-hover",
+                        "position": 0.5
+                      },
+                      {
+                        "color": "#C8FFD400",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 3,
+                  "height": 212
+                },
+                {
+                  "type": "ellipse",
+                  "id": "WzEjl",
+                  "x": 53,
+                  "y": 53,
+                  "name": "Hover Outer Ring",
+                  "fill": "#00000000",
+                  "width": 154,
+                  "height": 154,
+                  "stroke": "$door-glow-hover",
+                  "strokeWidth": 2,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-hover-soft",
+                    "blur": 18,
+                    "spread": 2
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "ypK93",
+                  "x": 70,
+                  "y": 70,
+                  "name": "Hover Middle Ring",
+                  "fill": "#00000000",
+                  "width": 120,
+                  "height": 120,
+                  "stroke": "$door-glow-known",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "ellipse",
+                  "id": "jqBRU",
+                  "x": 84,
+                  "y": 84,
+                  "name": "Hover Inner Ring",
+                  "fill": "$door-projection-core",
+                  "width": 92,
+                  "height": 92,
+                  "stroke": "$door-glow-hover",
+                  "strokeWidth": 3
+                },
+                {
+                  "type": "rectangle",
+                  "id": "TJgUv",
+                  "x": 126,
+                  "y": 42,
+                  "name": "Hover Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-hover",
+                  "width": 9,
+                  "height": 9,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-hover-soft",
+                    "blur": 8
+                  }
+                },
+                {
+                  "type": "rectangle",
+                  "id": "Wv5T2",
+                  "x": 126,
+                  "y": 210,
+                  "name": "Hover Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-hover",
+                  "width": 9,
+                  "height": 9,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-hover-soft",
+                    "blur": 8
+                  }
+                },
+                {
+                  "type": "rectangle",
+                  "id": "asgsY",
+                  "x": 42,
+                  "y": 126,
+                  "name": "Hover Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-hover",
+                  "width": 9,
+                  "height": 9,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-hover-soft",
+                    "blur": 8
+                  }
+                },
+                {
+                  "type": "rectangle",
+                  "id": "LaSsg",
+                  "x": 210,
+                  "y": 126,
+                  "name": "Hover Cardinal Node",
+                  "rotation": 45,
+                  "fill": "$door-glow-hover",
+                  "width": 9,
+                  "height": 9,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-hover-soft",
+                    "blur": 8
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "tmXQB",
+                  "x": 104,
+                  "y": 104,
+                  "name": "Hover React Icon",
+                  "width": 52,
+                  "height": 52,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../public/assets/game/technologies/react.svg",
+                    "mode": "fit"
+                  },
+                  "layout": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "m4RmD",
+          "x": 1072,
+          "y": 198,
+          "name": "Door State / SELECTED",
+          "width": 456,
+          "height": 650,
+          "fill": "$surface-light",
+          "cornerRadius": 2,
+          "stroke": "$decorative",
+          "strokeWidth": 1,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "tFlLR",
+              "x": 24,
+              "y": 22,
+              "name": "SELECTED Label",
+              "fill": "$door-glow-selected",
+              "content": "03  SELECTED",
+              "fontFamily": "$font-code",
+              "fontSize": 12,
+              "fontWeight": "700",
+              "letterSpacing": 1.1
+            },
+            {
+              "type": "text",
+              "id": "YvONZ",
+              "x": 24,
+              "y": 48,
+              "name": "SELECTED Caption",
+              "fill": "$muted",
+              "content": "Выбор подтверждён · готово к переходу",
+              "fontFamily": "$font-ui",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "Y0cT0",
+              "x": 98,
+              "y": 88,
+              "name": "SELECTED Door Artwork",
+              "width": 260,
+              "height": 410,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "../public/assets/game/door.png",
+                "mode": "fit"
+              },
+              "layout": "none"
+            },
+            {
+              "type": "text",
+              "id": "S7IUU",
+              "x": 28,
+              "y": 550,
+              "name": "SELECTED Motion Note",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": 400,
+              "content": "Сжатие в центр → золотая вспышка → внешняя волна",
+              "lineHeight": 1.45,
+              "fontFamily": "$font-code",
+              "fontSize": 11,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "yghDs",
+              "x": 98,
+              "y": 160,
+              "name": "Selected Projection",
+              "width": 260,
+              "height": 260,
+              "fill": "#00000000",
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "v4VEzV",
+                  "x": 100,
+                  "y": 8,
+                  "name": "Selected Vertical Light",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 180,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#F4C86A00",
+                        "position": 0
+                      },
+                      {
+                        "color": "$door-glow-selected-soft",
+                        "position": 0.5
+                      },
+                      {
+                        "color": "#F4C86A00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 60,
+                  "height": 244
+                },
+                {
+                  "type": "ellipse",
+                  "id": "BcZFG",
+                  "x": 14,
+                  "y": 14,
+                  "name": "Selected Gold Halo",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "radial",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "width": 1,
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$door-glow-selected-soft",
+                        "position": 0
+                      },
+                      {
+                        "color": "#F4C86A00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 232,
+                  "height": 232
+                },
+                {
+                  "type": "rectangle",
+                  "id": "YD76k",
+                  "x": 16,
+                  "y": 128,
+                  "name": "Selected Horizontal Beam",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 90,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#FFF4CD00",
+                        "position": 0
+                      },
+                      {
+                        "color": "$door-glow-flash",
+                        "position": 0.5
+                      },
+                      {
+                        "color": "#FFF4CD00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 228,
+                  "height": 3
+                },
+                {
+                  "type": "rectangle",
+                  "id": "dQiZy",
+                  "x": 128,
+                  "y": 16,
+                  "name": "Selected Vertical Beam",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 180,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#FFF4CD00",
+                        "position": 0
+                      },
+                      {
+                        "color": "$door-glow-flash",
+                        "position": 0.5
+                      },
+                      {
+                        "color": "#FFF4CD00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 3,
+                  "height": 228
+                },
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "qLXin",
+                  "x": 48,
+                  "y": 48,
+                  "name": "Selected Outer Hex",
+                  "fill": "#00000000",
+                  "width": 164,
+                  "height": 164,
+                  "stroke": "$door-glow-selected",
+                  "strokeWidth": 3,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 20,
+                    "spread": 3
+                  }
+                },
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "QPyoi",
+                  "x": 70,
+                  "y": 70,
+                  "name": "Selected Inner Hex",
+                  "fill": "#00000000",
+                  "width": 120,
+                  "height": 120,
+                  "stroke": "$door-glow-flash",
+                  "strokeWidth": 2
+                },
+                {
+                  "type": "ellipse",
+                  "id": "X37Zf",
+                  "x": 86,
+                  "y": 86,
+                  "name": "Selected Core Ring",
+                  "fill": "$door-projection-core",
+                  "width": 88,
+                  "height": 88,
+                  "stroke": "$door-glow-selected",
+                  "strokeWidth": 2
+                },
+                {
+                  "type": "ellipse",
+                  "id": "J9gnB",
+                  "x": 48,
+                  "y": 76,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 6,
+                  "height": 6,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "METTb",
+                  "x": 202,
+                  "y": 82,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 5,
+                  "height": 5,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "WraY7",
+                  "x": 38,
+                  "y": 144,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 4,
+                  "height": 4,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "fMUNH",
+                  "x": 215,
+                  "y": 150,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 7,
+                  "height": 7,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "S7mtM",
+                  "x": 70,
+                  "y": 203,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 5,
+                  "height": 5,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "OyAHg",
+                  "x": 184,
+                  "y": 210,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 4,
+                  "height": 4,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "uvqf4",
+                  "x": 92,
+                  "y": 44,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 4,
+                  "height": 4,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "sb278",
+                  "x": 170,
+                  "y": 38,
+                  "name": "Selected Light Particle",
+                  "fill": "$door-glow-flash",
+                  "width": 6,
+                  "height": 6,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 7
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "Hmb1y",
+                  "x": 102,
+                  "y": 102,
+                  "name": "Selected React Icon",
+                  "width": 56,
+                  "height": 56,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../public/assets/game/technologies/react.svg",
+                    "mode": "fit"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$door-glow-selected-soft",
+                    "blur": 10
+                  },
+                  "layout": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "pNZcS",
+          "x": 72,
+          "y": 874,
+          "name": "Door States Footer",
+          "fill": "$focus",
+          "content": "REFERENCE: docs/visual_direction_assets/concepts/doors.png  ·  geometry first, glow supports the projection",
+          "fontFamily": "$font-code",
+          "fontSize": 11,
+          "fontWeight": "500",
+          "letterSpacing": 0.6
+        }
+      ]
     }
   ],
   "variables": {
@@ -16460,6 +17480,38 @@
     "button-secondary-disabled": {
       "type": "color",
       "value": "#F2ECE980"
+    },
+    "door-glow-known": {
+      "type": "color",
+      "value": "#87DFA0"
+    },
+    "door-glow-known-soft": {
+      "type": "color",
+      "value": "#87DFA033"
+    },
+    "door-glow-hover": {
+      "type": "color",
+      "value": "#C8FFD4"
+    },
+    "door-glow-hover-soft": {
+      "type": "color",
+      "value": "#9FFFBF55"
+    },
+    "door-glow-selected": {
+      "type": "color",
+      "value": "#F4C86A"
+    },
+    "door-glow-selected-soft": {
+      "type": "color",
+      "value": "#F4C86A55"
+    },
+    "door-glow-flash": {
+      "type": "color",
+      "value": "#FFF4CD"
+    },
+    "door-projection-core": {
+      "type": "color",
+      "value": "#17231DE8"
     }
   },
   "fileToken": "a6809603-1690-4e20-8577-9d07276607d9"

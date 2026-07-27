@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import { BUFFS } from "@/game";
+import { BUFFS, DEBUFFS } from "@/game";
 import { TECHNOLOGIES } from "@/entities/technology";
 import {
   ASSETS_PATH,
@@ -28,6 +28,10 @@ export class PreloadScene extends Phaser.Scene {
 
     for (const buff of BUFFS) {
       this.load.image(buff.id, buff.iconPath);
+    }
+
+    for (const debuff of DEBUFFS) {
+      this.load.svg(debuff.id, debuff.iconPath, { width: 64, height: 64 });
     }
 
     for (const technology of TECHNOLOGIES) {

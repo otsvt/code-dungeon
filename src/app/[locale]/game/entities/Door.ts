@@ -321,9 +321,6 @@ export class Door extends Phaser.GameObjects.Container {
     if (isSelected) {
       this.projectionGraphics.fillStyle(SELECTED_COLOR, 0.08);
       this.projectionGraphics.fillRect(-5, -SEAL_BEAM_RADIUS - 8, 10, (SEAL_BEAM_RADIUS + 8) * 2);
-      this.projectionGraphics.lineStyle(2, SELECTED_FLASH_COLOR, 0.6);
-      this.projectionGraphics.lineBetween(-SEAL_BEAM_RADIUS, 0, SEAL_BEAM_RADIUS, 0);
-      this.projectionGraphics.lineBetween(0, -SEAL_BEAM_RADIUS, 0, SEAL_BEAM_RADIUS);
 
       this.projectionGraphics.lineStyle(3, SELECTED_COLOR, 0.95);
       this.projectionGraphics.strokePoints(this.getPolygonPoints(42, 6), true);

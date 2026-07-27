@@ -13,9 +13,11 @@ export function EffectIcon({ src, alt, type }: EffectIconProps) {
     debuff: "border-effect-debuff-stroke",
     impression: "border-light",
   }[type];
+  const backgroundClass =
+    type === "debuff" ? "bg-effect-debuff-bg" : "bg-effect-buff-bg";
 
   return (
-    <div className={clsx("rounded-full border-2 bg-effect-buff-bg", borderClass)}>
+    <div className={clsx("rounded-full border-2", borderClass, backgroundClass)}>
       <Image src={src} height={58} width={58} alt={alt} />
     </div>
   );

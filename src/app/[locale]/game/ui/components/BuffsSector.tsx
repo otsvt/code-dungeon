@@ -1,4 +1,10 @@
-import { type ActiveEffect, type BuffId, getBuffById } from "@/game";
+import {
+  type ActiveEffect,
+  type BuffId,
+  type DebuffId,
+  getBuffById,
+  getDebuffById,
+} from "@/game";
 import { Tooltip } from "@/shared/ui/tooltip";
 import { SectorWrapper } from "./SectorWrapper";
 import { useTranslations } from "next-intl";
@@ -6,9 +12,10 @@ import { EffectIcon } from "@/entities/effect";
 
 interface BuffsSectorProps {
   buffs: ActiveEffect<BuffId>[];
+  debuffs: ActiveEffect<DebuffId>[];
 }
 
-export function BuffsSector({ buffs }: BuffsSectorProps) {
+export function BuffsSector({ buffs, debuffs }: BuffsSectorProps) {
   const t = useTranslations("GameHud");
 
   return (
@@ -42,7 +49,35 @@ export function BuffsSector({ buffs }: BuffsSectorProps) {
             </Tooltip>
           );
         })}
-        <span data-buff-flight-target aria-hidden="true" className="pointer-events-none h-14.5 w-14.5 shrink-0" />
+        {debuffs.map((activeDebuff) => {
+          const debuff = getDebuffById(activeDebuff.id);
+
+          if (!debuff) {
+            return null;
+          }
+
+          return (
+            <Tooltip
+              key={debuff.id}
+              triggerClassName="buff-icon-arrival relative cursor-help"
+              content={
+                <span className="flex flex-col gap-y-1">
+                  <span className="font-semibold text-danger-icon">{t(debuff.nameKey)}</span>
+                  <span>{t(debuff.descriptionKey)}</span>
+                  {activeDebuff.stacks > 1 && <span>×{activeDebuff.stacks}</span>}
+                </span>
+              }
+            >
+              <EffectIcon src={debuff.iconPath} alt={t(debuff.nameKey)} type="debuff" />
+              {activeDebuff.stacks > 1 && (
+                <span className="absolute -right-1 -bottom-1 min-w-5 rounded-full bg-deep px-1 text-center text-xs text-danger-icon">
+                  {activeDebuff.stacks}
+                </span>
+              )}
+            </Tooltip>
+          );
+        })}
+        <span data-effect-flight-target aria-hidden="true" className="pointer-events-none h-14.5 w-14.5 shrink-0" />
       </div>
     </SectorWrapper>
   );

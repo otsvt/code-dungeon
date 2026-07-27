@@ -1,7 +1,9 @@
 import { useGameUiStore } from "@/game";
 import { SpriteIcon } from "@/shared/ui/sprite-icon";
+import { useTranslations } from "next-intl";
 
 export function PauseSector() {
+  const t = useTranslations("GameHud.pause");
   const isPaused = useGameUiStore((state) => state.isPaused);
   const togglePause = useGameUiStore((state) => state.togglePause);
 
@@ -10,6 +12,7 @@ export function PauseSector() {
       <button
         className="h-full w-full flex-center rounded-full bg-deep border border-sandy/60 group"
         onClick={togglePause}
+        aria-label={t(isPaused ? "resumeGame" : "pauseGame")}
       >
         <SpriteIcon
           className="h-8 w-8 text-accent transition-opacity group-hover:text-accent/80"

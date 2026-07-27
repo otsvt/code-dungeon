@@ -1,1 +1,6 @@
-export { TECHNOLOGIES, type Technology, type TechnologyId } from "./types/technology";
+export {
+  TECHNOLOGIES,
+  getTechnologyById,
+  type Technology,
+  type TechnologyId,
+} from "./types/technology";
