@@ -38,6 +38,7 @@ function createHrRun(impression: Impression): CurrentRun {
     },
     activeEffects: [],
     resolvedRoomIds: [],
+    hrRoomOffered: true,
     startBuffGranted: true,
     impression,
     status: "started",

@@ -21,6 +21,7 @@ export type CurrentRun = {
   };
   activeEffects: ActiveEffect<EffectId>[];
   resolvedRoomIds: string[];
+  hrRoomOffered: boolean;
   startBuffGranted: boolean;
   impression: Impression;
   status: "created" | "started";

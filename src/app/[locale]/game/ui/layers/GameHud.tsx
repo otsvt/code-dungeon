@@ -1,11 +1,10 @@
 import { CurrentRun } from "@/game/types/run";
 import { LiveSector } from "../components/LiveSector";
-import { BuffsSector } from "../components/BuffsSector";
+import { EffectSector } from "../components/EffectSector";
 import { SectorDecore } from "../components/SectorDecore";
 import { UserSector } from "../components/UserSector";
 import { ImpressionSector } from "../components/ImpressionSector";
 import { PauseSector } from "../components/PauseSector";
-import { DoorSector } from "../components/DoorSector";
 
 interface GameHudProps {
   currentRun: CurrentRun;
@@ -17,11 +16,10 @@ export function GameHud({ currentRun }: GameHudProps) {
       <UserSector />
       <LiveSector currentLives={currentRun.lives.current} maxLives={currentRun.lives.max} />
       <SectorDecore />
-      <BuffsSector effects={currentRun.activeEffects} />
+      <EffectSector effects={currentRun.activeEffects} />
       <SectorDecore />
       <ImpressionSector impression={currentRun.impression} />
       <SectorDecore />
-      <DoorSector currentRoomNumber={currentRun.roomNumber} totalRooms={currentRun.totalRooms} />
       <PauseSector />
     </div>
   );

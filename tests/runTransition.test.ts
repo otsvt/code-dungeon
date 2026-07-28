@@ -2,6 +2,12 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { type CurrentRun, type NextRoomChoice, useRunStore } from "../src/game";
+import { advanceRunToRoom } from "../src/game/application/run/runLifecycle";
+
+function idFactory() {
+  let index = 0;
+  return () => `generated-room-${index++}`;
+}
 
 function createRun(nextRoomChoices: NextRoomChoice[]): CurrentRun {
   return {
@@ -20,6 +26,7 @@ function createRun(nextRoomChoices: NextRoomChoice[]): CurrentRun {
     },
     activeEffects: [],
     resolvedRoomIds: [],
+    hrRoomOffered: nextRoomChoices.some((choice) => choice.type === "hr"),
     startBuffGranted: true,
     impression: 0,
     status: "created",
@@ -81,6 +88,53 @@ test("HR-дверь становится текущей комнатой", () =>
   );
 
   useRunStore.getState().resetRun();
+});
+
+test("HR-комната предлагается не более одного раза за весь run", () => {
+  const hrRoom: NextRoomChoice = {
+    id: "offered-hr-room",
+    type: "hr",
+  };
+  const firstBattleRoom: NextRoomChoice = {
+    id: "first-battle-room",
+    type: "battle",
+    technologyId: "html",
+  };
+  const createId = idFactory();
+  const initialRun = createRun([hrRoom, firstBattleRoom]);
+
+  const afterSkippedHr = advanceRunToRoom(initialRun, firstBattleRoom, {
+    random: () => 0,
+    createId,
+  });
+
+  assert.ok(afterSkippedHr);
+  assert.equal(afterSkippedHr.hrRoomOffered, true);
+  assert.ok(
+    afterSkippedHr.nextRoomChoices.every((choice) => choice.type !== "hr"),
+  );
+
+  const nextBattleRoom = afterSkippedHr.nextRoomChoices.find(
+    (choice) => choice.type === "battle",
+  );
+
+  assert.ok(nextBattleRoom);
+
+  const afterAnotherBattle = advanceRunToRoom(
+    afterSkippedHr,
+    nextBattleRoom,
+    {
+      random: () => 0,
+      createId,
+    },
+  );
+
+  assert.ok(afterAnotherBattle);
+  assert.ok(
+    afterAnotherBattle.nextRoomChoices.every(
+      (choice) => choice.type !== "hr",
+    ),
+  );
 });
 
 test("несуществующая дверь не может повторно изменить комнату", () => {

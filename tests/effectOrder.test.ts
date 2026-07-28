@@ -21,6 +21,7 @@ function createRun(): CurrentRun {
     lives: { current: 1, max: 1 },
     activeEffects: [],
     resolvedRoomIds: [],
+    hrRoomOffered: false,
     startBuffGranted: true,
     impression: 0,
     status: "started",

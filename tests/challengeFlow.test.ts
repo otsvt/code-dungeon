@@ -74,6 +74,7 @@ test("одна battle-комната применяет результат то�
     lives: { current: 1, max: 1 },
     activeEffects: [],
     resolvedRoomIds: [],
+    hrRoomOffered: false,
     startBuffGranted: true,
     impression: 0,
     status: "started",

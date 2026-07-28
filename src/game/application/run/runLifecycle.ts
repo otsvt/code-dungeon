@@ -26,18 +26,19 @@ export function createRun(
   const totalRooms =
     Math.floor(random() * (MAX_RUN_ROOMS - MIN_RUN_ROOMS + 1)) +
     MIN_RUN_ROOMS;
+  const nextRoomChoices = generateNextRoomChoices({
+    currentRoomNumber: 0,
+    totalRooms,
+    technologyIds: settings.technologyIds,
+    random,
+    createId,
+  });
 
   return {
     id: createId(),
     settings,
     currentRoom: { type: "start" },
-    nextRoomChoices: generateNextRoomChoices({
-      currentRoomNumber: 0,
-      totalRooms,
-      technologyIds: settings.technologyIds,
-      random,
-      createId,
-    }),
+    nextRoomChoices,
     roomNumber: 0,
     totalRooms,
     lives: {
@@ -46,6 +47,7 @@ export function createRun(
     },
     activeEffects: [],
     resolvedRoomIds: [],
+    hrRoomOffered: nextRoomChoices.some((choice) => choice.type === "hr"),
     startBuffGranted: false,
     impression: 0,
     status: "created",
@@ -90,21 +92,31 @@ export function advanceRunToRoom(
   }
 
   const roomNumber = currentRun.roomNumber + 1;
+  const hrRoomAlreadyOffered =
+    currentRun.hrRoomOffered ||
+    currentRun.nextRoomChoices.some(
+      (nextRoomChoice) => nextRoomChoice.type === "hr",
+    );
+  const nextRoomChoices =
+    choice.type === "final"
+      ? []
+      : generateNextRoomChoices({
+          currentRoomNumber: roomNumber,
+          totalRooms: currentRun.totalRooms,
+          technologyIds: currentRun.settings.technologyIds,
+          allowHrRoom: !hrRoomAlreadyOffered && choice.type !== "hr",
+          random,
+          createId,
+        });
 
   return {
     ...currentRun,
     currentRoom: choice,
-    nextRoomChoices:
-      choice.type === "final"
-        ? []
-        : generateNextRoomChoices({
-            currentRoomNumber: roomNumber,
-            totalRooms: currentRun.totalRooms,
-            technologyIds: currentRun.settings.technologyIds,
-            allowHrRoom: choice.type !== "hr",
-            random,
-            createId,
-          }),
+    nextRoomChoices,
+    hrRoomOffered:
+      hrRoomAlreadyOffered ||
+      choice.type === "hr" ||
+      nextRoomChoices.some((nextRoomChoice) => nextRoomChoice.type === "hr"),
     roomNumber,
     status: "started",
   };
