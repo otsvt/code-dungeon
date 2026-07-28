@@ -13,6 +13,7 @@ test("feature-store проходит полный flow через локальн
     kind: "battle",
     roomId: "feature-room",
     technologyId: "html",
+    activeEffectIds: [],
   });
 
   const challenge = useChallengeStore.getState().activeChallenge;

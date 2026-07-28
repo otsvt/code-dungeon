@@ -1,5 +1,6 @@
 import { BUFFS } from "../../types/buff";
 import { DEBUFFS } from "../../types/debuff";
+import { type EffectId } from "../../types/effect";
 import {
   type BattleRoomReward,
   type ChallengeAnswer,
@@ -42,15 +43,36 @@ export function resolveChallengeOutcome(
 
 export function createBattleRoomReward(
   outcome: ChallengeOutcome,
+  activeEffectIds: readonly EffectId[] = [],
   random: () => number = Math.random,
 ): BattleRoomReward {
+  const activeEffectIdSet = new Set(activeEffectIds);
+
   if (outcome === "strong") {
-    const buff = BUFFS[Math.floor(random() * BUFFS.length)] ?? BUFFS[0];
+    const availableBuffs = BUFFS.filter(
+      (buff) => !activeEffectIdSet.has(buff.id),
+    );
+    const buff =
+      availableBuffs[Math.floor(random() * availableBuffs.length)];
+
+    if (!buff) {
+      return { kind: "none", effectId: null };
+    }
+
     return { kind: "buff", effectId: buff.id };
   }
 
   if (outcome === "weak") {
-    const debuff = DEBUFFS[Math.floor(random() * DEBUFFS.length)] ?? DEBUFFS[0];
+    const availableDebuffs = DEBUFFS.filter(
+      (debuff) => !activeEffectIdSet.has(debuff.id),
+    );
+    const debuff =
+      availableDebuffs[Math.floor(random() * availableDebuffs.length)];
+
+    if (!debuff) {
+      return { kind: "none", effectId: null };
+    }
+
     return { kind: "debuff", effectId: debuff.id };
   }
 

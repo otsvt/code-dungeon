@@ -1,5 +1,12 @@
 import { EffectIcon } from "@/entities/effect";
-import { getBuffById, getDebuffById, isBuffId, isDebuffId, type ActiveEffect, type EffectId } from "@/game";
+import {
+  getBuffById,
+  getDebuffById,
+  isBuffId,
+  isDebuffId,
+  type ActiveEffect,
+  type EffectId,
+} from "@/game";
 import { Tooltip } from "@/shared/ui/tooltip";
 import { useTranslations } from "next-intl";
 import { SectorWrapper } from "./SectorWrapper";
@@ -49,25 +56,29 @@ export function EffectSector({ effects }: EffectSectorProps) {
                   triggerClassName="buff-icon-arrival relative cursor-help"
                   content={
                     <span className="flex flex-col gap-y-1">
-                      <span className={`font-semibold ${presentation.accentClassName}`}>{t(effect.nameKey)}</span>
+                      <span
+                        className={`font-semibold ${presentation.accentClassName}`}
+                      >
+                        {t(effect.nameKey)}
+                      </span>
                       <span>{t(effect.descriptionKey)}</span>
-                      {activeEffect.stacks > 1 && <span>×{activeEffect.stacks}</span>}
                     </span>
                   }
                 >
-                  <EffectIcon src={effect.iconPath} alt={t(effect.nameKey)} type={presentation.type} />
-                  {activeEffect.stacks > 1 && (
-                    <span
-                      className={`absolute -right-1 -bottom-1 min-w-5 rounded-full bg-deep px-1 text-center text-xs ${presentation.accentClassName}`}
-                    >
-                      {activeEffect.stacks}
-                    </span>
-                  )}
+                  <EffectIcon
+                    src={effect.iconPath}
+                    alt={t(effect.nameKey)}
+                    type={presentation.type}
+                  />
                 </Tooltip>
               </span>
             );
           })}
-          <span data-effect-flight-target aria-hidden="true" className="pointer-events-none h-14.5 w-14.5 shrink-0" />
+          <span
+            data-effect-flight-target
+            aria-hidden="true"
+            className="pointer-events-none h-14.5 w-14.5 shrink-0"
+          />
         </div>
       </div>
     </SectorWrapper>

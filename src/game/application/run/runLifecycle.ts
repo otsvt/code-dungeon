@@ -1,6 +1,10 @@
 import { type RunSettings } from "../../domain/run/runSettings";
 import { type ChallengeResult } from "../challenge/types";
-import { addEffectStacks, consumeEffectStacks, type EffectId } from "../../types/effect";
+import {
+  addUniqueEffect,
+  removeEffect,
+  type EffectId,
+} from "../../types/effect";
 import { START_BUFFS, type Buff } from "../../types/buff";
 import {
   generateNextRoomChoices,
@@ -70,7 +74,7 @@ export function grantStartBuff(
 
   return {
     ...currentRun,
-    activeEffects: addEffectStacks(currentRun.activeEffects, buff.id),
+    activeEffects: addUniqueEffect(currentRun.activeEffects, buff.id),
     startBuffGranted: true,
   };
 }
@@ -136,14 +140,17 @@ export function applyChallengeResult(
     return null;
   }
 
-  const activeEffects =
-    result.reward.kind === "none"
-      ? currentRun.activeEffects
-      : addEffectStacks(currentRun.activeEffects, result.reward.effectId);
+  const rewardEffectId =
+    result.reward.kind === "none" ? null : result.reward.effectId;
+  const isNewEffect =
+    rewardEffectId !== null &&
+    !currentRun.activeEffects.some((effect) => effect.id === rewardEffectId);
 
   return {
     ...currentRun,
-    activeEffects,
+    activeEffects: isNewEffect
+      ? addUniqueEffect(currentRun.activeEffects, rewardEffectId)
+      : currentRun.activeEffects,
     impression:
       result.kind === "battle"
         ? result.outcome === "strong"
@@ -159,29 +166,23 @@ export function applyChallengeResult(
 export function addRunEffect(
   currentRun: CurrentRun,
   effectId: EffectId,
-  stacks = 1,
 ): CurrentRun {
+  if (currentRun.activeEffects.some((effect) => effect.id === effectId)) {
+    return currentRun;
+  }
+
   return {
     ...currentRun,
-    activeEffects: addEffectStacks(
-      currentRun.activeEffects,
-      effectId,
-      stacks,
-    ),
+    activeEffects: addUniqueEffect(currentRun.activeEffects, effectId),
   };
 }
 
 export function consumeRunEffect(
   currentRun: CurrentRun,
   effectId: EffectId,
-  stacks = 1,
 ): CurrentRun {
   return {
     ...currentRun,
-    activeEffects: consumeEffectStacks(
-      currentRun.activeEffects,
-      effectId,
-      stacks,
-    ),
+    activeEffects: removeEffect(currentRun.activeEffects, effectId),
   };
 }

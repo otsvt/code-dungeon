@@ -53,6 +53,7 @@ test("challenge service зависит от порта, а не от JSON-реа
     kind: "battle",
     roomId: "room-1",
     technologyId: "html",
+    activeEffectIds: [],
   });
   const result = service.complete(challenge, [
     { questionId: "question-1", optionId: "a" },
@@ -80,6 +81,7 @@ test("application service сам считает HR outcome по выбранны
     kind: "hr",
     roomId: "hr-room",
     impression: -1,
+    activeEffectIds: [],
   });
   const result = service.complete(challenge, [
     { questionId: "question-1", optionId: "a" },

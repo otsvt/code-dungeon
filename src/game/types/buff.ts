@@ -52,16 +52,16 @@ export const BUFFS = [
 
 export const HR_BUFFS = [
   {
-    id: "goodContact",
-    iconPath: "/assets/game/buffs/good-contact.svg",
-    nameKey: "buffNames.goodContact",
-    descriptionKey: "buffDescriptions.goodContact",
+    id: "debuffImmunity",
+    iconPath: "/assets/game/buffs/debuff-immunity.png",
+    nameKey: "buffNames.debuffImmunity",
+    descriptionKey: "buffDescriptions.debuffImmunity",
   },
   {
-    id: "confidentDelivery",
-    iconPath: "/assets/game/buffs/confident-delivery.svg",
-    nameKey: "buffNames.confidentDelivery",
-    descriptionKey: "buffDescriptions.confidentDelivery",
+    id: "unlowerableReputation",
+    iconPath: "/assets/game/buffs/unlowerable-reputation.png",
+    nameKey: "buffNames.unlowerableReputation",
+    descriptionKey: "buffDescriptions.unlowerableReputation",
   },
 ] as const;
 

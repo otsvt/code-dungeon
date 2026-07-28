@@ -4,6 +4,8 @@ import test from "node:test";
 import {
   createHrRoomReward,
   getHrAllowedMistakes,
+  HR_BUFFS,
+  HR_DEBUFFS,
   resolveHrChallengeOutcome,
   type CurrentRun,
   type HrRoomReward,
@@ -67,20 +69,43 @@ test("HR-интервью содержит три отдельных ситуа�
 });
 
 test("HR-награда зависит от результата интервью, а не выдаётся автоматически", () => {
-  assert.deepEqual(createHrRoomReward("strong", () => 0), {
+  assert.deepEqual(createHrRoomReward("strong", [], () => 0), {
     kind: "buff",
-    effectId: "goodContact",
+    effectId: "debuffImmunity",
   });
-  assert.deepEqual(createHrRoomReward("weak", () => 0.999), {
+  assert.deepEqual(createHrRoomReward("weak", [], () => 0.999), {
     kind: "debuff",
-    effectId: "awkwardPause",
+    effectId: "failedStart",
   });
+});
+
+test("активные HR-эффекты исключаются из награды", () => {
+  assert.deepEqual(
+    createHrRoomReward("strong", ["debuffImmunity"], () => 0),
+    { kind: "buff", effectId: "unlowerableReputation" },
+  );
+  assert.deepEqual(
+    createHrRoomReward(
+      "strong",
+      HR_BUFFS.map((buff) => buff.id),
+      () => 0,
+    ),
+    { kind: "none", effectId: null },
+  );
+  assert.deepEqual(
+    createHrRoomReward(
+      "weak",
+      HR_DEBUFFS.map((debuff) => debuff.id),
+      () => 0,
+    ),
+    { kind: "none", effectId: null },
+  );
 });
 
 test("HR-комната применяет награду только один раз", () => {
   const reward: HrRoomReward = {
     kind: "buff",
-    effectId: "confidentDelivery",
+    effectId: "unlowerableReputation",
   };
 
   useRunStore.setState({
@@ -101,7 +126,7 @@ test("HR-комната применяет награду только один 
   assert.deepEqual(firstResult, reward);
   assert.equal(secondResult, null);
   assert.deepEqual(currentRun?.activeEffects, [
-    { id: "confidentDelivery", stacks: 1 },
+    { id: "unlowerableReputation" },
   ]);
   assert.deepEqual(currentRun?.resolvedRoomIds, ["hr-room"]);
 

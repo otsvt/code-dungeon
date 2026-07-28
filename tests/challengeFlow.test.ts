@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  BUFFS,
   createBattleRoomReward,
+  DEBUFFS,
   HR_BUFFS,
   HR_DEBUFFS,
   resolveChallengeOutcome,
@@ -33,9 +35,32 @@ test("результат зависит от количества правиль
 });
 
 test("награда соответствует исходу комнаты", () => {
-  assert.equal(createBattleRoomReward("strong", () => 0).kind, "buff");
-  assert.equal(createBattleRoomReward("neutral", () => 0).kind, "none");
-  assert.equal(createBattleRoomReward("weak", () => 0).kind, "debuff");
+  assert.equal(createBattleRoomReward("strong", [], () => 0).kind, "buff");
+  assert.equal(createBattleRoomReward("neutral", [], () => 0).kind, "none");
+  assert.equal(createBattleRoomReward("weak", [], () => 0).kind, "debuff");
+});
+
+test("активные обычные эффекты исключаются из награды", () => {
+  assert.deepEqual(
+    createBattleRoomReward("strong", ["noiseSuppression"], () => 0),
+    { kind: "buff", effectId: "stackNavigator" },
+  );
+  assert.deepEqual(
+    createBattleRoomReward(
+      "strong",
+      BUFFS.map((buff) => buff.id),
+      () => 0,
+    ),
+    { kind: "none", effectId: null },
+  );
+  assert.deepEqual(
+    createBattleRoomReward(
+      "weak",
+      DEBUFFS.map((debuff) => debuff.id),
+      () => 0,
+    ),
+    { kind: "none", effectId: null },
+  );
 });
 
 test("обычная Battle Room никогда не выдаёт HR-эффекты", () => {
@@ -45,8 +70,16 @@ test("обычная Battle Room никогда не выдаёт HR-эффек�
   ]);
 
   for (const randomValue of [0, 0.25, 0.5, 0.75, 0.999]) {
-    const buffReward = createBattleRoomReward("strong", () => randomValue);
-    const debuffReward = createBattleRoomReward("weak", () => randomValue);
+    const buffReward = createBattleRoomReward(
+      "strong",
+      [],
+      () => randomValue,
+    );
+    const debuffReward = createBattleRoomReward(
+      "weak",
+      [],
+      () => randomValue,
+    );
 
     assert.equal(buffReward.kind, "buff");
     assert.equal(debuffReward.kind, "debuff");
@@ -103,7 +136,7 @@ test("одна battle-комната применяет результат то�
   assert.deepEqual(first, { kind: "buff", effectId: "stackNavigator" });
   assert.equal(second, null);
   assert.deepEqual(resolvedRun?.activeEffects, [
-    { id: "stackNavigator", stacks: 1 },
+    { id: "stackNavigator" },
   ]);
   assert.equal(resolvedRun?.impression, 1);
   assert.deepEqual(resolvedRun?.resolvedRoomIds, ["battle-room"]);

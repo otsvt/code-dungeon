@@ -65,7 +65,11 @@ export function createChallengeSessionService(
           kind: "battle",
           roomId: challenge.roomId,
           outcome,
-          reward: createBattleRoomReward(outcome, random),
+          reward: createBattleRoomReward(
+            outcome,
+            challenge.activeEffectIds,
+            random,
+          ),
         };
       }
 
@@ -79,7 +83,11 @@ export function createChallengeSessionService(
         kind: "hr",
         roomId: challenge.roomId,
         outcome,
-        reward: createHrRoomReward(outcome, random),
+        reward: createHrRoomReward(
+          outcome,
+          challenge.activeEffectIds,
+          random,
+        ),
       };
     },
   };

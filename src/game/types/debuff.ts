@@ -51,16 +51,16 @@ export const DEBUFFS = [
 
 export const HR_DEBUFFS = [
   {
-    id: "redFlag",
-    iconPath: "/assets/game/debuffs/red-flag.svg",
-    nameKey: "debuffNames.redFlag",
-    descriptionKey: "debuffDescriptions.redFlag",
+    id: "buffBan",
+    iconPath: "/assets/game/debuffs/buff-ban.png",
+    nameKey: "debuffNames.buffBan",
+    descriptionKey: "debuffDescriptions.buffBan",
   },
   {
-    id: "awkwardPause",
-    iconPath: "/assets/game/debuffs/awkward-pause.svg",
-    nameKey: "debuffNames.awkwardPause",
-    descriptionKey: "debuffDescriptions.awkwardPause",
+    id: "failedStart",
+    iconPath: "/assets/game/debuffs/failed-start.png",
+    nameKey: "debuffNames.failedStart",
+    descriptionKey: "debuffDescriptions.failedStart",
   },
 ] as const;
 

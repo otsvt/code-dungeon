@@ -34,15 +34,15 @@ test("бафы и дебафы сохраняют общий порядок по
   run = addRunEffect(run, "noiseSuppression");
   run = addRunEffect(run, "routeSubstitution");
   run = addRunEffect(run, "stackNavigator");
-  run = addRunEffect(run, "redFlag");
+  run = addRunEffect(run, "buffBan");
 
   assert.deepEqual(
     run.activeEffects.map((effect) => effect.id),
-    ["noiseSuppression", "routeSubstitution", "stackNavigator", "redFlag"],
+    ["noiseSuppression", "routeSubstitution", "stackNavigator", "buffBan"],
   );
 });
 
-test("новый стак сохраняет позицию, а повторное получение удалённого эффекта ставит его в конец", () => {
+test("активный эффект не дублируется, но может вернуться после удаления", () => {
   let run = createRun();
 
   run = addRunEffect(run, "noiseSuppression");
@@ -51,12 +51,12 @@ test("новый стак сохраняет позицию, а повторно
   run = addRunEffect(run, "routeSubstitution");
 
   assert.deepEqual(run.activeEffects, [
-    { id: "noiseSuppression", stacks: 1 },
-    { id: "routeSubstitution", stacks: 2 },
-    { id: "stackNavigator", stacks: 1 },
+    { id: "noiseSuppression" },
+    { id: "routeSubstitution" },
+    { id: "stackNavigator" },
   ]);
 
-  run = consumeRunEffect(run, "routeSubstitution", 2);
+  run = consumeRunEffect(run, "routeSubstitution");
   run = addRunEffect(run, "routeSubstitution");
 
   assert.deepEqual(

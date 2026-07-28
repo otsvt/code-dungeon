@@ -20,8 +20,8 @@ export {
   type DebuffId,
 } from "./types/debuff";
 export {
-  addEffectStacks,
-  consumeEffectStacks,
+  addUniqueEffect,
+  removeEffect,
   type ActiveEffect,
   type EffectId,
 } from "./types/effect";

@@ -112,8 +112,8 @@
       "broadProfile": "Broad Profile",
       "refactoring": "Refactoring",
       "stableResult": "Stable Result",
-      "goodContact": "Good Contact",
-      "confidentDelivery": "Confident Delivery"
+      "debuffImmunity": "Debuff Immunity",
+      "unlowerableReputation": "Unlowerable Reputation"
     },
     "buffDescriptions": {
       "noiseSuppression": "Automatically removes one incorrect option from every question.",
@@ -123,8 +123,8 @@
       "broadProfile": "When the new room uses a different technology, two incorrect options are blocked in the first question.",
       "refactoring": "After every three perfectly completed rooms, one active debuff is removed automatically and the counter resets.",
       "stableResult": "A normally completed room grants a buff as if it had been completed perfectly.",
-      "goodContact": "HR noted a strong connection during the meeting.",
-      "confidentDelivery": "HR noted a confident delivery."
+      "debuffImmunity": "The player can no longer receive new debuffs.",
+      "unlowerableReputation": "Impression can no longer decrease."
     },
     "debuffNames": {
       "routeSubstitution": "Route Substitution",
@@ -135,8 +135,8 @@
       "busFactor": "Bus Factor",
       "reversedWording": "Reversed Wording",
       "crossFunctionalTeam": "Cross-Functional Team",
-      "redFlag": "Red Flag",
-      "awkwardPause": "Awkward Pause"
+      "buffBan": "Reward Ban",
+      "failedStart": "Failed Start"
     },
     "debuffDescriptions": {
       "routeSubstitution": "The selected door has a 50% chance to be replaced by another one.",
@@ -147,8 +147,8 @@
       "busFactor": "An error in the selected dangerous technology counts as two.",
       "reversedWording": "The words in one question are displayed in reverse order.",
       "crossFunctionalTeam": "Every challenge receives one additional random question from any topic.",
-      "redFlag": "HR noticed a concerning signal.",
-      "awkwardPause": "HR noted an awkward pause."
+      "buffBan": "The player can no longer receive new buffs.",
+      "failedStart": "The first question in every room cannot be answered correctly."
     },
     "buffReward": {
       "title": "Gift received",

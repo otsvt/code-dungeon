@@ -149,6 +149,10 @@ export class GameScene extends Phaser.Scene {
       kind: "hr",
       roomId,
       impression,
+      activeEffectIds:
+        useRunStore
+          .getState()
+          .currentRun?.activeEffects.map((effect) => effect.id) ?? [],
     });
 
     if (result.kind !== "hr") {
@@ -191,6 +195,10 @@ export class GameScene extends Phaser.Scene {
       kind: "battle",
       roomId,
       technologyId,
+      activeEffectIds:
+        useRunStore
+          .getState()
+          .currentRun?.activeEffects.map((effect) => effect.id) ?? [],
     });
 
     if (result.kind !== "battle") {

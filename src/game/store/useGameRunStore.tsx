@@ -30,8 +30,8 @@ type RunStore = {
   completeStartBuffGrant: () => void;
   advanceToRoom: (choice: NextRoomChoice) => boolean;
   completeChallengeRoom: (result: ChallengeResult) => ChallengeReward | null;
-  addEffect: (effectId: EffectId, stacks?: number) => void;
-  consumeEffect: (effectId: EffectId, stacks?: number) => void;
+  addEffect: (effectId: EffectId) => void;
+  consumeEffect: (effectId: EffectId) => void;
 };
 
 export const useRunStore = create<RunStore>((set) => ({
@@ -135,16 +135,16 @@ export const useRunStore = create<RunStore>((set) => ({
 
     return appliedReward;
   },
-  addEffect: (effectId, stacks = 1) =>
+  addEffect: (effectId) =>
     set((state) =>
       state.currentRun
-        ? { currentRun: addRunEffect(state.currentRun, effectId, stacks) }
+        ? { currentRun: addRunEffect(state.currentRun, effectId) }
         : state,
     ),
-  consumeEffect: (effectId, stacks = 1) =>
+  consumeEffect: (effectId) =>
     set((state) =>
       state.currentRun
-        ? { currentRun: consumeRunEffect(state.currentRun, effectId, stacks) }
+        ? { currentRun: consumeRunEffect(state.currentRun, effectId) }
         : state,
     ),
 }));
