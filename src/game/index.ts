@@ -1,10 +1,4 @@
 export { useRunStore } from "./store/useGameRunStore";
-export {
-  useGameUiStore,
-  type ActiveChallenge,
-  type ChallengeResult,
-  type PauseConfirmation,
-} from "./store/useGameUiStore";
 
 export {
   BUFFS,
@@ -12,6 +6,7 @@ export {
   ALL_BUFFS,
   START_BUFFS,
   getBuffById,
+  isBuffId,
   type Buff,
   type BuffId,
 } from "./types/buff";
@@ -42,18 +37,25 @@ export {
 export {
   createHrRoomReward,
   getHrAllowedMistakes,
-  getHrChallengeQuestions,
   resolveHrChallengeOutcome,
   type HrRoomReward,
-} from "./rooms/hrRoom";
+} from "./domain/room/hrRoom";
 export { type CurrentRun, type Impression, type RoomType } from "./types/run";
 export {
+  countCorrectAnswers,
   createBattleRoomReward,
-  getChallengeQuestions,
   resolveChallengeOutcome,
+} from "./domain/challenge/rules";
+export {
   type BattleRoomReward,
+  type ChallengeAnswer,
   type ChallengeLocale,
   type ChallengeOption,
   type ChallengeOutcome,
   type ChallengeQuestion,
-} from "./challenges/challenge";
+} from "./domain/challenge/types";
+export {
+  type ActiveChallenge,
+  type ChallengeRequest,
+  type ChallengeResult,
+} from "./application/challenge/types";

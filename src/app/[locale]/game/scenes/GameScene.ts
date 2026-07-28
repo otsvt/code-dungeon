@@ -1,13 +1,12 @@
 import Phaser from "phaser";
 
 import {
-  createBattleRoomReward,
-  createHrRoomReward,
-  type ChallengeOutcome,
+  type ChallengeRequest,
+  type ChallengeResult,
   type NextRoomChoice,
-  useGameUiStore,
   useRunStore,
 } from "@/game";
+import { useChallengeStore } from "@/features/play-challenge";
 import { Room } from "../entities/Room";
 import { Hero } from "../entities/Hero";
 import { Pedestal } from "../entities/Pedestal";
@@ -146,11 +145,17 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    const outcome = await this.waitForHrChallengeResult(roomId, impression);
-    const reward = createHrRoomReward(outcome);
-    const visualImpression = outcome === "strong" ? 1 : -1;
+    const result = await this.waitForChallengeResult({
+      kind: "hr",
+      roomId,
+      impression,
+    });
 
-    await this.hrDesk.playEvaluation(visualImpression, reducedMotion);
+    if (result.kind !== "hr") {
+      return;
+    }
+
+    const visualImpression = result.outcome === "strong" ? 1 : -1;
 
     const activeRun = useRunStore.getState().currentRun;
 
@@ -163,11 +168,14 @@ export class GameScene extends Phaser.Scene {
 
     const appliedReward = useRunStore
       .getState()
-      .completeHrRoom(outcome, reward);
+      .completeChallengeRoom(result);
 
-    if (appliedReward) {
-      this.showDoorSigns();
+    if (!appliedReward) {
+      return;
     }
+
+    await this.hrDesk.playEvaluation(visualImpression, reducedMotion);
+    this.showDoorSigns();
   }
 
   private async runBattleChallenge(
@@ -179,72 +187,60 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    const outcome = await this.waitForChallengeResult(roomId, technologyId);
+    const result = await this.waitForChallengeResult({
+      kind: "battle",
+      roomId,
+      technologyId,
+    });
 
-    await this.pedestal.hideTechnologyIcon(reducedMotion);
-
-    const reward = createBattleRoomReward(outcome);
-    const hudTarget = this.getEffectHudTarget();
-
-    if (reward.kind === "none") {
-      await this.pedestal.playResult(reducedMotion);
-    } else {
-      await this.pedestal.giveEffect(
-        reward.effectId,
-        hudTarget,
-        reducedMotion,
-        reward.kind === "debuff",
-      );
+    if (result.kind !== "battle") {
+      return;
     }
 
     const appliedReward = useRunStore
       .getState()
-      .completeBattleRoom(outcome, reward);
+      .completeChallengeRoom(result);
 
-    if (appliedReward) {
-      this.showDoorSigns();
+    if (!appliedReward) {
+      return;
     }
+
+    await this.pedestal.hideTechnologyIcon(reducedMotion);
+    const hudTarget = this.getEffectHudTarget();
+
+    if (result.reward.kind === "none") {
+      await this.pedestal.playResult(reducedMotion);
+    } else {
+      await this.pedestal.giveEffect(
+        result.reward.effectId,
+        hudTarget,
+        reducedMotion,
+        result.reward.kind === "debuff",
+      );
+    }
+
+    this.showDoorSigns();
   }
 
   private waitForChallengeResult(
-    roomId: string,
-    technologyId: NonNullable<NextRoomChoice["technologyId"]>,
-  ): Promise<ChallengeOutcome> {
+    request: ChallengeRequest,
+  ): Promise<ChallengeResult> {
     return new Promise((resolve) => {
-      const unsubscribe = useGameUiStore.subscribe((state) => {
-        if (state.challengeResult?.roomId !== roomId) {
+      const unsubscribe = useChallengeStore.subscribe((state) => {
+        if (state.challengeResult?.roomId !== request.roomId) {
           return;
         }
 
-        const outcome = state.challengeResult.outcome;
+        const result = state.challengeResult;
         unsubscribe();
-        useGameUiStore.getState().clearChallengeResult();
-        resolve(outcome);
+        useChallengeStore.getState().clearChallengeResult();
+        resolve(result);
       });
 
       this.events.once(Phaser.Scenes.Events.SHUTDOWN, unsubscribe);
-      useGameUiStore.getState().openChallenge(roomId, technologyId);
-    });
-  }
-
-  private waitForHrChallengeResult(
-    roomId: string,
-    impression: -1 | 0 | 1,
-  ): Promise<ChallengeOutcome> {
-    return new Promise((resolve) => {
-      const unsubscribe = useGameUiStore.subscribe((state) => {
-        if (state.challengeResult?.roomId !== roomId) {
-          return;
-        }
-
-        const outcome = state.challengeResult.outcome;
+      void useChallengeStore.getState().openChallenge(request).catch(() => {
         unsubscribe();
-        useGameUiStore.getState().clearChallengeResult();
-        resolve(outcome);
       });
-
-      this.events.once(Phaser.Scenes.Events.SHUTDOWN, unsubscribe);
-      useGameUiStore.getState().openHrChallenge(roomId, impression);
     });
   }
 

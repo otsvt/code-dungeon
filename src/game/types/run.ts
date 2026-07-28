@@ -1,4 +1,4 @@
-import { type RunSettings } from "@/features/run-setup";
+import { type RunSettings } from "../domain/run/runSettings";
 import { type BuffId } from "./buff";
 import { type DebuffId } from "./debuff";
 import { type ActiveEffect } from "./effect";

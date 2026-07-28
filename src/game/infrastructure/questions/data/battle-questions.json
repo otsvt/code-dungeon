@@ -1,0 +1,411 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "html-semantic-main",
+      "kind": "battle",
+      "technologyId": "html",
+      "prompt": {
+        "ru": "Какой элемент содержит основное уникальное содержимое страницы?",
+        "en": "Which element contains the page's main unique content?"
+      },
+      "code": null,
+      "options": [
+        { "id": "a", "label": { "ru": "<section>", "en": "<section>" } },
+        { "id": "b", "label": { "ru": "<main>", "en": "<main>" } },
+        { "id": "c", "label": { "ru": "<article>", "en": "<article>" } },
+        { "id": "d", "label": { "ru": "<body>", "en": "<body>" } }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "html-button",
+      "kind": "battle",
+      "technologyId": "html",
+      "prompt": {
+        "ru": "Что лучше использовать для действия внутри интерфейса? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
+        "en": "What is the best element for an action inside an interface? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "<div> — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "<div> — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "<span> — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "<span> — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "<button> — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "<button> — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "<a> без href — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "<a> without href — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "css-specificity",
+      "kind": "battle",
+      "technologyId": "css",
+      "prompt": {
+        "ru": "Какой селектор имеет наибольшую специфичность?",
+        "en": "Which selector has the highest specificity?"
+      },
+      "code": null,
+      "options": [
+        { "id": "a", "label": { "ru": ".card .title", "en": ".card .title" } },
+        { "id": "b", "label": { "ru": "article h2", "en": "article h2" } },
+        { "id": "c", "label": { "ru": "#profile .title", "en": "#profile .title" } },
+        { "id": "d", "label": { "ru": "[data-title]", "en": "[data-title]" } }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "css-flex-center",
+      "kind": "battle",
+      "technologyId": "css",
+      "prompt": {
+        "ru": "Как распределить элементы по центру главной оси flex-контейнера? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
+        "en": "How do you center items along a flex container's main axis? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "align-items: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "align-items: center — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "justify-content: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "justify-content: center — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "place-items: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "place-items: center — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "text-align: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "text-align: center — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "js-event-loop",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "prompt": {
+        "ru": "Что выведет этот код?",
+        "en": "What does this code print?"
+      },
+      "code": "console.log('A');\nPromise.resolve().then(() => console.log('B'));\nconsole.log('C');",
+      "options": [
+        { "id": "a", "label": { "ru": "A, B, C", "en": "A, B, C" } },
+        { "id": "b", "label": { "ru": "A, C, B", "en": "A, C, B" } },
+        { "id": "c", "label": { "ru": "B, A, C", "en": "B, A, C" } },
+        { "id": "d", "label": { "ru": "C, A, B", "en": "C, A, B" } }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "js-array-map",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "prompt": {
+        "ru": "Какой метод создаёт новый массив, применяя функцию к каждому элементу? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
+        "en": "Which method creates a new array by applying a function to every item? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "forEach — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "forEach — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "filter — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "filter — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "map — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "map — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "some — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "some — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "ts-unknown",
+      "kind": "battle",
+      "technologyId": "typescript",
+      "prompt": {
+        "ru": "Какой тип безопаснее использовать для значения неизвестного типа?",
+        "en": "Which type is safer for a value whose type is unknown?"
+      },
+      "code": null,
+      "options": [
+        { "id": "a", "label": { "ru": "any", "en": "any" } },
+        { "id": "b", "label": { "ru": "unknown", "en": "unknown" } },
+        { "id": "c", "label": { "ru": "never", "en": "never" } },
+        { "id": "d", "label": { "ru": "object", "en": "object" } }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "ts-union",
+      "kind": "battle",
+      "technologyId": "typescript",
+      "prompt": {
+        "ru": "Какая запись создаёт объединение строковых литералов? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
+        "en": "Which declaration creates a union of string literals? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "type State = 'idle' | 'done' — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "type State = 'idle' | 'done' — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "type State = ['idle', 'done'] — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "type State = ['idle', 'done'] — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "type State = string[] — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "type State = string[] — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "type State = keyof string — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "type State = keyof string — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "react-key",
+      "kind": "battle",
+      "technologyId": "react",
+      "prompt": {
+        "ru": "Зачем элементам списка нужен стабильный key?",
+        "en": "Why do list items need a stable key?"
+      },
+      "code": null,
+      "options": [
+        { "id": "a", "label": { "ru": "Для CSS-селектора", "en": "For a CSS selector" } },
+        { "id": "b", "label": { "ru": "Для сопоставления элементов при обновлении", "en": "To match elements between renders" } },
+        { "id": "c", "label": { "ru": "Для передачи props", "en": "To pass props" } },
+        { "id": "d", "label": { "ru": "Для сортировки массива", "en": "To sort the array" } }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "react-effect",
+      "kind": "battle",
+      "technologyId": "react",
+      "prompt": {
+        "ru": "Где следует выполнять синхронизацию с внешней системой? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
+        "en": "Where should synchronization with an external system happen? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "В useEffect — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "In useEffect — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "В useMemo — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "In useMemo — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "В JSX — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "In JSX — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "В reducer — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "In a reducer — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "vue-computed",
+      "kind": "battle",
+      "technologyId": "vue",
+      "prompt": {
+        "ru": "Что использовать для производного реактивного значения?",
+        "en": "What should be used for a derived reactive value?"
+      },
+      "code": null,
+      "options": [
+        { "id": "a", "label": { "ru": "computed", "en": "computed" } },
+        { "id": "b", "label": { "ru": "watchEffect только", "en": "watchEffect only" } },
+        { "id": "c", "label": { "ru": "provide", "en": "provide" } },
+        { "id": "d", "label": { "ru": "onMounted", "en": "onMounted" } }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "vue-key",
+      "kind": "battle",
+      "technologyId": "vue",
+      "prompt": {
+        "ru": "Какая директива выводит список элементов? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
+        "en": "Which directive renders a list of items? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "v-if — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "v-if — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "v-bind — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "v-bind — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "v-for — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "v-for — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "v-model — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "v-model — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "git-rebase",
+      "kind": "battle",
+      "technologyId": "git",
+      "prompt": {
+        "ru": "Какая команда переносит локальные коммиты поверх обновлённой ветки?",
+        "en": "Which command reapplies local commits on top of an updated branch?"
+      },
+      "code": null,
+      "options": [
+        { "id": "a", "label": { "ru": "git stash", "en": "git stash" } },
+        { "id": "b", "label": { "ru": "git rebase", "en": "git rebase" } },
+        { "id": "c", "label": { "ru": "git reset", "en": "git reset" } },
+        { "id": "d", "label": { "ru": "git tag", "en": "git tag" } }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "git-stage",
+      "kind": "battle",
+      "technologyId": "git",
+      "prompt": {
+        "ru": "Какая команда добавляет изменения в индекс? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
+        "en": "Which command adds changes to the staging area? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "git add — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "git add — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "git push — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "git push — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "git log — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "git log — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "git switch — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
+            "en": "git switch — an expanded answer describing the expected behavior in a complex production interface"
+          }
+        }
+      ],
+      "correctOptionId": "a"
+    }
+  ]
+}

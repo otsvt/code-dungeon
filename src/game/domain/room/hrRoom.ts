@@ -1,8 +1,7 @@
-import { HR_QUESTIONS } from "../content/questions/hrQuestions";
-import { type ChallengeOutcome, type ChallengeQuestion } from "../challenges/types";
-import { HR_BUFFS } from "../types/buff";
-import { HR_DEBUFFS } from "../types/debuff";
-import { type Impression } from "../types/run";
+import { type ChallengeOutcome } from "../challenge/types";
+import { HR_BUFFS } from "../../types/buff";
+import { HR_DEBUFFS } from "../../types/debuff";
+import { type Impression } from "../../types/run";
 
 export type HrRoomReward =
   | { kind: "buff"; effectId: (typeof HR_BUFFS)[number]["id"] }
@@ -10,7 +9,7 @@ export type HrRoomReward =
 
 export function createHrRoomReward(
   outcome: ChallengeOutcome,
-  random = Math.random,
+  random: () => number = Math.random,
 ): HrRoomReward {
   if (outcome === "strong") {
     const buff = HR_BUFFS[Math.floor(random() * HR_BUFFS.length)] ?? HR_BUFFS[0];
@@ -21,23 +20,13 @@ export function createHrRoomReward(
     };
   }
 
-  const debuff = HR_DEBUFFS[Math.floor(random() * HR_DEBUFFS.length)] ?? HR_DEBUFFS[0];
+  const debuff =
+    HR_DEBUFFS[Math.floor(random() * HR_DEBUFFS.length)] ?? HR_DEBUFFS[0];
 
   return {
     kind: "debuff",
     effectId: debuff.id,
   };
-}
-
-export function getHrChallengeQuestions(): ChallengeQuestion[] {
-  return HR_QUESTIONS.map((question) => ({
-    ...question,
-    options: question.options.map((option) => ({
-      ...option,
-      label: { ...option.label },
-    })),
-    prompt: { ...question.prompt },
-  }));
 }
 
 export function getHrAllowedMistakes(impression: Impression): number {

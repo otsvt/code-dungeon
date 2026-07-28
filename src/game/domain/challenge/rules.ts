@@ -1,37 +1,28 @@
-import { type TechnologyId } from "@/entities/technology";
-import { BATTLE_QUESTIONS } from "../content/questions/battleQuestions";
-import { BUFFS } from "../types/buff";
-import { DEBUFFS } from "../types/debuff";
+import { BUFFS } from "../../types/buff";
+import { DEBUFFS } from "../../types/debuff";
 import {
   type BattleRoomReward,
+  type ChallengeAnswer,
   type ChallengeOutcome,
   type ChallengeQuestion,
 } from "./types";
 
-export type {
-  BattleRoomReward,
-  ChallengeLocale,
-  ChallengeOption,
-  ChallengeOutcome,
-  ChallengeQuestion,
-  LocalizedChallengeText,
-} from "./types";
+export function countCorrectAnswers(
+  questions: readonly ChallengeQuestion[],
+  answers: readonly ChallengeAnswer[],
+): number {
+  const answersByQuestionId = new Map(
+    answers.map((answer) => [answer.questionId, answer.optionId]),
+  );
 
-export function getChallengeQuestions(
-  technologyId: TechnologyId,
-  count = 2,
-): ChallengeQuestion[] {
-  return BATTLE_QUESTIONS
-    .filter((question) => question.technologyId === technologyId)
-    .slice(0, count)
-    .map((question) => ({
-      ...question,
-      options: question.options.map((option) => ({
-        ...option,
-        label: { ...option.label },
-      })),
-      prompt: { ...question.prompt },
-    }));
+  return questions.reduce(
+    (total, question) =>
+      total +
+      Number(
+        answersByQuestionId.get(question.id) === question.correctOptionId,
+      ),
+    0,
+  );
 }
 
 export function resolveChallengeOutcome(

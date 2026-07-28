@@ -18,8 +18,6 @@ export default function HomePage() {
         <nav className="*:w-fit flex flex-col gap-y-4 text-2xl">
           <Link href={ROUTES.runSetup}>{t("newRun")}</Link>
           <Link href={ROUTES.game}>{t("continue")}</Link>
-          <Link href={ROUTES.dev.spikeTest}>{t("links.spike")}</Link>
-          <Link href={ROUTES.dev.loader}>{t("links.loader")}</Link>
         </nav>
         <LanguageSwitcher />
       </article>

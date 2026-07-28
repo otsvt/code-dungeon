@@ -1,36 +1,25 @@
 "use client";
 
 import { create } from "zustand";
-import { type RunSettings } from "@/features/run-setup";
+import {
+  addRunEffect,
+  advanceRunToRoom,
+  applyChallengeResult,
+  consumeRunEffect,
+  createRun,
+  grantStartBuff,
+  selectStartBuff,
+} from "../application/run/runLifecycle";
+import { type RunSettings } from "../domain/run/runSettings";
+import {
+  type ChallengeResult,
+} from "../application/challenge/types";
+import { type NextRoomChoice } from "../rooms/nextRoomChoices";
+import { type Buff } from "../types/buff";
+import { type EffectId } from "../types/effect";
 import { type CurrentRun } from "../types/run";
-import {
-  START_BUFFS,
-  getBuffById,
-  type Buff,
-  type BuffId,
-} from "../types/buff";
-import { type DebuffId } from "../types/debuff";
-import { addEffectStacks, consumeEffectStacks, type EffectId } from "../types/effect";
-import {
-  createBattleRoomReward,
-  type BattleRoomReward,
-  type ChallengeOutcome,
-} from "../challenges/challenge";
-import {
-  generateNextRoomChoices,
-  type NextRoomChoice,
-} from "../rooms/nextRoomChoices";
-import {
-  createHrRoomReward,
-  type HrRoomReward,
-} from "../rooms/hrRoom";
 
-const MIN_RUN_ROOMS = 5;
-const MAX_RUN_ROOMS = 9;
-
-function generateRunRoomCount() {
-  return Math.floor(Math.random() * (MAX_RUN_ROOMS - MIN_RUN_ROOMS + 1)) + MIN_RUN_ROOMS;
-}
+type ChallengeReward = ChallengeResult["reward"];
 
 type RunStore = {
   currentRun: CurrentRun | null;
@@ -40,14 +29,7 @@ type RunStore = {
   prepareStartBuff: () => Buff | null;
   completeStartBuffGrant: () => void;
   advanceToRoom: (choice: NextRoomChoice) => boolean;
-  completeBattleRoom: (
-    outcome: ChallengeOutcome,
-    reward?: BattleRoomReward,
-  ) => BattleRoomReward | null;
-  completeHrRoom: (
-    outcome: ChallengeOutcome,
-    reward?: HrRoomReward,
-  ) => HrRoomReward | null;
+  completeChallengeRoom: (result: ChallengeResult) => ChallengeReward | null;
   addEffect: (effectId: EffectId, stacks?: number) => void;
   consumeEffect: (effectId: EffectId, stacks?: number) => void;
 };
@@ -55,41 +37,16 @@ type RunStore = {
 export const useRunStore = create<RunStore>((set) => ({
   currentRun: null,
   pendingStartBuff: null,
-  startRun: (settings) => {
-    const totalRooms = generateRunRoomCount();
-
+  startRun: (settings) =>
     set({
       pendingStartBuff: null,
-      currentRun: {
-        id: crypto.randomUUID(),
-        settings,
-        currentRoom: { type: "start" },
-        nextRoomChoices: generateNextRoomChoices({
-          currentRoomNumber: 0,
-          totalRooms,
-          technologyIds: settings.technologyIds,
-        }),
-        roomNumber: 0,
-        totalRooms,
-        lives: {
-          current: 1,
-          max: 1,
-        },
-        activeBuffs: [],
-        activeDebuffs: [],
-        resolvedRoomIds: [],
-        startBuffGranted: false,
-        impression: 0,
-        status: "created",
-      },
-    });
-  },
-  resetRun: () => {
+      currentRun: createRun(settings),
+    }),
+  resetRun: () =>
     set({
       currentRun: null,
       pendingStartBuff: null,
-    });
-  },
+    }),
   prepareStartBuff: () => {
     let preparedBuff: Buff | null = null;
 
@@ -103,216 +60,91 @@ export const useRunStore = create<RunStore>((set) => ({
         return state;
       }
 
-      const randomIndex = Math.floor(Math.random() * START_BUFFS.length);
-      const buff = START_BUFFS[randomIndex];
-
-      preparedBuff = buff;
+      preparedBuff = selectStartBuff();
 
       return {
-        pendingStartBuff: buff,
+        pendingStartBuff: preparedBuff,
       };
     });
 
     return preparedBuff;
   },
-  completeStartBuffGrant: () => {
+  completeStartBuffGrant: () =>
     set((state) => {
-      if (!state.currentRun || !state.pendingStartBuff || state.currentRun.startBuffGranted) {
+      if (!state.currentRun || !state.pendingStartBuff) {
+        return state;
+      }
+
+      const currentRun = grantStartBuff(
+        state.currentRun,
+        state.pendingStartBuff,
+      );
+
+      if (!currentRun) {
         return state;
       }
 
       return {
+        currentRun,
         pendingStartBuff: null,
-        currentRun: {
-          ...state.currentRun,
-          activeBuffs: addEffectStacks(
-            state.currentRun.activeBuffs,
-            state.pendingStartBuff.id,
-          ),
-          startBuffGranted: true,
-        },
       };
-    });
-  },
+    }),
   advanceToRoom: (choice) => {
     let didAdvance = false;
 
     set((state) => {
-      const currentRun = state.currentRun;
-
-      if (
-        !currentRun ||
-        !currentRun.nextRoomChoices.some(
-          (nextRoomChoice) => nextRoomChoice.id === choice.id,
-        )
-      ) {
+      if (!state.currentRun) {
         return state;
       }
 
-      const roomNumber = currentRun.roomNumber + 1;
+      const currentRun = advanceRunToRoom(state.currentRun, choice);
+
+      if (!currentRun) {
+        return state;
+      }
 
       didAdvance = true;
 
       return {
-        currentRun: {
-          ...currentRun,
-          currentRoom: choice,
-          nextRoomChoices:
-            choice.type === "final"
-              ? []
-              : generateNextRoomChoices({
-                  currentRoomNumber: roomNumber,
-                  totalRooms: currentRun.totalRooms,
-                  technologyIds: currentRun.settings.technologyIds,
-                  allowHrRoom: choice.type !== "hr",
-                }),
-          roomNumber,
-          status: "started",
-        },
+        currentRun,
       };
     });
 
     return didAdvance;
   },
-  completeBattleRoom: (outcome, preparedReward) => {
-    let reward: BattleRoomReward | null = null;
+  completeChallengeRoom: (result) => {
+    let appliedReward: ChallengeReward | null = null;
 
-    set((state) => {
-      const currentRun = state.currentRun;
-      const currentRoom = currentRun?.currentRoom;
-
-      if (
-        !currentRun ||
-        !currentRoom ||
-        currentRoom.type !== "battle" ||
-        currentRun.resolvedRoomIds.includes(currentRoom.id)
-      ) {
-        return state;
-      }
-
-      const impression = outcome === "strong" ? 1 : outcome === "weak" ? -1 : 0;
-      let activeBuffs = currentRun.activeBuffs;
-      let activeDebuffs = currentRun.activeDebuffs;
-
-      reward = preparedReward ?? createBattleRoomReward(outcome);
-
-      if (reward.kind === "buff") {
-        activeBuffs = addEffectStacks(activeBuffs, reward.effectId);
-      } else if (reward.kind === "debuff") {
-        activeDebuffs = addEffectStacks(activeDebuffs, reward.effectId);
-      }
-
-      return {
-        currentRun: {
-          ...currentRun,
-          activeBuffs,
-          activeDebuffs,
-          impression,
-          resolvedRoomIds: [...currentRun.resolvedRoomIds, currentRoom.id],
-        },
-      };
-    });
-
-    return reward;
-  },
-  completeHrRoom: (outcome, preparedReward) => {
-    let reward: HrRoomReward | null = null;
-
-    set((state) => {
-      const currentRun = state.currentRun;
-      const currentRoom = currentRun?.currentRoom;
-
-      if (
-        !currentRun ||
-        !currentRoom ||
-        currentRoom.type !== "hr" ||
-        currentRun.resolvedRoomIds.includes(currentRoom.id)
-      ) {
-        return state;
-      }
-
-      reward = preparedReward ?? createHrRoomReward(outcome);
-      let activeBuffs = currentRun.activeBuffs;
-      let activeDebuffs = currentRun.activeDebuffs;
-
-      if (reward.kind === "buff") {
-        activeBuffs = addEffectStacks(activeBuffs, reward.effectId);
-      } else if (reward.kind === "debuff") {
-        activeDebuffs = addEffectStacks(activeDebuffs, reward.effectId);
-      }
-
-      return {
-        currentRun: {
-          ...currentRun,
-          activeBuffs,
-          activeDebuffs,
-          resolvedRoomIds: [...currentRun.resolvedRoomIds, currentRoom.id],
-        },
-      };
-    });
-
-    return reward;
-  },
-  addEffect: (effectId, stacks = 1) => {
     set((state) => {
       if (!state.currentRun) {
         return state;
       }
 
-      if (getBuffById(effectId as BuffId)) {
-        return {
-          currentRun: {
-            ...state.currentRun,
-            activeBuffs: addEffectStacks(
-              state.currentRun.activeBuffs,
-              effectId as BuffId,
-              stacks,
-            ),
-          },
-        };
-      }
+      const currentRun = applyChallengeResult(state.currentRun, result);
 
-      return {
-        currentRun: {
-          ...state.currentRun,
-          activeDebuffs: addEffectStacks(
-            state.currentRun.activeDebuffs,
-            effectId as DebuffId,
-            stacks,
-          ),
-        },
-      };
-    });
-  },
-  consumeEffect: (effectId, stacks = 1) => {
-    set((state) => {
-      if (!state.currentRun) {
+      if (!currentRun) {
         return state;
       }
 
-      if (getBuffById(effectId as BuffId)) {
-        return {
-          currentRun: {
-            ...state.currentRun,
-            activeBuffs: consumeEffectStacks(
-              state.currentRun.activeBuffs,
-              effectId as BuffId,
-              stacks,
-            ),
-          },
-        };
-      }
+      appliedReward = result.reward;
 
       return {
-        currentRun: {
-          ...state.currentRun,
-          activeDebuffs: consumeEffectStacks(
-            state.currentRun.activeDebuffs,
-            effectId as DebuffId,
-            stacks,
-          ),
-        },
+        currentRun,
       };
     });
+
+    return appliedReward;
   },
+  addEffect: (effectId, stacks = 1) =>
+    set((state) =>
+      state.currentRun
+        ? { currentRun: addRunEffect(state.currentRun, effectId, stacks) }
+        : state,
+    ),
+  consumeEffect: (effectId, stacks = 1) =>
+    set((state) =>
+      state.currentRun
+        ? { currentRun: consumeRunEffect(state.currentRun, effectId, stacks) }
+        : state,
+    ),
 }));

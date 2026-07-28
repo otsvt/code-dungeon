@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { useGameUiStore, useRunStore } from "@/game";
+import { useRunStore } from "@/game";
+import { useChallengeStore } from "@/features/play-challenge";
+import { usePauseStore } from "@/features/pause-game";
 import { useRouter } from "@/shared/i18n/navigation";
 import { ROUTES } from "@/shared/routes";
 import { GamePhaser } from "./layers/GamePhaser";
@@ -13,8 +15,8 @@ export function GameClient() {
 
   const currentRun = useRunStore((state) => state.currentRun);
   const startRun = useRunStore((state) => state.startRun);
-  const resumeGame = useGameUiStore((state) => state.resumeGame);
-  const resetChallenge = useGameUiStore((state) => state.resetChallenge);
+  const resumeGame = usePauseStore((state) => state.resumeGame);
+  const resetChallenge = useChallengeStore((state) => state.resetChallenge);
 
   useEffect(() => {
     if (!currentRun) {

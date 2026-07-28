@@ -1,13 +1,14 @@
 import { type TechnologyId } from "@/entities/technology";
+import { type PoolModeId } from "@/game/domain/run/runSettings";
+
+export {
+  type PoolModeId,
+  type RunSettings,
+} from "@/game/domain/run/runSettings";
 
 export type PoolMode = {
-  id: "frontend" | "custom";
+  id: PoolModeId;
   iconName: string;
-  technologyIds: TechnologyId[];
-};
-
-export type RunSettings = {
-  poolModeId: PoolModeId;
   technologyIds: TechnologyId[];
 };
 
@@ -23,5 +24,3 @@ export const POOL_MODES: PoolMode[] = [
     iconName: "lang-custom",
   },
 ];
-
-export type PoolModeId = (typeof POOL_MODES)[number]["id"];

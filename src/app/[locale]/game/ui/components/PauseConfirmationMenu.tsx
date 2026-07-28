@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
-import { PauseConfirmation } from "@/game";
+import { type PauseConfirmation } from "@/features/pause-game";
 import { CurrentRun } from "@/game/types/run";
 import { DefaultButton } from "@/shared/ui/button";
 import { SpriteIcon } from "@/shared/ui/sprite-icon";

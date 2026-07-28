@@ -4,13 +4,13 @@ import test from "node:test";
 import {
   createHrRoomReward,
   getHrAllowedMistakes,
-  getHrChallengeQuestions,
   resolveHrChallengeOutcome,
   type CurrentRun,
   type HrRoomReward,
   type Impression,
   useRunStore,
 } from "../src/game";
+import { LocalQuestionRepository } from "../src/game/infrastructure/questions/localQuestionRepository";
 
 function createHrRun(impression: Impression): CurrentRun {
   return {
@@ -58,8 +58,9 @@ test("Впечатление задаёт допустимое число оши
   assert.equal(resolveHrChallengeOutcome(0, 3, 1), "weak");
 });
 
-test("HR-интервью содержит три отдельных ситуационных вопроса", () => {
-  const questions = getHrChallengeQuestions();
+test("HR-интервью содержит три отдельных ситуационных вопроса", async () => {
+  const repository = new LocalQuestionRepository();
+  const questions = await repository.getHrQuestions();
 
   assert.equal(questions.length, 3);
   assert.ok(questions.every((question) => question.technologyId === undefined));
@@ -87,8 +88,14 @@ test("HR-комната применяет награду только один 
     pendingStartBuff: null,
   });
 
-  const firstResult = useRunStore.getState().completeHrRoom("strong", reward);
-  const secondResult = useRunStore.getState().completeHrRoom("strong", reward);
+  const result = {
+    kind: "hr" as const,
+    roomId: "hr-room",
+    outcome: "strong" as const,
+    reward,
+  };
+  const firstResult = useRunStore.getState().completeChallengeRoom(result);
+  const secondResult = useRunStore.getState().completeChallengeRoom(result);
   const currentRun = useRunStore.getState().currentRun;
 
   assert.deepEqual(firstResult, reward);

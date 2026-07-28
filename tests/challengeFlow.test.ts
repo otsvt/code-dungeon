@@ -3,7 +3,6 @@ import test from "node:test";
 
 import {
   createBattleRoomReward,
-  getChallengeQuestions,
   HR_BUFFS,
   HR_DEBUFFS,
   resolveChallengeOutcome,
@@ -11,9 +10,11 @@ import {
   type NextRoomChoice,
   useRunStore,
 } from "../src/game";
+import { LocalQuestionRepository } from "../src/game/infrastructure/questions/localQuestionRepository";
 
-test("испытание выбирает вопросы только для технологии комнаты", () => {
-  const questions = getChallengeQuestions("typescript", 2);
+test("испытание выбирает вопросы только для технологии комнаты", async () => {
+  const repository = new LocalQuestionRepository();
+  const questions = await repository.getBattleQuestions("typescript", 2);
 
   assert.equal(questions.length, 2);
   assert.ok(questions.every((question) => question.technologyId === "typescript"));
@@ -83,10 +84,20 @@ test("одна battle-комната применяет результат то�
 
   const first = useRunStore
     .getState()
-    .completeBattleRoom("strong", { kind: "buff", effectId: "doorInsight" });
+    .completeChallengeRoom({
+      kind: "battle",
+      roomId: "battle-room",
+      outcome: "strong",
+      reward: { kind: "buff", effectId: "doorInsight" },
+    });
   const second = useRunStore
     .getState()
-    .completeBattleRoom("weak", { kind: "debuff", effectId: "timerPressure" });
+    .completeChallengeRoom({
+      kind: "battle",
+      roomId: "battle-room",
+      outcome: "weak",
+      reward: { kind: "debuff", effectId: "timerPressure" },
+    });
   const resolvedRun = useRunStore.getState().currentRun;
 
   assert.deepEqual(first, { kind: "buff", effectId: "doorInsight" });

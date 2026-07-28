@@ -1,14 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useLocale } from "next-intl";
-import { getTechnologyById } from "@/entities/technology";
-import { type ActiveChallenge, type ChallengeLocale, type ChallengeOption } from "@/game";
+import { type ChallengeAnswer } from "@/game/domain/challenge/types";
+import { type ChallengeViewModel } from "../model/challengeViewModel";
 
 type ChallengeOverlayProps = {
-  challenge: ActiveChallenge;
-  onComplete: (correctAnswers: number, totalAnswers: number) => void;
+  challenge: ChallengeViewModel;
+  onComplete: (answers: readonly ChallengeAnswer[]) => void;
 };
+
+type ChallengeOptionViewModel =
+  ChallengeViewModel["questions"][number]["options"][number];
 
 const COPY = {
   ru: {
@@ -22,7 +24,6 @@ const COPY = {
     status: "СЕАНС АКТИВЕН",
     note: "Ответ фиксируется после перехода к следующему вопросу.",
     hrEyebrow: "ИНТЕРВЬЮ / HR ROOM",
-    hrTitle: "HR",
     allowedMistakes: "ДОПУСТИМО ОШИБОК",
   },
   en: {
@@ -36,19 +37,16 @@ const COPY = {
     status: "SESSION ACTIVE",
     note: "Your answer is locked after moving to the next question.",
     hrEyebrow: "INTERVIEW / HR ROOM",
-    hrTitle: "HR",
     allowedMistakes: "ALLOWED MISTAKES",
   },
 } as const;
 
 function OptionButton({
   option,
-  locale,
   selected,
   onSelect,
 }: {
-  option: ChallengeOption;
-  locale: ChallengeLocale;
+  option: ChallengeOptionViewModel;
   selected: boolean;
   onSelect: () => void;
 }) {
@@ -67,41 +65,31 @@ function OptionButton({
       <span
         className={[
           "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border font-mono text-xs font-bold uppercase",
-          selected ? "border-bronze bg-deep text-accent" : "border-sandy/60 text-bronze group-hover:border-bronze",
+          selected
+            ? "border-bronze bg-deep text-accent"
+            : "border-sandy/60 text-bronze group-hover:border-bronze",
         ].join(" ")}
       >
         {option.id}
       </span>
       <span className="challenge-copy min-w-0 wrap-break-word font-sans text-lg font-medium leading-6">
-        {option.label[locale]}
+        {option.label}
       </span>
     </button>
   );
 }
 
-export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProps) {
-  const requestedLocale = useLocale();
-  const locale: ChallengeLocale = requestedLocale === "en" ? "en" : "ru";
-  const copy = COPY[locale];
+export function ChallengeOverlay({
+  challenge,
+  onComplete,
+}: ChallengeOverlayProps) {
+  const copy = COPY[challenge.locale];
   const isHrChallenge = challenge.kind === "hr";
-  const technology = challenge.kind === "battle"
-    ? getTechnologyById(challenge.technologyId)
-    : undefined;
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [answers, setAnswers] = useState<ChallengeAnswer[]>([]);
   const question = challenge.questions[questionIndex];
   const isLastQuestion = questionIndex === challenge.questions.length - 1;
-  const technologyIconPath =
-    challenge.kind === "battle"
-      ? `/assets/game/technologies/${challenge.technologyId}.svg`
-      : `/assets/game/impressions/${
-          challenge.impression === -1
-            ? "impression-weak"
-            : challenge.impression === 1
-              ? "impression-strong"
-              : "impression-neutral"
-        }.png`;
   const progressWidth = useMemo(
     () => `${((questionIndex + 1) / challenge.questions.length) * 100}%`,
     [challenge.questions.length, questionIndex],
@@ -116,14 +104,20 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
       return;
     }
 
-    const nextCorrectAnswers = correctAnswers + Number(selectedOptionId === question.correctOptionId);
+    const nextAnswers = [
+      ...answers,
+      {
+        questionId: question.id,
+        optionId: selectedOptionId,
+      },
+    ];
 
     if (isLastQuestion) {
-      onComplete(nextCorrectAnswers, challenge.questions.length);
+      onComplete(nextAnswers);
       return;
     }
 
-    setCorrectAnswers(nextCorrectAnswers);
+    setAnswers(nextAnswers);
     setQuestionIndex((current) => current + 1);
     setSelectedOptionId(null);
   };
@@ -143,11 +137,15 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
                 {isHrChallenge ? copy.hrEyebrow : copy.eyebrow}
               </p>
               <p className="font-mono text-xs text-pale">
-                {copy.question} {questionIndex + 1} {copy.of} {challenge.questions.length}
+                {copy.question} {questionIndex + 1} {copy.of}{" "}
+                {challenge.questions.length}
               </p>
             </div>
             <div className="mt-3 h-px bg-sandy/25">
-              <div className="h-px bg-bronze transition-all duration-300" style={{ width: progressWidth }} />
+              <div
+                className="h-px bg-bronze transition-all duration-300"
+                style={{ width: progressWidth }}
+              />
             </div>
           </header>
 
@@ -156,7 +154,7 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
               id="challenge-title"
               className="challenge-copy max-w-5xl wrap-break-word font-noto text-3xl font-semibold leading-tight text-dark"
             >
-              {question.prompt[locale]}
+              {question.prompt}
             </h1>
 
             {question.code && (
@@ -165,13 +163,14 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
               </pre>
             )}
 
-            <p className="mt-6 font-mono text-xs font-semibold tracking-widest text-pale">{copy.choose}</p>
+            <p className="mt-6 font-mono text-xs font-semibold tracking-widest text-pale">
+              {copy.choose}
+            </p>
             <div className="mt-3 grid grid-cols-2 gap-3 max-md:grid-cols-1">
               {question.options.map((option) => (
                 <OptionButton
                   key={option.id}
                   option={option}
-                  locale={locale}
                   selected={selectedOptionId === option.id}
                   onSelect={() => setSelectedOptionId(option.id)}
                 />
@@ -180,7 +179,9 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
           </div>
 
           <footer className="flex items-center justify-between gap-5 border-t border-sandy/40 px-7 py-4">
-            <p className="max-w-lg font-sans text-sm leading-5 text-pale">{copy.note}</p>
+            <p className="max-w-lg font-sans text-sm leading-5 text-pale">
+              {copy.note}
+            </p>
             <button
               type="button"
               disabled={!selectedOptionId}
@@ -194,16 +195,22 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
 
         <aside className="relative flex min-h-120 flex-col overflow-hidden border-l border-sandy bg-deep px-6 py-6 text-background">
           <div className="absolute inset-x-0 top-0 h-px bg-accent/70" />
-          <p className="font-mono text-xs font-semibold tracking-widest text-accent">{copy.interviewer}</p>
+          <p className="font-mono text-xs font-semibold tracking-widest text-accent">
+            {copy.interviewer}
+          </p>
 
           <div className="mt-8 flex flex-1 flex-col items-center justify-center">
             <div className="relative flex h-32 w-32 items-center justify-center rounded-full border border-sandy/65 bg-effect-buff-bg shadow-2xl">
               <div className="absolute inset-2 rounded-full border border-sandy/25" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={technologyIconPath} alt="" className="h-18 w-18 drop-shadow-lg" />
+              <img
+                src={challenge.interviewerIconPath}
+                alt=""
+                className="h-18 w-18 drop-shadow-lg"
+              />
             </div>
             <h2 className="mt-6 font-noto text-3xl font-semibold text-accent">
-              {isHrChallenge ? copy.hrTitle : technology?.title}
+              {challenge.interviewerTitle}
             </h2>
             <p className="mt-2 font-mono text-xs tracking-widest text-milk/65">
               {isHrChallenge
@@ -222,7 +229,7 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
               <span>
                 {isHrChallenge
                   ? challenge.allowedMistakes
-                  : technology?.title.toUpperCase()}
+                  : challenge.interviewerTitle.toUpperCase()}
               </span>
             </div>
           </div>

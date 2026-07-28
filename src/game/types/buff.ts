@@ -62,3 +62,7 @@ export const START_BUFFS = BUFFS.filter((buff) => buff.availableAtStart);
 export function getBuffById(buffId: BuffId): Buff | undefined {
   return ALL_BUFFS.find((buff) => buff.id === buffId);
 }
+
+export function isBuffId(effectId: string): effectId is BuffId {
+  return ALL_BUFFS.some((buff) => buff.id === effectId);
+}

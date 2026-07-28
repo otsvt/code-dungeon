@@ -1,6 +1,6 @@
 import { type TechnologyId } from "@/entities/technology";
-import { type BuffId } from "../types/buff";
-import { type DebuffId } from "../types/debuff";
+import { type BuffId } from "../../types/buff";
+import { type DebuffId } from "../../types/debuff";
 
 export type ChallengeLocale = "ru" | "en";
 
@@ -18,6 +18,11 @@ export type ChallengeQuestion = {
   code?: string;
   options: readonly ChallengeOption[];
   correctOptionId: string;
+};
+
+export type ChallengeAnswer = {
+  questionId: string;
+  optionId: string;
 };
 
 export type ChallengeOutcome = "strong" | "neutral" | "weak";

@@ -21,6 +21,7 @@
 Основные документы:
 
 - `docs/DEVELOPMENT_PLAN_GAMEPLAY_FIRST.md` — актуальный порядок разработки по пути игрока.
+- `docs/ARCHITECTURE.md` — актуальные границы domain/application/infrastructure/features и challenge flow.
 - `docs/MVP_SCOPE.md` — актуальный состав MVP и игровые правила.
 - `docs/VISUAL_DIRECTION.md` — визуальное направление и разделение React / Phaser.
 - `docs/PROJECT_CONCEPT.md` — общая концепция проекта и долгосрочные идеи.

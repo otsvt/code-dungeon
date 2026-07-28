@@ -1,12 +1,7 @@
 {
   "MainMenu": {
     "newRun": "Начать забег",
-    "continue": "Продолжить",
-    "links": {
-      "spike": "Spike тест",
-      "loader": "Загрузчик",
-      "game": "Игра"
-    }
+    "continue": "Продолжить"
   },
   "RunSetup": {
     "title": "Подготовка кандидата",

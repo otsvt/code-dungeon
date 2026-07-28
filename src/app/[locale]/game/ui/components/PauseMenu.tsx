@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { useGameUiStore } from "@/game";
+import { usePauseStore } from "@/features/pause-game";
 import { CurrentRun } from "@/game/types/run";
 import { DefaultButton } from "@/shared/ui/button";
 import { SpriteIcon } from "@/shared/ui/sprite-icon";
@@ -10,8 +10,8 @@ interface PauseMenuProps {
 
 export function PauseMenu({ currentRun }: PauseMenuProps) {
   const t = useTranslations("GameHud.pause");
-  const resumeGame = useGameUiStore((state) => state.resumeGame);
-  const openConfirmation = useGameUiStore((state) => state.openConfirmation);
+  const resumeGame = usePauseStore((state) => state.resumeGame);
+  const openConfirmation = usePauseStore((state) => state.openConfirmation);
   const roomNumber = currentRun.roomNumber + 1;
 
   return (

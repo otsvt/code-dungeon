@@ -1,14 +1,14 @@
 import Phaser from "phaser";
 
 import { useEffect, useRef } from "react";
-import { useGameUiStore } from "@/game";
+import { usePauseStore } from "@/features/pause-game";
 import { PreloadScene } from "../../scenes/PreloadScene";
 import { GameScene } from "../../scenes/GameScene";
 
 export function GamePhaser() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const gameRef = useRef<Phaser.Game | null>(null);
-  const isPaused = useGameUiStore((state) => state.isPaused);
+  const isPaused = usePauseStore((state) => state.isPaused);
 
   useEffect(() => {
     if (!containerRef.current || gameRef.current) {
