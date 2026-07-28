@@ -7,14 +7,28 @@ import {
   type ChallengeOutcome,
   type ChallengeQuestion,
 } from "../challenges/challenge";
+import {
+  getHrAllowedMistakes,
+  getHrChallengeQuestions,
+} from "../rooms/hrRoom";
+import { type Impression } from "../types/run";
 
 export type PauseConfirmation = "restart" | "exit";
 
-export type ActiveChallenge = {
-  roomId: string;
-  technologyId: TechnologyId;
-  questions: ChallengeQuestion[];
-};
+export type ActiveChallenge =
+  | {
+      kind: "battle";
+      roomId: string;
+      technologyId: TechnologyId;
+      questions: ChallengeQuestion[];
+    }
+  | {
+      kind: "hr";
+      roomId: string;
+      impression: Impression;
+      allowedMistakes: number;
+      questions: ChallengeQuestion[];
+    };
 
 export type ChallengeResult = {
   roomId: string;
@@ -32,6 +46,7 @@ type GameUiStore = {
   openConfirmation: (confirmation: PauseConfirmation) => void;
   closeConfirmation: () => void;
   openChallenge: (roomId: string, technologyId: TechnologyId) => void;
+  openHrChallenge: (roomId: string, impression: Impression) => void;
   completeChallenge: (outcome: ChallengeOutcome) => void;
   clearChallengeResult: () => void;
   resetChallenge: () => void;
@@ -50,9 +65,23 @@ export const useGameUiStore = create<GameUiStore>((set) => ({
   openChallenge: (roomId, technologyId) =>
     set({
       activeChallenge: {
+        kind: "battle",
         roomId,
         technologyId,
         questions: getChallengeQuestions(technologyId),
+      },
+      challengeResult: null,
+      isPaused: false,
+      confirmation: null,
+    }),
+  openHrChallenge: (roomId, impression) =>
+    set({
+      activeChallenge: {
+        kind: "hr",
+        roomId,
+        impression,
+        allowedMistakes: getHrAllowedMistakes(impression),
+        questions: getHrChallengeQuestions(),
       },
       challengeResult: null,
       isPaused: false,

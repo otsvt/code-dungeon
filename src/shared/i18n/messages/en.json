@@ -114,28 +114,36 @@
       "secondChance": "Second Chance",
       "doorInsight": "Door Insight",
       "easierNextRoom": "Easier Next Room",
-      "skipQuestion": "Skip Question"
+      "skipQuestion": "Skip Question",
+      "goodContact": "Good Contact",
+      "confidentDelivery": "Confident Delivery"
     },
     "buffDescriptions": {
       "removeWrongOption": "Removes one incorrect answer option.",
       "secondChance": "Grants one additional life.",
       "doorInsight": "Reveals information about one of the next paths.",
       "easierNextRoom": "Reduces the difficulty of the next room.",
-      "skipQuestion": "Allows you to skip one question without a penalty."
+      "skipQuestion": "Allows you to skip one question without a penalty.",
+      "goodContact": "HR noted a strong connection during the meeting.",
+      "confidentDelivery": "HR noted a confident delivery."
     },
     "debuffNames": {
       "timerPressure": "Timer Pressure",
       "hiddenDoorInfo": "Hidden Paths",
       "harderNextRoom": "Harder Next Room",
       "extraTechnology": "Extra Technology",
-      "fewerHints": "Fewer Hints"
+      "fewerHints": "Fewer Hints",
+      "redFlag": "Red Flag",
+      "awkwardPause": "Awkward Pause"
     },
     "debuffDescriptions": {
       "timerPressure": "Reduces the time available in the next room.",
       "hiddenDoorInfo": "Hides one revealed path.",
       "harderNextRoom": "Increases the difficulty of the next room.",
       "extraTechnology": "Adds a random technology to the challenge pool.",
-      "fewerHints": "Blocks one available hint."
+      "fewerHints": "Blocks one available hint.",
+      "redFlag": "HR noticed a concerning signal.",
+      "awkwardPause": "HR noted an awkward pause."
     },
     "buffReward": {
       "title": "Gift received",

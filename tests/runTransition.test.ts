@@ -51,7 +51,35 @@ test("выбранная дверь становится текущей комн
       currentRun.nextRoomChoices.length >= 2 &&
       currentRun.nextRoomChoices.length <= 4,
   );
-  assert.ok(currentRun?.nextRoomChoices.every((choice) => choice.type === "battle"));
+  assert.ok(
+    currentRun?.nextRoomChoices.every(
+      (choice) => choice.type === "battle" || choice.type === "hr",
+    ),
+  );
+
+  useRunStore.getState().resetRun();
+});
+
+test("HR-дверь становится текущей комнатой", () => {
+  const selectedRoom: NextRoomChoice = {
+    id: "selected-hr-room",
+    type: "hr",
+  };
+
+  useRunStore.setState({
+    currentRun: createRun([selectedRoom]),
+    pendingStartBuff: null,
+  });
+
+  const didAdvance = useRunStore.getState().advanceToRoom(selectedRoom);
+
+  assert.equal(didAdvance, true);
+  assert.deepEqual(useRunStore.getState().currentRun?.currentRoom, selectedRoom);
+  assert.ok(
+    useRunStore
+      .getState()
+      .currentRun?.nextRoomChoices.every((choice) => choice.type !== "hr"),
+  );
 
   useRunStore.getState().resetRun();
 });

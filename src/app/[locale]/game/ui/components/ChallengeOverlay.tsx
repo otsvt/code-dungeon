@@ -21,6 +21,9 @@ const COPY = {
     interviewer: "ИНТЕРВЬЮЕР",
     status: "СЕАНС АКТИВЕН",
     note: "Ответ фиксируется после перехода к следующему вопросу.",
+    hrEyebrow: "ИНТЕРВЬЮ / HR ROOM",
+    hrTitle: "HR",
+    allowedMistakes: "ДОПУСТИМО ОШИБОК",
   },
   en: {
     eyebrow: "CHALLENGE / BATTLE ROOM",
@@ -32,6 +35,9 @@ const COPY = {
     interviewer: "INTERVIEWER",
     status: "SESSION ACTIVE",
     note: "Your answer is locked after moving to the next question.",
+    hrEyebrow: "INTERVIEW / HR ROOM",
+    hrTitle: "HR",
+    allowedMistakes: "ALLOWED MISTAKES",
   },
 } as const;
 
@@ -77,13 +83,25 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
   const requestedLocale = useLocale();
   const locale: ChallengeLocale = requestedLocale === "en" ? "en" : "ru";
   const copy = COPY[locale];
-  const technology = getTechnologyById(challenge.technologyId);
+  const isHrChallenge = challenge.kind === "hr";
+  const technology = challenge.kind === "battle"
+    ? getTechnologyById(challenge.technologyId)
+    : undefined;
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const question = challenge.questions[questionIndex];
   const isLastQuestion = questionIndex === challenge.questions.length - 1;
-  const technologyIconPath = `/assets/game/technologies/${challenge.technologyId}.svg`;
+  const technologyIconPath =
+    challenge.kind === "battle"
+      ? `/assets/game/technologies/${challenge.technologyId}.svg`
+      : `/assets/game/impressions/${
+          challenge.impression === -1
+            ? "impression-weak"
+            : challenge.impression === 1
+              ? "impression-strong"
+              : "impression-neutral"
+        }.png`;
   const progressWidth = useMemo(
     () => `${((questionIndex + 1) / challenge.questions.length) * 100}%`,
     [challenge.questions.length, questionIndex],
@@ -121,7 +139,9 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
         <div className="challenge-question-layout grid min-h-0 min-w-0">
           <header className="border-b border-sandy/55 px-7 py-4">
             <div className="flex items-center justify-between gap-5">
-              <p className="font-mono text-xs font-semibold tracking-widest text-bronze">{copy.eyebrow}</p>
+              <p className="font-mono text-xs font-semibold tracking-widest text-bronze">
+                {isHrChallenge ? copy.hrEyebrow : copy.eyebrow}
+              </p>
               <p className="font-mono text-xs text-pale">
                 {copy.question} {questionIndex + 1} {copy.of} {challenge.questions.length}
               </p>
@@ -183,9 +203,13 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
               <img src={technologyIconPath} alt="" className="h-18 w-18 drop-shadow-lg" />
             </div>
             <h2 className="mt-6 font-noto text-3xl font-semibold text-accent">
-              {technology?.title ?? challenge.technologyId}
+              {isHrChallenge ? copy.hrTitle : technology?.title}
             </h2>
-            <p className="mt-2 font-mono text-xs tracking-widest text-milk/65">{copy.status}</p>
+            <p className="mt-2 font-mono text-xs tracking-widest text-milk/65">
+              {isHrChallenge
+                ? `${copy.allowedMistakes}: ${challenge.allowedMistakes}`
+                : copy.status}
+            </p>
           </div>
 
           <div className="border-t border-sandy/35 pt-4">
@@ -194,8 +218,12 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
               <span>{challenge.roomId.slice(0, 8).toUpperCase()}</span>
             </div>
             <div className="mt-2 flex justify-between font-mono text-xs text-milk/55">
-              <span>TECH</span>
-              <span>{technology?.title.toUpperCase()}</span>
+              <span>{isHrChallenge ? copy.allowedMistakes : "TECH"}</span>
+              <span>
+                {isHrChallenge
+                  ? challenge.allowedMistakes
+                  : technology?.title.toUpperCase()}
+              </span>
             </div>
           </div>
         </aside>

@@ -4,6 +4,8 @@ import test from "node:test";
 import {
   createBattleRoomReward,
   getChallengeQuestions,
+  HR_BUFFS,
+  HR_DEBUFFS,
   resolveChallengeOutcome,
   type CurrentRun,
   type NextRoomChoice,
@@ -33,6 +35,23 @@ test("награда соответствует исходу комнаты", ()
   assert.equal(createBattleRoomReward("strong", () => 0).kind, "buff");
   assert.equal(createBattleRoomReward("neutral", () => 0).kind, "none");
   assert.equal(createBattleRoomReward("weak", () => 0).kind, "debuff");
+});
+
+test("обычная Battle Room никогда не выдаёт HR-эффекты", () => {
+  const hrEffectIds = new Set<string>([
+    ...HR_BUFFS.map((buff) => buff.id),
+    ...HR_DEBUFFS.map((debuff) => debuff.id),
+  ]);
+
+  for (const randomValue of [0, 0.25, 0.5, 0.75, 0.999]) {
+    const buffReward = createBattleRoomReward("strong", () => randomValue);
+    const debuffReward = createBattleRoomReward("weak", () => randomValue);
+
+    assert.equal(buffReward.kind, "buff");
+    assert.equal(debuffReward.kind, "debuff");
+    assert.equal(hrEffectIds.has(buffReward.effectId), false);
+    assert.equal(hrEffectIds.has(debuffReward.effectId), false);
+  }
 });
 
 test("одна battle-комната применяет результат только один раз", () => {

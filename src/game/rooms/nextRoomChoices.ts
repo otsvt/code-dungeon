@@ -3,6 +3,7 @@ import { type RoomType } from "../types/run";
 
 const MIN_DOOR_COUNT = 2;
 const MAX_DOOR_COUNT = 4;
+const DEFAULT_HR_ROOM_CHANCE = 0.25;
 
 export type NextRoomType = Exclude<RoomType, "start">;
 
@@ -22,6 +23,8 @@ type GenerateNextRoomChoicesOptions = {
   currentRoomNumber: number;
   totalRooms: number;
   technologyIds: readonly TechnologyId[];
+  hrRoomChance?: number;
+  allowHrRoom?: boolean;
   random?: () => number;
   createId?: () => string;
 };
@@ -30,6 +33,8 @@ export function generateNextRoomChoices({
   currentRoomNumber,
   totalRooms,
   technologyIds,
+  hrRoomChance = DEFAULT_HR_ROOM_CHANCE,
+  allowHrRoom = true,
   random = Math.random,
   createId = () => crypto.randomUUID(),
 }: GenerateNextRoomChoicesOptions): NextRoomChoice[] {
@@ -37,15 +42,29 @@ export function generateNextRoomChoices({
     return [{ id: createId(), type: "final" }];
   }
 
-  const doorCount =
-    MIN_DOOR_COUNT + Math.floor(random() * (MAX_DOOR_COUNT - MIN_DOOR_COUNT + 1));
+  const doorCount = MIN_DOOR_COUNT + Math.floor(random() * (MAX_DOOR_COUNT - MIN_DOOR_COUNT + 1));
   const availableTechnologyIds = [...technologyIds];
 
   if (availableTechnologyIds.length === 0) {
     throw new Error("At least one technology is required to generate next room choices.");
   }
 
-  return Array.from({ length: doorCount }, () => {
+  const choices: NextRoomChoice[] = [];
+  const safeHrRoomChance = Math.min(Math.max(hrRoomChance, 0), 1);
+  const hrDoorIndex =
+    allowHrRoom && random() < safeHrRoomChance
+      ? Math.floor(random() * doorCount)
+      : -1;
+
+  for (let index = 0; index < doorCount; index += 1) {
+    if (index === hrDoorIndex) {
+      choices.push({
+        id: createId(),
+        type: "hr",
+      });
+      continue;
+    }
+
     if (availableTechnologyIds.length === 0) {
       availableTechnologyIds.push(...technologyIds);
     }
@@ -53,12 +72,14 @@ export function generateNextRoomChoices({
     const technologyIndex = Math.floor(random() * availableTechnologyIds.length);
     const [technologyId] = availableTechnologyIds.splice(technologyIndex, 1);
 
-    return {
+    choices.push({
       id: createId(),
       type: "battle",
       technologyId,
-    };
-  });
+    });
+  }
+
+  return choices;
 }
 
 export function selectRevealedRoomIds(

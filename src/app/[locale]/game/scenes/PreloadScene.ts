@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import { BUFFS, DEBUFFS } from "@/game";
+import { ALL_BUFFS, ALL_DEBUFFS } from "@/game";
 import { TECHNOLOGIES } from "@/entities/technology";
 import {
   ASSETS_PATH,
@@ -19,6 +19,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image(SPRITE_NAMES.room, ASSETS_PATH[SPRITE_NAMES.room]);
     this.load.image(SPRITE_NAMES.door, ASSETS_PATH[SPRITE_NAMES.door]);
     this.load.image(SPRITE_NAMES.pedestal, ASSETS_PATH[SPRITE_NAMES.pedestal]);
+    this.load.image(SPRITE_NAMES.hrTable, ASSETS_PATH[SPRITE_NAMES.hrTable]);
 
     this.load.spritesheet(SPRITE_NAMES.hero, ASSETS_PATH[SPRITE_NAMES.hero], { frameHeight: 682, frameWidth: 682 });
     this.load.spritesheet(SPRITE_NAMES.flame.base, ASSETS_PATH[SPRITE_NAMES.flame.base], {
@@ -26,11 +27,11 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
     });
 
-    for (const buff of BUFFS) {
+    for (const buff of ALL_BUFFS) {
       this.load.image(buff.id, buff.iconPath);
     }
 
-    for (const debuff of DEBUFFS) {
+    for (const debuff of ALL_DEBUFFS) {
       this.load.svg(debuff.id, debuff.iconPath, { width: 64, height: 64 });
     }
 

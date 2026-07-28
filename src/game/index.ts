@@ -6,8 +6,23 @@ export {
   type PauseConfirmation,
 } from "./store/useGameUiStore";
 
-export { BUFFS, START_BUFFS, getBuffById, type Buff, type BuffId } from "./types/buff";
-export { DEBUFFS, getDebuffById, type Debuff, type DebuffId } from "./types/debuff";
+export {
+  BUFFS,
+  HR_BUFFS,
+  ALL_BUFFS,
+  START_BUFFS,
+  getBuffById,
+  type Buff,
+  type BuffId,
+} from "./types/buff";
+export {
+  DEBUFFS,
+  HR_DEBUFFS,
+  ALL_DEBUFFS,
+  getDebuffById,
+  type Debuff,
+  type DebuffId,
+} from "./types/debuff";
 export {
   addEffectStacks,
   consumeEffectStacks,
@@ -24,6 +39,13 @@ export {
   type NextRoomChoice,
   type NextRoomType,
 } from "./rooms/nextRoomChoices";
+export {
+  createHrRoomReward,
+  getHrAllowedMistakes,
+  getHrChallengeQuestions,
+  resolveHrChallengeOutcome,
+  type HrRoomReward,
+} from "./rooms/hrRoom";
 export { type CurrentRun, type Impression, type RoomType } from "./types/run";
 export {
   createBattleRoomReward,

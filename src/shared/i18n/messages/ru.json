@@ -114,28 +114,36 @@
       "secondChance": "Второй шанс",
       "doorInsight": "Знание пути",
       "easierNextRoom": "Лёгкая следующая комната",
-      "skipQuestion": "Пропустить вопрос"
+      "skipQuestion": "Пропустить вопрос",
+      "goodContact": "Хороший контакт",
+      "confidentDelivery": "Уверенная подача"
     },
     "buffDescriptions": {
       "removeWrongOption": "Удаляет один неверный вариант ответа.",
       "secondChance": "Даёт одну дополнительную жизнь.",
       "doorInsight": "Раскрывает информацию об одном из следующих путей.",
       "easierNextRoom": "Снижает сложность следующей комнаты.",
-      "skipQuestion": "Позволяет пропустить один вопрос без штрафа."
+      "skipQuestion": "Позволяет пропустить один вопрос без штрафа.",
+      "goodContact": "HR отметил хороший контакт во время встречи.",
+      "confidentDelivery": "HR отметил уверенную подачу."
     },
     "debuffNames": {
       "timerPressure": "Давление времени",
       "hiddenDoorInfo": "Скрытые пути",
       "harderNextRoom": "Сложная следующая комната",
       "extraTechnology": "Лишняя технология",
-      "fewerHints": "Меньше подсказок"
+      "fewerHints": "Меньше подсказок",
+      "redFlag": "Красный флаг",
+      "awkwardPause": "Неловкая пауза"
     },
     "debuffDescriptions": {
       "timerPressure": "Сокращает время на прохождение следующей комнаты.",
       "hiddenDoorInfo": "Скрывает один раскрытый путь.",
       "harderNextRoom": "Повышает сложность следующей комнаты.",
       "extraTechnology": "Добавляет случайную технологию в пул испытаний.",
-      "fewerHints": "Блокирует одну доступную подсказку."
+      "fewerHints": "Блокирует одну доступную подсказку.",
+      "redFlag": "HR заметил тревожный сигнал.",
+      "awkwardPause": "HR отметил неловкую паузу."
     },
     "buffReward": {
       "title": "Получен дар",

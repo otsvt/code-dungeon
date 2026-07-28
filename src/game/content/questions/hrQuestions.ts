@@ -1,0 +1,118 @@
+import { type ChallengeQuestion } from "../../challenges/types";
+
+export const HR_QUESTIONS: readonly ChallengeQuestion[] = [
+  {
+    id: "hr-missed-deadline",
+    prompt: {
+      ru: "Вы понимаете, что не успеваете закончить задачу к согласованному сроку. Что сделаете?",
+      en: "You realize you will not finish a task by the agreed deadline. What do you do?",
+    },
+    options: [
+      {
+        id: "a",
+        label: {
+          ru: "Заранее сообщу о риске, объясню причины и предложу обновлённый план",
+          en: "Raise the risk early, explain the reasons, and propose an updated plan",
+        },
+      },
+      {
+        id: "b",
+        label: {
+          ru: "Промолчу до последнего дня — возможно, всё получится",
+          en: "Stay silent until the last day — it may still work out",
+        },
+      },
+      {
+        id: "c",
+        label: {
+          ru: "Передам задачу коллеге без обсуждения",
+          en: "Hand the task to a colleague without discussing it",
+        },
+      },
+      {
+        id: "d",
+        label: {
+          ru: "Закрою задачу как готовую и исправлю позже",
+          en: "Mark it complete and fix it later",
+        },
+      },
+    ],
+    correctOptionId: "a",
+  },
+  {
+    id: "hr-review-disagreement",
+    prompt: {
+      ru: "Вы не согласны с замечанием коллеги на code review. Как поступите?",
+      en: "You disagree with a colleague's code review comment. What do you do?",
+    },
+    options: [
+      {
+        id: "a",
+        label: {
+          ru: "Отклоню комментарий без ответа",
+          en: "Dismiss the comment without replying",
+        },
+      },
+      {
+        id: "b",
+        label: {
+          ru: "Спокойно уточню аргументы и обсужу решение на конкретных примерах",
+          en: "Clarify the reasoning calmly and discuss concrete examples",
+        },
+      },
+      {
+        id: "c",
+        label: {
+          ru: "Сразу позову руководителя решить спор",
+          en: "Immediately ask a manager to settle the dispute",
+        },
+      },
+      {
+        id: "d",
+        label: {
+          ru: "Перепишу всё молча, даже если решение станет хуже",
+          en: "Rewrite everything silently even if the result becomes worse",
+        },
+      },
+    ],
+    correctOptionId: "b",
+  },
+  {
+    id: "hr-unknown-answer",
+    prompt: {
+      ru: "На собеседовании вы не знаете точного ответа. Какая реакция лучше?",
+      en: "You do not know the exact answer during an interview. What is the best response?",
+    },
+    options: [
+      {
+        id: "a",
+        label: {
+          ru: "Придумаю уверенный ответ, чтобы не показывать сомнение",
+          en: "Invent a confident answer to avoid showing doubt",
+        },
+      },
+      {
+        id: "b",
+        label: {
+          ru: "Откажусь продолжать обсуждение",
+          en: "Refuse to continue the discussion",
+        },
+      },
+      {
+        id: "c",
+        label: {
+          ru: "Честно обозначу границу знаний и проговорю способ поиска решения",
+          en: "State the limit of my knowledge and explain how I would find the solution",
+        },
+      },
+      {
+        id: "d",
+        label: {
+          ru: "Переведу разговор на другую тему",
+          en: "Change the subject",
+        },
+      },
+    ],
+    correctOptionId: "c",
+  },
+];

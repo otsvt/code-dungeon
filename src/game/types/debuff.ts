@@ -31,9 +31,26 @@ export const DEBUFFS = [
   },
 ] as const;
 
-export type Debuff = (typeof DEBUFFS)[number];
+export const HR_DEBUFFS = [
+  {
+    id: "redFlag",
+    iconPath: "/assets/game/debuffs/red-flag.svg",
+    nameKey: "debuffNames.redFlag",
+    descriptionKey: "debuffDescriptions.redFlag",
+  },
+  {
+    id: "awkwardPause",
+    iconPath: "/assets/game/debuffs/awkward-pause.svg",
+    nameKey: "debuffNames.awkwardPause",
+    descriptionKey: "debuffDescriptions.awkwardPause",
+  },
+] as const;
+
+export const ALL_DEBUFFS = [...DEBUFFS, ...HR_DEBUFFS] as const;
+
+export type Debuff = (typeof ALL_DEBUFFS)[number];
 export type DebuffId = Debuff["id"];
 
 export function getDebuffById(debuffId: DebuffId): Debuff | undefined {
-  return DEBUFFS.find((debuff) => debuff.id === debuffId);
+  return ALL_DEBUFFS.find((debuff) => debuff.id === debuffId);
 }

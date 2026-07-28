@@ -56,6 +56,12 @@ const EFFECT_RULES: Record<EffectId, EffectRule> = {
       contributions.questionSkips += stacks;
     },
   },
+  goodContact: {
+    apply: () => {},
+  },
+  confidentDelivery: {
+    apply: () => {},
+  },
   timerPressure: {
     apply: (contributions, stacks) => {
       contributions.timerPressure += stacks;
@@ -80,6 +86,12 @@ const EFFECT_RULES: Record<EffectId, EffectRule> = {
     apply: (contributions, stacks) => {
       contributions.wrongOptionRemovalBalance -= stacks;
     },
+  },
+  redFlag: {
+    apply: () => {},
+  },
+  awkwardPause: {
+    apply: () => {},
   },
 };
 

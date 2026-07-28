@@ -4,7 +4,10 @@ import { CurrentRun } from "@/game/types/run";
 import { PauseConfirmationMenu } from "../components/PauseConfirmationMenu";
 import { PauseMenu } from "../components/PauseMenu";
 import { ChallengeOverlay } from "../components/ChallengeOverlay";
-import { resolveChallengeOutcome } from "@/game";
+import {
+  resolveChallengeOutcome,
+  resolveHrChallengeOutcome,
+} from "@/game";
 
 interface GameOverlayProps {
   currentRun: CurrentRun;
@@ -53,9 +56,18 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
         <ChallengeOverlay
           key={activeChallenge.roomId}
           challenge={activeChallenge}
-          onComplete={(correctAnswers, totalAnswers) =>
-            completeChallenge(resolveChallengeOutcome(correctAnswers, totalAnswers))
-          }
+          onComplete={(correctAnswers, totalAnswers) => {
+            const outcome =
+              activeChallenge.kind === "hr"
+                ? resolveHrChallengeOutcome(
+                    correctAnswers,
+                    totalAnswers,
+                    activeChallenge.impression,
+                  )
+                : resolveChallengeOutcome(correctAnswers, totalAnswers);
+
+            completeChallenge(outcome);
+          }}
         />
       )}
       {isPaused && (

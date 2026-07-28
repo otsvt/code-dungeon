@@ -18,6 +18,7 @@ test("обычная комната заранее получает от дву�
     currentRoomNumber: 0,
     totalRooms: 7,
     technologyIds: ["html", "css", "javascript"],
+    hrRoomChance: 0,
     random: () => 0,
     createId: idFactory(),
   });
@@ -25,6 +26,7 @@ test("обычная комната заранее получает от дву�
     currentRoomNumber: 0,
     totalRooms: 7,
     technologyIds: ["html", "css", "javascript", "typescript", "react", "vue", "git"],
+    hrRoomChance: 0,
     random: () => 0.999,
     createId: idFactory(),
   });
@@ -38,6 +40,43 @@ test("обычная комната заранее получает от дву�
     ["html", "css"],
   );
   assert.equal(new Set(fourDoors.map((choice) => choice.technologyId)).size, 4);
+});
+
+test("HR-комната случайно подмешивается максимум в одну дверь", () => {
+  const withoutHr = generateNextRoomChoices({
+    currentRoomNumber: 1,
+    totalRooms: 7,
+    technologyIds: ["html", "css", "javascript"],
+    hrRoomChance: 0,
+    random: () => 0,
+    createId: idFactory(),
+  });
+  const withHr = generateNextRoomChoices({
+    currentRoomNumber: 1,
+    totalRooms: 7,
+    technologyIds: ["html", "css", "javascript"],
+    hrRoomChance: 1,
+    random: () => 0,
+    createId: idFactory(),
+  });
+
+  assert.ok(withoutHr.every((choice) => choice.type === "battle"));
+  assert.equal(withHr.filter((choice) => choice.type === "hr").length, 1);
+  assert.equal(withHr.length, 2);
+});
+
+test("после HR-комнаты следующий набор не содержит HR-дверь", () => {
+  const choices = generateNextRoomChoices({
+    currentRoomNumber: 2,
+    totalRooms: 7,
+    technologyIds: ["html", "css", "javascript"],
+    hrRoomChance: 1,
+    allowHrRoom: false,
+    random: () => 0,
+    createId: idFactory(),
+  });
+
+  assert.ok(choices.every((choice) => choice.type === "battle"));
 });
 
 test("после основных комнат генерируется реальный путь в финал", () => {

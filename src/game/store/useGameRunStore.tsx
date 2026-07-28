@@ -3,7 +3,12 @@
 import { create } from "zustand";
 import { type RunSettings } from "@/features/run-setup";
 import { type CurrentRun } from "../types/run";
-import { BUFFS, START_BUFFS, type Buff, type BuffId } from "../types/buff";
+import {
+  START_BUFFS,
+  getBuffById,
+  type Buff,
+  type BuffId,
+} from "../types/buff";
 import { type DebuffId } from "../types/debuff";
 import { addEffectStacks, consumeEffectStacks, type EffectId } from "../types/effect";
 import {
@@ -15,6 +20,10 @@ import {
   generateNextRoomChoices,
   type NextRoomChoice,
 } from "../rooms/nextRoomChoices";
+import {
+  createHrRoomReward,
+  type HrRoomReward,
+} from "../rooms/hrRoom";
 
 const MIN_RUN_ROOMS = 5;
 const MAX_RUN_ROOMS = 9;
@@ -35,6 +44,10 @@ type RunStore = {
     outcome: ChallengeOutcome,
     reward?: BattleRoomReward,
   ) => BattleRoomReward | null;
+  completeHrRoom: (
+    outcome: ChallengeOutcome,
+    reward?: HrRoomReward,
+  ) => HrRoomReward | null;
   addEffect: (effectId: EffectId, stacks?: number) => void;
   consumeEffect: (effectId: EffectId, stacks?: number) => void;
 };
@@ -151,6 +164,7 @@ export const useRunStore = create<RunStore>((set) => ({
                   currentRoomNumber: roomNumber,
                   totalRooms: currentRun.totalRooms,
                   technologyIds: currentRun.settings.technologyIds,
+                  allowHrRoom: choice.type !== "hr",
                 }),
           roomNumber,
           status: "started",
@@ -201,13 +215,51 @@ export const useRunStore = create<RunStore>((set) => ({
 
     return reward;
   },
+  completeHrRoom: (outcome, preparedReward) => {
+    let reward: HrRoomReward | null = null;
+
+    set((state) => {
+      const currentRun = state.currentRun;
+      const currentRoom = currentRun?.currentRoom;
+
+      if (
+        !currentRun ||
+        !currentRoom ||
+        currentRoom.type !== "hr" ||
+        currentRun.resolvedRoomIds.includes(currentRoom.id)
+      ) {
+        return state;
+      }
+
+      reward = preparedReward ?? createHrRoomReward(outcome);
+      let activeBuffs = currentRun.activeBuffs;
+      let activeDebuffs = currentRun.activeDebuffs;
+
+      if (reward.kind === "buff") {
+        activeBuffs = addEffectStacks(activeBuffs, reward.effectId);
+      } else if (reward.kind === "debuff") {
+        activeDebuffs = addEffectStacks(activeDebuffs, reward.effectId);
+      }
+
+      return {
+        currentRun: {
+          ...currentRun,
+          activeBuffs,
+          activeDebuffs,
+          resolvedRoomIds: [...currentRun.resolvedRoomIds, currentRoom.id],
+        },
+      };
+    });
+
+    return reward;
+  },
   addEffect: (effectId, stacks = 1) => {
     set((state) => {
       if (!state.currentRun) {
         return state;
       }
 
-      if (BUFFS.some((buff) => buff.id === effectId)) {
+      if (getBuffById(effectId as BuffId)) {
         return {
           currentRun: {
             ...state.currentRun,
@@ -238,7 +290,7 @@ export const useRunStore = create<RunStore>((set) => ({
         return state;
       }
 
-      if (BUFFS.some((buff) => buff.id === effectId)) {
+      if (getBuffById(effectId as BuffId)) {
         return {
           currentRun: {
             ...state.currentRun,
