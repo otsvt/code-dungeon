@@ -1,33 +1,51 @@
 export const DEBUFFS = [
   {
-    id: "timerPressure",
-    iconPath: "/assets/game/debuffs/timer-pressure.svg",
-    nameKey: "debuffNames.timerPressure",
-    descriptionKey: "debuffDescriptions.timerPressure",
+    id: "routeSubstitution",
+    iconPath: "/assets/game/debuffs/route-substitution.png",
+    nameKey: "debuffNames.routeSubstitution",
+    descriptionKey: "debuffDescriptions.routeSubstitution",
   },
   {
-    id: "hiddenDoorInfo",
-    iconPath: "/assets/game/debuffs/hidden-door-info.svg",
-    nameKey: "debuffNames.hiddenDoorInfo",
-    descriptionKey: "debuffDescriptions.hiddenDoorInfo",
+    id: "lostTranslation",
+    iconPath: "/assets/game/debuffs/lost-translation.png",
+    nameKey: "debuffNames.lostTranslation",
+    descriptionKey: "debuffDescriptions.lostTranslation",
   },
   {
-    id: "harderNextRoom",
-    iconPath: "/assets/game/debuffs/harder-next-room.svg",
-    nameKey: "debuffNames.harderNextRoom",
-    descriptionKey: "debuffDescriptions.harderNextRoom",
+    id: "glassCeiling",
+    iconPath: "/assets/game/debuffs/glass-ceiling.png",
+    nameKey: "debuffNames.glassCeiling",
+    descriptionKey: "debuffDescriptions.glassCeiling",
   },
   {
-    id: "extraTechnology",
-    iconPath: "/assets/game/debuffs/extra-technology.svg",
-    nameKey: "debuffNames.extraTechnology",
-    descriptionKey: "debuffDescriptions.extraTechnology",
+    id: "technicalDebt",
+    iconPath: "/assets/game/debuffs/technical-debt.png",
+    nameKey: "debuffNames.technicalDebt",
+    descriptionKey: "debuffDescriptions.technicalDebt",
   },
   {
-    id: "fewerHints",
-    iconPath: "/assets/game/debuffs/fewer-hints.svg",
-    nameKey: "debuffNames.fewerHints",
-    descriptionKey: "debuffDescriptions.fewerHints",
+    id: "undeclaredStack",
+    iconPath: "/assets/game/debuffs/undeclared-stack.png",
+    nameKey: "debuffNames.undeclaredStack",
+    descriptionKey: "debuffDescriptions.undeclaredStack",
+  },
+  {
+    id: "busFactor",
+    iconPath: "/assets/game/debuffs/bus-factor.png",
+    nameKey: "debuffNames.busFactor",
+    descriptionKey: "debuffDescriptions.busFactor",
+  },
+  {
+    id: "reversedWording",
+    iconPath: "/assets/game/debuffs/reversed-wording.png",
+    nameKey: "debuffNames.reversedWording",
+    descriptionKey: "debuffDescriptions.reversedWording",
+  },
+  {
+    id: "crossFunctionalTeam",
+    iconPath: "/assets/game/debuffs/cross-functional-team.png",
+    nameKey: "debuffNames.crossFunctionalTeam",
+    descriptionKey: "debuffDescriptions.crossFunctionalTeam",
   },
 ] as const;
 
@@ -53,4 +71,8 @@ export type DebuffId = Debuff["id"];
 
 export function getDebuffById(debuffId: DebuffId): Debuff | undefined {
   return ALL_DEBUFFS.find((debuff) => debuff.id === debuffId);
+}
+
+export function isDebuffId(effectId: string): effectId is DebuffId {
+  return ALL_DEBUFFS.some((debuff) => debuff.id === effectId);
 }

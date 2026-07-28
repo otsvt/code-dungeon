@@ -17,7 +17,7 @@ export function GameHud({ currentRun }: GameHudProps) {
       <UserSector />
       <LiveSector currentLives={currentRun.lives.current} maxLives={currentRun.lives.max} />
       <SectorDecore />
-      <BuffsSector buffs={currentRun.activeBuffs} debuffs={currentRun.activeDebuffs} />
+      <BuffsSector effects={currentRun.activeEffects} />
       <SectorDecore />
       <ImpressionSector impression={currentRun.impression} />
       <SectorDecore />

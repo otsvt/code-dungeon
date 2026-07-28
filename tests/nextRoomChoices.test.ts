@@ -3,7 +3,6 @@ import test from "node:test";
 
 import {
   generateNextRoomChoices,
-  resolveGameplayEffects,
   selectRevealedRoomIds,
   type NextRoomChoice,
 } from "../src/game";
@@ -90,19 +89,15 @@ test("после основных комнат генерируется реал
   assert.deepEqual(choices, [{ id: "room-0", type: "final" }]);
 });
 
-test("Door Insight раскрывает конкретную сохранённую комнату, а не текст-заглушку", () => {
+test("можно выбрать одну конкретную сохранённую комнату для раскрытия", () => {
   const choices: NextRoomChoice[] = [
     { id: "html-room", type: "battle", technologyId: "html" },
     { id: "css-room", type: "battle", technologyId: "css" },
     { id: "javascript-room", type: "battle", technologyId: "javascript" },
   ];
-  const modifiers = resolveGameplayEffects(
-    [{ id: "doorInsight", stacks: 1 }],
-    [],
-  );
   const revealedIds = selectRevealedRoomIds(
     choices,
-    modifiers.doorsToReveal,
+    1,
     () => 0.4,
   );
   const revealedRoom = choices.find((choice) => revealedIds.has(choice.id));

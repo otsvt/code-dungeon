@@ -72,8 +72,7 @@ test("одна battle-комната применяет результат то�
     roomNumber: 1,
     totalRooms: 5,
     lives: { current: 1, max: 1 },
-    activeBuffs: [],
-    activeDebuffs: [],
+    activeEffects: [],
     resolvedRoomIds: [],
     startBuffGranted: true,
     impression: 0,
@@ -88,7 +87,7 @@ test("одна battle-комната применяет результат то�
       kind: "battle",
       roomId: "battle-room",
       outcome: "strong",
-      reward: { kind: "buff", effectId: "doorInsight" },
+      reward: { kind: "buff", effectId: "stackNavigator" },
     });
   const second = useRunStore
     .getState()
@@ -96,14 +95,15 @@ test("одна battle-комната применяет результат то�
       kind: "battle",
       roomId: "battle-room",
       outcome: "weak",
-      reward: { kind: "debuff", effectId: "timerPressure" },
+      reward: { kind: "debuff", effectId: "routeSubstitution" },
     });
   const resolvedRun = useRunStore.getState().currentRun;
 
-  assert.deepEqual(first, { kind: "buff", effectId: "doorInsight" });
+  assert.deepEqual(first, { kind: "buff", effectId: "stackNavigator" });
   assert.equal(second, null);
-  assert.equal(resolvedRun?.activeBuffs[0]?.stacks, 1);
-  assert.equal(resolvedRun?.activeDebuffs.length, 0);
+  assert.deepEqual(resolvedRun?.activeEffects, [
+    { id: "stackNavigator", stacks: 1 },
+  ]);
   assert.equal(resolvedRun?.impression, 1);
   assert.deepEqual(resolvedRun?.resolvedRoomIds, ["battle-room"]);
 

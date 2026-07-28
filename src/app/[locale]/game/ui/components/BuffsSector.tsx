@@ -1,83 +1,95 @@
+import { EffectIcon } from "@/entities/effect";
 import {
-  type ActiveEffect,
-  type BuffId,
-  type DebuffId,
   getBuffById,
   getDebuffById,
+  isBuffId,
+  isDebuffId,
+  type ActiveEffect,
+  type EffectId,
 } from "@/game";
 import { Tooltip } from "@/shared/ui/tooltip";
-import { SectorWrapper } from "./SectorWrapper";
 import { useTranslations } from "next-intl";
-import { EffectIcon } from "@/entities/effect";
+import { SectorWrapper } from "./SectorWrapper";
 
 interface BuffsSectorProps {
-  buffs: ActiveEffect<BuffId>[];
-  debuffs: ActiveEffect<DebuffId>[];
+  effects: ActiveEffect<EffectId>[];
 }
 
-export function BuffsSector({ buffs, debuffs }: BuffsSectorProps) {
+function getEffectPresentation(effectId: EffectId) {
+  if (isBuffId(effectId)) {
+    return {
+      effect: getBuffById(effectId),
+      type: "buff" as const,
+      accentClassName: "text-decore",
+    };
+  }
+
+  if (isDebuffId(effectId)) {
+    return {
+      effect: getDebuffById(effectId),
+      type: "debuff" as const,
+      accentClassName: "text-danger-icon",
+    };
+  }
+
+  return null;
+}
+
+export function BuffsSector({ effects }: BuffsSectorProps) {
   const t = useTranslations("GameHud");
 
   return (
     <SectorWrapper classNames="w-120 after:absolute after:bottom-2 after:h-px after:left-2 after:right-0 after:bg-sandy-low">
-      <div className="h-full flex items-center gap-x-2 overflow-visible">
-        {buffs.map((activeBuff) => {
-          const buff = getBuffById(activeBuff.id);
+      <div className="scrollbar-primary h-full overflow-x-auto overflow-y-hidden">
+        <div className="flex h-full min-w-full w-max items-center gap-x-2 pr-2">
+          {effects.map((activeEffect) => {
+            const presentation = getEffectPresentation(activeEffect.id);
+            const effect = presentation?.effect;
 
-          if (!buff) {
-            return null;
-          }
+            if (!presentation || !effect) {
+              return null;
+            }
 
-          return (
-            <Tooltip
-              key={buff.id}
-              triggerClassName="buff-icon-arrival relative cursor-help"
-              content={
-                <span className="flex flex-col gap-y-1">
-                  <span className="font-semibold text-decore">{t(buff.nameKey)}</span>
-                  <span>{t(buff.descriptionKey)}</span>
-                  {activeBuff.stacks > 1 && <span>×{activeBuff.stacks}</span>}
-                </span>
-              }
-            >
-              <EffectIcon src={buff.iconPath} alt={t(buff.nameKey)} type="buff" />
-              {activeBuff.stacks > 1 && (
-                <span className="absolute -right-1 -bottom-1 min-w-5 rounded-full bg-deep px-1 text-center text-xs text-decore">
-                  {activeBuff.stacks}
-                </span>
-              )}
-            </Tooltip>
-          );
-        })}
-        {debuffs.map((activeDebuff) => {
-          const debuff = getDebuffById(activeDebuff.id);
-
-          if (!debuff) {
-            return null;
-          }
-
-          return (
-            <Tooltip
-              key={debuff.id}
-              triggerClassName="buff-icon-arrival relative cursor-help"
-              content={
-                <span className="flex flex-col gap-y-1">
-                  <span className="font-semibold text-danger-icon">{t(debuff.nameKey)}</span>
-                  <span>{t(debuff.descriptionKey)}</span>
-                  {activeDebuff.stacks > 1 && <span>×{activeDebuff.stacks}</span>}
-                </span>
-              }
-            >
-              <EffectIcon src={debuff.iconPath} alt={t(debuff.nameKey)} type="debuff" />
-              {activeDebuff.stacks > 1 && (
-                <span className="absolute -right-1 -bottom-1 min-w-5 rounded-full bg-deep px-1 text-center text-xs text-danger-icon">
-                  {activeDebuff.stacks}
-                </span>
-              )}
-            </Tooltip>
-          );
-        })}
-        <span data-effect-flight-target aria-hidden="true" className="pointer-events-none h-14.5 w-14.5 shrink-0" />
+            return (
+              <span key={effect.id} className="shrink-0">
+                <Tooltip
+                  triggerClassName="buff-icon-arrival relative cursor-help"
+                  content={
+                    <span className="flex flex-col gap-y-1">
+                      <span
+                        className={`font-semibold ${presentation.accentClassName}`}
+                      >
+                        {t(effect.nameKey)}
+                      </span>
+                      <span>{t(effect.descriptionKey)}</span>
+                      {activeEffect.stacks > 1 && (
+                        <span>×{activeEffect.stacks}</span>
+                      )}
+                    </span>
+                  }
+                >
+                  <EffectIcon
+                    src={effect.iconPath}
+                    alt={t(effect.nameKey)}
+                    type={presentation.type}
+                  />
+                  {activeEffect.stacks > 1 && (
+                    <span
+                      className={`absolute -right-1 -bottom-1 min-w-5 rounded-full bg-deep px-1 text-center text-xs ${presentation.accentClassName}`}
+                    >
+                      {activeEffect.stacks}
+                    </span>
+                  )}
+                </Tooltip>
+              </span>
+            );
+          })}
+          <span
+            data-effect-flight-target
+            aria-hidden="true"
+            className="pointer-events-none h-14.5 w-14.5 shrink-0"
+          />
+        </div>
       </div>
     </SectorWrapper>
   );

@@ -32,7 +32,7 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     for (const debuff of ALL_DEBUFFS) {
-      this.load.svg(debuff.id, debuff.iconPath, { width: 64, height: 64 });
+      this.load.image(debuff.id, debuff.iconPath);
     }
 
     for (const technology of TECHNOLOGIES) {

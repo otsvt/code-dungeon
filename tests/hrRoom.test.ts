@@ -36,8 +36,7 @@ function createHrRun(impression: Impression): CurrentRun {
       current: 1,
       max: 1,
     },
-    activeBuffs: [],
-    activeDebuffs: [],
+    activeEffects: [],
     resolvedRoomIds: [],
     startBuffGranted: true,
     impression,
@@ -100,7 +99,7 @@ test("HR-комната применяет награду только один 
 
   assert.deepEqual(firstResult, reward);
   assert.equal(secondResult, null);
-  assert.deepEqual(currentRun?.activeBuffs, [
+  assert.deepEqual(currentRun?.activeEffects, [
     { id: "confidentDelivery", stacks: 1 },
   ]);
   assert.deepEqual(currentRun?.resolvedRoomIds, ["hr-room"]);

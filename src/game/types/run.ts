@@ -1,7 +1,5 @@
 import { type RunSettings } from "../domain/run/runSettings";
-import { type BuffId } from "./buff";
-import { type DebuffId } from "./debuff";
-import { type ActiveEffect } from "./effect";
+import { type ActiveEffect, type EffectId } from "./effect";
 import { type NextRoomChoice } from "../rooms/nextRoomChoices";
 
 export type RoomType = "start" | "battle" | "hr" | "final";
@@ -21,8 +19,7 @@ export type CurrentRun = {
     current: number;
     max: number;
   };
-  activeBuffs: ActiveEffect<BuffId>[];
-  activeDebuffs: ActiveEffect<DebuffId>[];
+  activeEffects: ActiveEffect<EffectId>[];
   resolvedRoomIds: string[];
   startBuffGranted: boolean;
   impression: Impression;

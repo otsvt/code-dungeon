@@ -1,7 +1,7 @@
 import { type RunSettings } from "../../domain/run/runSettings";
 import { type ChallengeResult } from "../challenge/types";
 import { addEffectStacks, consumeEffectStacks, type EffectId } from "../../types/effect";
-import { isBuffId, START_BUFFS, type Buff } from "../../types/buff";
+import { START_BUFFS, type Buff } from "../../types/buff";
 import {
   generateNextRoomChoices,
   type NextRoomChoice,
@@ -44,8 +44,7 @@ export function createRun(
       current: 1,
       max: 1,
     },
-    activeBuffs: [],
-    activeDebuffs: [],
+    activeEffects: [],
     resolvedRoomIds: [],
     startBuffGranted: false,
     impression: 0,
@@ -69,7 +68,7 @@ export function grantStartBuff(
 
   return {
     ...currentRun,
-    activeBuffs: addEffectStacks(currentRun.activeBuffs, buff.id),
+    activeEffects: addEffectStacks(currentRun.activeEffects, buff.id),
     startBuffGranted: true,
   };
 }
@@ -125,19 +124,14 @@ export function applyChallengeResult(
     return null;
   }
 
-  let activeBuffs = currentRun.activeBuffs;
-  let activeDebuffs = currentRun.activeDebuffs;
-
-  if (result.reward.kind === "buff") {
-    activeBuffs = addEffectStacks(activeBuffs, result.reward.effectId);
-  } else if (result.reward.kind === "debuff") {
-    activeDebuffs = addEffectStacks(activeDebuffs, result.reward.effectId);
-  }
+  const activeEffects =
+    result.reward.kind === "none"
+      ? currentRun.activeEffects
+      : addEffectStacks(currentRun.activeEffects, result.reward.effectId);
 
   return {
     ...currentRun,
-    activeBuffs,
-    activeDebuffs,
+    activeEffects,
     impression:
       result.kind === "battle"
         ? result.outcome === "strong"
@@ -155,21 +149,10 @@ export function addRunEffect(
   effectId: EffectId,
   stacks = 1,
 ): CurrentRun {
-  if (isBuffId(effectId)) {
-    return {
-      ...currentRun,
-      activeBuffs: addEffectStacks(
-        currentRun.activeBuffs,
-        effectId,
-        stacks,
-      ),
-    };
-  }
-
   return {
     ...currentRun,
-    activeDebuffs: addEffectStacks(
-      currentRun.activeDebuffs,
+    activeEffects: addEffectStacks(
+      currentRun.activeEffects,
       effectId,
       stacks,
     ),
@@ -181,21 +164,10 @@ export function consumeRunEffect(
   effectId: EffectId,
   stacks = 1,
 ): CurrentRun {
-  if (isBuffId(effectId)) {
-    return {
-      ...currentRun,
-      activeBuffs: consumeEffectStacks(
-        currentRun.activeBuffs,
-        effectId,
-        stacks,
-      ),
-    };
-  }
-
   return {
     ...currentRun,
-    activeDebuffs: consumeEffectStacks(
-      currentRun.activeDebuffs,
+    activeEffects: consumeEffectStacks(
+      currentRun.activeEffects,
       effectId,
       stacks,
     ),

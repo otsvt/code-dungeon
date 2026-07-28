@@ -15,6 +15,7 @@ export {
   HR_DEBUFFS,
   ALL_DEBUFFS,
   getDebuffById,
+  isDebuffId,
   type Debuff,
   type DebuffId,
 } from "./types/debuff";
@@ -24,10 +25,6 @@ export {
   type ActiveEffect,
   type EffectId,
 } from "./types/effect";
-export {
-  resolveGameplayEffects,
-  type GameplayModifiers,
-} from "./effects/resolveGameplayEffects";
 export {
   generateNextRoomChoices,
   selectRevealedRoomIds,

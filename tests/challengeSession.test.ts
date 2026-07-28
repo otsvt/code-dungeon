@@ -66,7 +66,7 @@ test("challenge service зависит от порта, а не от JSON-реа
     outcome: "strong",
     reward: {
       kind: "buff",
-      effectId: "removeWrongOption",
+      effectId: "noiseSuppression",
     },
   });
 });
