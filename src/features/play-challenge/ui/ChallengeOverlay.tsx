@@ -1,5 +1,24 @@
 "use client";
 
+import {
+  closestCenter,
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+  type DragStartEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { useMemo, useState } from "react";
 import { PrismAsync as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -192,6 +211,59 @@ function CodeOptionButton({
   );
 }
 
+function OrderStepContent({ label }: { label: string }) {
+  return (
+    <>
+      <span className="challenge-copy min-w-0 flex-1 px-4 py-3 font-sans text-base font-medium leading-6 text-dark">
+        {label}
+      </span>
+      <span
+        aria-hidden="true"
+        className="flex h-14 w-12 shrink-0 items-center justify-center border-l border-sandy/45 text-bronze"
+      >
+        <span className="grid grid-cols-2 gap-1">
+          {Array.from({ length: 6 }, (_, dotIndex) => (
+            <span key={dotIndex} className="h-1 w-1 rounded-full bg-current" />
+          ))}
+        </span>
+      </span>
+    </>
+  );
+}
+
+function SortableOrderStep({
+  option,
+  index,
+  dragging,
+}: {
+  option: ChallengeOptionViewModel;
+  index: number;
+  dragging: boolean;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: option.id });
+
+  return (
+    <li className="flex min-h-14 items-stretch border border-sandy/45 bg-background/70">
+      <span className="flex h-14 w-12 shrink-0 items-center justify-center border-r border-sandy/45 bg-deep font-mono text-xs font-bold text-accent">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <div
+        ref={setNodeRef}
+        style={{ transform: CSS.Transform.toString(transform), transition }}
+        {...attributes}
+        {...listeners}
+        className={[
+          "flex min-w-0 flex-1 touch-none select-none items-center bg-background outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-bronze",
+          dragging ? "cursor-grabbing" : "cursor-grab",
+          isDragging ? "opacity-0" : "opacity-100",
+        ].join(" ")}
+      >
+        <OrderStepContent label={option.label} />
+      </div>
+    </li>
+  );
+}
+
 function OrderStepsControl({
   question,
   optionIds,
@@ -201,61 +273,65 @@ function OrderStepsControl({
   optionIds: readonly string[];
   onChange: (optionIds: string[]) => void;
 }) {
+  const [activeOptionId, setActiveOptionId] = useState<string | null>(null);
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  );
   const optionsById = new Map(question.options.map((option) => [option.id, option]));
+  const activeOption = activeOptionId ? optionsById.get(activeOptionId) : undefined;
 
-  const move = (index: number, direction: -1 | 1) => {
-    const targetIndex = index + direction;
+  const startDragging = ({ active }: DragStartEvent) => {
+    setActiveOptionId(String(active.id));
+  };
 
-    if (targetIndex < 0 || targetIndex >= optionIds.length) {
+  const finishDragging = ({ active, over }: DragEndEvent) => {
+    setActiveOptionId(null);
+
+    if (!over || active.id === over.id) {
       return;
     }
 
-    const next = [...optionIds];
-    [next[index], next[targetIndex]] = [next[targetIndex], next[index]];
-    onChange(next);
+    const oldIndex = optionIds.indexOf(String(active.id));
+    const newIndex = optionIds.indexOf(String(over.id));
+
+    if (oldIndex >= 0 && newIndex >= 0) {
+      onChange(arrayMove([...optionIds], oldIndex, newIndex));
+    }
   };
 
   return (
-    <ol className="flex flex-col gap-2">
-      {optionIds.map((optionId, index) => {
-        const option = optionsById.get(optionId);
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragStart={startDragging}
+      onDragCancel={() => setActiveOptionId(null)}
+      onDragEnd={finishDragging}
+    >
+      <SortableContext items={[...optionIds]} strategy={verticalListSortingStrategy}>
+        <ol className="flex flex-col gap-2">
+          {optionIds.map((optionId, index) => {
+            const option = optionsById.get(optionId);
 
-        if (!option) {
-          return null;
-        }
-
-        return (
-          <li key={option.id} className="flex min-h-14 items-center border border-sandy/45 bg-background/70">
-            <span className="flex h-14 w-12 shrink-0 items-center justify-center border-r border-sandy/45 bg-deep font-mono text-xs font-bold text-accent">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span className="challenge-copy min-w-0 flex-1 px-4 py-3 font-sans text-base font-medium leading-6 text-dark">
-              {option.label}
-            </span>
-            <div className="flex h-14 shrink-0 border-l border-sandy/45">
-              <button
-                type="button"
-                aria-label={`Move step ${index + 1} up`}
-                disabled={index === 0}
-                onClick={() => move(index, -1)}
-                className="w-11 font-mono text-sm text-bronze hover:bg-sandy-low disabled:opacity-25"
-              >
-                ↑
-              </button>
-              <button
-                type="button"
-                aria-label={`Move step ${index + 1} down`}
-                disabled={index === optionIds.length - 1}
-                onClick={() => move(index, 1)}
-                className="w-11 border-l border-sandy/45 font-mono text-sm text-bronze hover:bg-sandy-low disabled:opacity-25"
-              >
-                ↓
-              </button>
-            </div>
-          </li>
-        );
-      })}
-    </ol>
+            return option ? (
+              <SortableOrderStep
+                key={option.id}
+                option={option}
+                index={index}
+                dragging={activeOptionId !== null}
+              />
+            ) : null;
+          })}
+        </ol>
+      </SortableContext>
+      <DragOverlay dropAnimation={null}>
+        {activeOption ? (
+          <div className="flex min-h-14 cursor-grabbing items-center border border-sandy/45 bg-background shadow-xl">
+            <OrderStepContent label={activeOption.label} />
+          </div>
+        ) : null}
+      </DragOverlay>
+    </DndContext>
   );
 }
 
