@@ -1,3 +1,8 @@
+import { type TechnologyId } from "@/entities/technology";
+import {
+  type SingleChoiceQuestionFormat,
+} from "../../../domain/challenge/types";
+
 export type QuestionKindDto = "battle" | "hr";
 
 export type LocalizedTextDto = {
@@ -15,22 +20,31 @@ type BaseQuestionDto = {
   prompt: LocalizedTextDto;
   code: string | null;
   options: QuestionOptionDto[];
+};
+
+type SingleChoiceQuestionDto = BaseQuestionDto & {
+  format: SingleChoiceQuestionFormat;
   correctOptionId: string;
 };
 
-export type BattleQuestionDto = BaseQuestionDto & {
+type OrderStepsQuestionDto = BaseQuestionDto & {
+  format: "orderSteps";
+  correctOptionIds: string[];
+};
+
+export type BattleQuestionDto = (SingleChoiceQuestionDto | OrderStepsQuestionDto) & {
   kind: "battle";
   technologyId: TechnologyId;
 };
 
-export type HrQuestionDto = BaseQuestionDto & {
+export type HrQuestionDto = SingleChoiceQuestionDto & {
   kind: "hr";
+  format: "quiz";
 };
 
 export type QuestionDto = BattleQuestionDto | HrQuestionDto;
 
 export type QuestionCatalogDto = {
-  version: 1;
+  version: 2;
   questions: QuestionDto[];
 };
-import { type TechnologyId } from "@/entities/technology";

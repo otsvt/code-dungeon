@@ -11,6 +11,7 @@ export type ChallengeViewModel = {
   allowedMistakes?: number;
   questions: Array<{
     id: string;
+    format: ActiveChallenge["questions"][number]["format"];
     prompt: string;
     code?: string;
     options: Array<{
@@ -50,6 +51,7 @@ export function createChallengeViewModel(
       : {}),
     questions: challenge.questions.map((question) => ({
       id: question.id,
+      format: question.format,
       prompt: question.prompt[locale],
       ...(question.code ? { code: question.code } : {}),
       options: question.options.map((option) => ({

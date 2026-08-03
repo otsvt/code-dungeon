@@ -1,9 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "questions": [
     {
       "id": "hr-missed-deadline",
       "kind": "hr",
+      "format": "quiz",
       "prompt": {
         "ru": "Вы понимаете, что не успеваете закончить задачу к согласованному сроку. Что сделаете?",
         "en": "You realize you will not finish a task by the agreed deadline. What do you do?"
@@ -44,6 +45,7 @@
     {
       "id": "hr-review-disagreement",
       "kind": "hr",
+      "format": "quiz",
       "prompt": {
         "ru": "Вы не согласны с замечанием коллеги на code review. Как поступите?",
         "en": "You disagree with a colleague's code review comment. What do you do?"
@@ -84,6 +86,7 @@
     {
       "id": "hr-unknown-answer",
       "kind": "hr",
+      "format": "quiz",
       "prompt": {
         "ru": "На собеседовании вы не знаете точного ответа. Какая реакция лучше?",
         "en": "You do not know the exact answer during an interview. What is the best response?"

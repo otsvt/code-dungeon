@@ -13,17 +13,36 @@ export function countCorrectAnswers(
   answers: readonly ChallengeAnswer[],
 ): number {
   const answersByQuestionId = new Map(
-    answers.map((answer) => [answer.questionId, answer.optionId]),
+    answers.map((answer) => [answer.questionId, answer]),
   );
 
   return questions.reduce(
     (total, question) =>
       total +
-      Number(
-        answersByQuestionId.get(question.id) === question.correctOptionId,
-      ),
+      Number(isCorrectAnswer(question, answersByQuestionId.get(question.id))),
     0,
   );
+}
+
+function isCorrectAnswer(
+  question: ChallengeQuestion,
+  answer: ChallengeAnswer | undefined,
+): boolean {
+  if (!answer || answer.format !== question.format) {
+    return false;
+  }
+
+  if (question.format === "orderSteps") {
+    return (
+      answer.format === "orderSteps" &&
+      answer.optionIds.length === question.correctOptionIds.length &&
+      answer.optionIds.every(
+        (optionId, index) => optionId === question.correctOptionIds[index],
+      )
+    );
+  }
+
+  return answer.format !== "orderSteps" && answer.optionId === question.correctOptionId;
 }
 
 export function resolveChallengeOutcome(

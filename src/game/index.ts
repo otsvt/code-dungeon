@@ -44,7 +44,9 @@ export {
   resolveChallengeOutcome,
 } from "./domain/challenge/rules";
 export {
+  BATTLE_QUESTION_FORMATS,
   type BattleRoomReward,
+  type BattleQuestionFormat,
   type ChallengeAnswer,
   type ChallengeLocale,
   type ChallengeOption,

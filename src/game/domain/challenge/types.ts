@@ -6,24 +6,56 @@ export type ChallengeLocale = "ru" | "en";
 
 export type LocalizedChallengeText = Record<ChallengeLocale, string>;
 
+export const BATTLE_QUESTION_FORMATS = [
+  "quiz",
+  "trueFalse",
+  "codeOutput",
+  "findBug",
+  "chooseFragment",
+  "orderSteps",
+] as const;
+
+export type BattleQuestionFormat = (typeof BATTLE_QUESTION_FORMATS)[number];
+export type SingleChoiceQuestionFormat = Exclude<BattleQuestionFormat, "orderSteps">;
+
 export type ChallengeOption = {
   id: string;
   label: LocalizedChallengeText;
 };
 
-export type ChallengeQuestion = {
+type BaseChallengeQuestion = {
   id: string;
   technologyId?: TechnologyId;
   prompt: LocalizedChallengeText;
   code?: string;
   options: readonly ChallengeOption[];
+};
+
+export type SingleChoiceChallengeQuestion = BaseChallengeQuestion & {
+  format: SingleChoiceQuestionFormat;
   correctOptionId: string;
 };
 
-export type ChallengeAnswer = {
+export type OrderStepsChallengeQuestion = BaseChallengeQuestion & {
+  format: "orderSteps";
+  correctOptionIds: readonly string[];
+};
+
+export type ChallengeQuestion = SingleChoiceChallengeQuestion | OrderStepsChallengeQuestion;
+
+export type SingleChoiceChallengeAnswer = {
   questionId: string;
+  format: SingleChoiceQuestionFormat;
   optionId: string;
 };
+
+export type OrderStepsChallengeAnswer = {
+  questionId: string;
+  format: "orderSteps";
+  optionIds: readonly string[];
+};
+
+export type ChallengeAnswer = SingleChoiceChallengeAnswer | OrderStepsChallengeAnswer;
 
 export type ChallengeOutcome = "strong" | "neutral" | "weak";
 

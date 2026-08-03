@@ -2,7 +2,7 @@ import { type ChallengeQuestion } from "../../domain/challenge/types";
 import { type QuestionDto } from "./dto/questionCatalogDto";
 
 export function mapQuestionDto(question: QuestionDto): ChallengeQuestion {
-  return {
+  const base = {
     id: question.id,
     ...(question.kind === "battle"
       ? { technologyId: question.technologyId }
@@ -13,6 +13,19 @@ export function mapQuestionDto(question: QuestionDto): ChallengeQuestion {
       id: option.id,
       label: { ...option.label },
     })),
+  };
+
+  if (question.format === "orderSteps") {
+    return {
+      ...base,
+      format: "orderSteps",
+      correctOptionIds: [...question.correctOptionIds],
+    };
+  }
+
+  return {
+    ...base,
+    format: question.format,
     correctOptionId: question.correctOptionId,
   };
 }

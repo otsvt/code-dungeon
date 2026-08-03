@@ -1,411 +1,1769 @@
 {
-  "version": 1,
+  "version": 2,
   "questions": [
     {
-      "id": "html-semantic-main",
+      "id": "html-quiz-main",
       "kind": "battle",
       "technologyId": "html",
+      "format": "quiz",
       "prompt": {
         "ru": "Какой элемент содержит основное уникальное содержимое страницы?",
         "en": "Which element contains the page's main unique content?"
       },
       "code": null,
       "options": [
-        { "id": "a", "label": { "ru": "<section>", "en": "<section>" } },
-        { "id": "b", "label": { "ru": "<main>", "en": "<main>" } },
-        { "id": "c", "label": { "ru": "<article>", "en": "<article>" } },
-        { "id": "d", "label": { "ru": "<body>", "en": "<body>" } }
-      ],
-      "correctOptionId": "b"
-    },
-    {
-      "id": "html-button",
-      "kind": "battle",
-      "technologyId": "html",
-      "prompt": {
-        "ru": "Что лучше использовать для действия внутри интерфейса? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
-        "en": "What is the best element for an action inside an interface? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
-      },
-      "code": null,
-      "options": [
         {
           "id": "a",
           "label": {
-            "ru": "<div> — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "<div> — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "<section>",
+            "en": "<section>"
           }
         },
         {
           "id": "b",
           "label": {
-            "ru": "<span> — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "<span> — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "<main>",
+            "en": "<main>"
           }
         },
         {
           "id": "c",
           "label": {
-            "ru": "<button> — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "<button> — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "<article>",
+            "en": "<article>"
           }
         },
         {
           "id": "d",
           "label": {
-            "ru": "<a> без href — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "<a> without href — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "<body>",
+            "en": "<body>"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "html-true-false-button",
+      "kind": "battle",
+      "technologyId": "html",
+      "format": "trueFalse",
+      "prompt": {
+        "ru": "Внутри HTML-формы <button> без атрибута type по умолчанию отправляет форму.",
+        "en": "Inside an HTML form, a <button> without a type attribute submits the form by default."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "true",
+          "label": {
+            "ru": "ВЕРНО",
+            "en": "TRUE"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "ru": "НЕВЕРНО",
+            "en": "FALSE"
+          }
+        }
+      ],
+      "correctOptionId": "true"
+    },
+    {
+      "id": "html-code-output-details",
+      "kind": "battle",
+      "technologyId": "html",
+      "format": "codeOutput",
+      "prompt": {
+        "ru": "Что увидит пользователь сразу после загрузки разметки?",
+        "en": "What will the user see immediately after this markup loads?"
+      },
+      "code": "<details open>\n  <summary>Подробнее</summary>\n  <p>Описание</p>\n</details>",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "Только строку «Подробнее»",
+            "en": "Only the “Details” summary"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Только текст «Описание»",
+            "en": "Only the “Description” text"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "Обе строки: блок уже раскрыт",
+            "en": "Both lines because the block is open"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "Ничего до клика",
+            "en": "Nothing until a click"
           }
         }
       ],
       "correctOptionId": "c"
     },
     {
-      "id": "css-specificity",
+      "id": "html-find-bug-label",
+      "kind": "battle",
+      "technologyId": "html",
+      "format": "findBug",
+      "prompt": {
+        "ru": "В какой строке нарушена связь подписи с полем ввода?",
+        "en": "Which line breaks the association between the label and the input?"
+      },
+      "code": "1  <label for=\"email\">Email</label>\n2  <input id=\"user-email\" type=\"email\">",
+      "options": [
+        {
+          "id": "l1",
+          "label": {
+            "ru": "Строка 1 — <label for=\"email\">",
+            "en": "Строка 1 — <label for=\"email\">"
+          }
+        },
+        {
+          "id": "l2",
+          "label": {
+            "ru": "Строка 2 — <input id=\"user-email\">",
+            "en": "Строка 2 — <input id=\"user-email\">"
+          }
+        },
+        {
+          "id": "l3",
+          "label": {
+            "ru": "Строка 3 — type=\"email\"",
+            "en": "Строка 3 — type=\"email\""
+          }
+        },
+        {
+          "id": "l4",
+          "label": {
+            "ru": "Ошибки нет",
+            "en": "There is no bug"
+          }
+        }
+      ],
+      "correctOptionId": "l2"
+    },
+    {
+      "id": "html-choose-fragment-image",
+      "kind": "battle",
+      "technologyId": "html",
+      "format": "chooseFragment",
+      "prompt": {
+        "ru": "Какой фрагмент корректно добавляет альтернативный текст изображению?",
+        "en": "Which fragment correctly provides alternative text for an image?"
+      },
+      "code": "<!-- Вставьте доступное изображение / Insert an accessible image -->",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "<img src=\"chart.png\" alt=\"Продажи по месяцам\">",
+            "en": "<img src=\"chart.png\" alt=\"Monthly sales\">"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "<img src=\"chart.png\" title=\"chart\">",
+            "en": "<img src=\"chart.png\" title=\"chart\">"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "<img src=\"chart.png\" text=\"chart\">",
+            "en": "<img src=\"chart.png\" text=\"chart\">"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "<image href=\"chart.png\">",
+            "en": "<image href=\"chart.png\">"
+          }
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "html-order-steps-form",
+      "kind": "battle",
+      "technologyId": "html",
+      "format": "orderSteps",
+      "prompt": {
+        "ru": "Расположите шаги создания доступного поля формы в правильном порядке.",
+        "en": "Put the steps for creating an accessible form field in the correct order."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "c",
+          "label": {
+            "ru": "Добавить подходящий type полю",
+            "en": "Add an appropriate input type"
+          }
+        },
+        {
+          "id": "a",
+          "label": {
+            "ru": "Создать уникальный id у поля",
+            "en": "Create a unique input id"
+          }
+        },
+        {
+          "id": "e",
+          "label": {
+            "ru": "Проверить фокус с клавиатуры",
+            "en": "Test keyboard focus"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Связать label через for",
+            "en": "Connect the label with for"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "Добавить понятный текст ошибки",
+            "en": "Add a clear error message"
+          }
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "css-quiz-specificity",
       "kind": "battle",
       "technologyId": "css",
+      "format": "quiz",
       "prompt": {
         "ru": "Какой селектор имеет наибольшую специфичность?",
         "en": "Which selector has the highest specificity?"
       },
       "code": null,
       "options": [
-        { "id": "a", "label": { "ru": ".card .title", "en": ".card .title" } },
-        { "id": "b", "label": { "ru": "article h2", "en": "article h2" } },
-        { "id": "c", "label": { "ru": "#profile .title", "en": "#profile .title" } },
-        { "id": "d", "label": { "ru": "[data-title]", "en": "[data-title]" } }
-      ],
-      "correctOptionId": "c"
-    },
-    {
-      "id": "css-flex-center",
-      "kind": "battle",
-      "technologyId": "css",
-      "prompt": {
-        "ru": "Как распределить элементы по центру главной оси flex-контейнера? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
-        "en": "How do you center items along a flex container's main axis? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
-      },
-      "code": null,
-      "options": [
         {
           "id": "a",
           "label": {
-            "ru": "align-items: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "align-items: center — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": ".card .title",
+            "en": ".card .title"
           }
         },
         {
           "id": "b",
           "label": {
-            "ru": "justify-content: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "justify-content: center — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "article h2",
+            "en": "article h2"
           }
         },
         {
           "id": "c",
           "label": {
-            "ru": "place-items: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "place-items: center — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "#profile .title",
+            "en": "#profile .title"
           }
         },
         {
           "id": "d",
           "label": {
-            "ru": "text-align: center — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "text-align: center — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "[data-title]",
+            "en": "[data-title]"
+          }
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "css-true-false-gap",
+      "kind": "battle",
+      "technologyId": "css",
+      "format": "trueFalse",
+      "prompt": {
+        "ru": "Свойство gap работает и во flex-, и в grid-контейнерах.",
+        "en": "The gap property works in both flex and grid containers."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "true",
+          "label": {
+            "ru": "ВЕРНО",
+            "en": "TRUE"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "ru": "НЕВЕРНО",
+            "en": "FALSE"
+          }
+        }
+      ],
+      "correctOptionId": "true"
+    },
+    {
+      "id": "css-code-output-color",
+      "kind": "battle",
+      "technologyId": "css",
+      "format": "codeOutput",
+      "prompt": {
+        "ru": "Какой цвет будет у текста ссылки?",
+        "en": "What color will the link text be?"
+      },
+      "code": ".card a { color: red; }\n.card .link { color: blue; }\n\n<a class=\"link\">Профиль</a>",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "Красный",
+            "en": "Red"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Синий",
+            "en": "Blue"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "Цвет браузера по умолчанию",
+            "en": "The browser default"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "Прозрачный",
+            "en": "Transparent"
           }
         }
       ],
       "correctOptionId": "b"
     },
     {
-      "id": "js-event-loop",
+      "id": "css-find-bug-grid",
+      "kind": "battle",
+      "technologyId": "css",
+      "format": "findBug",
+      "prompt": {
+        "ru": "Какая строка мешает колонкам занять доступную ширину поровну?",
+        "en": "Which line prevents the columns from sharing the available width equally?"
+      },
+      "code": "1  .layout { display: grid;\n2    grid-template-columns: 200px 200px;\n3    gap: 16px;\n4  }",
+      "options": [
+        {
+          "id": "l1",
+          "label": {
+            "ru": "Строка 1 — display: grid",
+            "en": "Строка 1 — display: grid"
+          }
+        },
+        {
+          "id": "l2",
+          "label": {
+            "ru": "Строка 2 — grid-template-columns: 200px 200px",
+            "en": "Строка 2 — grid-template-columns: 200px 200px"
+          }
+        },
+        {
+          "id": "l3",
+          "label": {
+            "ru": "Строка 3 — gap: 16px",
+            "en": "Строка 3 — gap: 16px"
+          }
+        },
+        {
+          "id": "l4",
+          "label": {
+            "ru": "Ошибки нет",
+            "en": "There is no bug"
+          }
+        }
+      ],
+      "correctOptionId": "l2"
+    },
+    {
+      "id": "css-choose-fragment-focus",
+      "kind": "battle",
+      "technologyId": "css",
+      "format": "chooseFragment",
+      "prompt": {
+        "ru": "Какой фрагмент сохраняет видимый фокус для клавиатуры?",
+        "en": "Which fragment preserves a visible keyboard focus?"
+      },
+      "code": "/* Выберите доступное состояние фокуса / Choose an accessible focus state */",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "button:focus { outline: none; }",
+            "en": "button:focus { outline: none; }"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "button:focus-visible { outline: 2px solid currentColor; }",
+            "en": "button:focus-visible { outline: 2px solid currentColor; }"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "button:active { opacity: .8; }",
+            "en": "button:active { opacity: .8; }"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "button:hover { border: 0; }",
+            "en": "button:hover { border: 0; }"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "css-order-steps-cascade",
+      "kind": "battle",
+      "technologyId": "css",
+      "format": "orderSteps",
+      "prompt": {
+        "ru": "Расположите шаги диагностики конфликта стилей.",
+        "en": "Order the steps for diagnosing a CSS conflict."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "d",
+          "label": {
+            "ru": "Исправить самый узкий источник конфликта",
+            "en": "Fix the narrowest source of the conflict"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Найти итоговое значение в Computed",
+            "en": "Find the final value in Computed"
+          }
+        },
+        {
+          "id": "a",
+          "label": {
+            "ru": "Выбрать проблемный элемент в DevTools",
+            "en": "Select the affected element in DevTools"
+          }
+        },
+        {
+          "id": "e",
+          "label": {
+            "ru": "Повторно проверить состояние",
+            "en": "Recheck the state"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "Сравнить специфичность и порядок правил",
+            "en": "Compare specificity and source order"
+          }
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "js-quiz-map",
       "kind": "battle",
       "technologyId": "javascript",
+      "format": "quiz",
+      "prompt": {
+        "ru": "Какой метод создаёт новый массив, применяя функцию к каждому элементу?",
+        "en": "Which method creates a new array by applying a function to each item?"
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "forEach",
+            "en": "forEach"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "filter",
+            "en": "filter"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "map",
+            "en": "map"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "some",
+            "en": "some"
+          }
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "js-true-false-const",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "format": "trueFalse",
+      "prompt": {
+        "ru": "Объект, записанный в const, нельзя изменить внутри.",
+        "en": "An object stored in a const variable cannot be mutated."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "true",
+          "label": {
+            "ru": "ВЕРНО",
+            "en": "TRUE"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "ru": "НЕВЕРНО",
+            "en": "FALSE"
+          }
+        }
+      ],
+      "correctOptionId": "false"
+    },
+    {
+      "id": "js-code-output-event-loop",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "format": "codeOutput",
       "prompt": {
         "ru": "Что выведет этот код?",
         "en": "What does this code print?"
       },
       "code": "console.log('A');\nPromise.resolve().then(() => console.log('B'));\nconsole.log('C');",
       "options": [
-        { "id": "a", "label": { "ru": "A, B, C", "en": "A, B, C" } },
-        { "id": "b", "label": { "ru": "A, C, B", "en": "A, C, B" } },
-        { "id": "c", "label": { "ru": "B, A, C", "en": "B, A, C" } },
-        { "id": "d", "label": { "ru": "C, A, B", "en": "C, A, B" } }
-      ],
-      "correctOptionId": "b"
-    },
-    {
-      "id": "js-array-map",
-      "kind": "battle",
-      "technologyId": "javascript",
-      "prompt": {
-        "ru": "Какой метод создаёт новый массив, применяя функцию к каждому элементу? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
-        "en": "Which method creates a new array by applying a function to every item? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
-      },
-      "code": null,
-      "options": [
         {
           "id": "a",
           "label": {
-            "ru": "forEach — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "forEach — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "A, B, C",
+            "en": "A, B, C"
           }
         },
         {
           "id": "b",
           "label": {
-            "ru": "filter — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "filter — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "A, C, B",
+            "en": "A, C, B"
           }
         },
         {
           "id": "c",
           "label": {
-            "ru": "map — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "map — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "B, A, C",
+            "en": "B, A, C"
           }
         },
         {
           "id": "d",
           "label": {
-            "ru": "some — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "some — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "C, A, B",
+            "en": "C, A, B"
           }
         }
       ],
-      "correctOptionId": "c"
+      "correctOptionId": "b"
     },
     {
-      "id": "ts-unknown",
+      "id": "js-find-bug-loop",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "format": "findBug",
+      "prompt": {
+        "ru": "В какой строке находится ошибка, из-за которой цикл не завершится?",
+        "en": "Which line contains the bug that prevents the loop from finishing?"
+      },
+      "code": "1  let i = 0;\n2  while (i < 3) {\n3    console.log(i);\n4    i--;\n5  }",
+      "options": [
+        {
+          "id": "l1",
+          "label": {
+            "ru": "Строка 1 — let i = 0",
+            "en": "Строка 1 — let i = 0"
+          }
+        },
+        {
+          "id": "l2",
+          "label": {
+            "ru": "Строка 2 — условие i < 3",
+            "en": "Строка 2 — условие i < 3"
+          }
+        },
+        {
+          "id": "l3",
+          "label": {
+            "ru": "Строка 3 — console.log(i)",
+            "en": "Строка 3 — console.log(i)"
+          }
+        },
+        {
+          "id": "l4",
+          "label": {
+            "ru": "Строка 4 — i--",
+            "en": "Строка 4 — i--"
+          }
+        }
+      ],
+      "correctOptionId": "l4"
+    },
+    {
+      "id": "js-choose-fragment-copy",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "format": "chooseFragment",
+      "prompt": {
+        "ru": "Какой фрагмент создаёт новый массив без изменения исходного?",
+        "en": "Which fragment creates a new array without mutating the original?"
+      },
+      "code": "const items = ['a', 'b'];\n// Добавить value / Add value",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "const next = items.push(value);",
+            "en": "const next = items.push(value);"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "const next = [...items, value];",
+            "en": "const next = [...items, value];"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "const next = items.splice(0);",
+            "en": "const next = items.splice(0);"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "const next = items.sort();",
+            "en": "const next = items.sort();"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "js-order-steps-promise",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "format": "orderSteps",
+      "prompt": {
+        "ru": "Расположите этапы выполнения Promise-цепочки.",
+        "en": "Order the stages of a Promise chain."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "c",
+          "label": {
+            "ru": "Выполнить обработчик первого then",
+            "en": "Run the first then handler"
+          }
+        },
+        {
+          "id": "a",
+          "label": {
+            "ru": "Создать Promise",
+            "en": "Create the Promise"
+          }
+        },
+        {
+          "id": "e",
+          "label": {
+            "ru": "Выполнить finally",
+            "en": "Run finally"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Разрешить Promise",
+            "en": "Resolve the Promise"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "Передать значение в следующий then",
+            "en": "Pass the value to the next then"
+          }
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "ts-quiz-unknown",
       "kind": "battle",
       "technologyId": "typescript",
+      "format": "quiz",
       "prompt": {
         "ru": "Какой тип безопаснее использовать для значения неизвестного типа?",
         "en": "Which type is safer for a value whose type is unknown?"
       },
       "code": null,
       "options": [
-        { "id": "a", "label": { "ru": "any", "en": "any" } },
-        { "id": "b", "label": { "ru": "unknown", "en": "unknown" } },
-        { "id": "c", "label": { "ru": "never", "en": "never" } },
-        { "id": "d", "label": { "ru": "object", "en": "object" } }
+        {
+          "id": "a",
+          "label": {
+            "ru": "any",
+            "en": "any"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "unknown",
+            "en": "unknown"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "never",
+            "en": "never"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "object",
+            "en": "object"
+          }
+        }
       ],
       "correctOptionId": "b"
     },
     {
-      "id": "ts-union",
+      "id": "ts-true-false-union",
       "kind": "battle",
       "technologyId": "typescript",
+      "format": "trueFalse",
       "prompt": {
-        "ru": "Какая запись создаёт объединение строковых литералов? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
-        "en": "Which declaration creates a union of string literals? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+        "ru": "Тип string | number разрешает присвоить значение boolean.",
+        "en": "The string | number type allows assigning a boolean value."
       },
       "code": null,
       "options": [
         {
-          "id": "a",
+          "id": "true",
           "label": {
-            "ru": "type State = 'idle' | 'done' — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "type State = 'idle' | 'done' — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "ВЕРНО",
+            "en": "TRUE"
           }
         },
         {
-          "id": "b",
+          "id": "false",
           "label": {
-            "ru": "type State = ['idle', 'done'] — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "type State = ['idle', 'done'] — an expanded answer describing the expected behavior in a complex production interface"
-          }
-        },
-        {
-          "id": "c",
-          "label": {
-            "ru": "type State = string[] — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "type State = string[] — an expanded answer describing the expected behavior in a complex production interface"
-          }
-        },
-        {
-          "id": "d",
-          "label": {
-            "ru": "type State = keyof string — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "type State = keyof string — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "НЕВЕРНО",
+            "en": "FALSE"
           }
         }
       ],
-      "correctOptionId": "a"
+      "correctOptionId": "false"
     },
     {
-      "id": "react-key",
+      "id": "ts-code-output-narrowing",
       "kind": "battle",
-      "technologyId": "react",
+      "technologyId": "typescript",
+      "format": "codeOutput",
       "prompt": {
-        "ru": "Зачем элементам списка нужен стабильный key?",
-        "en": "Why do list items need a stable key?"
+        "ru": "Какое значение вернёт функция?",
+        "en": "What value does the function return?"
       },
-      "code": null,
-      "options": [
-        { "id": "a", "label": { "ru": "Для CSS-селектора", "en": "For a CSS selector" } },
-        { "id": "b", "label": { "ru": "Для сопоставления элементов при обновлении", "en": "To match elements between renders" } },
-        { "id": "c", "label": { "ru": "Для передачи props", "en": "To pass props" } },
-        { "id": "d", "label": { "ru": "Для сортировки массива", "en": "To sort the array" } }
-      ],
-      "correctOptionId": "b"
-    },
-    {
-      "id": "react-effect",
-      "kind": "battle",
-      "technologyId": "react",
-      "prompt": {
-        "ru": "Где следует выполнять синхронизацию с внешней системой? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
-        "en": "Where should synchronization with an external system happen? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
-      },
-      "code": null,
+      "code": "function size(value: string | number) {\n  return typeof value === 'string' ? value.length : value * 2;\n}\nsize(5);",
       "options": [
         {
           "id": "a",
           "label": {
-            "ru": "В useEffect — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "In useEffect — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "5",
+            "en": "5"
           }
         },
         {
           "id": "b",
           "label": {
-            "ru": "В useMemo — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "In useMemo — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "\"5\"",
+            "en": "\"5\""
           }
         },
         {
           "id": "c",
           "label": {
-            "ru": "В JSX — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "In JSX — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "10",
+            "en": "10"
           }
         },
         {
           "id": "d",
           "label": {
-            "ru": "В reducer — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "In a reducer — an expanded answer describing the expected behavior in a complex production interface"
-          }
-        }
-      ],
-      "correctOptionId": "a"
-    },
-    {
-      "id": "vue-computed",
-      "kind": "battle",
-      "technologyId": "vue",
-      "prompt": {
-        "ru": "Что использовать для производного реактивного значения?",
-        "en": "What should be used for a derived reactive value?"
-      },
-      "code": null,
-      "options": [
-        { "id": "a", "label": { "ru": "computed", "en": "computed" } },
-        { "id": "b", "label": { "ru": "watchEffect только", "en": "watchEffect only" } },
-        { "id": "c", "label": { "ru": "provide", "en": "provide" } },
-        { "id": "d", "label": { "ru": "onMounted", "en": "onMounted" } }
-      ],
-      "correctOptionId": "a"
-    },
-    {
-      "id": "vue-key",
-      "kind": "battle",
-      "technologyId": "vue",
-      "prompt": {
-        "ru": "Какая директива выводит список элементов? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
-        "en": "Which directive renders a list of items? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
-      },
-      "code": null,
-      "options": [
-        {
-          "id": "a",
-          "label": {
-            "ru": "v-if — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "v-if — an expanded answer describing the expected behavior in a complex production interface"
-          }
-        },
-        {
-          "id": "b",
-          "label": {
-            "ru": "v-bind — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "v-bind — an expanded answer describing the expected behavior in a complex production interface"
-          }
-        },
-        {
-          "id": "c",
-          "label": {
-            "ru": "v-for — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "v-for — an expanded answer describing the expected behavior in a complex production interface"
-          }
-        },
-        {
-          "id": "d",
-          "label": {
-            "ru": "v-model — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "v-model — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "Ошибка TypeScript",
+            "en": "TypeScript error"
           }
         }
       ],
       "correctOptionId": "c"
     },
     {
-      "id": "git-rebase",
+      "id": "ts-find-bug-interface",
       "kind": "battle",
-      "technologyId": "git",
+      "technologyId": "typescript",
+      "format": "findBug",
       "prompt": {
-        "ru": "Какая команда переносит локальные коммиты поверх обновлённой ветки?",
-        "en": "Which command reapplies local commits on top of an updated branch?"
+        "ru": "Какая строка нарушает контракт интерфейса User?",
+        "en": "Which line violates the User interface contract?"
       },
-      "code": null,
+      "code": "1  interface User {\n2    id: number;\n3    name: string;\n4  }\n5  const user: User = { id: '42',\n6    name: 'Ada' };",
       "options": [
-        { "id": "a", "label": { "ru": "git stash", "en": "git stash" } },
-        { "id": "b", "label": { "ru": "git rebase", "en": "git rebase" } },
-        { "id": "c", "label": { "ru": "git reset", "en": "git reset" } },
-        { "id": "d", "label": { "ru": "git tag", "en": "git tag" } }
+        {
+          "id": "l1",
+          "label": {
+            "ru": "Строка 1 — interface User",
+            "en": "Строка 1 — interface User"
+          }
+        },
+        {
+          "id": "l2",
+          "label": {
+            "ru": "Строка 2 — id: number",
+            "en": "Строка 2 — id: number"
+          }
+        },
+        {
+          "id": "l3",
+          "label": {
+            "ru": "Строка 5 — id: '42'",
+            "en": "Строка 5 — id: '42'"
+          }
+        },
+        {
+          "id": "l4",
+          "label": {
+            "ru": "Строка 6 — name: 'Ada'",
+            "en": "Строка 6 — name: 'Ada'"
+          }
+        }
+      ],
+      "correctOptionId": "l3"
+    },
+    {
+      "id": "ts-choose-fragment-guard",
+      "kind": "battle",
+      "technologyId": "typescript",
+      "format": "chooseFragment",
+      "prompt": {
+        "ru": "Какой фрагмент корректно сужает unknown до строки?",
+        "en": "Which fragment correctly narrows unknown to string?"
+      },
+      "code": "function print(value: unknown) {\n  // Выберите проверку / Choose a guard\n}",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "if (value) value.toUpperCase();",
+            "en": "if (value) value.toUpperCase();"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "if (typeof value === 'string') value.toUpperCase();",
+            "en": "if (typeof value === 'string') value.toUpperCase();"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "value as any as string;",
+            "en": "value as any as string;"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "if (value === String) value.toUpperCase();",
+            "en": "if (value === String) value.toUpperCase();"
+          }
+        }
       ],
       "correctOptionId": "b"
     },
     {
-      "id": "git-stage",
+      "id": "ts-order-steps-api",
       "kind": "battle",
-      "technologyId": "git",
+      "technologyId": "typescript",
+      "format": "orderSteps",
       "prompt": {
-        "ru": "Какая команда добавляет изменения в индекс? Выберите наиболее корректное решение для большого production-интерфейса, учитывая доступность, предсказуемость поведения, поддержку командой и возможное расширение требований в будущем.",
-        "en": "Which command adds changes to the staging area? Choose the most appropriate solution for a large production interface, considering accessibility, predictable behavior, team maintenance, and future requirement changes."
+        "ru": "Расположите шаги безопасной обработки ответа API.",
+        "en": "Order the steps for safely handling an API response."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "d",
+          "label": {
+            "ru": "Преобразовать DTO в доменную модель",
+            "en": "Map the DTO to the domain model"
+          }
+        },
+        {
+          "id": "a",
+          "label": {
+            "ru": "Получить данные как unknown",
+            "en": "Receive data as unknown"
+          }
+        },
+        {
+          "id": "e",
+          "label": {
+            "ru": "Передать модель потребителю",
+            "en": "Pass the model to the consumer"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "Сузить данные до DTO",
+            "en": "Narrow the data to the DTO"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Проверить структуру валидатором",
+            "en": "Validate the structure"
+          }
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "react-quiz-key",
+      "kind": "battle",
+      "technologyId": "react",
+      "format": "quiz",
+      "prompt": {
+        "ru": "Зачем React нужен key при рендеринге списка?",
+        "en": "Why does React need a key when rendering a list?"
       },
       "code": null,
       "options": [
         {
           "id": "a",
           "label": {
-            "ru": "git add — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "git add — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "Для CSS-селектора",
+            "en": "For a CSS selector"
           }
         },
         {
           "id": "b",
           "label": {
-            "ru": "git push — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "git push — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "Для идентификации элементов между рендерами",
+            "en": "To identify items between renders"
           }
         },
         {
           "id": "c",
           "label": {
-            "ru": "git log — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "git log — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "Для передачи props",
+            "en": "To pass props"
           }
         },
         {
           "id": "d",
           "label": {
-            "ru": "git switch — развёрнутый вариант ответа с пояснением предполагаемого поведения в сложном пользовательском интерфейсе",
-            "en": "git switch — an expanded answer describing the expected behavior in a complex production interface"
+            "ru": "Для сортировки массива",
+            "en": "To sort the array"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "react-true-false-state",
+      "kind": "battle",
+      "technologyId": "react",
+      "format": "trueFalse",
+      "prompt": {
+        "ru": "Прямое изменение объекта state гарантированно запускает новый рендер.",
+        "en": "Mutating a state object directly always triggers a new render."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "true",
+          "label": {
+            "ru": "ВЕРНО",
+            "en": "TRUE"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "ru": "НЕВЕРНО",
+            "en": "FALSE"
+          }
+        }
+      ],
+      "correctOptionId": "false"
+    },
+    {
+      "id": "react-code-output-batching",
+      "kind": "battle",
+      "technologyId": "react",
+      "format": "codeOutput",
+      "prompt": {
+        "ru": "Какое значение покажет кнопка после одного клика?",
+        "en": "What value will the button show after one click?"
+      },
+      "code": "function Counter() {\n  const [count, setCount] = useState(0);\n  return <button onClick={() => {\n    setCount(count + 1);\n    setCount(count + 1);\n  }}>{count}</button>;\n}",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "0",
+            "en": "0"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "1",
+            "en": "1"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "2",
+            "en": "2"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "Ошибка",
+            "en": "Error"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "react-find-bug-effect",
+      "kind": "battle",
+      "technologyId": "react",
+      "format": "findBug",
+      "prompt": {
+        "ru": "Какая строка вызывает бесконечный цикл обновлений?",
+        "en": "Which line causes an infinite update loop?"
+      },
+      "code": "1  useEffect(() => {\n2    setCount(count + 1);\n3  }, [count]);",
+      "options": [
+        {
+          "id": "l1",
+          "label": {
+            "ru": "Строка 1 — useEffect",
+            "en": "Строка 1 — useEffect"
+          }
+        },
+        {
+          "id": "l2",
+          "label": {
+            "ru": "Строка 2 — setCount(count + 1)",
+            "en": "Строка 2 — setCount(count + 1)"
+          }
+        },
+        {
+          "id": "l3",
+          "label": {
+            "ru": "Строка 3 — зависимость [count]",
+            "en": "Строка 3 — зависимость [count]"
+          }
+        },
+        {
+          "id": "l4",
+          "label": {
+            "ru": "Строки 2 и 3 вместе",
+            "en": "Lines 2 and 3 together"
+          }
+        }
+      ],
+      "correctOptionId": "l4"
+    },
+    {
+      "id": "react-choose-fragment-state",
+      "kind": "battle",
+      "technologyId": "react",
+      "format": "chooseFragment",
+      "prompt": {
+        "ru": "Какой фрагмент безопасно увеличивает state на основе прошлого значения?",
+        "en": "Which fragment safely increments state from its previous value?"
+      },
+      "code": "const [count, setCount] = useState(0);\n// Увеличить счётчик / Increment",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "setCount(count++);",
+            "en": "setCount(count++);"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "setCount(count + 1);",
+            "en": "setCount(count + 1);"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "setCount(current => current + 1);",
+            "en": "setCount(current => current + 1);"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "count = count + 1;",
+            "en": "count = count + 1;"
+          }
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "react-order-steps-render",
+      "kind": "battle",
+      "technologyId": "react",
+      "format": "orderSteps",
+      "prompt": {
+        "ru": "Расположите этапы обновления React-компонента.",
+        "en": "Order the stages of a React component update."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "c",
+          "label": {
+            "ru": "React вызывает компонент повторно",
+            "en": "React calls the component again"
+          }
+        },
+        {
+          "id": "e",
+          "label": {
+            "ru": "Браузер отображает обновление",
+            "en": "The browser paints the update"
+          }
+        },
+        {
+          "id": "a",
+          "label": {
+            "ru": "Пользователь вызывает обработчик",
+            "en": "The user triggers an event handler"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "React сравнивает деревья",
+            "en": "React reconciles the trees"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Обновление state ставится в очередь",
+            "en": "The state update is queued"
+          }
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "vue-quiz-computed",
+      "kind": "battle",
+      "technologyId": "vue",
+      "format": "quiz",
+      "prompt": {
+        "ru": "Что использовать для производного реактивного значения?",
+        "en": "What should be used for a derived reactive value?"
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "computed",
+            "en": "computed"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "watchEffect only",
+            "en": "watchEffect only"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "provide",
+            "en": "provide"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "onMounted",
+            "en": "onMounted"
           }
         }
       ],
       "correctOptionId": "a"
+    },
+    {
+      "id": "vue-true-false-props",
+      "kind": "battle",
+      "technologyId": "vue",
+      "format": "trueFalse",
+      "prompt": {
+        "ru": "В Vue дочерний компонент должен напрямую изменять полученный prop.",
+        "en": "In Vue, a child component should mutate a received prop directly."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "true",
+          "label": {
+            "ru": "ВЕРНО",
+            "en": "TRUE"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "ru": "НЕВЕРНО",
+            "en": "FALSE"
+          }
+        }
+      ],
+      "correctOptionId": "false"
+    },
+    {
+      "id": "vue-code-output-computed",
+      "kind": "battle",
+      "technologyId": "vue",
+      "format": "codeOutput",
+      "prompt": {
+        "ru": "Какое значение имеет doubled?",
+        "en": "What is the value of doubled?"
+      },
+      "code": "const count = ref(2);\nconst doubled = computed(() => count.value * 2);\nconsole.log(doubled.value);",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "2",
+            "en": "2"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "4",
+            "en": "4"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "ref(4)",
+            "en": "ref(4)"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "undefined",
+            "en": "undefined"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "vue-find-bug-ref",
+      "kind": "battle",
+      "technologyId": "vue",
+      "format": "findBug",
+      "prompt": {
+        "ru": "В какой строке потеряна реактивность ref?",
+        "en": "Which line incorrectly accesses a ref outside a template?"
+      },
+      "code": "1  const count = ref(0);\n2  count++;\n3  console.log(count.value);",
+      "options": [
+        {
+          "id": "l1",
+          "label": {
+            "ru": "Строка 1 — ref(0)",
+            "en": "Строка 1 — ref(0)"
+          }
+        },
+        {
+          "id": "l2",
+          "label": {
+            "ru": "Строка 2 — count++",
+            "en": "Строка 2 — count++"
+          }
+        },
+        {
+          "id": "l3",
+          "label": {
+            "ru": "Строка 3 — console.log",
+            "en": "Строка 3 — console.log"
+          }
+        },
+        {
+          "id": "l4",
+          "label": {
+            "ru": "Ошибки нет",
+            "en": "There is no bug"
+          }
+        }
+      ],
+      "correctOptionId": "l2"
+    },
+    {
+      "id": "vue-choose-fragment-event",
+      "kind": "battle",
+      "technologyId": "vue",
+      "format": "chooseFragment",
+      "prompt": {
+        "ru": "Какой фрагмент корректно отправляет событие save из setup?",
+        "en": "Which fragment correctly emits a save event from setup?"
+      },
+      "code": "<script setup>\n// Отправить событие save / Emit save\n</script>",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "const emit = defineEmits(['save']); emit('save');",
+            "en": "const emit = defineEmits(['save']); emit('save');"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "this.$emit('save');",
+            "en": "this.$emit('save');"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "props.emit('save');",
+            "en": "props.emit('save');"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "defineProps(['save'])();",
+            "en": "defineProps(['save'])();"
+          }
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "vue-order-steps-component",
+      "kind": "battle",
+      "technologyId": "vue",
+      "format": "orderSteps",
+      "prompt": {
+        "ru": "Расположите этапы передачи изменения от ребёнка родителю.",
+        "en": "Order the steps for sending a change from child to parent."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "e",
+          "label": {
+            "ru": "Родитель обновляет своё состояние",
+            "en": "The parent updates its state"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Ребёнок объявляет emit",
+            "en": "The child declares the emit"
+          }
+        },
+        {
+          "id": "a",
+          "label": {
+            "ru": "Родитель передаёт prop",
+            "en": "The parent passes a prop"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "Родитель обрабатывает событие",
+            "en": "The parent handles the event"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "Ребёнок вызывает emit",
+            "en": "The child emits the event"
+          }
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "git-quiz-rebase",
+      "kind": "battle",
+      "technologyId": "git",
+      "format": "quiz",
+      "prompt": {
+        "ru": "Какая команда переносит локальные коммиты поверх обновлённой ветки?",
+        "en": "Which command reapplies local commits on top of an updated branch?"
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "git stash",
+            "en": "git stash"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "git rebase",
+            "en": "git rebase"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "git reset",
+            "en": "git reset"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "git tag",
+            "en": "git tag"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "git-true-false-commit",
+      "kind": "battle",
+      "technologyId": "git",
+      "format": "trueFalse",
+      "prompt": {
+        "ru": "Команда git commit автоматически отправляет изменения в удалённый репозиторий.",
+        "en": "The git commit command automatically sends changes to a remote repository."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "true",
+          "label": {
+            "ru": "ВЕРНО",
+            "en": "TRUE"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "ru": "НЕВЕРНО",
+            "en": "FALSE"
+          }
+        }
+      ],
+      "correctOptionId": "false"
+    },
+    {
+      "id": "git-code-output-status",
+      "kind": "battle",
+      "technologyId": "git",
+      "format": "codeOutput",
+      "prompt": {
+        "ru": "Какой статус будет у app.ts после этих команд?",
+        "en": "What status will app.ts have after these commands?"
+      },
+      "code": "echo \"export const value = 1\" > app.ts\ngit add app.ts\ngit status --short",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "Untracked",
+            "en": "Untracked"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Modified, not staged",
+            "en": "Modified, not staged"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "Staged for commit",
+            "en": "Staged for commit"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "Committed",
+            "en": "Committed"
+          }
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    {
+      "id": "git-find-bug-force",
+      "kind": "battle",
+      "technologyId": "git",
+      "format": "findBug",
+      "prompt": {
+        "ru": "Какая строка опасно переписывает историю общей ветки?",
+        "en": "Which line dangerously rewrites the history of a shared branch?"
+      },
+      "code": "1  git switch main\n2  git pull\n3  git reset --hard HEAD~2\n4  git push --force",
+      "options": [
+        {
+          "id": "l1",
+          "label": {
+            "ru": "Строка 1 — git switch main",
+            "en": "Строка 1 — git switch main"
+          }
+        },
+        {
+          "id": "l2",
+          "label": {
+            "ru": "Строка 2 — git pull",
+            "en": "Строка 2 — git pull"
+          }
+        },
+        {
+          "id": "l3",
+          "label": {
+            "ru": "Строка 3 — git reset --hard HEAD~2",
+            "en": "Строка 3 — git reset --hard HEAD~2"
+          }
+        },
+        {
+          "id": "l4",
+          "label": {
+            "ru": "Строка 4 — git push --force",
+            "en": "Строка 4 — git push --force"
+          }
+        },
+        {
+          "id": "l5",
+          "label": {
+            "ru": "Строки 3 и 4 вместе",
+            "en": "Lines 3 and 4 together"
+          }
+        }
+      ],
+      "correctOptionId": "l5"
+    },
+    {
+      "id": "git-choose-fragment-branch",
+      "kind": "battle",
+      "technologyId": "git",
+      "format": "chooseFragment",
+      "prompt": {
+        "ru": "Какой фрагмент создаёт новую ветку и сразу переключается на неё?",
+        "en": "Which fragment creates a branch and switches to it immediately?"
+      },
+      "code": "git status\n# Создать feature / Create feature",
+      "options": [
+        {
+          "id": "a",
+          "label": {
+            "ru": "git branch feature",
+            "en": "git branch feature"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "git switch -c feature",
+            "en": "git switch -c feature"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "git checkout main",
+            "en": "git checkout main"
+          }
+        },
+        {
+          "id": "d",
+          "label": {
+            "ru": "git merge feature",
+            "en": "git merge feature"
+          }
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "git-order-steps-feature",
+      "kind": "battle",
+      "technologyId": "git",
+      "format": "orderSteps",
+      "prompt": {
+        "ru": "Расположите безопасный рабочий процесс для небольшой задачи.",
+        "en": "Order a safe workflow for a small change."
+      },
+      "code": null,
+      "options": [
+        {
+          "id": "d",
+          "label": {
+            "ru": "Создать commit",
+            "en": "Create a commit"
+          }
+        },
+        {
+          "id": "a",
+          "label": {
+            "ru": "Обновить основную ветку",
+            "en": "Update the main branch"
+          }
+        },
+        {
+          "id": "e",
+          "label": {
+            "ru": "Отправить ветку и открыть PR",
+            "en": "Push the branch and open a PR"
+          }
+        },
+        {
+          "id": "c",
+          "label": {
+            "ru": "Добавить проверенные изменения в индекс",
+            "en": "Stage the verified changes"
+          }
+        },
+        {
+          "id": "b",
+          "label": {
+            "ru": "Создать рабочую ветку",
+            "en": "Create a working branch"
+          }
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
     }
   ]
 }

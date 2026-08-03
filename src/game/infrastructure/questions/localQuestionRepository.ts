@@ -7,7 +7,7 @@ import {
 } from "./localQuestionCatalog";
 
 function cloneQuestion(question: ChallengeQuestion): ChallengeQuestion {
-  return {
+  const base = {
     ...question,
     prompt: { ...question.prompt },
     options: question.options.map((option) => ({
@@ -15,6 +15,10 @@ function cloneQuestion(question: ChallengeQuestion): ChallengeQuestion {
       label: { ...option.label },
     })),
   };
+
+  return question.format === "orderSteps"
+    ? { ...base, format: "orderSteps", correctOptionIds: [...question.correctOptionIds] }
+    : { ...base, format: question.format, correctOptionId: question.correctOptionId };
 }
 
 export class LocalQuestionRepository implements QuestionRepository {

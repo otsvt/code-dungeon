@@ -1,4 +1,5 @@
 import { TECHNOLOGIES } from "@/entities/technology";
+import { BATTLE_QUESTION_FORMATS } from "../../domain/challenge/types";
 import {
   type LocalizedTextDto,
   type QuestionCatalogDto,
@@ -45,6 +46,14 @@ function readOption(value: unknown, path: string): QuestionOptionDto {
   };
 }
 
+function readStringArray(value: unknown, path: string): string[] {
+  if (!Array.isArray(value) || value.length === 0) {
+    fail(path, "expected a non-empty array");
+  }
+
+  return value.map((item, index) => readString(item, `${path}[${index}]`));
+}
+
 function readQuestion(
   value: unknown,
   path: string,
@@ -53,13 +62,22 @@ function readQuestion(
   const question = readObject(value, path);
   const id = readString(question.id, `${path}.id`);
   const kind = readString(question.kind, `${path}.kind`);
+  const format = readString(question.format, `${path}.format`);
 
   if (kind !== expectedKind) {
     fail(`${path}.kind`, `expected "${expectedKind}"`);
   }
 
-  if (!Array.isArray(question.options) || question.options.length === 0) {
-    fail(`${path}.options`, "expected a non-empty array");
+  if (!BATTLE_QUESTION_FORMATS.some((candidate) => candidate === format)) {
+    fail(`${path}.format`, `unsupported question format "${format}"`);
+  }
+
+  if (expectedKind === "hr" && format !== "quiz") {
+    fail(`${path}.format`, "HR questions must use quiz format");
+  }
+
+  if (!Array.isArray(question.options) || question.options.length < 2) {
+    fail(`${path}.options`, "expected at least two options");
   }
 
   const options = question.options.map((option, index) =>
@@ -75,29 +93,68 @@ function readQuestion(
     optionIds.add(option.id);
   }
 
-  const correctOptionId = readString(
-    question.correctOptionId,
-    `${path}.correctOptionId`,
-  );
-
-  if (!optionIds.has(correctOptionId)) {
-    fail(
-      `${path}.correctOptionId`,
-      `"${correctOptionId}" does not reference an existing option`,
-    );
+  if (format === "trueFalse") {
+    if (options.length !== 2 || !optionIds.has("true") || !optionIds.has("false")) {
+      fail(`${path}.options`, 'trueFalse requires exactly "true" and "false" options');
+    }
   }
 
   const code =
     question.code === null || question.code === undefined
       ? null
       : readString(question.code, `${path}.code`);
+
+  if (["codeOutput", "findBug", "chooseFragment"].includes(format) && code === null) {
+    fail(`${path}.code`, `${format} requires a code sample`);
+  }
+
   const baseQuestion = {
     id,
     prompt: readLocalizedText(question.prompt, `${path}.prompt`),
     code,
     options,
-    correctOptionId,
   };
+
+  const answer =
+    format === "orderSteps"
+      ? (() => {
+          const correctOptionIds = readStringArray(
+            question.correctOptionIds,
+            `${path}.correctOptionIds`,
+          );
+          const uniqueCorrectOptionIds = new Set(correctOptionIds);
+
+          if (
+            correctOptionIds.length !== options.length ||
+            uniqueCorrectOptionIds.size !== options.length ||
+            correctOptionIds.some((optionId) => !optionIds.has(optionId))
+          ) {
+            fail(
+              `${path}.correctOptionIds`,
+              "must contain every option id exactly once",
+            );
+          }
+
+          return { format: "orderSteps" as const, correctOptionIds };
+        })()
+      : (() => {
+          const correctOptionId = readString(
+            question.correctOptionId,
+            `${path}.correctOptionId`,
+          );
+
+          if (!optionIds.has(correctOptionId)) {
+            fail(
+              `${path}.correctOptionId`,
+              `"${correctOptionId}" does not reference an existing option`,
+            );
+          }
+
+          return {
+            format: format as Exclude<typeof format, "orderSteps">,
+            correctOptionId,
+          };
+        })();
 
   if (expectedKind === "hr") {
     if (question.technologyId !== undefined) {
@@ -106,18 +163,14 @@ function readQuestion(
 
     return {
       ...baseQuestion,
+      ...answer,
       kind: "hr",
-    };
+      format: "quiz",
+    } as QuestionDto;
   }
 
-  const technologyId = readString(
-    question.technologyId,
-    `${path}.technologyId`,
-  );
-
-  const technology = TECHNOLOGIES.find(
-    (candidate) => candidate.id === technologyId,
-  );
+  const technologyId = readString(question.technologyId, `${path}.technologyId`);
+  const technology = TECHNOLOGIES.find((candidate) => candidate.id === technologyId);
 
   if (!technology) {
     fail(`${path}.technologyId`, `unsupported technology "${technologyId}"`);
@@ -125,9 +178,10 @@ function readQuestion(
 
   return {
     ...baseQuestion,
+    ...answer,
     kind: "battle",
     technologyId: technology.id,
-  };
+  } as QuestionDto;
 }
 
 export function parseQuestionCatalog(
@@ -136,8 +190,8 @@ export function parseQuestionCatalog(
 ): QuestionCatalogDto {
   const catalog = readObject(value, "catalog");
 
-  if (catalog.version !== 1) {
-    fail("catalog.version", "expected version 1");
+  if (catalog.version !== 2) {
+    fail("catalog.version", "expected version 2");
   }
 
   if (!Array.isArray(catalog.questions)) {
@@ -157,8 +211,5 @@ export function parseQuestionCatalog(
     questionIds.add(question.id);
   }
 
-  return {
-    version: 1,
-    questions,
-  };
+  return { version: 2, questions };
 }
