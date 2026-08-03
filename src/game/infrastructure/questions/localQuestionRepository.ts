@@ -24,11 +24,9 @@ function cloneQuestion(question: ChallengeQuestion): ChallengeQuestion {
 export class LocalQuestionRepository implements QuestionRepository {
   async getBattleQuestions(
     technologyId: TechnologyId,
-    count: number,
   ): Promise<ChallengeQuestion[]> {
     return getLocalBattleQuestions()
       .filter((question) => question.technologyId === technologyId)
-      .slice(0, count)
       .map(cloneQuestion);
   }
 

@@ -16,7 +16,35 @@ import {
   type ChallengeResult,
 } from "./types";
 
-const DEFAULT_BATTLE_QUESTION_COUNT = 7;
+const MIN_BATTLE_QUESTION_COUNT = 5;
+const MAX_BATTLE_QUESTION_COUNT = 10;
+
+function randomIndex(random: () => number, upperBound: number): number {
+  return Math.floor(Math.min(Math.max(random(), 0), 0.999999999999) * upperBound);
+}
+
+function selectRandomBattleQuestions<T>(
+  questions: readonly T[],
+  random: () => number,
+): T[] {
+  const requestedCount =
+    MIN_BATTLE_QUESTION_COUNT +
+    randomIndex(
+      random,
+      MAX_BATTLE_QUESTION_COUNT - MIN_BATTLE_QUESTION_COUNT + 1,
+    );
+  const shuffled = [...questions];
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = randomIndex(random, index + 1);
+    [shuffled[index], shuffled[swapIndex]] = [
+      shuffled[swapIndex],
+      shuffled[index],
+    ];
+  }
+
+  return shuffled.slice(0, Math.min(requestedCount, shuffled.length));
+}
 
 export type ChallengeSessionService = {
   start(request: ChallengeRequest): Promise<ActiveChallenge>;
@@ -33,12 +61,13 @@ export function createChallengeSessionService(
   return {
     async start(request) {
       if (request.kind === "battle") {
+        const questionPool = await repository.getBattleQuestions(
+          request.technologyId,
+        );
+
         return {
           ...request,
-          questions: await repository.getBattleQuestions(
-            request.technologyId,
-            DEFAULT_BATTLE_QUESTION_COUNT,
-          ),
+          questions: selectRandomBattleQuestions(questionPool, random),
         };
       }
 

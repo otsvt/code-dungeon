@@ -24,8 +24,8 @@ function HighlightedCode({ code, language, embedded = false }: { code: string; l
       CodeTag={embedded ? "span" : "code"}
       className={
         embedded
-          ? "max-h-80 overflow-auto font-mono text-sm leading-6"
-          : "mt-4 max-h-58 overflow-auto border-l-2 border-bronze font-mono text-sm leading-6 shadow-inner"
+          ? "max-h-80 overflow-auto scrollbar-primary font-mono text-sm leading-6"
+          : "mt-4 max-h-58 overflow-auto scrollbar-primary border-l-2 border-bronze font-mono text-sm leading-6 shadow-inner"
       }
       customStyle={{
         marginTop: embedded ? 0 : undefined,
@@ -48,7 +48,6 @@ const COPY = {
     of: "ИЗ",
     next: "СЛЕДУЮЩИЙ ВОПРОС",
     finish: "ЗАВЕРШИТЬ ИСПЫТАНИЕ",
-    interviewer: "ДУХ ИНТЕРВЬЮЕР",
     status: "СЕАНС АКТИВЕН",
     note: "Выберите ответ и подтвердите его. После перехода изменить выбор нельзя.",
     hrEyebrow: "ИНТЕРВЬЮ / HR ROOM",
@@ -80,7 +79,6 @@ const COPY = {
     of: "OF",
     next: "NEXT QUESTION",
     finish: "FINISH CHALLENGE",
-    interviewer: "SPIRIT INTERVIEWER",
     status: "SESSION ACTIVE",
     note: "Choose and confirm an answer. You cannot change it after moving on.",
     hrEyebrow: "INTERVIEW / HR ROOM",
@@ -410,7 +408,6 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
 
         <aside className="relative flex min-h-120 flex-col overflow-hidden border-l border-sandy bg-deep px-6 py-6 text-background">
           <div className="absolute inset-x-0 top-0 h-px bg-accent/70" />
-          <p className="font-mono text-xs font-semibold tracking-widest text-accent">{copy.interviewer}</p>
           <div className="mt-8 flex flex-1 flex-col items-center justify-center">
             <div className="relative flex h-32 w-32 items-center justify-center rounded-full border border-sandy/65 bg-effect-buff-bg shadow-2xl">
               <div className="absolute inset-2 rounded-full border border-sandy/25" />
