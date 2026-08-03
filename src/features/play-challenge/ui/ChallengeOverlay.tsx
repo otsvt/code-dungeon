@@ -14,16 +14,24 @@ type ChallengeOverlayProps = {
 type QuestionViewModel = ChallengeViewModel["questions"][number];
 type ChallengeOptionViewModel = QuestionViewModel["options"][number];
 
-function HighlightedCode({ code, language }: { code: string; language: string }) {
+function HighlightedCode({ code, language, embedded = false }: { code: string; language: string; embedded?: boolean }) {
   return (
     <SyntaxHighlighter
       language={language}
       style={vscDarkPlus}
       wrapLongLines={false}
-      className="mt-4 max-h-58 overflow-auto border-l-2 border-bronze font-mono text-sm leading-6 shadow-inner"
+      PreTag={embedded ? "span" : "pre"}
+      CodeTag={embedded ? "span" : "code"}
+      className={
+        embedded
+          ? "max-h-80 overflow-auto font-mono text-sm leading-6"
+          : "mt-4 max-h-58 overflow-auto border-l-2 border-bronze font-mono text-sm leading-6 shadow-inner"
+      }
       customStyle={{
+        marginTop: embedded ? 0 : undefined,
         marginBottom: 0,
-        padding: "1rem 1.25rem",
+        display: embedded ? "block" : undefined,
+        padding: embedded ? "0.875rem 1rem" : "1rem 1.25rem",
         background: "#242623F7",
       }}
       codeTagProps={{ className: "font-mono text-sm leading-6" }}
@@ -53,6 +61,7 @@ const COPY = {
       codeOutput: "РЕЗУЛЬТАТ КОДА",
       findBug: "НАЙДИ ОШИБКУ",
       chooseFragment: "ВЫБЕРИ ФРАГМЕНТ",
+      chooseCode: "ВЫБЕРИ КОД",
       orderSteps: "ПОРЯДОК ШАГОВ",
     },
     instructions: {
@@ -61,6 +70,7 @@ const COPY = {
       codeOutput: "ВЫБЕРИТЕ РЕЗУЛЬТАТ ВЫПОЛНЕНИЯ",
       findBug: "УКАЖИТЕ СТРОКУ ИЛИ ПРИЧИНУ ОШИБКИ",
       chooseFragment: "ВЫБЕРИТЕ КОРРЕКТНЫЙ ФРАГМЕНТ",
+      chooseCode: "ВЫБЕРИТЕ ПРАВИЛЬНЫЙ КОД",
       orderSteps: "РАСПОЛОЖИТЕ ШАГИ В ПРАВИЛЬНОМ ПОРЯДКЕ",
     },
   },
@@ -83,6 +93,7 @@ const COPY = {
       codeOutput: "CODE OUTPUT",
       findBug: "FIND THE BUG",
       chooseFragment: "CHOOSE FRAGMENT",
+      chooseCode: "CHOOSE CODE",
       orderSteps: "ORDER STEPS",
     },
     instructions: {
@@ -91,6 +102,7 @@ const COPY = {
       codeOutput: "CHOOSE THE EXECUTION RESULT",
       findBug: "IDENTIFY THE BUGGY LINE OR CAUSE",
       chooseFragment: "CHOOSE THE CORRECT FRAGMENT",
+      chooseCode: "CHOOSE THE CORRECT CODE",
       orderSteps: "PUT THE STEPS IN THE CORRECT ORDER",
     },
   },
@@ -121,10 +133,8 @@ function OptionButton({
     >
       <span
         className={[
-          "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border font-mono text-[10px] font-bold uppercase",
-          selected
-            ? "border-accent text-accent"
-            : "border-sandy/60 text-bronze group-hover:border-bronze",
+          "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border font-mono text-xs font-bold uppercase",
+          selected ? "border-accent text-accent" : "border-sandy/60 text-bronze group-hover:border-bronze",
         ].join(" ")}
       >
         {option.id.replace(/^l/, "")}
@@ -136,6 +146,49 @@ function OptionButton({
         ].join(" ")}
       >
         {option.label}
+      </span>
+    </button>
+  );
+}
+
+function CodeOptionButton({
+  option,
+  selected,
+  language,
+  onSelect,
+}: {
+  option: ChallengeOptionViewModel;
+  selected: boolean;
+  language: string;
+  onSelect: () => void;
+}) {
+  if (!option.code) {
+    return null;
+  }
+
+  return (
+    <button
+      type="button"
+      aria-label={option.label}
+      aria-pressed={selected}
+      onClick={onSelect}
+      className={[
+        "group flex w-full min-w-0 items-start gap-3 border p-3 text-left transition duration-150",
+        selected
+          ? "border-l-4 border-bronze bg-deep shadow-inner"
+          : "border-sandy/45 bg-background/65 hover:border-sandy",
+      ].join(" ")}
+    >
+      <span
+        className={[
+          "flex h-7 w-7 shrink-0 items-center justify-center border font-mono text-xs font-bold uppercase",
+          selected ? "border-accent text-accent" : "border-sandy/60 text-bronze group-hover:border-bronze",
+        ].join(" ")}
+      >
+        {option.id}
+      </span>
+      <span className="min-w-0 flex-1 overflow-hidden">
+        <HighlightedCode code={option.code} language={language} embedded />
       </span>
     </button>
   );
@@ -174,10 +227,7 @@ function OrderStepsControl({
         }
 
         return (
-          <li
-            key={option.id}
-            className="flex min-h-14 items-center border border-sandy/45 bg-background/70"
-          >
+          <li key={option.id} className="flex min-h-14 items-center border border-sandy/45 bg-background/70">
             <span className="flex h-14 w-12 shrink-0 items-center justify-center border-r border-sandy/45 bg-deep font-mono text-xs font-bold text-accent">
               {String(index + 1).padStart(2, "0")}
             </span>
@@ -269,9 +319,7 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
     setQuestionIndex((current) => current + 1);
   };
 
-  const monospaceOptions = ["codeOutput", "findBug", "chooseFragment"].includes(
-    question.format,
-  );
+  const monospaceOptions = ["codeOutput", "findBug", "chooseFragment"].includes(question.format);
 
   return (
     <div className="challenge-overlay-enter absolute inset-0 z-30 flex items-center justify-center bg-overlay/85 px-6 pb-8 pt-32 backdrop-blur-sm">
@@ -279,12 +327,14 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
         role="dialog"
         aria-modal="true"
         aria-labelledby="challenge-title"
-        className="challenge-dialog grid w-full max-w-[1680px] overflow-hidden border border-sandy bg-background shadow-2xl"
+        className="challenge-dialog grid w-full max-w-fluid overflow-hidden border border-sandy bg-background shadow-2xl"
       >
         <div className="challenge-question-layout grid min-h-0 min-w-0">
           <header className="border-b border-sandy/55 px-7 py-3">
-            <div className="flex items-center gap-5 font-mono text-[10px] font-semibold tracking-widest text-pale">
-              <span>{copy.question} {questionIndex + 1} {copy.of} {challenge.questions.length}</span>
+            <div className="flex items-center gap-5 font-mono text-xs font-semibold tracking-widest text-pale">
+              <span>
+                {copy.question} {questionIndex + 1} {copy.of} {challenge.questions.length}
+              </span>
               <span className="h-4 w-px bg-sandy/55" />
               <span>{challenge.interviewerTitle.toUpperCase()}</span>
               <span className="h-4 w-px bg-sandy/55" />
@@ -298,22 +348,15 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
             </div>
           </header>
 
-          <div className="min-h-0 overflow-y-auto overscroll-contain px-7 py-5">
+          <div className="min-h-0 overflow-y-auto overscroll-contain scrollbar-primary px-7 py-5">
             <h1
               id="challenge-title"
               className="challenge-copy max-w-5xl wrap-break-word font-noto text-2xl font-semibold leading-tight text-dark"
             >
               {question.prompt}
             </h1>
-
-            {question.code && (
-              <HighlightedCode
-                code={question.code}
-                language={question.codeLanguage ?? "text"}
-              />
-            )}
-
-            <p className="mt-5 font-mono text-[10px] font-semibold tracking-widest text-bronze">
+            {question.code && <HighlightedCode code={question.code} language={question.codeLanguage ?? "text"} />}
+            <p className="mt-5 font-mono text-xs font-semibold tracking-widest text-bronze">
               {copy.instructions[question.format]}
             </p>
 
@@ -324,14 +367,20 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
                   optionIds={currentOrderedOptionIds}
                   onChange={setOrderedOptionIds}
                 />
+              ) : question.format === "chooseCode" ? (
+                <div className="flex flex-col gap-3">
+                  {question.options.map((option) => (
+                    <CodeOptionButton
+                      key={option.id}
+                      option={option}
+                      selected={selectedOptionId === option.id}
+                      language={question.codeLanguage ?? "text"}
+                      onSelect={() => setSelectedOptionId(option.id)}
+                    />
+                  ))}
+                </div>
               ) : (
-                <div
-                  className={
-                    question.format === "trueFalse"
-                      ? "grid grid-cols-2 gap-3"
-                      : "flex flex-col gap-2"
-                  }
-                >
+                <div className={question.format === "trueFalse" ? "grid grid-cols-2 gap-3" : "flex flex-col gap-2"}>
                   {question.options.map((option) => (
                     <OptionButton
                       key={option.id}

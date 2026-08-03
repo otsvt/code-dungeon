@@ -18,6 +18,7 @@ export type ChallengeViewModel = {
     options: Array<{
       id: string;
       label: string;
+      code?: string;
     }>;
   }>;
 };
@@ -65,7 +66,8 @@ export function createChallengeViewModel(
       format: question.format,
       prompt: question.prompt[locale],
       ...(question.code ? { code: question.code } : {}),
-      ...(question.code && challenge.kind === "battle"
+      ...((question.code || question.format === "chooseCode") &&
+      challenge.kind === "battle"
         ? {
             codeLanguage:
               question.codeLanguage ??
@@ -75,6 +77,7 @@ export function createChallengeViewModel(
       options: question.options.map((option) => ({
         id: option.id,
         label: option.label[locale],
+        ...(option.code ? { code: option.code } : {}),
       })),
     })),
   };

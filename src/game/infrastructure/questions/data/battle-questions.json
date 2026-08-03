@@ -1767,6 +1767,216 @@
         "d",
         "e"
       ]
+    },
+    {
+      "id": "html-choose-code-accessible-form",
+      "kind": "battle",
+      "technologyId": "html",
+      "format": "chooseCode",
+      "prompt": {
+        "ru": "Выберите корректную доступную разметку поля электронной почты.",
+        "en": "Choose the correct accessible markup for an email field."
+      },
+      "code": null,
+      "codeLanguage": "markup",
+      "options": [
+        {
+          "id": "a",
+          "label": { "ru": "Вариант A", "en": "Option A" },
+          "code": "<label for=\"email\">Email</label>\n<input\n  id=\"email\"\n  name=\"email\"\n  type=\"email\"\n  autocomplete=\"email\"\n  required\n>"
+        },
+        {
+          "id": "b",
+          "label": { "ru": "Вариант B", "en": "Option B" },
+          "code": "<label>Email</label>\n<input\n  id=\"email\"\n  name=\"email\"\n  type=\"text\"\n>"
+        },
+        {
+          "id": "c",
+          "label": { "ru": "Вариант C", "en": "Option C" },
+          "code": "<span>Email</span>\n<div\n  contenteditable=\"true\"\n  data-name=\"email\"\n></div>"
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "css-choose-code-responsive-grid",
+      "kind": "battle",
+      "technologyId": "css",
+      "format": "chooseCode",
+      "prompt": {
+        "ru": "Выберите сетку карточек, которая адаптируется без горизонтального переполнения.",
+        "en": "Choose the card grid that adapts without horizontal overflow."
+      },
+      "code": null,
+      "codeLanguage": "css",
+      "options": [
+        {
+          "id": "a",
+          "label": { "ru": "Вариант A", "en": "Option A" },
+          "code": ".grid {\n  display: grid;\n  grid-template-columns: repeat(3, 420px);\n  gap: 24px;\n}"
+        },
+        {
+          "id": "b",
+          "label": { "ru": "Вариант B", "en": "Option B" },
+          "code": ".grid {\n  display: grid;\n  grid-template-columns:\n    repeat(auto-fit, minmax(min(100%, 18rem), 1fr));\n  gap: 1rem;\n}"
+        },
+        {
+          "id": "c",
+          "label": { "ru": "Вариант C", "en": "Option C" },
+          "code": ".grid {\n  display: flex;\n  width: 1200px;\n  gap: 16px;\n}\n.grid > * { width: 400px; }"
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    {
+      "id": "javascript-choose-code-fetch",
+      "kind": "battle",
+      "technologyId": "javascript",
+      "format": "chooseCode",
+      "prompt": {
+        "ru": "Выберите функцию, которая корректно обрабатывает ошибочный HTTP-ответ.",
+        "en": "Choose the function that correctly handles an unsuccessful HTTP response."
+      },
+      "code": null,
+      "codeLanguage": "javascript",
+      "options": [
+        {
+          "id": "a",
+          "label": { "ru": "Вариант A", "en": "Option A" },
+          "code": "async function loadUser(id) {\n  const response = await fetch(`/api/users/${id}`);\n  if (!response.ok) {\n    throw new Error(`HTTP ${response.status}`);\n  }\n  return response.json();\n}"
+        },
+        {
+          "id": "b",
+          "label": { "ru": "Вариант B", "en": "Option B" },
+          "code": "async function loadUser(id) {\n  const response = fetch(`/api/users/${id}`);\n  return response.json();\n}"
+        },
+        {
+          "id": "c",
+          "label": { "ru": "Вариант C", "en": "Option C" },
+          "code": "function loadUser(id) {\n  return fetch(`/api/users/${id}`)\n    .then(response => response.body);\n}"
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "typescript-choose-code-guard",
+      "kind": "battle",
+      "technologyId": "typescript",
+      "format": "chooseCode",
+      "prompt": {
+        "ru": "Выберите корректный type guard для неизвестного значения.",
+        "en": "Choose the correct type guard for an unknown value."
+      },
+      "code": null,
+      "codeLanguage": "typescript",
+      "options": [
+        {
+          "id": "a",
+          "label": { "ru": "Вариант A", "en": "Option A" },
+          "code": "type User = { id: number; name: string };\n\nfunction isUser(value: unknown): value is User {\n  if (typeof value !== 'object' || value === null) return false;\n  const candidate = value as Record<string, unknown>;\n  return typeof candidate.id === 'number'\n    && typeof candidate.name === 'string';\n}"
+        },
+        {
+          "id": "b",
+          "label": { "ru": "Вариант B", "en": "Option B" },
+          "code": "type User = { id: number; name: string };\n\nfunction isUser(value: unknown): boolean {\n  return Boolean(value);\n}"
+        },
+        {
+          "id": "c",
+          "label": { "ru": "Вариант C", "en": "Option C" },
+          "code": "type User = { id: number; name: string };\n\nfunction isUser(value: any): value is User {\n  return value.id && value.name;\n}"
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "react-choose-code-effect-cleanup",
+      "kind": "battle",
+      "technologyId": "react",
+      "format": "chooseCode",
+      "prompt": {
+        "ru": "Выберите компонент, который корректно удаляет обработчик события.",
+        "en": "Choose the component that correctly removes its event listener."
+      },
+      "code": null,
+      "codeLanguage": "tsx",
+      "options": [
+        {
+          "id": "a",
+          "label": { "ru": "Вариант A", "en": "Option A" },
+          "code": "function EscapeListener() {\n  useEffect(() => {\n    const onKeyDown = (event: KeyboardEvent) => {\n      if (event.key === 'Escape') closeDialog();\n    };\n    window.addEventListener('keydown', onKeyDown);\n    return () => window.removeEventListener('keydown', onKeyDown);\n  }, []);\n\n  return null;\n}"
+        },
+        {
+          "id": "b",
+          "label": { "ru": "Вариант B", "en": "Option B" },
+          "code": "function EscapeListener() {\n  useEffect(() => {\n    window.addEventListener('keydown', event => {\n      if (event.key === 'Escape') closeDialog();\n    });\n  });\n\n  return null;\n}"
+        },
+        {
+          "id": "c",
+          "label": { "ru": "Вариант C", "en": "Option C" },
+          "code": "function EscapeListener() {\n  window.addEventListener('keydown', closeDialog);\n  return <button onClick={closeDialog}>Close</button>;\n}"
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "vue-choose-code-composable",
+      "kind": "battle",
+      "technologyId": "vue",
+      "format": "chooseCode",
+      "prompt": {
+        "ru": "Выберите composable, сохраняющий реактивность вычисляемого значения.",
+        "en": "Choose the composable that preserves reactivity for the computed value."
+      },
+      "code": null,
+      "codeLanguage": "javascript",
+      "options": [
+        {
+          "id": "a",
+          "label": { "ru": "Вариант A", "en": "Option A" },
+          "code": "export function useFullName(firstName, lastName) {\n  const fullName = computed(\n    () => `${firstName.value} ${lastName.value}`\n  );\n\n  return { fullName };\n}"
+        },
+        {
+          "id": "b",
+          "label": { "ru": "Вариант B", "en": "Option B" },
+          "code": "export function useFullName(firstName, lastName) {\n  const fullName =\n    `${firstName.value} ${lastName.value}`;\n\n  return { fullName };\n}"
+        },
+        {
+          "id": "c",
+          "label": { "ru": "Вариант C", "en": "Option C" },
+          "code": "export function useFullName(firstName, lastName) {\n  const { value: first } = firstName;\n  const { value: last } = lastName;\n\n  return { fullName: `${first} ${last}` };\n}"
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "git-choose-code-safe-update",
+      "kind": "battle",
+      "technologyId": "git",
+      "format": "chooseCode",
+      "prompt": {
+        "ru": "Выберите безопасную последовательность обновления feature-ветки перед отправкой.",
+        "en": "Choose the safe sequence for updating a feature branch before pushing."
+      },
+      "code": null,
+      "codeLanguage": "bash",
+      "options": [
+        {
+          "id": "a",
+          "label": { "ru": "Вариант A", "en": "Option A" },
+          "code": "git fetch origin\ngit rebase origin/main\nnpm test\ngit push --force-with-lease"
+        },
+        {
+          "id": "b",
+          "label": { "ru": "Вариант B", "en": "Option B" },
+          "code": "git reset --hard origin/main\ngit push --force"
+        },
+        {
+          "id": "c",
+          "label": { "ru": "Вариант C", "en": "Option C" },
+          "code": "git pull origin main\ngit push --force"
+        }
+      ],
+      "correctOptionId": "a"
     }
   ]
 }

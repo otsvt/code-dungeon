@@ -12,6 +12,7 @@ export const BATTLE_QUESTION_FORMATS = [
   "codeOutput",
   "findBug",
   "chooseFragment",
+  "chooseCode",
   "orderSteps",
 ] as const;
 
@@ -21,6 +22,7 @@ export type SingleChoiceQuestionFormat = Exclude<BattleQuestionFormat, "orderSte
 export type ChallengeOption = {
   id: string;
   label: LocalizedChallengeText;
+  code?: string;
 };
 
 type BaseChallengeQuestion = {

@@ -13,6 +13,7 @@ export type LocalizedTextDto = {
 export type QuestionOptionDto = {
   id: string;
   label: LocalizedTextDto;
+  code: string | null;
 };
 
 type BaseQuestionDto = {

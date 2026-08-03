@@ -15,6 +15,7 @@ export function mapQuestionDto(question: QuestionDto): ChallengeQuestion {
     options: question.options.map((option) => ({
       id: option.id,
       label: { ...option.label },
+      ...(option.code === null ? {} : { code: option.code }),
     })),
   };
 

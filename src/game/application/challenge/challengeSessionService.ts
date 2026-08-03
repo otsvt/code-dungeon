@@ -16,7 +16,7 @@ import {
   type ChallengeResult,
 } from "./types";
 
-const DEFAULT_BATTLE_QUESTION_COUNT = 6;
+const DEFAULT_BATTLE_QUESTION_COUNT = 7;
 
 export type ChallengeSessionService = {
   start(request: ChallengeRequest): Promise<ActiveChallenge>;

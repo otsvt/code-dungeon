@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import { useLocale } from "next-intl";
 import { CurrentRun } from "@/game/types/run";
-import {
-  ChallengeOverlay,
-  createChallengeViewModel,
-  useChallengeStore,
-} from "@/features/play-challenge";
+import { ChallengeOverlay, createChallengeViewModel, useChallengeStore } from "@/features/play-challenge";
 import { usePauseStore } from "@/features/pause-game";
 import { PauseConfirmationMenu } from "../components/PauseConfirmationMenu";
 import { PauseMenu } from "../components/PauseMenu";
@@ -24,16 +20,10 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
   const resumeGame = usePauseStore((state) => state.resumeGame);
   const closeConfirmation = usePauseStore((state) => state.closeConfirmation);
   const activeChallenge = useChallengeStore((state) => state.activeChallenge);
-  const isChallengeLoading = useChallengeStore(
-    (state) => state.isChallengeLoading,
-  );
+  const isChallengeLoading = useChallengeStore((state) => state.isChallengeLoading);
   const challengeError = useChallengeStore((state) => state.challengeError);
-  const completeChallenge = useChallengeStore(
-    (state) => state.completeChallenge,
-  );
-  const challengeViewModel = activeChallenge
-    ? createChallengeViewModel(activeChallenge, locale)
-    : null;
+  const completeChallenge = useChallengeStore((state) => state.completeChallenge);
+  const challengeViewModel = activeChallenge ? createChallengeViewModel(activeChallenge, locale) : null;
 
   useEffect(() => {
     if (!isPaused) {
@@ -58,12 +48,7 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
     };
   }, [closeConfirmation, confirmation, isPaused, resumeGame]);
 
-  if (
-    !challengeViewModel &&
-    !isChallengeLoading &&
-    !challengeError &&
-    !isPaused
-  ) {
+  if (!challengeViewModel && !isChallengeLoading && !challengeError && !isPaused) {
     return null;
   }
 

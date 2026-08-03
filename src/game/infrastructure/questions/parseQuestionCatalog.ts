@@ -43,6 +43,10 @@ function readOption(value: unknown, path: string): QuestionOptionDto {
   return {
     id: readString(option.id, `${path}.id`),
     label: readLocalizedText(option.label, `${path}.label`),
+    code:
+      option.code === null || option.code === undefined
+        ? null
+        : readString(option.code, `${path}.code`),
   };
 }
 
@@ -99,6 +103,13 @@ function readQuestion(
     }
   }
 
+  if (
+    format === "chooseCode" &&
+    options.some((option) => option.code === null)
+  ) {
+    fail(`${path}.options`, "chooseCode requires code in every option");
+  }
+
   const code =
     question.code === null || question.code === undefined
       ? null
@@ -108,7 +119,7 @@ function readQuestion(
       ? null
       : readString(question.codeLanguage, `${path}.codeLanguage`);
 
-  if (code === null && codeLanguage !== null) {
+  if (code === null && codeLanguage !== null && format !== "chooseCode") {
     fail(`${path}.codeLanguage`, "requires a code sample");
   }
 
