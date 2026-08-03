@@ -170,6 +170,8 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
+    await this.hrDesk.playEvaluation(visualImpression, reducedMotion);
+
     const appliedReward = useRunStore
       .getState()
       .completeChallengeRoom(result);
@@ -178,7 +180,6 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    await this.hrDesk.playEvaluation(visualImpression, reducedMotion);
     this.showDoorSigns();
   }
 
@@ -205,11 +206,12 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    const appliedReward = useRunStore
-      .getState()
-      .completeChallengeRoom(result);
+    const activeRun = useRunStore.getState().currentRun;
 
-    if (!appliedReward) {
+    if (
+      activeRun?.currentRoom.type !== "battle" ||
+      activeRun.currentRoom.id !== roomId
+    ) {
       return;
     }
 
@@ -225,6 +227,14 @@ export class GameScene extends Phaser.Scene {
         reducedMotion,
         result.reward.kind === "debuff",
       );
+    }
+
+    const appliedReward = useRunStore
+      .getState()
+      .completeChallengeRoom(result);
+
+    if (!appliedReward) {
+      return;
     }
 
     this.showDoorSigns();
