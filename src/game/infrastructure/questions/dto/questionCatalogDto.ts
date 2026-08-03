@@ -19,6 +19,7 @@ type BaseQuestionDto = {
   id: string;
   prompt: LocalizedTextDto;
   code: string | null;
+  codeLanguage: string | null;
   options: QuestionOptionDto[];
 };
 

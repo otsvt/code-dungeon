@@ -103,6 +103,14 @@ function readQuestion(
     question.code === null || question.code === undefined
       ? null
       : readString(question.code, `${path}.code`);
+  const codeLanguage =
+    question.codeLanguage === null || question.codeLanguage === undefined
+      ? null
+      : readString(question.codeLanguage, `${path}.codeLanguage`);
+
+  if (code === null && codeLanguage !== null) {
+    fail(`${path}.codeLanguage`, "requires a code sample");
+  }
 
   if (["codeOutput", "findBug", "chooseFragment"].includes(format) && code === null) {
     fail(`${path}.code`, `${format} requires a code sample`);
@@ -112,6 +120,7 @@ function readQuestion(
     id,
     prompt: readLocalizedText(question.prompt, `${path}.prompt`),
     code,
+    codeLanguage,
     options,
   };
 

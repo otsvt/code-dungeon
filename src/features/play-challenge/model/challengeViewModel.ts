@@ -1,4 +1,4 @@
-import { getTechnologyById } from "@/entities/technology";
+import { getTechnologyById, type TechnologyId } from "@/entities/technology";
 import { type ActiveChallenge } from "@/game/application/challenge/types";
 import { type ChallengeLocale } from "@/game/domain/challenge/types";
 
@@ -14,11 +14,22 @@ export type ChallengeViewModel = {
     format: ActiveChallenge["questions"][number]["format"];
     prompt: string;
     code?: string;
+    codeLanguage?: string;
     options: Array<{
       id: string;
       label: string;
     }>;
   }>;
+};
+
+const CODE_LANGUAGE_BY_TECHNOLOGY: Record<TechnologyId, string> = {
+  html: "markup",
+  css: "css",
+  javascript: "javascript",
+  typescript: "typescript",
+  react: "tsx",
+  vue: "javascript",
+  git: "bash",
 };
 
 export function createChallengeViewModel(
@@ -54,6 +65,13 @@ export function createChallengeViewModel(
       format: question.format,
       prompt: question.prompt[locale],
       ...(question.code ? { code: question.code } : {}),
+      ...(question.code && challenge.kind === "battle"
+        ? {
+            codeLanguage:
+              question.codeLanguage ??
+              CODE_LANGUAGE_BY_TECHNOLOGY[challenge.technologyId],
+          }
+        : {}),
       options: question.options.map((option) => ({
         id: option.id,
         label: option.label[locale],

@@ -1336,6 +1336,7 @@
         "en": "What is the value of doubled?"
       },
       "code": "const count = ref(2);\nconst doubled = computed(() => count.value * 2);\nconsole.log(doubled.value);",
+      "codeLanguage": "javascript",
       "options": [
         {
           "id": "a",
@@ -1378,6 +1379,7 @@
         "en": "Which line incorrectly accesses a ref outside a template?"
       },
       "code": "1  const count = ref(0);\n2  count++;\n3  console.log(count.value);",
+      "codeLanguage": "javascript",
       "options": [
         {
           "id": "l1",
@@ -1420,6 +1422,7 @@
         "en": "Which fragment correctly emits a save event from setup?"
       },
       "code": "<script setup>\n// Отправить событие save / Emit save\n</script>",
+      "codeLanguage": "markup",
       "options": [
         {
           "id": "a",

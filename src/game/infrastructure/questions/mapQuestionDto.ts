@@ -9,6 +9,9 @@ export function mapQuestionDto(question: QuestionDto): ChallengeQuestion {
       : {}),
     prompt: { ...question.prompt },
     ...(question.code === null ? {} : { code: question.code }),
+    ...(question.codeLanguage === null
+      ? {}
+      : { codeLanguage: question.codeLanguage }),
     options: question.options.map((option) => ({
       id: option.id,
       label: { ...option.label },

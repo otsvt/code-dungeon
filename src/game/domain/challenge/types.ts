@@ -28,6 +28,7 @@ type BaseChallengeQuestion = {
   technologyId?: TechnologyId;
   prompt: LocalizedChallengeText;
   code?: string;
+  codeLanguage?: string;
   options: readonly ChallengeOption[];
 };
 

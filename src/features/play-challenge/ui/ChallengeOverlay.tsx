@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { PrismAsync as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { type ChallengeAnswer } from "@/game/domain/challenge/types";
 import { type ChallengeViewModel } from "../model/challengeViewModel";
 
@@ -11,6 +13,25 @@ type ChallengeOverlayProps = {
 
 type QuestionViewModel = ChallengeViewModel["questions"][number];
 type ChallengeOptionViewModel = QuestionViewModel["options"][number];
+
+function HighlightedCode({ code, language }: { code: string; language: string }) {
+  return (
+    <SyntaxHighlighter
+      language={language}
+      style={vscDarkPlus}
+      wrapLongLines={false}
+      className="mt-4 max-h-58 overflow-auto border-l-2 border-bronze font-mono text-sm leading-6 shadow-inner"
+      customStyle={{
+        marginBottom: 0,
+        padding: "1rem 1.25rem",
+        background: "#242623F7",
+      }}
+      codeTagProps={{ className: "font-mono text-sm leading-6" }}
+    >
+      {code}
+    </SyntaxHighlighter>
+  );
+}
 
 const COPY = {
   ru: {
@@ -286,9 +307,10 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
             </h1>
 
             {question.code && (
-              <pre className="mt-4 max-h-58 overflow-auto border-l-2 border-bronze bg-deep px-5 py-4 font-mono text-sm leading-6 text-milk shadow-inner">
-                <code>{question.code}</code>
-              </pre>
+              <HighlightedCode
+                code={question.code}
+                language={question.codeLanguage ?? "text"}
+              />
             )}
 
             <p className="mt-5 font-mono text-[10px] font-semibold tracking-widest text-bronze">
