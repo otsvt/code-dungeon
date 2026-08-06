@@ -11,6 +11,9 @@ export const SPRITE_NAMES = {
   hrTable: "hrTable",
   flame: {
     base: "baseFlame",
+    buff: "buffFlame",
+    debuff: "debuffFlame",
+    none: "noneFlame",
   },
 } as const;
 
@@ -29,6 +32,9 @@ export const ASSETS_PATH = {
   [SPRITE_NAMES.hrTable]: "/assets/game/hr-table.png",
   [SPRITE_NAMES.hero]: "/assets/game/hero-sprite.png",
   [SPRITE_NAMES.flame.base]: "/assets/game/flame/red-flame-sprite.png",
+  [SPRITE_NAMES.flame.buff]: "/assets/game/flame/green-flame-sprite.png",
+  [SPRITE_NAMES.flame.debuff]: "/assets/game/flame/error-flame-sprite.png",
+  [SPRITE_NAMES.flame.none]: "/assets/game/flame/white-flame-sprite.png",
 } as const;
 
 export function getTechnologyTextureKey(technologyId: string) {

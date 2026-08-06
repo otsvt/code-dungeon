@@ -16234,8 +16234,8 @@
     {
       "type": "frame",
       "id": "ciGEE",
-      "x": 10077,
-      "y": 3600,
+      "x": 2574,
+      "y": 5325,
       "name": "00.10 — Door Projection States / Concept Matched",
       "clip": true,
       "width": 1600,
@@ -16408,28 +16408,6 @@
                     ]
                   },
                   "width": 180,
-                  "height": 180
-                },
-                {
-                  "type": "rectangle",
-                  "id": "yIWQS",
-                  "x": 40,
-                  "y": 129,
-                  "name": "Default Horizontal Axis",
-                  "opacity": 0.38,
-                  "fill": "$door-glow-known",
-                  "width": 180,
-                  "height": 1
-                },
-                {
-                  "type": "rectangle",
-                  "id": "dA0az",
-                  "x": 129,
-                  "y": 40,
-                  "name": "Default Vertical Axis",
-                  "opacity": 0.38,
-                  "fill": "$door-glow-known",
-                  "width": 1,
                   "height": 180
                 },
                 {
@@ -16635,70 +16613,6 @@
                   },
                   "width": 220,
                   "height": 220
-                },
-                {
-                  "type": "rectangle",
-                  "id": "cQorJ",
-                  "x": 24,
-                  "y": 128,
-                  "name": "Hover Horizontal Beam",
-                  "fill": {
-                    "type": "gradient",
-                    "gradientType": "linear",
-                    "enabled": true,
-                    "rotation": 90,
-                    "size": {
-                      "height": 1
-                    },
-                    "colors": [
-                      {
-                        "color": "#C8FFD400",
-                        "position": 0
-                      },
-                      {
-                        "color": "$door-glow-hover",
-                        "position": 0.5
-                      },
-                      {
-                        "color": "#C8FFD400",
-                        "position": 1
-                      }
-                    ]
-                  },
-                  "width": 212,
-                  "height": 3
-                },
-                {
-                  "type": "rectangle",
-                  "id": "oh6w7",
-                  "x": 128,
-                  "y": 24,
-                  "name": "Hover Vertical Beam",
-                  "fill": {
-                    "type": "gradient",
-                    "gradientType": "linear",
-                    "enabled": true,
-                    "rotation": 180,
-                    "size": {
-                      "height": 1
-                    },
-                    "colors": [
-                      {
-                        "color": "#C8FFD400",
-                        "position": 0
-                      },
-                      {
-                        "color": "$door-glow-hover",
-                        "position": 0.5
-                      },
-                      {
-                        "color": "#C8FFD400",
-                        "position": 1
-                      }
-                    ]
-                  },
-                  "width": 3,
-                  "height": 212
                 },
                 {
                   "type": "ellipse",

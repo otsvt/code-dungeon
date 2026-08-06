@@ -3,8 +3,6 @@ import { DEPTH_INDEX, getTechnologyTextureKey, SPRITE_NAMES } from "../types/con
 import { type BuffId, type EffectId } from "@/game";
 import { type TechnologyId } from "@/entities/technology";
 
-const FLAME_ANIMATION_KEY = "base-flame-burning";
-
 type Point = {
   x: number;
   y: number;
@@ -56,14 +54,16 @@ export class Pedestal extends Phaser.GameObjects.Container {
 
     this.setDepth(DEPTH_INDEX[SPRITE_NAMES.pedestal]);
 
-    this.startFlameAnimation();
+    this.playFlameAnimation(SPRITE_NAMES.flame.base);
   }
 
-  private startFlameAnimation() {
-    if (!this.scene.anims.exists(FLAME_ANIMATION_KEY)) {
+  private playFlameAnimation(texture: string) {
+    const animationKey = `${texture}-burning`;
+
+    if (!this.scene.anims.exists(animationKey)) {
       this.scene.anims.create({
-        key: FLAME_ANIMATION_KEY,
-        frames: this.scene.anims.generateFrameNumbers(SPRITE_NAMES.flame.base, {
+        key: animationKey,
+        frames: this.scene.anims.generateFrameNumbers(texture, {
           start: 0,
           end: 7,
         }),
@@ -72,19 +72,16 @@ export class Pedestal extends Phaser.GameObjects.Container {
       });
     }
 
-    this.flame.play(FLAME_ANIMATION_KEY);
+    this.flame.play(animationKey);
   }
 
   public giveBuff(buffId: BuffId, hudTarget: Point, reducedMotion = false): Promise<void> {
     return this.giveEffect(buffId, hudTarget, reducedMotion, false);
   }
 
-  public giveEffect(
-    effectId: EffectId,
-    hudTarget: Point,
-    reducedMotion = false,
-    isDebuff = false,
-  ): Promise<void> {
+  public giveEffect(effectId: EffectId, hudTarget: Point, reducedMotion = false, isDebuff = false): Promise<void> {
+    this.playFlameAnimation(isDebuff ? SPRITE_NAMES.flame.debuff : SPRITE_NAMES.flame.buff);
+
     if (reducedMotion) {
       return this.pulseFlame(160);
     }
@@ -168,7 +165,46 @@ export class Pedestal extends Phaser.GameObjects.Container {
   }
 
   public playResult(reducedMotion = false): Promise<void> {
-    return this.pulseFlame(reducedMotion ? 120 : 520);
+    const restingY = this.flame.y;
+    const resultGlow = this.scene.add.circle(0, restingY, 24, 0xf7f5e9, 0).setBlendMode(Phaser.BlendModes.ADD);
+
+    this.addAt(resultGlow, 1);
+    this.flame.anims.timeScale = 0.6;
+
+    if (!reducedMotion) {
+      this.scene.cameras.main.shake(1000, 0.001);
+    }
+
+    return new Promise((resolve) => {
+      this.scene.time.delayedCall(160, () => {
+        this.scene.tweens.add({
+          targets: this.flame,
+          alpha: 0.48,
+          duration: 700,
+          ease: "Sine.easeIn",
+          onComplete: () => {
+            this.scene.time.delayedCall(140, () => {
+              this.flame.anims.timeScale = 1;
+              this.playFlameAnimation(SPRITE_NAMES.flame.none);
+              this.flame.setScale(5).setPosition(0, restingY).setAlpha(1);
+              resultGlow.setScale(0.65).setAlpha(0.52);
+
+              this.scene.tweens.add({
+                targets: resultGlow,
+                scaleX: 3.2,
+                scaleY: 3.2,
+                alpha: 0,
+                duration: 340,
+                ease: "Cubic.easeOut",
+                onComplete: () => resultGlow.destroy(),
+              });
+
+              void this.pulseFlame(520).then(resolve);
+            });
+          },
+        });
+      });
+    });
   }
 
   private pulseFlame(duration: number): Promise<void> {

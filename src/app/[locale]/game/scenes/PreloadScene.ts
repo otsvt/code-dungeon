@@ -22,10 +22,12 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image(SPRITE_NAMES.hrTable, ASSETS_PATH[SPRITE_NAMES.hrTable]);
 
     this.load.spritesheet(SPRITE_NAMES.hero, ASSETS_PATH[SPRITE_NAMES.hero], { frameHeight: 682, frameWidth: 682 });
-    this.load.spritesheet(SPRITE_NAMES.flame.base, ASSETS_PATH[SPRITE_NAMES.flame.base], {
-      frameHeight: 48,
-      frameWidth: 32,
-    });
+    for (const flameTexture of Object.values(SPRITE_NAMES.flame)) {
+      this.load.spritesheet(flameTexture, ASSETS_PATH[flameTexture], {
+        frameHeight: 48,
+        frameWidth: 32,
+      });
+    }
 
     for (const buff of ALL_BUFFS) {
       this.load.image(buff.id, buff.iconPath);

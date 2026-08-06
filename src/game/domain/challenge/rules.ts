@@ -68,6 +68,10 @@ export function createBattleRoomReward(
   const activeEffectIdSet = new Set(activeEffectIds);
 
   if (outcome === "strong") {
+    if (activeEffectIdSet.has("buffBan")) {
+      return { kind: "none", effectId: null };
+    }
+
     const availableBuffs = BUFFS.filter(
       (buff) => !activeEffectIdSet.has(buff.id),
     );
@@ -82,6 +86,10 @@ export function createBattleRoomReward(
   }
 
   if (outcome === "weak") {
+    if (activeEffectIdSet.has("debuffImmunity")) {
+      return { kind: "none", effectId: null };
+    }
+
     const availableDebuffs = DEBUFFS.filter(
       (debuff) => !activeEffectIdSet.has(debuff.id),
     );

@@ -17,6 +17,10 @@ export function createHrRoomReward(
   const activeEffectIdSet = new Set(activeEffectIds);
 
   if (outcome === "strong") {
+    if (activeEffectIdSet.has("buffBan")) {
+      return { kind: "none", effectId: null };
+    }
+
     const availableBuffs = HR_BUFFS.filter(
       (buff) => !activeEffectIdSet.has(buff.id),
     );
@@ -26,6 +30,10 @@ export function createHrRoomReward(
     return buff
       ? { kind: "buff", effectId: buff.id }
       : { kind: "none", effectId: null };
+  }
+
+  if (activeEffectIdSet.has("debuffImmunity")) {
+    return { kind: "none", effectId: null };
   }
 
   const availableDebuffs = HR_DEBUFFS.filter(
