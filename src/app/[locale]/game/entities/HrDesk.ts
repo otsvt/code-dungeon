@@ -16,19 +16,17 @@ export class HrDesk extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene) {
     const { width, height } = scene.scale;
 
-    super(scene, width / 2, height * 0.34);
+    super(scene, width / 2, height * 0.55);
 
     this.aura = scene.add
       .circle(0, -34, 104, 0xe5c398, 0.08)
       .setStrokeStyle(2, 0xe5c398, 0.42)
       .setBlendMode(Phaser.BlendModes.ADD);
 
-    this.desk = scene.add
-      .image(0, 0, SPRITE_NAMES.hrTable)
-      .setDisplaySize(560, 420)
-      .setBlendMode(Phaser.BlendModes.MULTIPLY);
+    this.desk = scene.add.image(0, 0, SPRITE_NAMES.hrTable).setDisplaySize(520, 380);
 
     this.add([this.aura, this.desk]);
+    this.sendToBack(this.aura);
     this.setDepth(DEPTH_INDEX[SPRITE_NAMES.hrTable]);
     scene.add.existing(this);
 

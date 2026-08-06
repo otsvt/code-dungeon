@@ -10,7 +10,7 @@ import {
   generateNextRoomChoices,
   type NextRoomChoice,
 } from "../../rooms/nextRoomChoices";
-import { type CurrentRun } from "../../types/run";
+import { type CurrentRun, type Impression } from "../../types/run";
 
 const MIN_RUN_ROOMS = 5;
 const MAX_RUN_ROOMS = 9;
@@ -19,6 +19,39 @@ type RunRandomDependencies = {
   random?: () => number;
   createId?: () => string;
 };
+
+function resolveNextImpression(
+  currentRun: CurrentRun,
+  result: ChallengeResult,
+): Impression {
+  if (result.kind !== "battle") {
+    return currentRun.impression;
+  }
+
+  let nextImpression: Impression =
+    result.outcome === "strong"
+      ? 1
+      : result.outcome === "weak"
+        ? -1
+        : 0;
+
+  const activeEffectIds = new Set(
+    currentRun.activeEffects.map((effect) => effect.id),
+  );
+
+  if (activeEffectIds.has("glassCeiling") && nextImpression === 1) {
+    nextImpression = 0;
+  }
+
+  if (
+    activeEffectIds.has("unlowerableReputation") &&
+    nextImpression < currentRun.impression
+  ) {
+    return currentRun.impression;
+  }
+
+  return nextImpression;
+}
 
 export function createRun(
   settings: RunSettings,
@@ -151,14 +184,7 @@ export function applyChallengeResult(
     activeEffects: isNewEffect
       ? addUniqueEffect(currentRun.activeEffects, rewardEffectId)
       : currentRun.activeEffects,
-    impression:
-      result.kind === "battle"
-        ? result.outcome === "strong"
-          ? 1
-          : result.outcome === "weak"
-            ? -1
-            : 0
-        : currentRun.impression,
+    impression: resolveNextImpression(currentRun, result),
     resolvedRoomIds: [...currentRun.resolvedRoomIds, result.roomId],
   };
 }
