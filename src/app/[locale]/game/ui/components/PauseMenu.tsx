@@ -36,8 +36,8 @@ export function PauseMenu({ currentRun }: PauseMenuProps) {
           room: roomNumber,
           totalRooms: "?",
           impression: t(`impressions.${currentRun.impression}`),
-          currentLives: currentRun.lives.current,
-          maxLives: currentRun.lives.max,
+          currentStress: currentRun.stress.current,
+          maxStress: currentRun.stress.max,
         })}
       </p>
       <div className="mt-4 h-px w-full bg-decore/50" />

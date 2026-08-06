@@ -1,8 +1,10 @@
 import { EffectIcon } from "@/entities/effect";
 import {
   getBuffById,
+  getCurseById,
   getDebuffById,
   isBuffId,
+  isCurseId,
   isDebuffId,
   type ActiveEffect,
   type EffectId,
@@ -27,6 +29,14 @@ function getEffectPresentation(effectId: EffectId) {
   if (isDebuffId(effectId)) {
     return {
       effect: getDebuffById(effectId),
+      type: "debuff" as const,
+      accentClassName: "text-danger-icon",
+    };
+  }
+
+  if (isCurseId(effectId)) {
+    return {
+      effect: getCurseById(effectId),
       type: "debuff" as const,
       accentClassName: "text-danger-icon",
     };

@@ -78,15 +78,16 @@ export function createRun(
     nextRoomChoices,
     roomNumber: 0,
     totalRooms,
-    lives: {
-      current: 1,
-      max: 1,
+    stress: {
+      current: 0,
+      max: 3,
     },
     activeEffects: [],
     resolvedRoomIds: [],
     hrRoomOffered: nextRoomChoices.some((choice) => choice.type === "hr"),
     startBuffGranted: false,
     impression: 0,
+    finalResult: null,
     status: "created",
   };
 }
@@ -178,13 +179,39 @@ export function applyChallengeResult(
   const isNewEffect =
     rewardEffectId !== null &&
     !currentRun.activeEffects.some((effect) => effect.id === rewardEffectId);
+  let nextActiveEffects = isNewEffect
+    ? addUniqueEffect(currentRun.activeEffects, rewardEffectId)
+    : currentRun.activeEffects;
+  let nextStress = currentRun.stress;
+
+  if (result.kind === "battle" && result.outcome === "strong") {
+    nextStress = {
+      ...currentRun.stress,
+      current: Math.max(0, currentRun.stress.current - 1),
+    };
+  }
+
+  if (result.kind === "battle" && result.outcome === "weak") {
+    const stressCurrent = currentRun.stress.current + 1;
+
+    if (stressCurrent >= currentRun.stress.max) {
+      nextStress = { ...currentRun.stress, current: 0 };
+      nextActiveEffects = addUniqueEffect(
+        nextActiveEffects,
+        "highExpectations",
+      );
+    } else {
+      nextStress = { ...currentRun.stress, current: stressCurrent };
+    }
+  }
 
   return {
     ...currentRun,
-    activeEffects: isNewEffect
-      ? addUniqueEffect(currentRun.activeEffects, rewardEffectId)
-      : currentRun.activeEffects,
+    activeEffects: nextActiveEffects,
+    stress: nextStress,
     impression: resolveNextImpression(currentRun, result),
+    finalResult:
+      result.kind === "final" ? result.finalResult : currentRun.finalResult,
     resolvedRoomIds: [...currentRun.resolvedRoomIds, result.roomId],
     status: result.kind === "final" ? "completed" : currentRun.status,
   };

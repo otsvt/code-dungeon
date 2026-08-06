@@ -8,6 +8,14 @@ export type CurrentRoom = { type: "start" } | NextRoomChoice;
 
 export type Impression = -1 | 0 | 1;
 
+export type FinalRunResult = {
+  correctAnswers: number;
+  totalAnswers: number;
+  accuracyPercent: number;
+  requiredAccuracyPercent: number;
+  passed: boolean;
+};
+
 export type CurrentRun = {
   id: string;
   settings: RunSettings;
@@ -15,7 +23,7 @@ export type CurrentRun = {
   nextRoomChoices: NextRoomChoice[];
   roomNumber: number;
   totalRooms: number;
-  lives: {
+  stress: {
     current: number;
     max: number;
   };
@@ -24,5 +32,6 @@ export type CurrentRun = {
   hrRoomOffered: boolean;
   startBuffGranted: boolean;
   impression: Impression;
+  finalResult: FinalRunResult | null;
   status: "created" | "started" | "completed";
 };

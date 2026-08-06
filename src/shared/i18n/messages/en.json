@@ -60,7 +60,7 @@
     }
   },
   "GameHud": {
-    "life": "Life",
+    "stress": "Stress",
     "room": "Room",
     "buffs": "Gifts",
     "debuffs": "Distortions",
@@ -72,7 +72,7 @@
       "resumeGame": "Resume game",
       "serial": "RUN_{run} / ROOM_{room}",
       "title": "PAUSED",
-      "currentState": "Room {room} of {totalRooms} • Impression: {impression} • Life {currentLives}/{maxLives}",
+      "currentState": "Room {room} of {totalRooms} • Impression: {impression} • Stress {currentStress}/{maxStress}",
       "continue": "CONTINUE",
       "restart": "RESTART RUN",
       "exitToMenu": "MAIN MENU",
@@ -149,6 +149,12 @@
       "crossFunctionalTeam": "Every challenge receives one additional random question from any topic.",
       "buffBan": "The player can no longer receive new buffs.",
       "failedStart": "The first question in every room cannot be answered correctly."
+    },
+    "curseNames": {
+      "highExpectations": "High Expectations"
+    },
+    "curseDescriptions": {
+      "highExpectations": "All subsequent standard rooms use only difficult question formats."
     },
     "buffReward": {
       "title": "Gift received",

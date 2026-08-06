@@ -60,7 +60,7 @@
     }
   },
   "GameHud": {
-    "life": "Жизнь",
+    "stress": "Стресс",
     "room": "Комната",
     "buffs": "Дары",
     "debuffs": "Искажения",
@@ -72,7 +72,7 @@
       "resumeGame": "Продолжить игру",
       "serial": "RUN_{run} / ROOM_{room}",
       "title": "ПАУЗА",
-      "currentState": "Комната {room} из {totalRooms} • Впечатление: {impression} • Жизнь {currentLives}/{maxLives}",
+      "currentState": "Комната {room} из {totalRooms} • Впечатление: {impression} • Стресс {currentStress}/{maxStress}",
       "continue": "ПРОДОЛЖИТЬ",
       "restart": "НАЧАТЬ RUN ЗАНОВО",
       "exitToMenu": "В ГЛАВНОЕ МЕНЮ",
@@ -149,6 +149,12 @@
       "crossFunctionalTeam": "В каждое испытание добавляется дополнительный случайный вопрос по любой теме.",
       "buffBan": "Игрок больше не может получать новые бафы.",
       "failedStart": "В каждой комнате на первый вопрос невозможно ответить правильно."
+    },
+    "curseNames": {
+      "highExpectations": "Высокие ожидания"
+    },
+    "curseDescriptions": {
+      "highExpectations": "Во всех следующих обычных комнатах используются только сложные форматы вопросов."
     },
     "buffReward": {
       "title": "Получен дар",

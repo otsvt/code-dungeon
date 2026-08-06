@@ -1,7 +1,8 @@
 import { type BuffId } from "./buff";
+import { type CurseId } from "./curse";
 import { type DebuffId } from "./debuff";
 
-export type EffectId = BuffId | DebuffId;
+export type EffectId = BuffId | DebuffId | CurseId;
 
 export type ActiveEffect<TId extends EffectId = EffectId> = {
   id: TId;

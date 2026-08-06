@@ -24,6 +24,8 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
   const challengeError = useChallengeStore((state) => state.challengeError);
   const completeChallenge = useChallengeStore((state) => state.completeChallenge);
   const challengeViewModel = activeChallenge ? createChallengeViewModel(activeChallenge, locale) : null;
+  const finalResult =
+    currentRun.status === "completed" ? currentRun.finalResult : null;
 
   useEffect(() => {
     if (!isPaused) {
@@ -48,7 +50,13 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
     };
   }, [closeConfirmation, confirmation, isPaused, resumeGame]);
 
-  if (!challengeViewModel && !isChallengeLoading && !challengeError && !isPaused) {
+  if (
+    !challengeViewModel &&
+    !isChallengeLoading &&
+    !challengeError &&
+    !isPaused &&
+    !finalResult
+  ) {
     return null;
   }
 
@@ -76,6 +84,28 @@ export function GameOverlay({ currentRun, onRestart, onExitToMenu }: GameOverlay
           challenge={challengeViewModel}
           onComplete={completeChallenge}
         />
+      )}
+      {finalResult && (
+        <section className="absolute inset-0 z-40 bg-background p-6">
+          <h1>
+            {locale === "ru"
+              ? finalResult.passed
+                ? "Победа"
+                : "Поражение"
+              : finalResult.passed
+                ? "Victory"
+                : "Defeat"}
+          </h1>
+          <p>
+            {locale === "ru" ? "Правильные ответы" : "Correct answers"}: {finalResult.correctAnswers} / {finalResult.totalAnswers}
+          </p>
+          <p>
+            {locale === "ru" ? "Результат" : "Result"}: {Math.round(finalResult.accuracyPercent * 10) / 10}%
+          </p>
+          <p>
+            {locale === "ru" ? "Необходимый результат" : "Required result"}: {currentRun.impression === -1 ? ">" : "≥"} {finalResult.requiredAccuracyPercent}%
+          </p>
+        </section>
       )}
       {isPaused && (
         <div className="absolute inset-0 z-50 p-6 flex-center bg-overlay">

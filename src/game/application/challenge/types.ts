@@ -6,7 +6,7 @@ import {
 } from "../../domain/challenge/types";
 import { type HrRoomReward } from "../../domain/room/hrRoom";
 import { type EffectId } from "../../types/effect";
-import { type Impression } from "../../types/run";
+import { type FinalRunResult, type Impression } from "../../types/run";
 
 export type ChallengeRequest =
   | {
@@ -69,5 +69,6 @@ export type ChallengeResult =
       kind: "final";
       roomId: string;
       outcome: ChallengeOutcome;
+      finalResult: FinalRunResult;
       reward: { kind: "none"; effectId: null };
     };

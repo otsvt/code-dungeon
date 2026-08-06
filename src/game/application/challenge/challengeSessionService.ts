@@ -26,7 +26,12 @@ const FINAL_QUESTION_COUNT_BY_IMPRESSION = {
   [0]: { min: 20, max: 25 },
   [1]: { min: 15, max: 20 },
 } as const;
-const HARD_FINAL_FORMATS = new Set([
+const FINAL_REQUIRED_ACCURACY_BY_IMPRESSION = {
+  [-1]: 90,
+  [0]: 85,
+  [1]: 80,
+} as const;
+const HARD_QUESTION_FORMATS = new Set([
   "chooseFragment",
   "chooseCode",
   "orderSteps",
@@ -74,7 +79,7 @@ function selectFinalQuestions(
   const range = FINAL_QUESTION_COUNT_BY_IMPRESSION[impression];
   const questionCount = range.min + randomIndex(random, range.max - range.min + 1);
   const technicalPool = battleQuestions.filter((question) => {
-    const isHard = HARD_FINAL_FORMATS.has(question.format);
+    const isHard = HARD_QUESTION_FORMATS.has(question.format);
 
     return impression === 0 || (impression === -1 ? isHard : !isHard);
   });
@@ -93,6 +98,29 @@ function selectFinalQuestions(
   );
 }
 
+function resolveFinalResult(
+  correctAnswers: number,
+  totalAnswers: number,
+  impression: -1 | 0 | 1,
+) {
+  const accuracyPercent =
+    totalAnswers === 0 ? 0 : (correctAnswers / totalAnswers) * 100;
+  const requiredAccuracyPercent =
+    FINAL_REQUIRED_ACCURACY_BY_IMPRESSION[impression];
+  const passed =
+    impression === -1
+      ? accuracyPercent > requiredAccuracyPercent
+      : accuracyPercent >= requiredAccuracyPercent;
+
+  return {
+    correctAnswers,
+    totalAnswers,
+    accuracyPercent,
+    requiredAccuracyPercent,
+    passed,
+  };
+}
+
 export type ChallengeSessionService = {
   start(request: ChallengeRequest): Promise<ActiveChallenge>;
   complete(
@@ -108,9 +136,14 @@ export function createChallengeSessionService(
   return {
     async start(request) {
       if (request.kind === "battle") {
-        const questionPool = await repository.getBattleQuestions(
+        const allQuestions = await repository.getBattleQuestions(
           request.technologyId,
         );
+        const questionPool = request.activeEffectIds.includes("highExpectations")
+          ? allQuestions.filter((question) =>
+              HARD_QUESTION_FORMATS.has(question.format),
+            )
+          : allQuestions;
 
         return {
           ...request,
@@ -173,11 +206,17 @@ export function createChallengeSessionService(
           answers,
           challenge.activeEffectIds.includes("failedStart"),
         );
+        const finalResult = resolveFinalResult(
+          correctAnswers,
+          totalAnswers,
+          challenge.impression,
+        );
 
         return {
           kind: "final",
           roomId: challenge.roomId,
-          outcome: resolveChallengeOutcome(correctAnswers, totalAnswers),
+          outcome: finalResult.passed ? "strong" : "weak",
+          finalResult,
           reward: { kind: "none", effectId: null },
         };
       }

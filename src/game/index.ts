@@ -20,6 +20,13 @@ export {
   type DebuffId,
 } from "./types/debuff";
 export {
+  CURSES,
+  getCurseById,
+  isCurseId,
+  type Curse,
+  type CurseId,
+} from "./types/curse";
+export {
   addUniqueEffect,
   removeEffect,
   type ActiveEffect,
