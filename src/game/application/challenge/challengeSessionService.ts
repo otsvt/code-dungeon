@@ -3,7 +3,10 @@ import {
   createBattleRoomReward,
   resolveChallengeOutcome,
 } from "../../domain/challenge/rules";
-import { type ChallengeAnswer } from "../../domain/challenge/types";
+import {
+  type ChallengeAnswer,
+  type ChallengeQuestion,
+} from "../../domain/challenge/types";
 import {
   createHrRoomReward,
   getHrAllowedMistakes,
@@ -18,6 +21,16 @@ import {
 
 const MIN_BATTLE_QUESTION_COUNT = 5;
 const MAX_BATTLE_QUESTION_COUNT = 10;
+const FINAL_QUESTION_COUNT_BY_IMPRESSION = {
+  [-1]: { min: 25, max: 30 },
+  [0]: { min: 20, max: 25 },
+  [1]: { min: 15, max: 20 },
+} as const;
+const HARD_FINAL_FORMATS = new Set([
+  "chooseFragment",
+  "chooseCode",
+  "orderSteps",
+]);
 
 function randomIndex(random: () => number, upperBound: number): number {
   return Math.floor(Math.min(Math.max(random(), 0), 0.999999999999) * upperBound);
@@ -33,6 +46,12 @@ function selectRandomBattleQuestions<T>(
       random,
       MAX_BATTLE_QUESTION_COUNT - MIN_BATTLE_QUESTION_COUNT + 1,
     );
+  const shuffled = shuffleQuestions(questions, random);
+
+  return shuffled.slice(0, Math.min(requestedCount, shuffled.length));
+}
+
+function shuffleQuestions<T>(questions: readonly T[], random: () => number): T[] {
   const shuffled = [...questions];
 
   for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -43,7 +62,35 @@ function selectRandomBattleQuestions<T>(
     ];
   }
 
-  return shuffled.slice(0, Math.min(requestedCount, shuffled.length));
+  return shuffled;
+}
+
+function selectFinalQuestions(
+  battleQuestions: readonly ChallengeQuestion[],
+  hrQuestions: readonly ChallengeQuestion[],
+  impression: -1 | 0 | 1,
+  random: () => number,
+) {
+  const range = FINAL_QUESTION_COUNT_BY_IMPRESSION[impression];
+  const questionCount = range.min + randomIndex(random, range.max - range.min + 1);
+  const technicalPool = battleQuestions.filter((question) => {
+    const isHard = HARD_FINAL_FORMATS.has(question.format);
+
+    return impression === 0 || (impression === -1 ? isHard : !isHard);
+  });
+  const selectedHrQuestions = shuffleQuestions(hrQuestions, random).slice(
+    0,
+    Math.min(hrQuestions.length, questionCount),
+  );
+  const selectedTechnicalQuestions = shuffleQuestions(technicalPool, random).slice(
+    0,
+    Math.max(0, questionCount - selectedHrQuestions.length),
+  );
+
+  return shuffleQuestions(
+    [...selectedHrQuestions, ...selectedTechnicalQuestions],
+    random,
+  );
 }
 
 export type ChallengeSessionService = {
@@ -71,6 +118,23 @@ export function createChallengeSessionService(
         };
       }
 
+      if (request.kind === "final") {
+        const [battleQuestions, hrQuestions] = await Promise.all([
+          repository.getAllBattleQuestions(),
+          repository.getHrQuestions(),
+        ]);
+
+        return {
+          ...request,
+          questions: selectFinalQuestions(
+            battleQuestions,
+            hrQuestions,
+            request.impression,
+            random,
+          ),
+        };
+      }
+
       return {
         ...request,
         allowedMistakes: getHrAllowedMistakes(request.impression),
@@ -78,13 +142,14 @@ export function createChallengeSessionService(
       };
     },
     complete(challenge, answers) {
-      const correctAnswers = countCorrectAnswers(
-        challenge.questions,
-        answers,
-      );
       const totalAnswers = challenge.questions.length;
 
       if (challenge.kind === "battle") {
+        const correctAnswers = countCorrectAnswers(
+          challenge.questions,
+          answers,
+          challenge.activeEffectIds.includes("failedStart"),
+        );
         const outcome = resolveChallengeOutcome(
           correctAnswers,
           totalAnswers,
@@ -102,6 +167,25 @@ export function createChallengeSessionService(
         };
       }
 
+      if (challenge.kind === "final") {
+        const correctAnswers = countCorrectAnswers(
+          challenge.questions,
+          answers,
+          challenge.activeEffectIds.includes("failedStart"),
+        );
+
+        return {
+          kind: "final",
+          roomId: challenge.roomId,
+          outcome: resolveChallengeOutcome(correctAnswers, totalAnswers),
+          reward: { kind: "none", effectId: null },
+        };
+      }
+
+      const correctAnswers = countCorrectAnswers(
+        challenge.questions,
+        answers,
+      );
       const outcome = resolveHrChallengeOutcome(
         correctAnswers,
         totalAnswers,

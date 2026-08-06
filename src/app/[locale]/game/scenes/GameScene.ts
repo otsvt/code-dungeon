@@ -50,12 +50,20 @@ export class GameScene extends Phaser.Scene {
         ? currentRun.currentRoom.technologyId
         : undefined;
     const isHrRoom = currentRun?.currentRoom.type === "hr";
+    const isFinalRoom = currentRun?.currentRoom.type === "final";
+    const isInterviewRoom = isHrRoom || isFinalRoom;
 
     this.room = new Room(this);
-    this.doors = new Doors(this, currentRun?.nextRoomChoices ?? []);
-    this.doors.on(DOOR_SELECTED_EVENT, this.handleDoorSelected, this);
-    this.pedestal = isHrRoom ? undefined : new Pedestal(this, technologyId);
-    this.hrDesk = isHrRoom ? new HrDesk(this) : undefined;
+    this.doors = isFinalRoom
+      ? undefined
+      : new Doors(this, currentRun?.nextRoomChoices ?? []);
+    this.doors?.on(DOOR_SELECTED_EVENT, this.handleDoorSelected, this);
+    this.pedestal = isInterviewRoom
+      ? undefined
+      : new Pedestal(this, technologyId);
+    this.hrDesk = isInterviewRoom
+      ? new HrDesk(this, isFinalRoom ? "final" : "hr")
+      : undefined;
     this.hero = new Hero(this);
 
     this.startRoomIntro();
@@ -111,6 +119,19 @@ export class GameScene extends Phaser.Scene {
       }
 
       await this.runHrEvent(activeRun.currentRoom.id, activeRun.impression, reducedMotion);
+      return;
+    }
+
+    if (activeRun.currentRoom.type === "final") {
+      if (activeRun.resolvedRoomIds.includes(activeRun.currentRoom.id)) {
+        return;
+      }
+
+      await this.runFinalEvent(
+        activeRun.currentRoom.id,
+        activeRun.impression,
+        reducedMotion,
+      );
       return;
     }
 
@@ -238,6 +259,45 @@ export class GameScene extends Phaser.Scene {
     }
 
     this.showDoorSigns();
+  }
+
+  private async runFinalEvent(
+    roomId: string,
+    impression: -1 | 0 | 1,
+    reducedMotion: boolean,
+  ) {
+    if (!this.hrDesk) {
+      return;
+    }
+
+    const result = await this.waitForChallengeResult({
+      kind: "final",
+      roomId,
+      impression,
+      activeEffectIds:
+        useRunStore
+          .getState()
+          .currentRun?.activeEffects.map((effect) => effect.id) ?? [],
+    });
+
+    if (result.kind !== "final") {
+      return;
+    }
+
+    const activeRun = useRunStore.getState().currentRun;
+
+    if (
+      activeRun?.currentRoom.type !== "final" ||
+      activeRun.currentRoom.id !== roomId
+    ) {
+      return;
+    }
+
+    const visualImpression =
+      result.outcome === "strong" ? 1 : result.outcome === "weak" ? -1 : 0;
+
+    await this.hrDesk.playEvaluation(visualImpression, reducedMotion);
+    useRunStore.getState().completeChallengeRoom(result);
   }
 
   private waitForChallengeResult(

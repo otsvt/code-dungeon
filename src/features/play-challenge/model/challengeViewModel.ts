@@ -9,10 +9,13 @@ export type ChallengeViewModel = {
   interviewerTitle: string;
   interviewerIconPath: string;
   allowedMistakes?: number;
+  finalDifficulty?: "easyMedium" | "mixed" | "hard";
   questions: Array<{
     id: string;
     format: ActiveChallenge["questions"][number]["format"];
     prompt: string;
+    interviewerTitle: string;
+    interviewerIconPath: string;
     code?: string;
     codeLanguage?: string;
     options: Array<{
@@ -47,7 +50,11 @@ export function createChallengeViewModel(
     roomId: challenge.roomId,
     locale,
     interviewerTitle:
-      challenge.kind === "hr" ? "HR" : (technology?.title ?? ""),
+      challenge.kind === "hr"
+        ? "HR"
+        : challenge.kind === "final"
+          ? "HR + TEAM LEAD"
+          : (technology?.title ?? ""),
     interviewerIconPath:
       challenge.kind === "battle"
         ? `/assets/game/technologies/${challenge.technologyId}.svg`
@@ -61,17 +68,49 @@ export function createChallengeViewModel(
     ...(challenge.kind === "hr"
       ? { allowedMistakes: challenge.allowedMistakes }
       : {}),
+    ...(challenge.kind === "final"
+      ? {
+          finalDifficulty:
+            challenge.impression === -1
+              ? ("hard" as const)
+              : challenge.impression === 1
+                ? ("easyMedium" as const)
+                : ("mixed" as const),
+        }
+      : {}),
     questions: challenge.questions.map((question) => ({
       id: question.id,
       format: question.format,
       prompt: question.prompt[locale],
+      interviewerTitle:
+        challenge.kind === "final"
+          ? question.technologyId
+            ? "TEAM LEAD"
+            : "HR"
+          : challenge.kind === "hr"
+            ? "HR"
+            : (technology?.title ?? ""),
+      interviewerIconPath:
+        challenge.kind === "final"
+          ? question.technologyId
+            ? "/assets/game/interviewers/team-lead.png"
+            : "/assets/game/interviewers/hr-spirit.png"
+          : challenge.kind === "battle"
+            ? `/assets/game/technologies/${challenge.technologyId}.svg`
+            : `/assets/game/impressions/${
+                challenge.impression === -1
+                  ? "impression-weak"
+                  : challenge.impression === 1
+                    ? "impression-strong"
+                    : "impression-neutral"
+              }.png`,
       ...(question.code ? { code: question.code } : {}),
       ...((question.code || question.format === "chooseCode") &&
-      challenge.kind === "battle"
+      question.technologyId
         ? {
             codeLanguage:
               question.codeLanguage ??
-              CODE_LANGUAGE_BY_TECHNOLOGY[challenge.technologyId],
+              CODE_LANGUAGE_BY_TECHNOLOGY[question.technologyId],
           }
         : {}),
       options: question.options.map((option) => ({

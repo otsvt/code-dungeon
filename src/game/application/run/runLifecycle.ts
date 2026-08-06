@@ -186,6 +186,7 @@ export function applyChallengeResult(
       : currentRun.activeEffects,
     impression: resolveNextImpression(currentRun, result),
     resolvedRoomIds: [...currentRun.resolvedRoomIds, result.roomId],
+    status: result.kind === "final" ? "completed" : currentRun.status,
   };
 }
 

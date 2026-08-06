@@ -9,6 +9,7 @@ export const SPRITE_NAMES = {
   hero: "hero",
   pedestal: "pedestal",
   hrTable: "hrTable",
+  finalTable: "finalTable",
   flame: {
     base: "baseFlame",
     buff: "buffFlame",
@@ -22,6 +23,7 @@ export const DEPTH_INDEX = {
   [SPRITE_NAMES.door]: 2,
   [SPRITE_NAMES.pedestal]: 3,
   [SPRITE_NAMES.hrTable]: 3,
+  [SPRITE_NAMES.finalTable]: 3,
   [SPRITE_NAMES.hero]: 4,
 } as const;
 
@@ -30,6 +32,7 @@ export const ASSETS_PATH = {
   [SPRITE_NAMES.door]: "/assets/game/door.png",
   [SPRITE_NAMES.pedestal]: "/assets/game/pedestal.png",
   [SPRITE_NAMES.hrTable]: "/assets/game/hr-table.png",
+  [SPRITE_NAMES.finalTable]: "/assets/game/final-table.png",
   [SPRITE_NAMES.hero]: "/assets/game/hero-sprite.png",
   [SPRITE_NAMES.flame.base]: "/assets/game/flame/red-flame-sprite.png",
   [SPRITE_NAMES.flame.buff]: "/assets/game/flame/green-flame-sprite.png",

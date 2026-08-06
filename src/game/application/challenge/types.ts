@@ -20,6 +20,12 @@ export type ChallengeRequest =
       roomId: string;
       impression: Impression;
       activeEffectIds: readonly EffectId[];
+    }
+  | {
+      kind: "final";
+      roomId: string;
+      impression: Impression;
+      activeEffectIds: readonly EffectId[];
     };
 
 export type ActiveChallenge =
@@ -37,6 +43,13 @@ export type ActiveChallenge =
       allowedMistakes: number;
       activeEffectIds: readonly EffectId[];
       questions: ChallengeQuestion[];
+    }
+  | {
+      kind: "final";
+      roomId: string;
+      impression: Impression;
+      activeEffectIds: readonly EffectId[];
+      questions: ChallengeQuestion[];
     };
 
 export type ChallengeResult =
@@ -51,4 +64,10 @@ export type ChallengeResult =
       roomId: string;
       outcome: ChallengeOutcome;
       reward: HrRoomReward;
+    }
+  | {
+      kind: "final";
+      roomId: string;
+      outcome: ChallengeOutcome;
+      reward: { kind: "none"; effectId: null };
     };

@@ -20,6 +20,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image(SPRITE_NAMES.door, ASSETS_PATH[SPRITE_NAMES.door]);
     this.load.image(SPRITE_NAMES.pedestal, ASSETS_PATH[SPRITE_NAMES.pedestal]);
     this.load.image(SPRITE_NAMES.hrTable, ASSETS_PATH[SPRITE_NAMES.hrTable]);
+    this.load.image(SPRITE_NAMES.finalTable, ASSETS_PATH[SPRITE_NAMES.finalTable]);
 
     this.load.spritesheet(SPRITE_NAMES.hero, ASSETS_PATH[SPRITE_NAMES.hero], { frameHeight: 682, frameWidth: 682 });
     for (const flameTexture of Object.values(SPRITE_NAMES.flame)) {

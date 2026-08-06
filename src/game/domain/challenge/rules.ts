@@ -11,15 +11,19 @@ import {
 export function countCorrectAnswers(
   questions: readonly ChallengeQuestion[],
   answers: readonly ChallengeAnswer[],
+  firstAnswerAlwaysIncorrect = false,
 ): number {
   const answersByQuestionId = new Map(
     answers.map((answer) => [answer.questionId, answer]),
   );
 
   return questions.reduce(
-    (total, question) =>
+    (total, question, questionIndex) =>
       total +
-      Number(isCorrectAnswer(question, answersByQuestionId.get(question.id))),
+      Number(
+        !(firstAnswerAlwaysIncorrect && questionIndex === 0) &&
+          isCorrectAnswer(question, answersByQuestionId.get(question.id)),
+      ),
     0,
   );
 }

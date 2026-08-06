@@ -5,5 +5,6 @@ export interface QuestionRepository {
   getBattleQuestions(
     technologyId: TechnologyId,
   ): Promise<ChallengeQuestion[]>;
+  getAllBattleQuestions(): Promise<ChallengeQuestion[]>;
   getHrQuestions(): Promise<ChallengeQuestion[]>;
 }

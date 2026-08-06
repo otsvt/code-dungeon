@@ -70,6 +70,12 @@ const COPY = {
     status: "СЕАНС АКТИВЕН",
     note: "Выберите ответ и подтвердите его. После перехода изменить выбор нельзя.",
     hrEyebrow: "ИНТЕРВЬЮ / HR ROOM",
+    finalEyebrow: "ФИНАЛЬНОЕ СОБЕСЕДОВАНИЕ",
+    finalDifficulties: {
+      easyMedium: "ЛЁГКИЙ / СРЕДНИЙ",
+      mixed: "СЛУЧАЙНЫЙ",
+      hard: "СЛОЖНЫЙ",
+    },
     allowedMistakes: "ДОПУСТИМО ОШИБОК",
     difficulty: "СРЕДНИЙ",
     room: "ОБЫЧНАЯ КОМНАТА",
@@ -101,6 +107,12 @@ const COPY = {
     status: "SESSION ACTIVE",
     note: "Choose and confirm an answer. You cannot change it after moving on.",
     hrEyebrow: "INTERVIEW / HR ROOM",
+    finalEyebrow: "FINAL INTERVIEW",
+    finalDifficulties: {
+      easyMedium: "EASY / MEDIUM",
+      mixed: "RANDOM",
+      hard: "HARD",
+    },
     allowedMistakes: "ALLOWED MISTAKES",
     difficulty: "MEDIUM",
     room: "STANDARD ROOM",
@@ -338,6 +350,7 @@ function OrderStepsControl({
 export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProps) {
   const copy = COPY[challenge.locale];
   const isHrChallenge = challenge.kind === "hr";
+  const isFinalChallenge = challenge.kind === "final";
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [orderedOptionIds, setOrderedOptionIds] = useState<string[]>([]);
@@ -410,12 +423,22 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
                 {copy.question} {questionIndex + 1} {copy.of} {challenge.questions.length}
               </span>
               <span className="h-4 w-px bg-sandy/55" />
-              <span>{challenge.interviewerTitle.toUpperCase()}</span>
+              <span>{question.interviewerTitle.toUpperCase()}</span>
               <span className="h-4 w-px bg-sandy/55" />
               <span className="text-bronze">{copy.formats[question.format]}</span>
               <span className="h-4 w-px bg-sandy/55" />
-              <span>{copy.difficulty}</span>
-              <span className="ml-auto">{isHrChallenge ? copy.hrEyebrow : copy.room}</span>
+              <span>
+                {isFinalChallenge && challenge.finalDifficulty
+                  ? copy.finalDifficulties[challenge.finalDifficulty]
+                  : copy.difficulty}
+              </span>
+              <span className="ml-auto">
+                {isFinalChallenge
+                  ? copy.finalEyebrow
+                  : isHrChallenge
+                    ? copy.hrEyebrow
+                    : copy.room}
+              </span>
             </div>
             <div className="mt-3 h-px bg-sandy/25">
               <div className="h-px bg-bronze transition-all duration-300" style={{ width: progressWidth }} />
@@ -485,12 +508,23 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
         <aside className="relative flex min-h-120 flex-col overflow-hidden border-l border-sandy bg-deep px-6 py-6 text-background">
           <div className="absolute inset-x-0 top-0 h-px bg-accent/70" />
           <div className="mt-8 flex flex-1 flex-col items-center justify-center">
-            <div className="relative flex h-32 w-32 items-center justify-center rounded-full border border-sandy/65 bg-effect-buff-bg shadow-2xl">
-              <div className="absolute inset-2 rounded-full border border-sandy/25" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={challenge.interviewerIconPath} alt="" className="h-18 w-18 drop-shadow-lg" />
-            </div>
-            <h2 className="mt-6 font-noto text-3xl font-semibold text-accent">{challenge.interviewerTitle}</h2>
+            {isFinalChallenge ? (
+              <div className="flex h-80 w-full items-end justify-center overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={question.interviewerIconPath}
+                  alt=""
+                  className="max-h-full max-w-full object-contain drop-shadow-2xl"
+                />
+              </div>
+            ) : (
+              <div className="relative flex h-32 w-32 items-center justify-center rounded-full border border-sandy/65 bg-effect-buff-bg shadow-2xl">
+                <div className="absolute inset-2 rounded-full border border-sandy/25" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={question.interviewerIconPath} alt="" className="h-18 w-18 drop-shadow-lg" />
+              </div>
+            )}
+            <h2 className="mt-6 font-noto text-3xl font-semibold text-accent">{question.interviewerTitle}</h2>
             <p className="mt-2 font-mono text-xs tracking-widest text-milk/65">
               {isHrChallenge ? `${copy.allowedMistakes}: ${challenge.allowedMistakes}` : copy.status}
             </p>
@@ -501,8 +535,18 @@ export function ChallengeOverlay({ challenge, onComplete }: ChallengeOverlayProp
               <span>{challenge.roomId.slice(0, 8).toUpperCase()}</span>
             </div>
             <div className="mt-2 flex justify-between font-mono text-xs text-milk/55">
-              <span>{isHrChallenge ? copy.allowedMistakes : "TECH"}</span>
-              <span>{isHrChallenge ? challenge.allowedMistakes : challenge.interviewerTitle.toUpperCase()}</span>
+              <span>
+                {isHrChallenge
+                  ? copy.allowedMistakes
+                  : isFinalChallenge
+                    ? "INTERVIEWER"
+                    : "TECH"}
+              </span>
+              <span>
+                {isHrChallenge
+                  ? challenge.allowedMistakes
+                  : question.interviewerTitle.toUpperCase()}
+              </span>
             </div>
           </div>
         </aside>

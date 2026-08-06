@@ -30,6 +30,10 @@ export class LocalQuestionRepository implements QuestionRepository {
       .map(cloneQuestion);
   }
 
+  async getAllBattleQuestions(): Promise<ChallengeQuestion[]> {
+    return getLocalBattleQuestions().map(cloneQuestion);
+  }
+
   async getHrQuestions(): Promise<ChallengeQuestion[]> {
     return getLocalHrQuestions().map(cloneQuestion);
   }

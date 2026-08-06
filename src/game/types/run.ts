@@ -24,5 +24,5 @@ export type CurrentRun = {
   hrRoomOffered: boolean;
   startBuffGranted: boolean;
   impression: Impression;
-  status: "created" | "started";
+  status: "created" | "started" | "completed";
 };
